@@ -1,0 +1,409 @@
+.main_content {
+  position: relative;
+  width: calc(100% - 100px);
+  left: 100px;
+  min-height: calc(90vh);
+  background-color: rgb(238, 238, 238);
+  color: var(--black1);
+  top: 75px;
+  padding: 5%;
+  padding-top: 2px;
+  padding-bottom: 3%;
+}
+
+.allDiv {
+  background-color: rgb(255, 255, 255);
+  padding: 5%;
+  border-radius: 10px 10px 10px 10px;
+  z-index: 1;
+}
+
+.tripHeader {
+  display: grid;
+  grid-template-columns: 40% 40%;
+  gap: 15%;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  text-decoration: none;
+  color: var(--white);
+}
+
+.tripHeader .avaliableVehicles {
+  background-color: rgb(255, 255, 255);
+  color: rgb(20, 132, 0);
+  margin-bottom: -50px;
+  border: 8px solid rgb(238, 238, 238);
+  z-index: -1;
+  text-transform: none;
+  padding: 25px;
+}
+
+.tripHeader p h1 {
+  color: rgb(0, 0, 0);
+  display: inline-block;
+  border-radius: 8px;
+  border: none;
+  font-size: 1.6vw;
+}
+
+.setTrip {
+  background-color: rgb(234, 234, 234);
+  margin-left: 4%;
+  padding: 2%;
+  margin-top: 30px;
+  padding-left: -5%;
+  transition: 0.8s;
+  text-decoration: none;
+  color: black;
+  z-index: 2;
+}
+
+.avilabel_trips {
+  display: grid;
+  grid-template-columns: 300px 300px;
+  column-gap: 20%;
+  padding-left: 8%;
+  margin-top: 1.8%;
+  margin-bottom: 2%;
+  padding-bottom: 10px;
+  transition: 1s;
+  padding-top: 2%;
+  border-radius: 7px 7px 7px 7px;
+  z-index: 2;
+}
+
+.borderBottom {
+  border-bottom: 1px solid green;
+}
+
+.avilabel_trips p b {
+  color: green;
+}
+
+.setTrip button {
+  background-color: rgb(0, 111, 39);
+  padding: 5px;
+  padding-right: 5%;
+  padding-left: 5%;
+  border: none;
+  color: white;
+  border-radius: 5px;
+
+}
+
+.result {
+  text-align: center;
+  color: rgb(0, 0, 0);
+  z-index: -1;
+
+}
+
+.setTrip button:hover {
+  background-color: rgb(1, 79, 28);
+}
+
+.set_history {
+  padding-left: 43%;
+  padding-bottom: 10px;
+}
+
+.avilabel_trips button:hover {
+  background-color: rgb(1, 86, 1);
+
+}
+
+.avilabel_trips:hover {
+  background-color: rgb(175, 175, 175);
+  color: rgb(255, 255, 255);
+  transform: scale(1.15);
+}
+
+.companysearchinner {
+  position: relative;
+  height: 30px;
+  padding: 30px;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid rgb(89, 89, 89);
+  padding: 0 15px;
+  margin-top: 20px;
+}
+
+.companysearch button {
+  position: relative;
+  height: 30px;
+  outline: none;
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 0 6px 6px 0;
+  margin-left: -1px;
+  margin-top: 20px;
+  margin-right: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.companyList {
+  display: grid;
+  grid-template-columns: 43% 43% 4%;
+  background-color: rgb(52, 52, 52);
+  justify-content: space-between;
+  color: #ffffff; 
+  margin: 15px;
+  padding-left: 4%;
+  padding-right: 10px;
+  height: 45px;
+  padding-top: 10px;
+}
+
+.companyList .dropdownVehicle {
+  margin-top: 3px;
+}
+
+.greentrip {
+  margin-top: 5px;
+  color: green;
+  font-size: 1.7vw;
+  margin-left: 25px;
+  margin-top: 30px;
+}
+
+.loading {
+  margin-top: 100px;
+  margin-bottom: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+
+/* ------------------ Vehicle-search ------------------- */
+
+.vehicle_search {
+  display: flex;
+  justify-content: right;
+  margin-top: 40px; 
+  width: 100%;
+}
+
+.hide {
+   display: none; 
+}
+
+.vehicle_search p {
+   display: flex;
+}
+.vehicle_search .icn{ 
+   margin-top: 8px;
+   margin-right: -42px;
+   margin-left: 20px;
+   z-index: 2;
+}
+
+.vehicle_search input {
+   height: 38px;
+   padding-left: 50px;
+   border-radius: 6px 0px 0px 6px;
+   background-color: #ffffff;
+   outline: none;
+   border: 1px solid rgb(145, 145, 145);
+   margin-left: 10px;
+   z-index: 1;
+   padding-right: 10px;
+}
+
+.vehicle_search p button {
+   width: 80px;
+   background-color: #222;
+   color: var(--white);
+   border-radius: 0px 7px 7px 0px;
+   border: none;
+}
+
+.vehicle_search p button:hover {
+   background-color: rgb(67, 67, 67);
+   border: none;
+}
+
+/* ----------------- table ------------------ */
+
+.outer_vehicle_table {
+  overflow-x: scroll;
+  margin: 3%;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-bottom: 10px;
+}
+.outer_vehicle_table p {
+  color: #009879;
+  font-size: 23px;
+  margin-left: 5px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.vehicle_table {
+  border-collapse: collapse;
+  width: 100%;
+  border-radius: 5px 5px 0px 0px;
+  overflow: hidden;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+}
+
+.vehicle_table thead {
+  background-color: #0e7b48;
+  color: var(--white);
+  text-align: left;
+  padding: 2%;
+  margin-top: 2%;
+  height: 50px;
+}
+
+.vehicle_table button {
+  background-color: #404040;
+  color: var(--white);
+  padding: 3%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  border: none;
+  border-radius: 5px;
+  width: 80px;
+  font-size: 0.8rem;
+}
+
+.vehicle_table .edit_button {
+  background-color: #006666;
+}
+
+.vehicle_table th,
+.vehicle_table td {
+  padding: 5px 15px;
+}
+
+.vehicle_table tbody tr {
+  border-bottom: 1px solid #afafaf;
+}
+
+.vehicle_table tbody tr:nth-of-type(even) {
+  background-color: #e4e4e4;
+}
+
+.vehicle_table tbody tr:last-of-type {
+  border-bottom: 4px solid #4a4a4a;
+}
+
+.vehicle_table tbody .active_row {
+  color: #005d4a;
+}
+
+
+/* ------------------ pagination ------------------- */
+.page {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 10px;
+}
+
+.num {
+  padding: 20px 10px 20px 20px;
+}
+
+.page .sel {
+  margin-right: 50px;
+}
+
+.page .next {
+  margin-top: 8px;
+  margin-left: 10px;
+}
+
+.vehicle_menu {
+  display: none;
+}
+
+@media screen and (max-width: 500px) {
+  .main_content {
+    position: absolute;
+    width: calc(100%);
+    left: 0px;
+    min-height: calc(88vh);
+    opacity: var(--black2);
+    color: var(--black1);
+    top: 75px;
+    background-color: rgb(242, 242, 242);
+    z-index: -1;
+  }
+
+  .allDiv {
+    background-color: rgb(255, 255, 255);
+    padding: 2%;
+    border-radius: 10px 10px 10px 10px;
+    z-index: 1;
+  }
+
+  .tripHeader {
+    display: grid;
+    grid-template-columns: 48% 48%;
+    gap: 1px;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    text-decoration: none;
+    color: var(--white);
+  }
+
+  .tripHeader .avaliableVehicles {
+    background-color: rgb(255, 255, 255);
+    color: rgb(20, 132, 0);
+    margin-bottom: -50px;
+    border: 8px solid rgb(238, 238, 238);
+    z-index: -1;
+    text-transform: none;
+    padding: 15px;
+  }
+
+  .tripHeader p h1 {
+    color: rgb(0, 0, 0);
+    display: inline-block;
+    /* padding: 1%;
+    padding-left: 8%;
+    padding-right: 8%; */
+    border-radius: 8px;
+    border: none;
+    font-size: 3vw;
+  }
+
+  .companyList {
+    display: grid;
+    grid-template-columns: 65% 10%;
+    gap: 1px;
+    background-color: rgb(52, 52, 52);
+    justify-content: space-between;
+    color: #ffffff;
+    margin: 15px;
+    padding-left: 4%;
+    padding-right: 10px;
+    height: 45px;
+    padding-top: 8px;
+  }
+
+  .companyList label {
+    display: none;
+  }
+
+  .greentrip {
+    margin-top: 5px;
+    color: green;
+    font-size: 4vw;
+    margin-left: 25px;
+    margin-top: 30px;
+  }
+
+  .vehicle_search p button {
+    display: none;
+}
+
+}

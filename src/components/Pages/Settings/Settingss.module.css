@@ -1,0 +1,333 @@
+
+
+/* ----------------- contents ----------------- */
+.main_content{
+    position: absolute;
+    width: calc(100% - 100px);
+    left: 100px;
+    min-height: calc(100vh -75px);
+    background-color: rgb(245, 245, 245);
+    color: var(--black1);
+    top: 75px;
+    z-index: -2;
+ }
+ 
+ /* ----------------- all cards ----------------- */
+ .dashboardContents {
+    display: grid; 
+    grid-template-columns: 23% 23% 23%; 
+    justify-content: center; 
+    justify-items: center; 
+    align-items: center; 
+    margin-top: 50px;
+    margin-bottom: 120px; 
+    gap: 7%; 
+    row-gap: 1%;
+ } 
+ 
+ /* ----------------- total Vehicle card ----------------- */
+ .totalVehicles {
+    color: #006666;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    height: 110px;
+    margin-bottom: 50px;
+    border-radius: 10px 0px 0px 10px;
+    text-align: center;  
+    transition: 0.3s;
+    padding: 25px;
+    border-right: 8px solid #006666;
+    /* box-shadow: 1px 5px 5px -4px rgb(0, 0, 0); */
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
+    display: inline-block;
+ }
+ .totalVehicles h4{
+    color: #006666;
+ }
+ 
+ .innerCard{
+    display: grid;
+    grid-template-columns: 60px 20px;
+    justify-content: center;
+    margin-top: 3px;
+    color: #006666;
+ }
+ .innerCard p{
+    font-size: 23px;
+    font-weight: 700;
+    display: flex;
+    align-items: center; 
+ }
+ .totalVehicles:hover {
+    transform: scale(1.09);
+ }
+ 
+ /* ----------------- communication card----------------- */
+ .message {
+    color: #006666;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    height: 110px;
+    margin-bottom: 50px;
+    border-radius: 10px 0px 0px 10px;
+    text-align: center; 
+    transition: 0.3s;
+    padding: 25px;
+    border-right: 8px solid #b35900;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
+    display: inline-block;
+    color: #b35900;
+ }
+ .message h4{
+    color: #b35900;
+ }
+ .innerCard2{
+    display: grid;
+    grid-template-columns: 60px 20px;
+    justify-content: center;
+    margin-top: 3px;
+    color: #b35900;
+ }
+ 
+ .innerCard2 p{
+    font-size: 23px;
+    font-weight: 700;
+    display: flex;
+    align-items: center; 
+ }
+ .message:hover {
+    transform: scale(1.09);
+ }
+ 
+ /* ----------------- users card----------------- */
+ .users {
+    color: #006666;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    height: 110px;
+    margin-bottom: 50px;
+    border-radius: 10px 0px 0px 10px;
+    text-align: center; 
+    transition: 0.3s;
+    padding: 25px;
+    border-right: 8px solid #002e4d;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
+    display: inline-block;
+    color: #002e4d;
+ }
+ .users h4{
+    color: #002e4d;
+ }
+ .innerCard3{
+    display: grid;
+    grid-template-columns: 60px 20px;
+    justify-content: center;
+    margin-top: 3px;
+    color: #002e4d;
+ }
+ .innerCard3 p{
+    font-size: 23px;
+    font-weight: 700;
+    display: flex;
+    align-items: center; 
+ }
+ .users:hover {
+    transform: scale(1.09);
+ }
+ /* ----------------- registration card ----------------- */
+ .registration {
+    color: #006666;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    height: 110px;
+    margin-bottom: 50px;
+    border-radius: 10px 0px 0px 10px;
+    text-align: center; 
+    transition: 0.3s;
+    padding: 25px;
+    border-right: 8px solid #00802b;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
+    display: inline-block;
+    color: #00802b;
+ }
+ .registration h4{
+    color: #00802b;
+ }
+ .innerCard4{
+    display: grid;
+    justify-content: center;
+    margin-top: 3px;
+    color: #00802b;
+ }
+ .registration:hover {
+    transform: scale(1.09);
+ }
+ /* ----------------- trip card----------------- */
+ .trip {
+    color: #006666;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    height: 110px;
+    margin-bottom: 50px;
+    border-radius: 10px 0px 0px 10px;
+    text-align: center; 
+    transition: 0.3s;
+    padding: 25px;
+    border-right: 8px solid #009999;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
+    display: inline-block;
+    color: #009999;
+ }
+ .trip h4{
+    color: #009999;
+ }
+ .innerCard5{
+    justify-content: center;
+    margin-top: 3px;
+    color: #009999;
+ }
+ .trip:hover {
+    transform: scale(1.09); 
+ }
+ /* ----------------- report card----------------- */
+ .report {
+    color: #006666;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    height: 110px;
+    margin-bottom: 50px;
+    border-radius: 10px 0px 0px 10px;
+    text-align: center; 
+    transition: 0.3s;
+    padding: 25px;
+    border-right: 8px solid #005c99;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
+    display: inline-block;
+    color: #005c99;
+ }
+ .report h4{
+    color: #005c99;
+ }
+ .innerCard6{
+    justify-content: center;
+    margin-top: 3px;
+    color: #005c99;
+ }
+ .report:hover {
+    transform: scale(1.09);
+ }
+ /* ----------------- alert card----------------- */
+ .alert {
+    color: #006666;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    height: 110px;
+    margin-bottom: 50px;
+    border-radius: 10px 0px 0px 10px;
+    text-align: center; 
+    transition: 0.3s;
+    padding: 25px;
+    border-right: 8px solid #ff0000; 
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
+    display: inline-block;
+    color: #ff0000;
+ }
+ .alert h4{
+    color: #ff0000;
+ }
+ .innerCard7{
+    display: grid;
+    grid-template-columns: 60px 20px;
+    justify-content: center;
+    margin-top: 3px;
+    color: #ff0000;
+ }
+ .innerCard7 p{
+    font-size: 23px;
+    font-weight: 700;
+    display: flex;
+    align-items: center; 
+ }
+ .alert:hover {
+    transform: scale(1.09);
+ }
+ /* ----------------- tracking card----------------- */
+ .tracking {
+    color: #006666;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    height: 110px;
+    margin-bottom: 50px;
+    border-radius: 10px 0px 0px 10px;
+    text-align: center; 
+    transition: 0.3s;
+    padding: 25px;
+    border-right: 8px solid #404040;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
+    display: inline-block;
+    color: #404040;
+ }
+ .tracking h4{
+    color: #404040;
+ }
+ .innerCard8{
+    justify-content: center;
+    margin-top: 3px;
+    color: #404040;
+ }
+ .tracking:hover {
+    transform: scale(1.09);
+ }
+ 
+ 
+ /* ---------------responsiveness--------------- */
+ 
+ @media screen and (max-width: 870px) {
+    .dashboardContents {
+       display: grid;
+       grid-template-columns: 35% 35%;
+       justify-content: center;
+       justify-items: center;
+       align-items: center;
+       margin-top: 30px;
+       margin-bottom: 120px;
+       gap: 6%;
+    }
+    
+ }
+ 
+ @media screen and (max-width: 600px) {
+    .dashboardContents {
+       display: grid;
+       grid-template-columns: 80%;
+       justify-content: center;
+       justify-items: center;
+       align-items: center;
+       margin-top: 30px;
+       margin-bottom: 120px; 
+       gap: 1px;
+    }
+ }
+ 
+ @media screen and (max-width: 500px) {
+ 
+    .main_content{
+       position: absolute;
+       width: calc(100%); 
+       left: 0px;
+       opacity: var(--black2); 
+       color: var(--black1);
+       top: 75px;
+       background-color: rgb(242, 242, 242);
+       z-index: -2;
+       min-height: calc(100vh -75px);
+ 
+   }
+ }
+ 
+ @media screen and (max-width: 400px) {
+    .dashboard_contents {
+       margin-left: 3%;
+    }
+ 
+ }

@@ -1,0 +1,188 @@
+.popup3{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    z-index: 31; 
+}
+.popup{ 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1; 
+}
+.popup2{ 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1; 
+}
+.popupp{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10; 
+}
+.popup-inner{
+    position: relative;
+    padding: 2px;
+    padding-top: 5%;
+    padding-bottom: 2%;
+    width: 100%;
+    max-width: 1100px;
+    background-color: rgb(230, 230, 230);
+    z-index: 1;
+    border-radius: 4px;
+}
+.popup-innerr{
+    position: relative;
+    padding: 2px;
+    padding-top: 5%;
+    padding-bottom: 2%;
+    width: 80%;
+    max-width: 800px;
+    background-color: rgb(230, 230, 230);
+    z-index: 1;
+    border-radius: 4px;
+}
+
+.popup-inner .close-btn{
+    position: absolute;
+    top: 20px ;
+    right: 26px;
+    background-color: red;
+    padding: 2px;
+    padding-left: 2%;
+    padding-right: 2%;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    
+}
+
+.popup-innerr .close-btn{
+    position: absolute;
+    top: 20px ;
+    right: 26px;
+    background-color: red;
+    padding: 2px;
+    padding-left: 2%;
+    padding-right: 2%;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    
+}
+.popup-inner .close-btn2{
+    position: absolute;
+    top: 55px ;
+    right: 16px;
+    background-color: red; 
+    padding: 2px; 
+    padding-left: 2%;
+    padding-right: 2%;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    
+}
+.qwe{
+    display: grid;
+    grid-template-columns: 30.6% 30.6% 30.6%;
+    gap: 4%;
+    row-gap: 35px;
+    background-color: rgb(255, 255, 255);
+    padding: 5%;
+    border-radius: 8px;
+    padding-top: 70px;
+    padding-bottom: 1.5%;
+    margin-top: -13px;
+    
+}
+
+.qwe2{
+    display: grid;
+    grid-template-columns: 30.6% 30.6% 30.6%;
+    gap: 4%;
+    row-gap: 15px;
+    background-color: rgb(255, 255, 255);
+    padding: 5%;
+    border-radius: 8px;
+    padding-top: 70px;
+    padding-bottom: 1.5%;
+    margin-top: -13px;
+    
+}
+.ewq{
+    /* background-color: red; */
+    padding: 2%;
+
+}
+.asd{
+    display: grid;
+}
+
+.zxc{
+    background-color: rgb(255, 255, 255);
+    margin-left: -50%;
+    padding-top: 2%;
+    padding-bottom: 30px;
+    border: 8px solid rgb(230, 230, 230);
+    padding-left: 4%;
+    padding-right: 4%;
+    color: green;
+    font-size: 22px;
+    font-weight: 700;
+    z-index: 4;
+}
+
+.zxcc{
+    background-color: rgb(255, 255, 255);
+    margin-left: 10%;
+    padding-top: 2%;
+    padding-bottom: 30px;
+    border: 8px solid rgb(230, 230, 230);
+    padding-left: 4%;
+    padding-right: 4%;
+    color: green;
+    font-size: 22px;
+    font-weight: 700;
+    z-index: 4;
+}
+.zxc2{
+    background-color: black;
+    margin-bottom: -20px;
+}
+
+.asdy button{
+    background-color: black;
+    color: rgb(255, 255, 255);
+    padding: 2%;
+    border-radius: 8px;
+    margin-top: 10px;
+    padding-left: 10%;
+    padding-right: 10%;
+
+}

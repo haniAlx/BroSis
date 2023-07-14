@@ -1,0 +1,408 @@
+
+
+/* --------------- registration --------------- */
+
+.main_content {
+  position: relative;
+  width: calc(100% - 100px);
+  left: 100px;
+  min-height: calc(100vh -75px);
+  background-color: rgb(238, 238, 238);
+  color: var(--black1);
+  top: 75px;
+  padding: 5%;
+  padding-top: 2px;
+  padding-bottom: 3%;
+
+} 
+
+.allDiv {
+  background-color: rgb(255, 255, 255);
+  padding: 5%;
+  border-radius: 10px 10px 10px 10px;
+  z-index: 1;
+}
+
+.company_individual_header {
+  display: grid;
+  grid-template-columns: 30% 30% 20%;
+  gap: 8%;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  text-decoration: none;
+  color: var(--white);
+}
+
+.company_individual_header .companyHeader {
+  background-color: rgb(255, 255, 255);
+  color: rgb(20, 132, 0);
+  margin-bottom: -40px;
+  border: 8px solid rgb(238, 238, 238);
+  z-index: -1;
+  text-transform: none;
+  padding: 25px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.company_individual_header p h1 {
+  color: rgb(0, 0, 0);
+  display: inline-block;
+  border-radius: 8px;
+  border: none;
+  font-size: 1.6vw;
+}
+ 
+/* .company_individual_header .vehicleDetail {
+  background-color: rgb(255, 255, 255);
+  color: rgb(20, 132, 0);
+  text-align: center;
+  border: 8px solid rgb(238, 238, 238);
+  border-radius: 17px 17px 0px 17px;
+  padding: 4%;
+  margin-top: 20px;
+  margin-right: -3.5%;
+  display: grid;
+  row-gap: 10px;
+} */
+
+
+/* -------------------- company_information -------------------- */
+.company_information {
+  display: grid;
+  grid-template-columns: 45% 45%;
+  gap: 10%;
+  text-transform: uppercase;
+} 
+
+h1 {
+  margin-top: 50px;
+  margin-bottom: 10px;
+}
+
+.company_information input {
+  position: relative;
+  height: 40px;
+  width: 100%;
+  outline: none;
+  border-radius: 6px;
+  padding: 0 15px;
+  background-color: rgb(242, 242, 242);
+  border: 1px solid rgb(202, 202, 202);
+}
+
+.company_information input:focus {
+  box-shadow: 0px 0px 2px 1px rgba(21, 113, 146, 0.4);
+  border: 1px solid rgba(21, 113, 146, 0.4);
+
+}
+
+.company_information select {
+  position: relative;
+  height: 40px;
+  width: 100%;
+  outline: none;
+  border: 1px solid rgb(202, 202, 202);
+  border-radius: 6px;
+  padding: 0 15px;
+  background-color: rgb(242, 242, 242);
+}
+
+/* -------------------- company_Address -------------------- */
+.company_Address {
+  display: grid;
+  grid-template-columns: 30% 30% 30%;
+  gap: 5%;
+  text-transform: uppercase;
+} 
+
+h1 {
+  margin-top: 50px;
+  color: rgb(55, 55, 55);
+  text-transform: uppercase;
+  font-size: 22px;
+}
+
+.company_Address input {
+  position: relative;
+  height: 40px;
+  width: 100%;
+  outline: none;
+  background-color: rgb(242, 242, 242);
+  border: 1px solid rgb(202, 202, 202);
+  border-radius: 6px;
+  padding: 0 15px;
+}
+
+.company_Address select {
+  position: relative;
+  height: 40px;
+  width: 100%;
+  border: 1px solid rgb(202, 202, 202);
+  border: 1px solid rgb(129, 129, 129);
+  border-radius: 6px;
+  padding: 0 15px;
+  background-color: rgb(242, 242, 242);
+}
+
+.company_Address input:focus {
+  box-shadow: 0px 0px 2px 1px rgba(21, 113, 146, 0.4);
+  border: 1px solid rgba(21, 113, 146, 0.4);
+
+}
+
+/* -------------------- owner_information -------------------- */
+.owner_information {
+  display: grid;
+  grid-template-columns: 45% 45%;
+  gap: 10%;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin-top: 50px;
+}
+
+.owner_information input {
+  position: relative;
+  height: 40px;
+  width: 100%;
+  outline: none;
+  background-color: rgb(242, 242, 242);
+  border: 1px solid rgb(202, 202, 202);
+  border-radius: 6px;
+  padding: 0 15px;
+}
+ 
+.owner_information select {
+  position: relative;
+  height: 40px;
+  width: 100%;
+  outline: none;
+  border: 1px solid rgb(202, 202, 202);
+  border-radius: 6px;
+  padding: 0 15px; 
+  background-color: rgb(242, 242, 242);
+}
+
+.owner_information input:focus {
+  box-shadow: 0px 0px 2px 1px rgba(21, 113, 146, 0.4);
+  border: 1px solid rgba(21, 113, 146, 0.4);
+
+}
+
+
+/* -------------------- additional_information -------------------- */
+.additional_information {
+  display: grid;
+  grid-template-columns: 45% 45%;
+  gap: 10%;
+  text-transform: uppercase;
+}
+
+.Third_div h1 {
+  margin-top: 80px;
+}
+
+h1 {
+  margin-top: 50px;
+}
+
+.additional_information input {
+  position: relative;
+  height: 40px;
+  width: 100%;
+  outline: none;
+  background-color: rgb(242, 242, 242);
+  border: 1px solid rgb(202, 202, 202);
+  border-radius: 6px;
+  padding: 0 15px;
+}
+
+.additional_information select {
+  position: relative;
+  height: 40px;
+  width: 100%;
+  outline: none;
+  background-color: rgb(242, 242, 242);
+  border: 1px solid rgb(202, 202, 202);
+  border-radius: 6px;
+  padding: 0 15px;
+}
+
+/* -------------------- vehicle_information -------------------- */
+
+.vehicle_information {
+  display: grid;
+  grid-template-columns: 30% 30% 30%;
+  gap: 5%;
+  row-gap: 20px;
+  text-transform: uppercase;
+}
+
+.vehicle_information input {
+  position: relative;
+  height: 40px;
+  width: 100%;
+  outline: none;
+  background-color: rgb(242, 242, 242);
+  border: 1px solid rgb(202, 202, 202);
+  border-radius: 6px;
+  padding: 0 15px;
+}
+h1 {
+  margin-top: 50px;
+}
+
+.vehicle_information select {
+  position: relative;
+  height: 40px;
+  width: 100%;
+  outline: none;
+  background-color: rgb(242, 242, 242);
+  border: 1px solid rgb(202, 202, 202);
+  border-radius: 6px;
+  padding: 0 15px; 
+}
+
+.set_trip {
+  margin-left: 10%;
+}
+
+.vehicle_information1 input:focus {
+  box-shadow: 0px 0px 2px 1px rgba(21, 113, 146, 0.4);
+  border: 1px solid rgba(21, 113, 146, 0.4);
+
+}
+
+/* -------------------- Buttons -------------------- */
+.company_button {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+.add {
+  padding: 1%;
+  padding-left: 10%;
+  padding-right: 10%;
+  text-align: center;
+  background-color: #191919;
+  border: none;
+  border-radius: 8px;
+  color: var(--white);
+  transition: .5s;
+}
+.add:hover{
+  transform: scale(1.07);
+  background-color: #393939;
+}
+.validate_text {
+  color: #ff0000;
+  font-size: 13px;
+  
+}
+
+
+@media screen and (max-width: 1000px) {
+  .company_Address {
+    display: grid;
+    grid-template-columns: 45% 45%;
+    gap: 5%;
+  }
+
+  .vehicle_information {
+    display: grid;
+    grid-template-columns: 45% 45%;
+    gap: 5%;
+  }
+
+}
+
+@media screen and (max-width: 800px) {
+  
+  .company_information {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .company_Address {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .owner_information {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .additional_information {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .vehicle_information {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+  }
+
+  .menu_controler {
+    display: contents;
+  }
+
+  .company_header .header_title {
+    display: none;
+  }
+
+}
+
+@media screen and (max-width: 500px) {
+  .main_content {
+    position: absolute;
+    width: calc(100%); 
+    left: 0px;
+    min-height: calc(100vh -75px);
+    opacity: var(--black2);
+    color: var(--black1);
+    top: 75px;
+    background-color: rgb(242, 242, 242);
+    z-index: -1;  
+}
+
+.company_individual_header {
+  display: grid;
+  grid-template-columns: 40% 40%;
+  gap: 5%;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  text-decoration: none;
+  color: var(--white);
+}
+
+.company_individual_header .companyHeader {
+  color: rgb(20, 132, 0);
+  margin-bottom: -40px;
+  border: 8px solid rgb(238, 238, 238);
+  z-index: -1;
+  text-transform: none;
+  padding: 19x;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.company_individual_header p h1 {
+  color: rgb(0, 0, 0);
+  display: inline-block;
+  border-radius: 8px;
+  border: none;
+  font-size: 3vw;
+}
+}

@@ -1,0 +1,460 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+
+/* --------------- vehicle-main --------------- */
+.main_content {
+    position: absolute;
+    width: calc(100% - 100px);
+    left: 100px;
+    min-height: calc(88vh);
+    opacity: var(--black2);
+    color: var(--black1);
+    top: 75px;
+    border: 2px solid red;
+    background-color: rgb(247, 247, 247);
+    /* z-index: -1; */
+} 
+.forms{
+    border: 2px solid yellow;
+    position: relative;
+    height: 250px;
+    width: 80%;
+  
+
+}
+.form{
+    margin-left: 50%;
+}
+.vehicle_outer { 
+    position: absolute;
+    width: calc(100% - 100px);
+    left: 100px;
+    min-height: 88vh;
+    background-color: rgb(244, 244, 244);
+    color: var(--black1);
+    top: 75px;
+} 
+
+.vehicle_contents0 {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: 10px 10px 10px 10px 10px;
+    justify-content: space-between;
+    width: 74%;
+    margin-left: 5%;
+    /* position: absolute; */ 
+}
+
+/* ------------------ Total_vehicle ------------------- */ 
+
+.allcards {
+    display: grid;
+    grid-template-columns: 18% 18% 18% 18% 18%;
+    row-gap: 1px;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    margin-top: 50px;
+    /* margin-bottom: 120px; */
+    /* gap: 6%;  */
+
+}
+
+/* -----------------active card ------------------- */
+.activeCard {
+    width: 80%;
+    background-color: rgb(83, 83, 83);
+    height: 90px;
+    margin-bottom: 50px;
+    border-radius: 10px;
+    text-align: center;
+    transition: 0.3s;
+    padding: 16px;
+    box-shadow: 0px 4px 4px -4px rgb(0, 0, 0);
+    cursor: pointer;
+    display: inline-block;
+    color: #ffffff;
+}
+
+.innerContents1 {
+    color: #ffffff;
+}
+
+.activeCard p {
+    display: grid;
+    grid-template-columns: 45px 45px;
+    justify-content: center;
+    margin-top: 6px;
+}
+
+.activeCard p b {
+    margin-top: 2px;
+    font-size: 1.5rem;
+}
+
+.activeCard:hover {
+    transform: scale(1.09);
+}
+
+/* -----------------other cards ------------------- */
+.vehicle {
+    color: #006666;
+    width: 80%;
+    background-color: rgb(255, 255, 255);
+    height: 90px;
+    margin-bottom: 50px;
+    border-radius: 10px;
+    text-align: center;
+    transition: 0.3s; 
+    padding: 16px;
+    box-shadow: 0px 4px 4px -4px rgb(0, 0, 0);
+    cursor: pointer;
+    display: inline-block;
+    color: #000;
+}
+
+.innerContents {
+    color: #000;
+}
+
+.icon {
+    display: flex;
+    justify-content: space-around;
+    gap: 3%;
+}
+
+.vehicle p {
+    display: grid;
+    grid-template-columns: 45px 45px;
+    justify-content: center;
+    margin-top: 6px;
+}
+
+.vehicle p b {
+    margin-top: 2px;
+    font-size: 1.5rem;
+}
+
+.vehicle:hover {
+    transform: scale(1.09);
+}
+
+
+/* ------------------ Vehicle-search ------------------- */
+
+.vehicle_search {
+    display: flex;
+    justify-content: right;
+}
+ 
+.hide {
+    display: none;
+}
+
+.vehicle_search p {
+    display: flex;
+}
+
+.vehicle_search .icn {
+    margin-top: 8px;
+    margin-right: -42px;
+    margin-left: 20px;
+    z-index: 2;
+}
+
+.vehicle_search input {
+    height: 38px;
+    padding-left: 50px;
+    border-radius: 6px 0px 0px 6px;
+    background-color: #ffffff;
+    outline: none;
+    border: 1px solid rgb(145, 145, 145);
+    margin-left: 10px;
+    z-index: 1;
+}
+
+.vehicle_search p button {
+    width: 80px;
+    background-color: #222;
+    color: var(--white);
+    border-radius: 0px 7px 7px 0px;
+    border: none;
+}
+
+.vehicle_search p button:hover {
+    background-color: rgb(67, 67, 67);
+    border: none;
+}
+
+
+/* ------------------ Vehicle-filter ------------------- */
+.vehicle_filter p {
+    margin-top: 50px;
+    margin-left: 80%;
+    color: rgb(63, 63, 63);
+    display: flex;
+}
+
+.vehicle_filter p .fil {
+    margin-top: 1px;
+}
+
+.vehicle_filter p h6 {
+    padding-left: 5px;
+    font-size: 0.8rem;
+}
+
+/* ------------------ Vehicle-table ------------------- */
+
+.outer_vehicle_table {
+    overflow-x: scroll;
+    margin: 7%;
+    padding-bottom: 20px;
+    margin-bottom: 10px;
+    margin-top: 30px;
+}
+
+.outer_vehicle_table p {
+    color: #009879;
+    font-size: 23px;
+    margin-left: 5px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.vehicle_table {
+    border-collapse: collapse;
+    width: 100%;
+    border-radius: 5px 5px 0px 0px;
+    overflow: hidden;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+}
+
+.vehicle_table thead {
+    background-color: #0e7b48;
+    color: var(--white);
+    text-align: left;
+    padding: 1%;
+    margin-top: 1%;
+    height: 50px;
+}
+
+.vehicle_table button {
+    background-color: #404040;
+    color: var(--white);
+    padding: 3%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border: none;
+    border-radius: 5px;
+    width: 80px;
+    font-size: 0.8rem;
+}
+
+.vehicle_table .edit_button {
+    background-color: #006666;
+}
+
+.vehicle_table th,
+.vehicle_table td {
+    padding: 5px 15px;
+}
+
+.vehicle_table tbody tr {
+    border-bottom: 1px solid #afafaf;
+}
+ 
+.vehicle_table tbody tr:nth-of-type(even) {
+    background-color: #e4e4e4; 
+}
+
+.vehicle_table tbody tr:last-of-type {
+    border-bottom: 4px solid #4a4a4a;
+}
+
+.vehicle_table tbody .active_row {
+    color: #005d4a;
+}
+
+
+/* ------------------ pagination ------------------- */
+.page {
+    /* padding: 10px; */
+    display: flex;
+    justify-content: center;
+    padding-bottom: 0px;
+}
+
+.num {
+    padding: 20px 10px 20px 20px;
+}
+
+.page .sel {
+    margin-right: 50px;
+}
+
+.page .next {
+    margin-top: 8px;
+    margin-left: 10px;
+}
+
+.vehicle_menu {
+    display: none;
+}
+
+.loading {
+    margin-left: 45%;
+    margin-top: 100px;
+    padding: 10px;
+}
+
+/* ---------------------- popup --------------------- */
+
+.popup{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2; 
+}
+
+.popupInner{
+    position: relative;
+    padding: 2px;
+    padding-top: 5%;
+    padding-bottom: 20px;
+    width: 100%;
+    max-width: 700px;
+    background-color: rgb(230, 230, 230);
+    border-radius: 4px;
+}
+.popupInner .closeBtn{
+    position: absolute;
+    top: 20px ;
+    right: 26px;
+    background-color: red;
+    padding: 2px;
+    padding-left: 2%;
+    padding-right: 2%;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    
+}
+
+.assignetDiver{
+    display: grid;
+    gap: 10px;
+    width: 80%;
+    margin-left: 10%;
+    margin-top: -20px;
+    /* margin-bottom: 20px; */
+    padding-bottom: 40px;
+    background-color: white;
+    padding-left: 100px;
+    padding-right: 100px;
+    border-radius: 6px;
+}
+.assignetDiver .lable{
+    background-color: rgb(255, 255, 255);
+    border: 8px solid rgb(231, 231, 231);
+    border-radius: 6px;
+    text-align: center;
+    margin-top: -40px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 24px;
+    color: green;
+    margin-bottom: 30px;
+    font-weight: 700;
+} 
+.assignetDiver input{
+    height: 40px;
+    outline: none;
+    border-radius: 6px;
+    padding: 0 15px;
+    background-color: rgb(242, 242, 242);
+    border: 1px solid rgb(202, 202, 202);
+    text-align: center;
+}
+
+.assignetDiver button{
+    height: 40px;
+    outline: none;
+    border-radius: 6px;
+    background-color: rgb(46, 46, 46);
+    border: 1px solid rgb(202, 202, 202);
+    color: rgb(255, 255, 255);
+    font-weight: 700;
+    font-size: 15px;
+    width: 50%;
+    margin-left: 24%;
+    margin-top: 10px;
+    margin-bottom: -30px;
+    
+}
+
+
+/* ------------------ Responsivness ------------------- */
+
+@media screen and (max-width: 1120px) {
+
+    .allcards {
+        display: grid;
+        grid-template-columns: 30% 30% 30%;
+    }
+
+}
+
+@media screen and (max-width: 710px) {
+
+    .allcards {
+        display: grid;
+        grid-template-columns: 45% 45%;
+    }
+
+}
+
+@media screen and (max-width: 420px) {
+
+    .allcards {
+        display: grid;
+        grid-template-columns: 90%;
+    }
+
+    .activeCard {
+        height: 100px;
+    }
+
+    .vehicle {
+        height: 100px;
+    }
+
+}
+
+@media screen and (max-width: 500px) {
+
+    .main_content {
+        position: absolute;
+        width: calc(100%);
+        left: 0px;
+        /* min-height: calc(100% -75px); */
+        opacity: var(--black2);
+        color: var(--black1);
+        top: 75px;
+        background-color: rgb(242, 242, 242);
+        z-index: -1;
+
+    }
+}
+
+
+
+

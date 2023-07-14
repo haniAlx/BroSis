@@ -1,0 +1,207 @@
+/* ------------------ search ------------------- */
+/* .company_container{
+    border: 2px solid yellow;
+    } 
+     */
+.main_content {
+    position: relative;
+    width: calc(100% - 100px);
+    left: 100px;
+    height:100vh;
+    min-height: calc(100vh -75px);
+    background-color: rgb(238, 238, 238);
+    color: var(--black1);
+    top: 75px;
+    padding: 5%;
+    padding-top: 2px;
+    padding-bottom: 3%;
+    
+  
+  }
+  .company_individual_header {
+    display: grid;
+    grid-template-columns: 25% 25%;
+    gap: 8%;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    text-decoration: none;
+    color: var(--white);
+  }
+  
+.company_individual_header .companyHeader {
+    background-color: rgb(255, 255, 255);
+    color: rgb(20, 132, 0);
+    margin-bottom: -40px;
+    border: 8px solid rgb(238, 238, 238);
+    z-index: -1;
+    text-transform: none;
+    padding: 25px;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  
+  .company_individual_header p h1 {
+    color: rgb(0, 0, 0);
+    display: inline-block;
+    border-radius: 8px;
+    border: none;
+    font-size: 1.6vw;
+  }.allDiv {
+    background-color: rgb(255, 255, 255);
+    padding: 5%;
+    border-radius: 10px 10px 10px 10px;
+    z-index: 1;
+  }
+
+/* -------------------Place for map --------------------- */
+.search{
+    text-align: right;
+    width: 50%;
+    margin: 0 0  0 auto;
+}
+/* .search{
+   
+    text-align: right;
+    border: 2px solid red;
+
+} */
+.search input{
+    margin-bottom: 10px;
+    /* margin-left: 25px; */
+    width: 50%;
+    height: 36px;
+    padding-left: 10px;
+    outline: none;
+    border-radius: 6px 0 0 6px;
+    padding: 0 15px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(202, 202, 202);
+    margin-top: 10px;
+}
+.search button{
+    color: #ffffff;
+    width: 20%;
+    background-color: rgb(79, 79, 79);
+    height: 36px;
+    border-radius: 0 6px 6px 0;
+    padding: 0 15px;
+    border: 1px solid rgb(202, 202, 202);
+    margin-top: 10px;
+    margin-left: -1px;
+}
+
+
+/* ------------------- Table --------------------- */
+
+.outer_vehicle_table {
+    overflow-x: scroll;
+    background-color: rgb(252, 250, 250);
+    border-radius: 5px;
+    width:90%;
+    margin: 0 auto;
+}
+.outer_vehicle_table p {
+    color: #009879;
+    font-size: 23px;
+    margin-left: 45px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    width: 80%;
+}
+
+.vehicle_table {
+    /* background-color: red; */
+    /* margin-left: 4%; */
+    border-collapse: collapse;
+    width: 90%;
+    border-radius: 5px 5px 0px 0px;
+    overflow: hidden;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+    margin: 0 auto;
+}
+
+.vehicle_table thead {
+    background-color: #0e7b48;
+    color: var(--white);
+    text-align: left;
+    padding: 2%;
+    margin-top: 2%;
+    height: 60px;
+}
+
+.vehicle_table button {
+    background-color: #404040;
+    color: var(--white);
+    padding: 3%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border: none;
+    border-radius: 5px;
+    width: 80px;
+    font-size: 0.8rem;
+}
+
+.vehicle_table .edit_button {
+    background-color: #006666;
+}
+
+.vehicle_table th,
+.vehicle_table td {
+    padding: 8px 15px;
+}
+
+.vehicle_table tbody tr {
+    border-bottom: 1px solid #afafaf;
+}
+
+.vehicle_table tbody tr:nth-of-type(even) {
+    background-color: #e4e4e4;
+}
+
+.vehicle_table tbody tr:last-of-type {
+    border-bottom: 4px solid #4a4a4a;
+}
+
+.vehicle_table tbody .active_row {
+    color: #005d4a;
+}
+
+
+/* ------------------ pagination ------------------- */
+.page {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+@media screen and (max-width: 820px) {
+    .mapAndSearch {
+        display: grid;
+        grid-template-columns: 90%;
+        justify-content: center; 
+        column-gap: 10px;
+        margin-top: 50px;
+    }
+    .m-mapclone {
+        margin-left: 17%;
+    }
+
+}
+
+@media screen and (max-width: 500px) {
+    .main_content{
+        position: absolute;
+        width: calc(100%); 
+        left: 0px;
+        min-height: calc(100vh -75px);
+        opacity: var(--black2);
+        color: var(--black1);
+        top: 75px;
+        background-color: rgb(242, 242, 242);
+        z-index: -1;  
+    
+    }
+}

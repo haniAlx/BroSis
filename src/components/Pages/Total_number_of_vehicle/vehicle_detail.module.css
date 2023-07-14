@@ -1,0 +1,284 @@
+.main_content {
+  position: absolute;
+  width: calc(100% - 100px);
+  left: 100px;
+  min-height: calc(90vh);
+  opacity: var(--black2);
+  color: var(--black1);
+  top: 75px;
+  background-color: rgb(238, 238, 238);
+}
+
+.allDiv {
+  background-color: rgb(255, 255, 255);
+  padding: 5%;
+  border-radius: 10px 10px 10px 10px;
+  z-index: 1;
+  margin-left: 6%;
+  margin-right: 6%;
+  padding-bottom: 30px;
+}
+.addToMaintenance{
+  display: flex;
+  justify-content: right;
+}
+.addToMaintenance p{
+  background-color: #4e4e4e;
+  color: #ffffff;
+  font-size: 13px;
+  padding: 0.8%;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.tripHeader {
+  /* background-color: red; */
+  display: grid;
+  grid-template-columns: 40% 40%;
+  justify-content: center;
+  gap: 20%;
+  text-decoration: none;
+  color: var(--white);
+  margin: 6%;
+  margin-bottom: 0px;
+  padding-left: 10%;
+  margin-top: 30px;
+}
+
+.tripHeader .avaliableVehicles {
+  background-color: rgb(255, 255, 255);
+  color: rgb(20, 132, 0);
+  margin-bottom: -50px;
+  border: 8px solid rgb(238, 238, 238);
+  z-index: -1;
+  text-transform: none;
+  padding: 25px;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.tripHeader p h1 {
+  color: rgb(0, 0, 0);
+  display: inline-block;
+  border-radius: 8px;
+  border: none;
+  font-size: 1.6vw;
+}
+
+.tripHeader p h4 {
+  color: green;
+  border-radius: 8px;
+  border: none;
+  font-size: 1.2vw;
+  font-weight: 700;
+  margin-top: 20px;
+  background-color: rgb(255, 255, 255);
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  margin-left: 20%;
+}
+
+.forms {
+  display: grid;
+  grid-template-columns: 30% 30% 30%;
+  justify-content: center;
+  /* background-color: red; */
+  gap: 5%;
+  margin-top: 20px;
+  row-gap: 20px;
+}
+
+.forms select {
+  position: relative;
+  height: 40px;
+  width: 100%;
+  outline: none;
+  background-color: rgb(234, 234, 234);
+  border: none;
+  border-radius: 6px;
+  padding: 0 15px;
+  border: 1px solid rgb(188, 188, 188);
+}
+
+.forms input {
+  position: relative;
+  height: 40px;
+  width: 100%;
+  outline: none;
+  background-color: rgb(234, 234, 234);
+  border: none;
+  border-radius: 6px;
+  padding: 0 15px;
+  border: 1px solid rgb(188, 188, 188);
+}
+
+.forms input:focus {
+  box-shadow: 0px 0px 2px 1px rgba(21, 113, 146, 0.4);
+  border: 1px solid rgba(21, 113, 146, 0.4);
+
+}
+
+.forms select:focus {
+  box-shadow: 0px 0px 2px 1px rgba(21, 113, 146, 0.4);
+  border: 1px solid rgba(21, 113, 146, 0.4);
+
+}
+
+.setButton {
+  display: flex;
+  grid-template-columns: 40% 40%;
+  justify-content: space-around;
+  margin-top: 50px;
+}
+
+.button {
+  padding: 0.7%;
+  padding-left: 6.7%;
+  padding-right: 6.7%;
+  text-align: center;
+  background-color: #b90000;
+  border: none;
+  border-radius: 8px;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.button2 { 
+  padding: 0.7%;
+  padding-left: 8%;
+  padding-right: 8%;
+  text-align: center;
+  background-color: #118f40;
+  border: none;
+  border-radius: 8px;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.button3 {
+  padding: 0.7%;
+  padding-left: 8%;
+  padding-right: 8%;
+  text-align: center;
+  background-color: #434343;
+  border: none;
+  border-radius: 8px;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.button4 {
+  padding: 0.7%;
+  padding-left: 8%;
+  padding-right: 8%;
+  text-align: center;
+  background-color: rgb(234, 234, 234);
+  border: none;
+  border-radius: 8px;
+  color: rgb(75, 75, 75);
+  font-weight: 500;
+  /* font-size: 1vw; */
+  display: flex;
+  align-items: center;
+  cursor: no-drop;
+  border: 1px solid rgb(188, 188, 188);
+}
+
+.validate_text {
+  color: #ff0000;
+  font-size: 14px;
+}
+
+@media screen and (max-width: 900px) {
+  .forms {
+    display: grid;
+    grid-template-columns: 45% 45%;
+    justify-content: center;
+    /* background-color: red; */
+    gap: 4%;
+    margin-top: 20px;
+    row-gap: 30px;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .forms {
+    display: grid;
+    grid-template-columns: 90%;
+    justify-content: center;
+    /* background-color: red; */
+    gap: 4%;
+    margin-top: 40px;
+    row-gap: 10px;
+  }
+
+  .tripHeader p h1 {
+    font-size: 2.2vw;
+  }
+
+  .tripHeader p h4 {
+    font-size: 1.5vw;
+    margin-top: 70px;
+    padding: 10px;
+    width: 80%;
+    margin-left: 20%;
+    border: 3px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .main_content {
+    position: absolute;
+    width: calc(100%);
+    left: 0px;
+    min-height: calc(84vh);
+  }
+
+  .allDiv {
+    background-color: rgb(255, 255, 255);
+    padding: 5%;
+    border-radius: 10px 10px 10px 10px;
+    z-index: 1;
+    margin-left: 5%;
+    margin-right: 5%;
+    padding-bottom: 10px;
+  }
+
+  .tripHeader {
+    margin-top: 0px;
+  }
+
+  .tripHeader .avaliableVehicles {
+    padding: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .tripHeader p h1 {
+    font-size: 3vw;
+  }
+
+  .tripHeader p h4 {
+    font-size: 2vw;
+    margin-top: 30px;
+    padding: 10px;
+    width: 90%;
+    margin-left: 10%;
+    border: 3px;
+  }
+
+  .setButton {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+  }
+}

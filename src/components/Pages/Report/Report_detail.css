@@ -1,0 +1,565 @@
+/*------------ vehicle name & plate number----------------*/
+.main_content77 {
+    position: absolute;
+    width: calc(100% - 100px);
+    left: 100px;
+    min-height: calc(88vh);
+    opacity: var(--black2);
+    color: var(--black1);
+    top: 75px;
+    background-color: rgb(247, 247, 247);
+}
+
+.vehicle-detail {
+    display: grid;
+    grid-template-columns: 34% 34%;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.vehicle-name {
+    box-shadow: 2px 2px 4px 0px;
+    background-color: white;
+    text-align: center;
+    align-items: center;
+    align-content: center;
+    padding-bottom: 15px;
+}
+
+.plate-number {
+    box-shadow: 2px 2px 5px 0px;
+    background-color: white;
+}
+
+.table-report {
+    margin-left: 7%;
+    margin-top: 20px;
+    width: 90%;
+    box-shadow: none;
+    margin-bottom: 0%;
+
+}
+
+.row-two {
+    display: grid;
+    grid-template-columns: 25%;
+}
+
+.report-status {
+    padding: 5px;
+    box-shadow: 2px 2px 5px 0px;
+    background-color: white;
+}
+
+.table-report-status {
+    margin: 10px;
+    box-shadow: none;
+}
+
+.colors-report {
+    color: rgb(75, 136, 75);
+}
+
+.report-date {
+    display: flex;
+    justify-content: right;
+    box-shadow: none;
+    padding-bottom: 20px;
+}
+
+.report-date input {
+    position: relative;
+    height: 40px;
+    width: 300px;
+    outline: none;
+    border: 1px solid rgb(129, 129, 129);
+    border-radius: 6px;
+    padding: 0 35px;
+}
+
+.report-date input:hover {
+    box-shadow: 0px 0px 2px 1px rgba(21, 113, 146, 0.4);
+    border: 1px solid rgba(21, 113, 146, 0.4);
+
+}
+
+/* ------------------------- Table ------------------------- */
+.outer_vehicle_table {
+    overflow-x: scroll;
+    margin: 6%;
+    padding-bottom: 20px;
+    margin-bottom: 10px;
+    margin-top: 50px;
+}
+
+.outer_vehicle_table p {
+    color: #009879;
+    font-size: 23px;
+    margin-left: 5px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.vehicle_table {
+    /* margin-left: 4%; */
+    border-collapse: collapse;
+    width: 100%;
+    border-radius: 5px 5px 0px 0px;
+    overflow: hidden;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+}
+
+.vehicle_table thead {
+    background-color: #0e7b48;
+    color: var(--white);
+    text-align: left;
+    padding: 1%;
+    margin-top: 1%;
+    height: 50px;
+}
+
+.vehicle_table button {
+    background-color: #404040;
+    color: var(--white);
+    padding: 3%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border: none;
+    border-radius: 5px;
+    width: 80px;
+    font-size: 0.8rem;
+}
+
+.vehicle_table .edit_button {
+    background-color: #006666;
+}
+
+.vehicle_table th,
+.vehicle_table td {
+    padding: 5px 15px;
+}
+
+.vehicle_table tbody tr {
+    border-bottom: 1px solid #afafaf;
+}
+
+.vehicle_table tbody tr:nth-of-type(even) {
+    background-color: #e4e4e4;
+}
+
+.vehicle_table tbody tr:last-of-type {
+    border-bottom: 4px solid #4a4a4a;
+}
+
+.vehicle_table tbody .active_row {
+    color: #005d4a;
+}
+
+
+/* ------------------ pagination ------------------- */
+.page {
+    /* padding: 10px; */
+    display: flex;
+    justify-content: center;
+    padding-bottom: 20px;
+}
+
+/*--------------Popup page------------------*/
+.report-popup {
+    width: 95%;
+    height: 100px;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+}
+
+.x-button-report {
+
+    margin-top: 30px;
+    margin-bottom: 2%;
+    margin-right: 5%;
+    display: flex;
+    justify-content: end;
+    z-index: 1;
+
+}
+
+.x-press-report {
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 5px;
+    color: white;
+    background-color: #ff0000;
+    border: none;
+
+}
+
+.x-button-report .x-press-report:hover {
+    transform: scale(1.04);
+}
+
+.table-report-popup {
+    border-radius: 5px 5px 0px 0px;
+    border-bottom: 4px solid #4a4a4a;
+    box-shadow: 0px 0px 0px 1000px rgba(0, 0, 0, 0.75);
+    background-color: #ff0000;
+    height: 70px;
+    width: 70%;
+    margin-top: -10px;
+    padding-left: 20px;
+    /* background-color: red */
+}
+
+.ind-report {
+    padding-left: 20%;
+    margin-left: 70px;
+}
+
+/*-----------Chart place-------------------*/
+
+.Status-report {
+
+    display: grid;
+    grid-template-columns: 30% 30%;
+    column-gap: 10%;
+    width: 100%;
+    height: 450px;
+    padding-left: 20px;
+
+
+}
+
+.popup_button {
+    margin-top: 300px;
+    margin-left: 75%;
+    display: grid;
+    width: 130px;
+    font-size: 10px;
+    /* background-color: red; */
+
+}
+
+.popup_button .previous {
+    margin-top: -280px;
+
+}
+
+.popup_button button {
+    background-color: #000000;
+    color: var(--white);
+    border: none;
+    border-radius: 5px;
+    height: 35px;
+    /* font-size: 10px; */
+}
+
+.popup_button p {
+    background-color: #000000;
+    color: var(--white);
+    border: none;
+    border-radius: 5px;
+    height: 35px;
+    font-size: 15px;
+    padding-top: 7px;
+
+}
+
+.pop_input {
+    margin-top: -300px;
+    margin-left: 120px;
+}
+
+.pop_input2 {
+    margin-right: 30px;
+    display: grid;
+    width: 130%;
+    gap: 10%;
+    grid-template-columns: 60% 60% 60%;
+}
+
+.pop_input2 input {
+    margin-top: 15px;
+    position: relative;
+    height: 40px;
+    width: 100%;
+    outline: none;
+    border: 1px solid rgb(129, 129, 129);
+    border-radius: 6px;
+    padding: 0 15px;
+}
+
+.pop_input2 input:focus {
+    box-shadow: 0px 0px 2px 1px rgba(21, 113, 146, 0.4);
+    border: 1px solid rgba(21, 113, 146, 0.4);
+
+}
+
+.inline {
+    display: grid;
+}
+
+
+.Status-report h2 {
+    text-align: center;
+}
+
+.Status-reports {
+    background-color: #f7f7f7;
+    display: grid;
+    grid-template-columns: 40% 60%;
+    margin-left: 11%;
+    width: 85%;
+    height: 450px;
+    margin-left: 5%;
+
+}
+
+.popup_box_one {
+    background-color: #f7f7f7;
+    display: grid;
+    grid-template-columns: 40% 60%;
+    margin-left: 11%;
+    width: 85%;
+    height: 450px;
+    margin-left: 5%;
+    padding-top: 30px;
+
+}
+
+.popup_box_one_first {
+    background-color: #f7f7f7;
+    display: grid;
+    grid-template-columns: 40% 60%;
+    margin-left: 11%;
+    width: 85%;
+    height: 450px;
+    margin-left: 5%;
+    box-shadow: 0px 0px 0px 1000px rgba(0, 0, 0, 0.75);
+    padding-top: 30px;
+
+}
+
+.Status-reports h2 {
+    padding-top: 30px;
+
+}
+
+.line-chart {
+    margin-top: 5%;
+    margin-right: 10%;
+    margin-left: 10%;
+    padding: 15px;
+}
+
+.ind-report {
+    padding-left: 20px;
+    /* background-color: red */
+}
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.popup3 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.popup-inner0 {
+    position: relative;
+    padding: 5%;
+    padding-top: 5%;
+    padding-bottom: 2%;
+    width: 100%;
+    max-width: 1100px;
+    background-color: rgb(230, 230, 230);
+    z-index: 2;
+    border-radius: 4px;
+    border-radius: 5px;
+}
+
+.popup-innerr {
+    position: relative;
+    padding: 5%;
+    padding-top: 5%;
+    padding-bottom: 2%;
+    width: 100%;
+    max-width: 1100px;
+    background-color: rgb(230, 230, 230);
+    z-index: 2;
+    border-radius: 4px;
+    border-radius: 5px;
+}
+
+.popup-inner0 .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 26px;
+    background-color: red;
+    padding: 2px;
+    padding-left: 2%;
+    padding-right: 2%;
+    border: none;
+    color: white;
+    border-radius: 5px;
+
+}
+.popup-innerr .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 26px;
+    background-color: red;
+    padding: 2px;
+    padding-left: 2%;
+    padding-right: 2%;
+    border: none;
+    color: white;
+    border-radius: 5px;
+
+}
+
+.startEndPoint {
+    display: grid;
+    grid-template-columns: 32% 32% 32%;
+    background-color: white;
+    column-gap: 7%;
+    padding: 2%;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px 0px;
+}
+
+.chart-donat {
+    display: grid;
+    grid-template-columns: 35% 65%;
+    column-gap: 30px;
+    margin-left: -30px;
+
+
+}
+
+.travelTime {
+    background-color: white;
+    padding-top: 20px;
+    padding-left: 15px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px 0px;
+}
+
+.speedHistory {
+    background-color: white;
+    padding-top: 20px;
+    padding-left: 40px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px 0px;
+}
+
+.reportDetail {
+    background-color: #2c2c2c;
+    margin-top: 5px;
+}
+
+.pdfandexcelouter {
+    background-color: white;
+    padding: 50px;
+    margin-left: 60px;
+    margin-right: 60px;
+    border-radius: 5px;
+}
+
+.pdfandexcel {
+    background-color: white;
+    display: grid;
+    row-gap: 30%;
+    grid-template-columns: 50%;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.pdfandexcel button {
+    background-color: #1c8a25;
+    border: none;
+    height: 40px;
+    color: #ffffff;
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+.print {
+    background-color: rgb(34, 34, 34);
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    color: #ffffff;
+    border-radius: 6px;
+    border: none;
+}
+
+.page22 {
+    display: flex;
+    justify-content: right;
+    padding: 5%;
+    padding-right: 12%;
+    padding-top: 10px;
+}
+
+.printexel {
+    border: none;
+}
+
+.selectAction {
+    text-align: center;
+    background-color: white;
+    border: 8px solid rgb(230, 230, 230);
+    margin-top: -90px;
+    margin-left: 15%;
+    margin-right: 15%;
+    padding: 2%;
+    color: green;
+    font-size: 23px;
+    font-weight: 700;
+}
+
+
+
+@media screen and (max-width: 500px) {
+
+    .main_content77 {
+        position: absolute;
+        width: calc(100%);
+        left: 0px;
+        /* min-height: calc(100% -75px); */
+        opacity: var(--black2);
+        color: var(--black1);
+        top: 75px;
+        background-color: rgb(242, 242, 242);
+        z-index: -1;
+
+    }
+    .vehicle-detail {
+        display: grid;
+        grid-template-columns: 80%;
+    }
+}

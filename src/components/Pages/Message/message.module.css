@@ -1,0 +1,350 @@
+
+.main_content {
+    position: absolute;
+    width: calc(100% - 100px);
+    left: 100px;
+    min-height: calc(88vh);
+    background-color: rgb(244, 244, 244);
+    color: var(--black1);
+    top: 75px;
+}
+ 
+/* ------------------ Vehicle-search ------------------- */
+
+.vehicle_search {
+    display: flex;
+    justify-content: right;
+}
+
+.hide {
+    display: none;
+}
+
+.vehicle_search p {
+    display: flex;
+}
+
+.vehicle_search .icn {
+    margin-top: 8px;
+    margin-right: -42px;
+    margin-left: 20px;
+    /* z-index: 1; */
+}
+
+.vehicle_search input {
+    height: 38px;
+    padding-left: 50px;
+    border-radius: 6px 0px 0px 6px;
+    background-color: #ffffff;
+    outline: none;
+    border: 1px solid rgb(145, 145, 145);
+    margin-left: 10px;
+    z-index: 1;
+}
+
+.vehicle_search p button {
+    width: 80px;
+    background-color: #222;
+    color: var(--white);
+    border-radius: 0px 7px 7px 0px;
+    border: none;
+}
+
+.vehicle_search p button:hover {
+    background-color: rgb(67, 67, 67);
+    border: none;
+}
+/* ------------------ Vehicle-table ------------------- */
+
+.outer_vehicle_table {
+    overflow-x: scroll;
+    margin: 7%;
+    padding-bottom: 20px;
+    margin-bottom: 10px;
+    margin-top: 30px;
+    /* background-color: rgb(255, 255, 255); */
+}
+
+.outer_vehicle_table p {
+    color: #009879;
+    font-size: 23px;
+    margin-left: 5px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.vehicle_table {
+    border-collapse: collapse;
+    width: 100%;
+    border-radius: 5px 5px 0px 0px;
+    overflow: hidden;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+}
+
+.vehicle_table thead {
+    background-color: #0e7b48;
+    color: var(--white);
+    text-align: left;
+    padding: 1%;
+    margin-top: 1%;
+    height: 50px;
+}
+
+.vehicle_table button {
+    background-color: #404040;
+    color: var(--white);
+    padding: 3%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border: none;
+    border-radius: 5px;
+    width: 80px;
+    font-size: 0.8rem;
+}
+
+.vehicle_table .edit_button {
+    background-color: #006666;
+}
+
+.vehicle_table th,
+.vehicle_table td {
+    padding: 5px 15px;
+}
+
+.vehicle_table tbody tr {
+    border-bottom: 1px solid #afafaf;
+}
+ 
+.vehicle_table tbody tr:nth-of-type(even) {
+    background-color: #e4e4e4;
+}
+
+.vehicle_table tbody tr:last-of-type {
+    border-bottom: 4px solid #4a4a4a;
+}
+
+.vehicle_table tbody .active_row {
+    color: #005d4a;
+}
+
+
+/* ------------------ pagination ------------------- */
+.page {
+    /* padding: 10px; */
+    display: flex;
+    justify-content: center;
+}
+
+.num {
+    padding: 20px 10px 20px 20px;
+}
+
+.page .sel {
+    margin-right: 50px;
+}
+
+.page .next {
+    margin-top: 8px;
+    margin-left: 10px;
+}
+
+.vehicle_menu {
+    display: none;
+}
+
+.loading {
+    margin-left: 45%;
+    margin-top: 100px;
+    padding: 10px;
+}
+
+
+/*-----------button to redirect for the topup----------------*/
+.messageOverviewbBtton {
+    margin-top: 1%;
+    margin-bottom: 20px;
+    margin-right: 12%;
+    display: flex;
+    text-align: end;
+    justify-content: end;
+}
+.messageOverviewText {
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 5px;
+    color: white;
+    background-color: #000000;
+
+}
+.messageOverviewText:disabled{
+    background-color: white;
+    color: black;
+    /* display: none; */
+}
+
+.messageOverviewbBtton .messageOverviewText:hover {
+    transform: scale(1.03);
+}
+
+/*--------------Popup page------------------*/
+.mainPopup{
+    width: 100%;
+    height: 80vh;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+}
+.holdingForMssage {
+    position: absolute;
+    margin-top: -10px;
+    margin-left: 150px;
+    margin-right: 15%;
+    margin-bottom: 50px;
+    width: 70%;
+    height: 450px;
+    border-radius: 5px;
+    background-color: none;
+    padding-top: 2%;
+    padding-left: 3%;
+    padding-right: 3%;
+    padding-bottom: 2%;
+}
+.messageBoxs{
+    
+    box-shadow: 0px 0px 0px 10000px rgba(85, 87, 22, 0.75);
+    overflow: hidden;
+    background-color: #fffefe;
+    z-index: 1000;
+    border-radius: 2em;
+
+}
+.textbox{
+ 
+    height: 200px;
+}
+.textarea
+{
+    border-radius: 1em;
+    padding: 1em;
+    width: 80%;
+    height: 100px;
+    margin:2em 5em;
+}
+.message{
+    padding: 0 0 0 3em ;  
+}
+.xButton {
+    margin-top: 1%;
+    /* margin-bottom: 1%; */
+    /* margin-right: 1%; */
+    display: flex;
+    text-align: end;
+    justify-content: end;
+
+}
+
+.xPress {
+    padding:2px 15px;
+    border-radius: 3px;
+    margin: 0 2em;
+    border-radius: .5rm;
+    color: white;
+    border: none;
+    background-color: #ff0000;
+
+}
+.x-button .x-press:hover {
+    transform: scale(1.04);
+}
+.sendButton {
+    margin-top: 1%;
+    margin-bottom: 2%;
+    margin-right: 4.5%;
+    display: flex;
+    text-align: end;
+    color: whitesmoke;
+    justify-content: end;
+
+}
+.editSend {
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 5px;
+    color: white;
+    z-index: 1000;
+    background-color: #000000;
+}
+
+.sendButton .editSend:hover {
+    transform: scale(1.03);
+}
+
+
+.ck-rounded-corners .ck.ck-editor__main>.ck-editor__editable, .ck.ck-editor__main>.ck-editor__editable.ck-rounded-corners{
+    height:300px;
+}
+
+
+/* ------------------ Responsivness ------------------- */
+
+@media screen and (max-width: 1120px) {
+
+    .allcards {
+        display: grid;
+        grid-template-columns: 30% 30% 30%;
+    }
+
+}
+
+@media screen and (max-width: 710px) {
+
+    .allcards {
+        display: grid;
+        grid-template-columns: 45% 45%;
+    }
+
+}
+
+@media screen and (max-width: 420px) {
+
+    .allcards {
+        display: grid;
+        grid-template-columns: 90%;
+    }
+
+    .activeCard {
+        height: 100px;
+    }
+
+    .vehicle {
+        height: 100px;
+    }
+
+}
+
+@media screen and (max-width: 500px) {
+
+    .main_content {
+        position: absolute;
+        width: calc(100%);
+        left: 0px;
+        min-height: calc(88vh);
+        opacity: var(--black2);
+        color: var(--black1);
+        top: 75px;
+        background-color: rgb(242, 242, 242);
+        z-index: -1;
+
+    }
+}
+
+
+
+
+
