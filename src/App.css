@@ -1,0 +1,19 @@
+*,
+::before,
+::after {
+  margin: 0;
+  padding: 0;
+}
+body {
+  box-sizing: border-box;
+  background-color: rgb(247, 247, 247);
+}
+.main-container {
+  max-width: 990px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.container_mv {
+  display: flex;
+}
