@@ -4,8 +4,10 @@ const Homepage = () => {
   return (
     <div className="main-bar">
       <div>
-        <h1>Analysis</h1>
-        <hr />
+        <h2 style={{}}>Analysis</h2>
+        <hr className="hr" />
+        <h2 style={{ marginTop: "100px" }}>NewJob availabel</h2>
+        <hr className="hr" />
       </div>
     </div>
   );
