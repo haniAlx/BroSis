@@ -1,5 +1,10 @@
 import React from "react";
-import { MdDashboard, MdDirectionsCar, MdPeople } from "react-icons/md";
+import {
+  MdDashboard,
+  MdDirectionsCar,
+  MdOutlineManageAccounts,
+  MdPeople,
+} from "react-icons/md";
 import "./sidebar.css";
 const SideBar = () => {
   return (
@@ -14,6 +19,10 @@ const SideBar = () => {
             <li>
               <MdDirectionsCar color="black" size={25} />
               <p>Vehicle</p>
+            </li>
+            <li>
+              <MdOutlineManageAccounts color="black" size={25} />
+              <p>Driver</p>
             </li>
             <li>
               <MdPeople color="black" size={25} />
