@@ -58,7 +58,7 @@ function Drivers() {
     try {
       const res = await fetch(apiAllDrivers, options);
       const data = await res.json();
-      setAllDrivers(data.drivers);
+      if (data.drivers) setAllDrivers(data.drivers);
       console.log(data.drivers);
     } catch (e) {
       console.log(e.message);
@@ -70,7 +70,7 @@ function Drivers() {
     try {
       const res = await fetch(apiOnRoute, options);
       const data = await res.json();
-      setOnRoute(data.drivers);
+      if (data.drivers) setOnRoute(data.drivers);
       console.log(data.drivers);
     } catch (e) {
       console.log(e.message);
@@ -81,7 +81,7 @@ function Drivers() {
     try {
       const res = await fetch(apiAssigned, options);
       const data = await res.json();
-      setAssigned(data.drivers);
+      if (data.drivers) setAssigned(data.drivers);
       console.log(data.drivers);
     } catch (e) {
       console.log(e.message);
@@ -92,7 +92,7 @@ function Drivers() {
     try {
       const res = await fetch(apiUnAssigned, options);
       const data = await res.json();
-      setUnassigned(data.drivers);
+      if (data.drivers) setUnassigned(data.drivers);
       console.log(data.drivers);
     } catch (e) {
       console.log(e.message);
@@ -103,7 +103,7 @@ function Drivers() {
     try {
       const res = await fetch(apiPermit, options);
       const data = await res.json();
-      setPermit(data.drivers);
+      if (data.drivers) setPermit(data.drivers);
       console.log(data.drivers);
     } catch (e) {
       console.log(e.message);
