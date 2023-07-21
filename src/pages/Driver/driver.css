@@ -1,0 +1,47 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;700;800;900&display=swap");
+.table-container {
+  margin-top: 40px;
+  max-height: 80vh;
+  overflow-y: scroll;
+}
+.driver-table td {
+  padding: 15px;
+}
+.driver-table th {
+  padding: 15px;
+  font-size: 15px;
+  font-weight: 500;
+}
+.driver-table tr {
+  border-top: 0.4px solid rgb(197, 197, 197);
+  border-bottom: 0.4px solid rgb(197, 197, 197);
+  border-radius: 4px 10px;
+}
+.driver-table th {
+  background-color: rgba(14, 18, 23, 0.997);
+  color: white;
+  text-align: left;
+}
+.driver-table {
+  border-collapse: collapse;
+  margin-top: 20px;
+  margin: 40px auto;
+  font-family: "Poppins", sans-serif;
+}
+.driver-table tr:nth-child(even) {
+  background-color: rgb(220, 220, 220);
+}
+.table-btn {
+  border: none;
+  padding: 10px;
+  background-color: rgb(34, 142, 250);
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  font-size: 14px;
+  font-weight: bold;
+}
+.table-btn:hover {
+  background-color: rgb(5, 103, 201);
+}
