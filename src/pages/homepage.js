@@ -5,13 +5,13 @@ import { Chart } from "chart.js/auto";
 import DoughnutChart from "../components/DoughnutChart";
 const Homepage = () => {
   const [data, setData] = useState({
-    labels: [20, 25, 20, 20],
+    labels: ["Vehicle", "User", "Driver", "Compony"],
     datasets: [{ label: "hello", data: [1, 2, 3, 4] }],
   });
   useEffect(() => {
     const populateDate = () => {
       setData({
-        labels: [20, 30, 10, 20],
+        labels: ["Vehicle", "User", "Driver", "Compony"],
         datasets: [{ label: "Summary", data: [1, 2, 3, 4] }],
       });
     };

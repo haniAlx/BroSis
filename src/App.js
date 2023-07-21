@@ -8,6 +8,8 @@ import SignIn from "./components/SignInPages/Signin";
 import ForgatePass from "./components/SignInPages/ForgatePass";
 import ConfirmPass from "./components/SignInPages/ConfirmPass";
 import ErrorPage from "./pages/ErrorPage";
+import Vehicle from "./pages/Vehicle/Vehicle";
+import Drivers from "./pages/Driver/Drivers";
 
 function App() {
   const [user, setUser] = useState();
@@ -29,6 +31,8 @@ function App() {
                   <SideBar />
                   <Routes>
                     <Route path="/Dashboard" element={<Homepage />}></Route>
+                    <Route path="/vehicle" element={<Vehicle />} />
+                    <Route path="/driver" element={<Drivers />} />
                     <Route path="*" element={<ErrorPage />} />
                   </Routes>
                 </div>
