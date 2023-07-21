@@ -13,7 +13,7 @@ const DriversTable = ({ target }) => {
             <th>Status</th>
             <th>VehicleOwner</th>
             <th>Detail</th>
-            <th>Tracking</th>
+            <th>Manage</th>
           </tr>
         </thead>
 

@@ -10,6 +10,7 @@ import ConfirmPass from "./components/SignInPages/ConfirmPass";
 import ErrorPage from "./pages/ErrorPage";
 import Vehicle from "./pages/Vehicle/Vehicle";
 import Drivers from "./pages/Driver/Drivers";
+import DataLoadContext from "./components/context/DataLoadContext";
 
 function App() {
   const [user, setUser] = useState();
@@ -21,33 +22,35 @@ function App() {
   }, []);
   return (
     <>
-      <BrowserRouter>
-        {user || null ? (
-          <>
-            <div>
-              <Navigation />
-              <div className="main-container">
-                <div className="container_mv">
-                  <SideBar />
-                  <Routes>
-                    <Route path="/Dashboard" element={<Homepage />}></Route>
-                    <Route path="/vehicle" element={<Vehicle />} />
-                    <Route path="/driver" element={<Drivers />} />
-                    <Route path="*" element={<ErrorPage />} />
-                  </Routes>
+      <DataLoadContext>
+        <BrowserRouter>
+          {user || null ? (
+            <>
+              <div>
+                <Navigation />
+                <div className="main-container">
+                  <div className="container_mv">
+                    <SideBar />
+                    <Routes>
+                      <Route path="/Dashboard" element={<Homepage />}></Route>
+                      <Route path="/vehicle" element={<Vehicle />} />
+                      <Route path="/driver" element={<Drivers />} />
+                      <Route path="*" element={<ErrorPage />} />
+                    </Routes>
+                  </div>
                 </div>
               </div>
-            </div>
-          </>
-        ) : (
-          <Routes>
-            <Route path="/" element={<SignIn />}></Route>
-            <Route path="/ForgatePass" element={<ForgatePass />}></Route>
-            <Route path="/ConfirmPass" element={<ConfirmPass />}></Route>
-            <Route path="*" element={<ErrorPage />} />
-          </Routes>
-        )}
-      </BrowserRouter>
+            </>
+          ) : (
+            <Routes>
+              <Route path="/" element={<SignIn />}></Route>
+              <Route path="/ForgatePass" element={<ForgatePass />}></Route>
+              <Route path="/ConfirmPass" element={<ConfirmPass />}></Route>
+              <Route path="*" element={<ErrorPage />} />
+            </Routes>
+          )}
+        </BrowserRouter>
+      </DataLoadContext>
     </>
   );
 }
