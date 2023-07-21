@@ -7,6 +7,7 @@ import Homepage from "./pages/homepage";
 import SignIn from "./components/SignInPages/Signin";
 import ForgatePass from "./components/SignInPages/ForgatePass";
 import ConfirmPass from "./components/SignInPages/ConfirmPass";
+import ErrorPage from "./pages/ErrorPage";
 
 function App() {
   const [user, setUser] = useState();
@@ -27,6 +28,7 @@ function App() {
                 <SideBar />
                 <Routes>
                   <Route path="/Dashboard" element={<Homepage />}></Route>
+                  <Route path="*" element={<ErrorPage />} />
                 </Routes>
               </div>
             </div>
@@ -36,6 +38,7 @@ function App() {
             <Route path="/" element={<SignIn />}></Route>
             <Route path="/ForgatePass" element={<ForgatePass />}></Route>
             <Route path="/ConfirmPass" element={<ConfirmPass />}></Route>
+            <Route path="*" element={<ErrorPage />} />
           </Routes>
         )}
       </BrowserRouter>
