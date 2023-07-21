@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./home.css";
-import BarChar from "../components/BarChar";
+import BarChar from "../components/Charts/BarChar";
 import { Chart } from "chart.js/auto";
-import DoughnutChart from "../components/DoughnutChart";
+import DoughnutChart from "../components/Charts/DoughnutChart";
 const Homepage = () => {
   const [data, setData] = useState({
     labels: ["Vehicle", "User", "Driver", "Compony"],
