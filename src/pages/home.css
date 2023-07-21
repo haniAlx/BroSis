@@ -14,3 +14,9 @@
   border: none;
   height: 2px;
 }
+.chart-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
