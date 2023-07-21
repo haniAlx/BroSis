@@ -1,0 +1,18 @@
+.error-container {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  align-items: center;
+}
+.error-msg {
+  border-radius: 10px;
+  width: 500px;
+  height: 400px;
+}
+
+@media (max-width: 570px) {
+  .error.msg {
+    width: 300px;
+    height: 250px;
+  }
+}
