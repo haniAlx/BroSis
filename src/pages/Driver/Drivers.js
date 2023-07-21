@@ -14,6 +14,7 @@ function Drivers() {
   const [unassigned, setUnassigned] = useState([]);
   const [permit, setPermit] = useState([]);
   const [error, setError] = useState();
+  const [tableData, setTableData] = useState(allDrivers);
   const [allDataLoaded, setAllDataLoaded] = useState(false);
   const apiAllDrivers = "http://64.226.104.50:9090/Api/Admin/All/Drivers";
   const apiOnRoute = "http://64.226.104.50:9090/Api/Admin/Drivers/ONROUTE";
@@ -58,8 +59,10 @@ function Drivers() {
     try {
       const res = await fetch(apiAllDrivers, options);
       const data = await res.json();
-      if (data.drivers) setAllDrivers(data.drivers);
-      console.log(data.drivers);
+      if (data.drivers) {
+        setAllDrivers(data.drivers);
+        setTableData(data.drivers);
+      }
     } catch (e) {
       console.log(e.message);
       setError(e.message);
@@ -116,7 +119,7 @@ function Drivers() {
       data: allDrivers.length || null,
       icon: MdPeople,
       color: "rgb(94, 175, 255)",
-      name: "totalDriver",
+      name: "totalDrivers",
     },
     {
       title: "OnRoute",
@@ -147,8 +150,29 @@ function Drivers() {
       name: "permit",
     },
   ];
+  const [activeCard, setActiveCard] = useState("totalDrivers");
+  /** Handling Card Change */
   const handleCardChange = (name) => {
-    console.log(name);
+    setActiveCard(name);
+    switch (name) {
+      case "totalDrivers":
+        setTableData(allDrivers);
+        break;
+      case "onRoute":
+        setTableData(onRoute);
+        break;
+      case "assigned":
+        setTableData(Assigned);
+        break;
+      case "unassigned":
+        setTableData(unassigned);
+        break;
+      case "permit":
+        setTableData(permit);
+        break;
+      default:
+        setTableData(allDrivers);
+    }
   };
   return (
     <div className="main-bar">
@@ -200,11 +224,13 @@ function Drivers() {
                     color={item.color}
                     key={index}
                     handleCardChange={() => handleCardChange(item.name)}
+                    active={activeCard}
+                    name={item.name}
                   />
                 ))}
               </div>
               <div className="table-container">
-                <DriversTable target={allDrivers} />
+                <DriversTable target={tableData} />
               </div>
             </>
           )

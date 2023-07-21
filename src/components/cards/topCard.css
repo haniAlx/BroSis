@@ -11,7 +11,8 @@
 .topcard-container:hover {
   background-color: rgb(28, 62, 61) !important;
 }
-.topcard-container.activer {
+
+.active-card {
   background-color: rgb(28, 62, 61) !important;
 }
 .card-title {
