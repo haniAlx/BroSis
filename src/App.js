@@ -21,18 +21,20 @@ function App() {
     <>
       <BrowserRouter>
         {user || null ? (
-          <div>
-            <Navigation />
-            <div className="main-container">
-              <div className="container_mv">
-                <SideBar />
-                <Routes>
-                  <Route path="/Dashboard" element={<Homepage />}></Route>
-                  <Route path="*" element={<ErrorPage />} />
-                </Routes>
+          <>
+            <div>
+              <Navigation />
+              <div className="main-container">
+                <div className="container_mv">
+                  <SideBar />
+                  <Routes>
+                    <Route path="/Dashboard" element={<Homepage />}></Route>
+                    <Route path="*" element={<ErrorPage />} />
+                  </Routes>
+                </div>
               </div>
             </div>
-          </div>
+          </>
         ) : (
           <Routes>
             <Route path="/" element={<SignIn />}></Route>
