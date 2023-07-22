@@ -18,6 +18,7 @@ body {
 
 .container_mv {
   display: flex;
+  justify-content: center;
 }
 
 @media (max-width: 576px) {

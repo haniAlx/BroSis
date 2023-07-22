@@ -3,6 +3,7 @@
   margin-top: 40px;
   max-height: 80vh;
   overflow-y: scroll;
+  overflow-x: auto;
 }
 .driver-table td {
   padding: 15px;
@@ -34,7 +35,7 @@
 .table-btn {
   border: none;
   padding: 8px 15px;
-  background-color: rgb(34, 142, 250);
+  background-color: rgb(79, 81, 83);
   color: white;
   border-radius: 4px;
   cursor: pointer;
@@ -44,4 +45,34 @@
 }
 .table-btn:hover {
   background-color: rgb(5, 103, 201);
+}
+.top-card-holder {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+@media (max-width: 1200px) {
+  .main-bar-driver {
+    max-width: 86vw;
+  }
+}
+@media (max-width: 992px) {
+  .main-bar-driver {
+    max-width: 90vw;
+  }
+  .top-card-holder {
+    display: none;
+  }
+  .driver-table {
+    max-width: 500px;
+  }
+  .table-container {
+    overflow-x: scroll;
+  }
+  .driver-table td {
+    padding: 5px;
+  }
+  .driver-table th {
+    padding: 5px;
+  }
 }

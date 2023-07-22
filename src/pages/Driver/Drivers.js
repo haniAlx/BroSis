@@ -8,6 +8,7 @@ import DriversTable from "./DriversTable";
 import "./driver.css";
 import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
+import ManageDriver from "./ManageDriver";
 function Drivers() {
   const [loading, setLoading] = useState(false);
   const [allDrivers, setAllDrivers] = useState([]);
@@ -63,7 +64,7 @@ function Drivers() {
       const res = await fetch(apiAllDrivers, options);
       if (res.status == 401) {
         swal({
-          title: "401",
+          title: "Server respond With 401",
           text: `Unable to Load Data `,
           icon: "error",
           dangerMode: true,
@@ -76,7 +77,7 @@ function Drivers() {
           },
         });
         setLoading(false);
-        setError("Unable to Load!!");
+        setError("Unable to Load!! server respond with 401");
       }
       const data = await res.json();
       if (data.drivers) {
@@ -194,11 +195,24 @@ function Drivers() {
         setTableData(allDrivers);
     }
   };
+  const [showManage, setShowManage] = useState(false);
+  const [driverDetail, setDriverDetail] = useState();
+  const handleManage = (item) => {
+    setShowManage(true);
+    setDriverDetail(item);
+    console.log(item);
+  };
   return (
     <div className="main-bar">
+      {showManage && (
+        <ManageDriver
+          setShowManage={setShowManage}
+          driverDetail={driverDetail}
+        />
+      )}
       <h2 style={{}}>Driver</h2>
       <hr className="hr" />
-      <div>
+      <div className="main-bar-driver">
         {error ? (
           <p
             style={{
@@ -229,13 +243,7 @@ function Drivers() {
         ) : (
           !error && (
             <>
-              <div
-                style={{
-                  marginTop: "20px",
-                  display: "flex",
-                  justifyContent: "space-around",
-                }}
-              >
+              <div className="top-card-holder">
                 {topCardDetail.map((item, index) => (
                   <TopCards
                     title={item.title}
@@ -250,7 +258,10 @@ function Drivers() {
                 ))}
               </div>
               <div className="table-container">
-                <DriversTable target={tableData} />
+                <DriversTable
+                  target={tableData}
+                  handleManage={(val) => handleManage(val)}
+                />
               </div>
             </>
           )
