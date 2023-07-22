@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import swal from "sweetalert";
+import { useUserContext } from "./UserContext";
 
 const LoadDataContext = React.createContext(null);
 export const useLoadContext = () => useContext(LoadDataContext);
 const DataLoadContext = ({ children }) => {
-  const [load, setLoad] = useState(false);
   const [loading, setLoading] = useState(false);
   const [allDrivers, setAllDrivers] = useState([]);
   const [onRoute, setOnRoute] = useState([]);
@@ -13,7 +14,6 @@ const DataLoadContext = ({ children }) => {
   const [permit, setPermit] = useState([]);
   const [error, setError] = useState();
   const [tableData, setTableData] = useState(allDrivers);
-  const [allDataLoaded, setAllDataLoaded] = useState(false);
   const apiAllDrivers = "http://64.226.104.50:9090/Api/Admin/All/Drivers";
   const apiOnRoute = "http://64.226.104.50:9090/Api/Admin/Drivers/ONROUTE";
   const apiAssigned = "http://64.226.104.50:9090/Api/Admin/Drivers/ASSIGNED";
@@ -21,6 +21,7 @@ const DataLoadContext = ({ children }) => {
     "http://64.226.104.50:9090/Api/Admin/Drivers/UNASSIGNED";
   const apiPermit = "http://64.226.104.50:9090/Api/Admin/Drivers/PERMIT";
   const navigator = useNavigate();
+  const { setCurrentUser } = useUserContext();
   /**  GET JWT */
   const jwt = JSON.parse(localStorage.getItem("jwt"));
   /** Option for fetch */
@@ -57,10 +58,26 @@ const DataLoadContext = ({ children }) => {
     try {
       const res = await fetch(apiAllDrivers, options);
       console.log("response", res.status);
-      if (res.status === 401) {
-        console.log("Not authorized/session expires");
-
-        // navigator("/signin");
+      if (res.status == 401) {
+        swal({
+          title: "Server respond With 401",
+          text: `Your Session is expried`,
+          icon: "error",
+          dangerMode: true,
+          buttons: ["cancel", "SignIn"],
+          cancelButtonColor: "#d33",
+          showClass: {
+            popup: "animate__animated animate__shakeX",
+          },
+        }).then((signin) => {
+          if (signin) {
+            localStorage.removeItem("user");
+            setCurrentUser(null);
+            navigator("/");
+          }
+        });
+        setLoading(false);
+        setError("Unable to Load!! server respond with 401");
       }
       const data = await res.json();
       if (data.drivers) {
@@ -121,7 +138,7 @@ const DataLoadContext = ({ children }) => {
     <LoadDataContext.Provider
       value={{
         loading,
-        setLoad: setLoad,
+        setLoading,
         payload: {
           allDrivers: allDrivers,
           onRoute: onRoute,

@@ -1,16 +1,18 @@
 import React from "react";
 import "./Signin.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import { useState } from "react";
 import { AiOutlineEye } from "react-icons/ai";
+import { useUserContext } from "../context/UserContext";
 
 export default function SignIn() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
   const [pass, showPass] = useState(false);
-
+  const { setCurrentUser } = useUserContext();
+  const navigate = useNavigate();
   const toggleEye = () => {
     showPass(!pass);
   };
@@ -52,9 +54,11 @@ export default function SignIn() {
           buttons: false,
           timer: 2000,
         }).then(() => {
+          setCurrentUser(result.user);
+          console.log(result.user);
           localStorage.setItem("user", JSON.stringify(result["user"]));
           localStorage.setItem("jwt", JSON.stringify(result["jwt"]));
-          window.location.href = "/dashboard";
+          navigate("/dashboard");
         });
       } else {
         swal({

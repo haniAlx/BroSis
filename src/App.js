@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navigation from "./components/navigation/Navigation";
@@ -11,20 +11,16 @@ import ErrorPage from "./pages/ErrorPage";
 import Vehicle from "./pages/Vehicle/Vehicle";
 import Drivers from "./pages/Driver/Drivers";
 import DataLoadContext from "./components/context/DataLoadContext";
+import { useUserContext } from "./components/context/UserContext";
 
 function App() {
-  const [user, setUser] = useState();
-  useEffect(() => {
-    const getUser = () => {
-      setUser(localStorage.getItem("user"));
-    };
-    getUser();
-  }, []);
+  const { currentUser } = useUserContext();
+
   return (
     <>
       <BrowserRouter>
         <DataLoadContext>
-          {user || null ? (
+          {currentUser || null ? (
             <>
               <div>
                 <Navigation />
@@ -33,7 +29,7 @@ function App() {
                     <SideBar />
                     <Routes>
                       <Route path="/" element={<Homepage />} />
-                      <Route path="/Dashboard" element={<Homepage />}></Route>
+                      <Route path="/dashboard" element={<Homepage />}></Route>
                       <Route path="/vehicle" element={<Vehicle />} />
                       <Route path="/driver" element={<Drivers />} />
                       <Route path="/signin" element={<SignIn />} />
