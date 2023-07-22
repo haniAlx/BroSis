@@ -4,17 +4,23 @@ import BarChar from "../components/Charts/BarChar";
 import { Chart } from "chart.js/auto";
 import DoughnutChart from "../components/Charts/DoughnutChart";
 import CircularBar from "../components/circularBar/circularBar";
+import { useLoadContext } from "../components/context/DataLoadContext";
 const Homepage = () => {
   const [data, setData] = useState({
     labels: ["Vehicle", "User", "Driver", "Compony"],
     datasets: [{ label: "hello", data: [1, 2, 3, 4] }],
   });
+
+  const { payload, loading } = useLoadContext();
+
   useEffect(() => {
     const populateDate = () => {
       setData({
         labels: ["Vehicle", "User", "Driver", "Compony"],
         datasets: [{ label: "Summary", data: [1, 2, 3, 4] }],
       });
+      console.log("loading", loading);
+      console.log("payload", payload);
     };
     populateDate();
   }, []);

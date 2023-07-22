@@ -22,8 +22,8 @@ function App() {
   }, []);
   return (
     <>
-      <DataLoadContext>
-        <BrowserRouter>
+      <BrowserRouter>
+        <DataLoadContext>
           {user || null ? (
             <>
               <div>
@@ -49,8 +49,8 @@ function App() {
               <Route path="*" element={<ErrorPage />} />
             </Routes>
           )}
-        </BrowserRouter>
-      </DataLoadContext>
+        </DataLoadContext>
+      </BrowserRouter>
     </>
   );
 }
