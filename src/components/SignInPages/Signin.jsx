@@ -42,8 +42,9 @@ export default function SignIn() {
     try {
       const response = await fetch(url, options);
       const result = await response.json();
-      localStorage.setItem("user", JSON.stringify(result["user"]));
-      localStorage.setItem("user", JSON.stringify(users));
+      if (response.status === 200) {
+        localStorage.setItem("user", JSON.stringify(result["user"]));
+      }
 
       if (response.ok) {
         console.log("Login successful");
@@ -52,19 +53,18 @@ export default function SignIn() {
           timer: 2000,
         }).then(() => {
           localStorage.setItem("user", JSON.stringify(result["user"]));
-          localStorage.getItem("user");
           localStorage.setItem("jwt", JSON.stringify(result["jwt"]));
-          localStorage.getItem("jwt");
           window.location.href = "/dashboard";
         });
       } else {
-        swal.fire({
+        swal({
           title: "Failed To Login?",
           text: `Wrong Password or Username! `,
           icon: "error",
           dangerMode: true,
-          showConfirmButton: false,
-          showCancelButton: true,
+          buttons: {
+            confirm: true,
+          },
           cancelButtonColor: "#d33",
           showClass: {
             popup: "animate__animated animate__shakeX",
