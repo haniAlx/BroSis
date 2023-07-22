@@ -58,8 +58,6 @@ const DataLoadContext = ({ children }) => {
       const res = await fetch(apiAllDrivers, options);
       console.log("response", res.status);
       if (res.status === 401) console.log("session expired");
-      localStorage.clear();
-      navigator("/");
       const data = await res.json();
       if (data.drivers) {
         setAllDrivers(data.drivers);
