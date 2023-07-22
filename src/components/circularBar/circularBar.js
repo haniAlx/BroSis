@@ -13,7 +13,7 @@ function CircularBar({ max, color, text }) {
     return () => {
       clearInterval(timeout);
     };
-  }, []);
+  }, [max]);
   return (
     <div
       className="circular-bar-container"

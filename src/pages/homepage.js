@@ -6,12 +6,12 @@ import DoughnutChart from "../components/Charts/DoughnutChart";
 import CircularBar from "../components/circularBar/circularBar";
 import { useLoadContext } from "../components/context/DataLoadContext";
 import { Link } from "react-router-dom";
+import ReactLoading from "react-loading";
 const Homepage = () => {
   const [data, setData] = useState({
     labels: ["Vehicle", "User", "Driver", "Compony"],
     datasets: [{ label: "hello", data: [1, 2, 3, 4] }],
   });
-  const [driverdata, setDriverdata] = useState();
   const { payload, loading, error } = useLoadContext();
 
   useEffect(() => {
@@ -38,7 +38,22 @@ const Homepage = () => {
       <div>
         <h2 style={{}}>Driver Analysis</h2>
         <hr className="hr" />
-        {loading ? <p>Loading Drivers Data Please Wait...</p> : ""}
+        {loading ? (
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              width: "100%",
+              flexDirection: "column",
+              rowGap: "10px",
+            }}
+          >
+            <ReactLoading type="cylon" width={60} height={20} color="black" />
+            <p>Loading Data Please Wait</p>
+          </div>
+        ) : (
+          ""
+        )}
         {error ? (
           <p>{error}</p>
         ) : (
