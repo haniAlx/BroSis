@@ -12,8 +12,7 @@ const DataLoadContext = ({ children }) => {
   const [Assigned, setAssigned] = useState([]);
   const [unassigned, setUnassigned] = useState([]);
   const [permit, setPermit] = useState([]);
-  const [error, setError] = useState();
-  const [tableData, setTableData] = useState(allDrivers);
+  const [error, setError] = useState(null);
   const apiAllDrivers = "http://64.226.104.50:9090/Api/Admin/All/Drivers";
   const apiOnRoute = "http://64.226.104.50:9090/Api/Admin/Drivers/ONROUTE";
   const apiAssigned = "http://64.226.104.50:9090/Api/Admin/Drivers/ASSIGNED";
@@ -42,6 +41,7 @@ const DataLoadContext = ({ children }) => {
   //   }, 6000);
   useEffect(() => {
     const getAllApiData = async () => {
+      setError("");
       await getAllDrivers();
       await getAssigned();
       await getOnRoute();
@@ -80,9 +80,11 @@ const DataLoadContext = ({ children }) => {
         setError("Unable to Load!! server respond with 401");
       }
       const data = await res.json();
-      if (data.drivers) {
+      if (data.drivers && res.ok) {
         setAllDrivers(data.drivers);
-        setTableData(data.drivers);
+      }
+      if (res.status == 400) {
+        setError("Invalid API server 400");
       }
     } catch (e) {
       console.log(e.message);
@@ -95,7 +97,9 @@ const DataLoadContext = ({ children }) => {
       const res = await fetch(apiOnRoute, options);
       const data = await res.json();
       if (data.drivers) setOnRoute(data.drivers);
-      console.log(data.drivers);
+      if (res.status == 400) {
+        setError("Invalid API server 400");
+      }
     } catch (e) {
       console.log(e.message);
       setError(e.message);
@@ -106,7 +110,9 @@ const DataLoadContext = ({ children }) => {
       const res = await fetch(apiAssigned, options);
       const data = await res.json();
       if (data.drivers) setAssigned(data.drivers);
-      console.log(data.drivers);
+      if (res.status == 400) {
+        setError("Invalid API server 400");
+      }
     } catch (e) {
       console.log(e.message);
       setError(e.message);
@@ -117,7 +123,9 @@ const DataLoadContext = ({ children }) => {
       const res = await fetch(apiUnAssigned, options);
       const data = await res.json();
       if (data.drivers) setUnassigned(data.drivers);
-      console.log(data.drivers);
+      if (res.status == 400) {
+        setError("Invalid API server 400");
+      }
     } catch (e) {
       console.log(e.message);
       setError(e.message);
@@ -128,7 +136,9 @@ const DataLoadContext = ({ children }) => {
       const res = await fetch(apiPermit, options);
       const data = await res.json();
       if (data.drivers) setPermit(data.drivers);
-      console.log(data.drivers);
+      if (res.status == 400) {
+        setError("Invalid API server 400");
+      }
     } catch (e) {
       console.log(e.message);
       setError(e.message);
@@ -139,6 +149,7 @@ const DataLoadContext = ({ children }) => {
       value={{
         loading,
         setLoading,
+        error,
         payload: {
           allDrivers: allDrivers,
           onRoute: onRoute,

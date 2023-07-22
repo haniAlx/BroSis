@@ -13,9 +13,9 @@ function Drivers() {
   const [Assigned, setAssigned] = useState([]);
   const [unassigned, setUnassigned] = useState([]);
   const [permit, setPermit] = useState([]);
-  const [error, setError] = useState();
+  // const [error, setError] = useState();
   const [tableData, setTableData] = useState(allDrivers);
-  const { payload, loading } = useLoadContext();
+  const { payload, loading, error } = useLoadContext();
 
   useEffect(() => {
     const getAllApiData = async () => {
