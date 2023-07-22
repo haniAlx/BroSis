@@ -32,9 +32,11 @@ function App() {
                   <div className="container_mv">
                     <SideBar />
                     <Routes>
+                      <Route path="/" element={<Homepage />} />
                       <Route path="/Dashboard" element={<Homepage />}></Route>
                       <Route path="/vehicle" element={<Vehicle />} />
                       <Route path="/driver" element={<Drivers />} />
+                      <Route path="/signin" element={<SignIn />} />
                       <Route path="*" element={<ErrorPage />} />
                     </Routes>
                   </div>

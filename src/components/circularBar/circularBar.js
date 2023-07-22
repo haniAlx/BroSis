@@ -26,7 +26,7 @@ function CircularBar({ max, color, text }) {
       <div className="circular-bar">
         <div className="circular-bar-percent">
           <p>{count.current}%</p>
-          <p>{text}</p>
+          <p className="bar-text">{text}</p>
         </div>
       </div>
     </div>

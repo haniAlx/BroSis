@@ -5,30 +5,42 @@ import { Chart } from "chart.js/auto";
 import DoughnutChart from "../components/Charts/DoughnutChart";
 import CircularBar from "../components/circularBar/circularBar";
 import { useLoadContext } from "../components/context/DataLoadContext";
+import { Link } from "react-router-dom";
 const Homepage = () => {
   const [data, setData] = useState({
     labels: ["Vehicle", "User", "Driver", "Compony"],
     datasets: [{ label: "hello", data: [1, 2, 3, 4] }],
   });
-
+  const [driverdata, setDriverdata] = useState();
   const { payload, loading } = useLoadContext();
 
   useEffect(() => {
     const populateDate = () => {
       setData({
-        labels: ["Vehicle", "User", "Driver", "Compony"],
-        datasets: [{ label: "Summary", data: [1, 2, 3, 4] }],
+        labels: ["OnRoute", "Assigned", "Unassigned", "permite"],
+        datasets: [
+          {
+            label: "Summary",
+            data: [
+              payload.onRoute.length,
+              payload.assigned.length,
+              payload.unassigned.length,
+              payload.permit.length,
+            ],
+          },
+        ],
       });
       console.log("loading", loading);
       console.log("payload", payload);
     };
     populateDate();
-  }, []);
+  }, [loading]);
   return (
     <div className="main-bar">
       <div>
         <h2 style={{}}>Driver Analysis</h2>
         <hr className="hr" />
+        {loading ? <p>Loading Drivers Data Please Wait...</p> : ""}
         <div className="chart-container">
           <div
             style={{
@@ -37,24 +49,48 @@ const Homepage = () => {
             }}
           >
             <div>
-              <CircularBar text="OnRoute" max={(8 / 13) * 100} color={""} />
-              <CircularBar text="Assigned" max={(3 / 13) * 100} color={""} />
+              <CircularBar
+                text={loading ? "loading" : "onRoute"}
+                max={(payload.onRoute.length / payload.allDrivers.length) * 100}
+                color={""}
+              />
+              <CircularBar
+                text={loading ? "loading" : "Assigned"}
+                max={
+                  (payload.assigned.length / payload.allDrivers.length) * 100
+                }
+                color={""}
+              />
             </div>
             <div>
-              <CircularBar text="UnAssigned" max={(2 / 13) * 100} color={""} />
-              <CircularBar text="Permit" max={(0 / 13) * 100} color={""} />
+              <CircularBar
+                text={loading ? "loading " : "UnAssigned"}
+                max={
+                  (payload.unassigned.length / payload.allDrivers.length) * 100
+                }
+                color={""}
+              />
+              <CircularBar
+                text={loading ? "loading " : "Permit"}
+                max={(payload.permit.length / payload.allDrivers.length) * 100}
+                color={""}
+              />
             </div>
           </div>
-          <div style={{ maxWidth: "400px", position: "relative" }}>
+          {/* <div style={{ maxWidth: "400px", position: "relative" }}>
             <DoughnutChart chartData={data} />
-          </div>
+          </div> */}
           <div
             style={{ maxWidth: "700px", position: "relative", height: "300px" }}
           >
             <BarChar chartData={data} />
           </div>
         </div>
-
+        <div>
+          <Link className="link-goto" to={"/driver"}>
+            Go To Driveres
+          </Link>
+        </div>
         <h2 style={{ marginTop: "100px" }}>Market Analysis</h2>
         <hr className="hr" />
         <div className="chart-container">

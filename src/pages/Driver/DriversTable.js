@@ -6,6 +6,7 @@ const DriversTable = ({ target }) => {
       <table className="driver-table">
         <thead>
           <tr>
+            <th>Index</th>
             <th>Driver Name</th>
             <th>License Number</th>
             <th>Experience</th>
@@ -21,6 +22,7 @@ const DriversTable = ({ target }) => {
           {target.length > 0 ? (
             target.map((item, index) => (
               <tr className="" key={index}>
+                <td>{index + 1}</td>
                 <td>{item.driverName}</td>
                 <td>{item.licenseNumber}</td>
                 <td>{item.experience}</td>

@@ -6,6 +6,8 @@ import { FaRoute } from "react-icons/fa";
 import { useLoadContext } from "../../components/context/DataLoadContext";
 import DriversTable from "./DriversTable";
 import "./driver.css";
+import { useNavigate } from "react-router-dom";
+import swal from "sweetalert";
 function Drivers() {
   const [loading, setLoading] = useState(false);
   const [allDrivers, setAllDrivers] = useState([]);
@@ -32,6 +34,7 @@ function Drivers() {
       Accept: "application/json",
     },
   };
+  const navigate = useNavigate();
   const { load, setLoad } = useLoadContext();
   /** Aborting fetch if it is taking to long */
   //   const controler = new AbortController();
@@ -58,6 +61,23 @@ function Drivers() {
   const getAllDrivers = async () => {
     try {
       const res = await fetch(apiAllDrivers, options);
+      if (res.status == 401) {
+        swal({
+          title: "401",
+          text: `Unable to Load Data `,
+          icon: "error",
+          dangerMode: true,
+          buttons: {
+            confirm: true,
+          },
+          cancelButtonColor: "#d33",
+          showClass: {
+            popup: "animate__animated animate__shakeX",
+          },
+        });
+        setLoading(false);
+        setError("Unable to Load!!");
+      }
       const data = await res.json();
       if (data.drivers) {
         setAllDrivers(data.drivers);

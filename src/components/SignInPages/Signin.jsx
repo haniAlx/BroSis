@@ -58,7 +58,7 @@ export default function SignIn() {
         });
       } else {
         swal({
-          title: "Failed To Login?",
+          title: "Failed To Login",
           text: `Wrong Password or Username! `,
           icon: "error",
           dangerMode: true,

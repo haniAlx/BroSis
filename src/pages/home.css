@@ -21,3 +21,12 @@
   width: 100%;
   margin-top: 50px;
 }
+.link-goto {
+  margin-top: 20px;
+  margin-left: 10px;
+  display: inline-block;
+  padding: 5px 15px;
+  border-radius: 5px;
+  background-color: rgb(244, 255, 39);
+  text-decoration: none;
+}

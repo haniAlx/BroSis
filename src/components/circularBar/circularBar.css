@@ -18,3 +18,6 @@
   text-align: center;
   margin-top: 35%;
 }
+.circular-bar-percent .bar-text {
+  word-wrap: break-word;
+}
