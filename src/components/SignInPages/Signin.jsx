@@ -5,12 +5,14 @@ import swal from "sweetalert";
 import { useState } from "react";
 import { AiOutlineEye } from "react-icons/ai";
 import { useUserContext } from "../context/UserContext";
+import LoadingPage from "../LoadingPage";
 
 export default function SignIn() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
   const [pass, showPass] = useState(false);
+  const [showLoading, setShowLoading] = useState(false);
   const { setCurrentUser } = useUserContext();
   const navigate = useNavigate();
   const toggleEye = () => {
@@ -27,6 +29,7 @@ export default function SignIn() {
     }
   };
   async function login() {
+    setShowLoading(true);
     const users = { username, password };
     localStorage.setItem("username", username);
     console.log(username);
@@ -77,23 +80,25 @@ export default function SignIn() {
       }
     } catch (error) {
       console.log(error + "error");
-      swal.fire({
+      swal({
         title: "Something Went Wrong?",
         text: `net::ERR_INTERNET_DISCONNECTED `,
         icon: "warning",
         dangerMode: true,
-        showConfirmButton: false,
-        showCancelButton: true,
+        buttons: [false, true],
         cancelButtonColor: "#d33",
         showClass: {
           popup: "animate__animated animate__shakeX",
         },
       });
       // window.location.href = "/dashboard";
+    } finally {
+      setShowLoading(false);
     }
   }
   return (
     <>
+      {showLoading && <LoadingPage message={"Loging You In please Wait"} />}
       <div className="SigninWrapper">
         <div className="left-side">
           <div className="left-SideInner">
