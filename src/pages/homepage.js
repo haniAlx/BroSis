@@ -12,7 +12,7 @@ const Homepage = () => {
     labels: ["Vehicle", "User", "Driver", "Compony"],
     datasets: [{ label: "hello", data: [1, 2, 3, 4] }],
   });
-  const { payload, loading, error } = useLoadContext();
+  const { payload, loading, error, setRefresh } = useLoadContext();
 
   useEffect(() => {
     const populateDate = () => {
@@ -55,7 +55,24 @@ const Homepage = () => {
           ""
         )}
         {error ? (
-          <p>{error}</p>
+          <>
+            <p
+              style={{
+                textAlign: "center",
+                fontSize: "25px",
+                marginTop: "50px",
+                color: "red",
+              }}
+            >
+              {error}
+            </p>
+            <button
+              className="btn w-300 center"
+              onClick={() => setRefresh(true)}
+            >
+              Refresh Page
+            </button>
+          </>
         ) : (
           <div className="chart-container">
             <div

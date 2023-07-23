@@ -10,12 +10,16 @@
   left: 0;
 }
 
-.manage-modal div {
+.manage-modal .manage-modal-content {
   background-color: white;
   padding: 10px 20px;
   border-radius: 10px;
-  max-width: 350px;
+  width: 50vw;
+  max-width: 600px;
   animation: slideInDown 0.8s ease-in;
+}
+.manage-modal-content form {
+  width: 100%;
 }
 .manage-modal .modal-title {
   border-bottom: 2px solid rgb(159, 159, 159);
@@ -78,7 +82,7 @@
 }
 
 @media (min-width: 900px) {
-  .manage-modal div {
+  .manage-modal .manage-modal-content {
     min-width: 400px;
     max-width: 450px;
   }

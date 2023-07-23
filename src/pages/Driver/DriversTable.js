@@ -1,6 +1,6 @@
 import React from "react";
 
-const DriversTable = ({ target, handleManage }) => {
+const DriversTable = ({ target, handleManage,showDetail }) => {
   return (
     <div>
       <table className="driver-table">
@@ -42,7 +42,9 @@ const DriversTable = ({ target, handleManage }) => {
                 </td>
                 <td>{item.vehicleOwner}</td>
                 <td>
-                  <button className="table-btn">Detail</button>
+                  <button className="table-btn"
+                  onClick={()=>showDetail(item)}
+                  >Detail</button>
                 </td>
                 <td>
                   <button

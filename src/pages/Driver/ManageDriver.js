@@ -34,7 +34,7 @@ function ManageDriver({ setShowManage, driverDetail }) {
   }, []);
   /** Closing modal */
   const hideModal = () => {
-    const modal = document.getElementById("manage-modal");
+    const modal = document.getElementById("driver-manage");
     window.onclick = (event) => {
       if (event.target == modal) {
         setShowManage(false);
@@ -79,8 +79,8 @@ function ManageDriver({ setShowManage, driverDetail }) {
   };
 
   return (
-    <div className="manage-modal" id="manage-modal" onClick={() => hideModal()}>
-      <div>
+    <div className="manage-modal" id="driver-manage" onClick={() => hideModal()}>
+      <div className="manage-modal-content">
         <div className="modal-title">
           <p>Mangage Driver Status</p>
         </div>
