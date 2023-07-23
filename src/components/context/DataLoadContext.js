@@ -20,7 +20,7 @@ const DataLoadContext = ({ children }) => {
     "http://64.226.104.50:9090/Api/Admin/Drivers/UNASSIGNED";
   const apiPermit = "http://64.226.104.50:9090/Api/Admin/Drivers/PERMIT";
   const navigator = useNavigate();
-  const { setCurrentUser } = useUserContext();
+  const { setCurrentUser, currentUser } = useUserContext();
   /**  GET JWT */
   const jwt = JSON.parse(localStorage.getItem("jwt"));
   /** Option for fetch */
@@ -53,7 +53,7 @@ const DataLoadContext = ({ children }) => {
     getAllApiData();
 
     return () => {};
-  }, []);
+  }, [currentUser]);
   const getAllDrivers = async () => {
     try {
       const res = await fetch(apiAllDrivers, options);
