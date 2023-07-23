@@ -13,6 +13,7 @@ const DataLoadContext = ({ children }) => {
   const [unassigned, setUnassigned] = useState([]);
   const [permit, setPermit] = useState([]);
   const [error, setError] = useState(null);
+  const [refresh, setRefresh] = useState(false);
   const apiAllDrivers = "http://64.226.104.50:9090/Api/Admin/All/Drivers";
   const apiOnRoute = "http://64.226.104.50:9090/Api/Admin/Drivers/ONROUTE";
   const apiAssigned = "http://64.226.104.50:9090/Api/Admin/Drivers/ASSIGNED";
@@ -48,12 +49,13 @@ const DataLoadContext = ({ children }) => {
       await getUnAssigned();
       await getPermit();
       setLoading(false);
+      setRefresh(false);
     };
     setLoading(true);
     getAllApiData();
 
     return () => {};
-  }, [currentUser]);
+  }, [currentUser, refresh]);
   const getAllDrivers = async () => {
     try {
       const res = await fetch(apiAllDrivers, options);
@@ -102,7 +104,7 @@ const DataLoadContext = ({ children }) => {
       }
     } catch (e) {
       console.log(e.message);
-      setError(e.message);
+      setError(e.message + "try to refresh page");
     }
   };
   const getAssigned = async () => {
@@ -147,6 +149,7 @@ const DataLoadContext = ({ children }) => {
   return (
     <LoadDataContext.Provider
       value={{
+        setRefresh,
         loading,
         setLoading,
         error,
