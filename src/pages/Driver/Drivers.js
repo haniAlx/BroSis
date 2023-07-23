@@ -7,6 +7,7 @@ import { useLoadContext } from "../../components/context/DataLoadContext";
 import DriversTable from "./DriversTable";
 import "./driver.css";
 import ManageDriver from "./ManageDriver";
+import DriverDetail from "./DriverDetail";
 function Drivers() {
   const [allDrivers, setAllDrivers] = useState([]);
   const [onRoute, setOnRoute] = useState([]);
@@ -15,7 +16,7 @@ function Drivers() {
   const [permit, setPermit] = useState([]);
   // const [error, setError] = useState();
   const [tableData, setTableData] = useState(allDrivers);
-  const { payload, loading, error } = useLoadContext();
+  const { payload, loading, error, setRefresh } = useLoadContext();
 
   useEffect(() => {
     const getAllApiData = async () => {
@@ -29,7 +30,7 @@ function Drivers() {
     getAllApiData();
 
     return () => {};
-  }, []);
+  }, [loading]);
 
   const topCardDetail = [
     {
@@ -94,10 +95,14 @@ function Drivers() {
   };
   const [showManage, setShowManage] = useState(false);
   const [driverDetail, setDriverDetail] = useState();
+  const [detail, setDetail] = useState(false);
   const handleManage = (item) => {
     setShowManage(true);
     setDriverDetail(item);
-    console.log(item);
+  };
+  const showDetail = (item) => {
+    setDetail(true);
+    setDriverDetail(item);
   };
   return (
     <div className="main-bar">
@@ -107,20 +112,31 @@ function Drivers() {
           driverDetail={driverDetail}
         />
       )}
+      {detail && (
+        <DriverDetail driverDetail={driverDetail} setDetail={setDetail} />
+      )}
       <h2 style={{}}>Driver</h2>
       <hr className="hr" />
       <div className="main-bar-driver">
         {error ? (
-          <p
-            style={{
-              textAlign: "center",
-              fontSize: "25px",
-              marginTop: "50px",
-              color: "red",
-            }}
-          >
-            {error}
-          </p>
+          <>
+            <p
+              style={{
+                textAlign: "center",
+                fontSize: "25px",
+                marginTop: "50px",
+                color: "red",
+              }}
+            >
+              {error}
+            </p>
+            <button
+              className="btn center w-300"
+              onClick={() => setRefresh(true)}
+            >
+              Refresh Page
+            </button>
+          </>
         ) : (
           ""
         )}
@@ -158,6 +174,7 @@ function Drivers() {
                 <DriversTable
                   target={tableData}
                   handleManage={(val) => handleManage(val)}
+                  showDetail={(val) => showDetail(val)}
                 />
               </div>
             </>
