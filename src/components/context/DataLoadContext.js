@@ -104,7 +104,7 @@ const DataLoadContext = ({ children }) => {
       }
     } catch (e) {
       console.log(e.message);
-      setError(e.message + "try to refresh page");
+      setError(e.message + " try to refresh page");
     }
   };
   const getAssigned = async () => {
