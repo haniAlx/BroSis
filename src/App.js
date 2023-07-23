@@ -44,7 +44,7 @@ function App() {
               <Route path="/" element={<SignIn />}></Route>
               <Route path="/ForgatePass" element={<ForgatePass />}></Route>
               <Route path="/ConfirmPass" element={<ConfirmPass />}></Route>
-              <Route path="*" element={<ErrorPage />} />
+              <Route path="*" element={<SignIn />} />
             </Routes>
           )}
         </DataLoadContext>
