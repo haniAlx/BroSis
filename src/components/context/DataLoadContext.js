@@ -14,12 +14,12 @@ const DataLoadContext = ({ children }) => {
   const [permit, setPermit] = useState([]);
   const [error, setError] = useState(null);
   const [refresh, setRefresh] = useState(false);
-  const apiAllDrivers = "http://64.226.104.50:9090/Api/Admin/All/Drivers";
-  const apiOnRoute = "http://64.226.104.50:9090/Api/Admin/Drivers/ONROUTE";
-  const apiAssigned = "http://64.226.104.50:9090/Api/Admin/Drivers/ASSIGNED";
-  const apiUnAssigned =
-    "http://64.226.104.50:9090/Api/Admin/Drivers/UNASSIGNED";
-  const apiPermit = "http://64.226.104.50:9090/Api/Admin/Drivers/PERMIT";
+  const api = "http://164.90.174.113:9090";
+  const apiAllDrivers = `${api}/Api/Admin/All/Drivers`;
+  const apiOnRoute = `${api}/Api/Admin/Drivers/ONROUTE`;
+  const apiAssigned = `${api}/Api/Admin/Drivers/ASSIGNED`;
+  const apiUnAssigned = `${api}/Api/Admin/Drivers/UNASSIGNED`;
+  const apiPermit = `${api}/Api/Admin/Drivers/PERMIT`;
   const navigator = useNavigate();
   const { setCurrentUser, currentUser } = useUserContext();
   /**  GET JWT */

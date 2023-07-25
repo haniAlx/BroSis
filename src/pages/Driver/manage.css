@@ -87,3 +87,8 @@
     max-width: 450px;
   }
 }
+@media (max-width: 570px) {
+  .manage-modal .manage-modal-content {
+    width: 80%;
+  }
+}

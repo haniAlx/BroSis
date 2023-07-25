@@ -35,28 +35,28 @@ function Drivers() {
   const topCardDetail = [
     {
       title: "Total Driver",
-      data: allDrivers.length || null,
+      data: allDrivers.length || 0,
       icon: MdPeople,
       color: "rgb(94, 175, 255)",
       name: "totalDrivers",
     },
     {
       title: "OnRoute",
-      data: onRoute.length || null,
+      data: onRoute.length || 0,
       icon: FaRoute,
       color: "rgb(255, 234, 94)",
       name: "onRoute",
     },
     {
       title: "Assigned",
-      data: Assigned.length || null,
+      data: Assigned.length || 0,
       icon: MdVerified,
       color: "rgb(102, 255, 94)",
       name: "assigned",
     },
     {
       title: "Unassigned",
-      data: unassigned.length || null,
+      data: unassigned.length || 0,
       icon: MdError,
       color: "rgb(255, 94, 116)",
       name: "unassigned",

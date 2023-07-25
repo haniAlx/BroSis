@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import "./manage.css";
 import swal from "sweetalert";
 function ManageDriver({ setShowManage, driverDetail }) {
+  const api = "http://164.90.174.113:9090";
   /*************************Total vehicles***************/
-  const allVehicleapi = "http://64.226.104.50:9090/Api/Admin/All/Vehicles";
+  const allVehicleapi = `${api}/Api/Admin/All/Vehicles`;
   const updateStatusapi =
-    "http://64.226.104.50:9090/Api/Vehicle/ChangeDriverStatus";
+    `${api}/Api/Vehicle/ChangeDriverStatus`;
   const [allVehicles, setAllVehicles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [plateNumber, setPlateNumber] = useState(driverDetail.plateNumber);
