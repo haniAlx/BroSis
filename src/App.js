@@ -12,6 +12,7 @@ import Vehicle from "./pages/Vehicle/Vehicle";
 import Drivers from "./pages/Driver/Drivers";
 import DataLoadContext from "./components/context/DataLoadContext";
 import { useUserContext } from "./components/context/UserContext";
+import VehicleDetail from "./pages/Vehicle/VehicleDetail";
 
 function App() {
   const { currentUser } = useUserContext();
@@ -32,7 +33,10 @@ function App() {
                       <Route path="/dashboard" element={<Homepage />}></Route>
                       <Route path="/vehicle" element={<Vehicle />} />
                       <Route path="/driver" element={<Drivers />} />
-                      <Route path="/signin" element={<SignIn />} />
+                      <Route
+                        path="/vehicle/detail/:vehicleId"
+                        element={<VehicleDetail />}
+                      />
                       <Route path="*" element={<ErrorPage />} />
                     </Routes>
                   </div>

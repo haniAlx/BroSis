@@ -1,0 +1,229 @@
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import "./vehicledetail.css";
+import { MdKeyboardArrowLeft, MdModeEdit } from "react-icons/md";
+const VehicleDetail = () => {
+  const { vehicleId } = useParams();
+  const api = "http://164.90.174.113:9090";
+  const apiVehicleDetail = `${api}/Api/Admin/All/Vehicles/${vehicleId}`;
+  const [vehicleDetail, setVehicleDetail] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState();
+  const [updatedData, setUpdateData] = useState(vehicleDetail);
+  const [edit, setEdit] = useState(false);
+  const jwt = JSON.parse(localStorage.getItem("jwt"));
+  const options = {
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      Authorization: `Bearer ${jwt}`,
+    },
+  };
+  useEffect(() => {
+    console.log(vehicleId);
+    const getDetail = async () => {
+      try {
+        const res = await fetch(apiVehicleDetail, options);
+        console.log("response", res.status);
+        if (res.status == 401) {
+          //showErrorMessage();
+          setLoading(false);
+          setError("Unable to Load!! server respond with 401");
+        }
+        const data = await res.json();
+        if (data && res.ok) {
+          console.log(data);
+          setVehicleDetail(data);
+          setUpdateData(vehicleDetail);
+        }
+        if (res.status == 400) {
+          setError("Invalid API server 400");
+        }
+      } catch (e) {
+        console.log(e.message);
+        setError(e.message);
+        setLoading(false);
+      }
+    };
+    getDetail();
+  }, []);
+  const updateVehicleInfo = async () => {
+    const options = {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${jwt}`,
+      },
+      body: JSON.stringify(updatedData),
+    };
+    const url = `${api}/Api/Admin/UpdateVehicleInfo/${vehicleId}`;
+    try {
+      const response = await fetch(url, options);
+      const result = await response.json();
+    } catch (e) {
+      setError(e);
+    }
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (
+      vehicleDetail.id == "" ||
+      vehicleDetail.manufactureDate == "" ||
+      vehicleDetail.plateNumber == "" ||
+      vehicleDetail.vehicleCondition == "" ||
+      vehicleDetail.capacity == ""
+    )
+      updateVehicleInfo();
+  };
+  const handleChange = (e) => {
+    setVehicleDetail({ ...vehicleDetail, [e.target.name]: e.target.value });
+    console.log(vehicleDetail);
+  };
+  const activeEdit = () => {};
+  return (
+    <div className="main-bar" id="driver-detail">
+      <div
+        style={{
+          display: "flex",
+          columnGap: "10px",
+          alignItems: "center",
+        }}
+      >
+        <MdKeyboardArrowLeft size={30} />
+        <Link to={"/vehicle"}>Vehicle</Link>
+      </div>
+      <div className="manage-window  detail-content mx-auto">
+        <form onSubmit={(e) => handleSubmit(e)}>
+          <p className="detail-part">Vehicle Detail</p>
+          <hr />
+
+          <div
+            style={{
+              display: "flex",
+              columnGap: "20px",
+              flexWrap: "wrap",
+            }}
+          >
+            <div className="flex-grow">
+              <label>ID</label>
+              <input value={vehicleDetail.id || ""} name="id" disabled />
+            </div>
+            <div className="flex-grow">
+              <label>Manufacture Date</label>
+              <input
+                value={vehicleDetail.manufactureDate || ""}
+                name="manufactureDate"
+                disabled={!edit}
+                onChange={(e) => handleChange(e)}
+              />
+            </div>
+            <div className="flex-grow">
+              <label>Plate Number</label>
+              <input
+                value={vehicleDetail.plateNumber || ""}
+                name="plateNumber"
+                disabled={!edit}
+                onChange={(e) => handleChange(e)}
+              />
+            </div>
+            <div className="flex-grow">
+              <label>Vehicle Type</label>
+              <input
+                value={vehicleDetail.vehicleCatagory || ""}
+                name="vehicleCatagory"
+                disabled
+              />
+            </div>
+            <div className="flex-grow " style={{}}>
+              <label>Vehicle Condition</label>
+              {!edit ? (
+                <input value={vehicleDetail.vehicleCondition || ""} disabled />
+              ) : (
+                <select
+                  value={vehicleDetail.vehicleCondition || ""}
+                  name="vehicleCondition"
+                  onChange={(e) => handleChange(e)}
+                >
+                  <option value={"old"}>Old</option>
+                  <option value={"New"}>New</option>
+                </select>
+              )}
+            </div>
+            <div className="flex-grow " style={{}}>
+              <label>Vehicle Capacit</label>
+              <input
+                value={vehicleDetail.capacity || ""}
+                name="capacity"
+                disabled={!edit}
+                onChange={(e) => handleChange(e)}
+              />
+            </div>
+          </div>
+          <p className="detail-part">Vehicle Status</p>
+          <div
+            style={{
+              display: "flex",
+              columnGap: "20px",
+              flexWrap: "wrap",
+            }}
+          >
+            <div className="flex-grow">
+              <label>Status</label>
+              <input
+                value={vehicleDetail.status || ""}
+                name="status"
+                disabled={!edit}
+                onChange={(e) => handleChange(e)}
+              />
+            </div>
+
+            <div className="flex-grow">
+              <label>Vehicle Driver</label>
+              <input
+                value={vehicleDetail.driver || ""}
+                name="driver"
+                disabled={!edit}
+                onChange={(e) => handleChange(e)}
+              />
+            </div>
+            <div className="flex-grow">
+              <label>Vehicle Owner</label>
+              <input
+                value={vehicleDetail.vehicleOwner || ""}
+                name="vehicleOwner"
+                disabled
+              />
+            </div>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
+            <span
+              className={`btn ${edit ? "btn-bg-lightred" : "btn-bg-gray"}`}
+              style={{
+                maxWidth: "150px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                columnGap: "4px",
+              }}
+              onClick={() => setEdit(!edit)}
+            >
+              {edit ? "Cancel" : "Edit"}
+              <MdModeEdit color="white" width={25} />
+            </span>
+            <button className="btn w-300" disabled={!edit}>
+              Update
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default VehicleDetail;

@@ -1,0 +1,46 @@
+.manage-modal-content form {
+  width: 100%;
+}
+.manage-window {
+  max-width: 500px;
+  margin-left: 20px;
+}
+.manage-window .modal-title {
+  border-bottom: 2px solid rgb(159, 159, 159);
+  border-radius: 0;
+}
+.manage-window label {
+  font-size: 16px;
+  color: black;
+}
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+.manage-window input,
+.manage-window select {
+  background-color: rgb(227, 227, 227);
+  text-align: center;
+  margin-bottom: 15px;
+  width: 100%;
+  display: block;
+  height: 40px;
+  border-radius: 5px;
+  font-size: 15px;
+}
+.manage-window input:enabled {
+  border: 1px solid rgb(196, 39, 131);
+}
+.btn-bg-gray {
+  background-color: rgb(100, 100, 100);
+}
+.btn-bg-gray:hover {
+  background-color: rgb(41, 43, 43);
+}
+.btn:disabled {
+  background-color: rgb(135, 130, 130);
+  cursor: not-allowed;
+}
+.btn-bg-lightred {
+  background-color: rgb(203, 42, 42);
+}
