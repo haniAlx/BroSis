@@ -8,7 +8,7 @@ const LoadingPage = ({ message }) => {
           backgroundColor: "white",
           borderRadius: "10px",
           maxWidth: "300px",
-          height: "200px",
+          height: "100px",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -16,10 +16,10 @@ const LoadingPage = ({ message }) => {
           padding: "10px",
         }}
       >
-        <ReactLoading type="spin" width={100} height={50} color="black" />
+        <ReactLoading type="spin" width={50} height={20} color="black" />
         <p
           style={{
-            marginTop: "40px",
+            marginTop: "10px",
           }}
         >
           {message}
