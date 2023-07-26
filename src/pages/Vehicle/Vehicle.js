@@ -40,6 +40,7 @@ const Vehicle = () => {
   };
   useEffect(() => {
     const getVehicleData = async () => {
+      setLoading(true);
       getAllVehicle();
       getVehicleOnRoute();
       getVehicleParked();
@@ -66,6 +67,7 @@ const Vehicle = () => {
   };
   const getAllVehicle = async () => {
     try {
+      setLoading(true);
       const res = await fetch(apiAllVehicle, options);
       console.log("response", res.status);
       if (res.status == 401) {
@@ -87,10 +89,13 @@ const Vehicle = () => {
       console.log(e.message);
       setError(e.message);
       setLoading(false);
+    } finally {
+      setLoading(false);
     }
   };
   const getVehicleOnRoute = async () => {
     try {
+      setLoading(true);
       const res = await fetch(apiVehicleOnRoute, options);
       if (res.status == 401) {
         showErrorMessage();
@@ -110,10 +115,13 @@ const Vehicle = () => {
       console.log(e.message);
       setError(e.message);
       setLoading(false);
+    } finally {
+      setLoading(false);
     }
   };
   const getVehicleParked = async () => {
     try {
+      setLoading(true);
       const res = await fetch(apiParked, options);
       if (res.status == 401) {
         showErrorMessage();
@@ -132,10 +140,13 @@ const Vehicle = () => {
       console.log(e.message);
       setError(e.message);
       setLoading(false);
+    } finally {
+      setLoading(false);
     }
   };
   const getVehicleMaintaning = async () => {
     try {
+      setLoading(true);
       const res = await fetch(apiMaintaining, options);
       if (res.status == 401) {
         showErrorMessage();
@@ -154,10 +165,13 @@ const Vehicle = () => {
       console.log(e.message);
       setError(e.message);
       setLoading(false);
+    } finally {
+      setLoading(false);
     }
   };
   const getVehicleInStock = async () => {
     try {
+      setLoading(true);
       const res = await fetch(apiInStock, options);
       if (res.status == 401) {
         showErrorMessage();
@@ -174,6 +188,8 @@ const Vehicle = () => {
     } catch (e) {
       console.log(e.message);
       setError(e.message);
+      setLoading(false);
+    } finally {
       setLoading(false);
     }
   };
