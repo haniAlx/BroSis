@@ -278,7 +278,7 @@ const Vehicle = () => {
                   />
                 ))}
               </div>
-              <div className="table-container">
+              <div className="">
                 <VehicleTable
                   target={tableData}
                   handleManage={(val) => handleManage(val)}

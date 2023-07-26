@@ -4,6 +4,7 @@
 .manage-window {
   max-width: 500px;
   margin-left: 20px;
+  width: 90vw;
 }
 .manage-window .modal-title {
   border-bottom: 2px solid rgb(159, 159, 159);
@@ -13,6 +14,7 @@
   font-size: 16px;
   color: black;
 }
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -27,6 +29,16 @@
   height: 40px;
   border-radius: 5px;
   font-size: 15px;
+}
+.manage-window input[type="date"] {
+  min-width: 200px;
+}
+.manage-window select {
+  min-width: 200px;
+}
+.manage-window option {
+  display: block;
+  height: 40px;
 }
 .manage-window input:enabled {
   border: 1px solid rgb(196, 39, 131);

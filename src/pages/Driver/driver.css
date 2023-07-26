@@ -1,35 +1,37 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;700;800;900&display=swap");
 .table-container {
-  margin-top: 40px;
-  max-height: 80vh;
+  margin-top: 20px;
+  height: 400px;
+  max-width: 1200px;
+  width: 90vw;
   overflow-y: scroll;
   overflow-x: auto;
 }
-.driver-table td {
+.data-table td {
   padding: 15px;
 }
-.driver-table th {
+.data-table th {
   padding: 15px;
   font-size: 15px;
   font-weight: 500;
 }
-.driver-table tr {
+.data-table tr {
   border-top: 0.4px solid rgb(197, 197, 197);
   border-bottom: 0.4px solid rgb(197, 197, 197);
   border-radius: 4px 10px;
 }
-.driver-table th {
+.data-table th {
   background-color: rgba(14, 18, 23, 0.997);
   color: white;
   text-align: left;
 }
-.driver-table {
+.data-table {
   border-collapse: collapse;
   margin-top: 20px;
-  margin: 40px auto;
+  margin: 10px auto;
   font-family: "Poppins", sans-serif;
 }
-.driver-table tr:nth-child(even) {
+.data-table tr:nth-child(even) {
   background-color: rgb(220, 220, 220);
 }
 .table-btn {
@@ -63,16 +65,16 @@
   .top-card-holder {
     display: none;
   }
-  .driver-table {
+  .data-table {
     max-width: 500px;
   }
   .table-container {
     overflow-x: scroll;
   }
-  .driver-table td {
+  .data-table td {
     padding: 5px;
   }
-  .driver-table th {
+  .data-table th {
     padding: 5px;
   }
 }
