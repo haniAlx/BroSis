@@ -170,7 +170,7 @@ function Drivers() {
                   />
                 ))}
               </div>
-              <div className="table-container">
+              <div className="">
                 <DriversTable
                   target={tableData}
                   handleManage={(val) => handleManage(val)}
