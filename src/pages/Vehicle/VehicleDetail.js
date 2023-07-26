@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import "./vehicledetail.css";
 import { MdKeyboardArrowLeft, MdModeEdit } from "react-icons/md";
+import swal from "sweetalert";
+import LoadingPage from "../../components/LoadingPage";
 const VehicleDetail = () => {
   const { vehicleId } = useParams();
   const api = "http://164.90.174.113:9090";
@@ -22,6 +24,7 @@ const VehicleDetail = () => {
   useEffect(() => {
     console.log(vehicleId);
     const getDetail = async () => {
+      setLoading(true);
       try {
         const res = await fetch(apiVehicleDetail, options);
         console.log("response", res.status);
@@ -42,6 +45,8 @@ const VehicleDetail = () => {
       } catch (e) {
         console.log(e.message);
         setError(e.message);
+        setLoading(false);
+      } finally {
         setLoading(false);
       }
     };
@@ -72,15 +77,26 @@ const VehicleDetail = () => {
       vehicleDetail.manufactureDate == "" ||
       vehicleDetail.plateNumber == "" ||
       vehicleDetail.vehicleCondition == "" ||
-      vehicleDetail.capacity == ""
-    )
-      updateVehicleInfo();
+      vehicleDetail.vehicleCatagory == "" ||
+      vehicleDetail.capacity == "" ||
+      vehicleDetail.status == "" ||
+      vehicleDetail.driver ||
+      vehicleDetail.vehicleOwner == ""
+    ) {
+      swal({
+        title: "Fill all Detail below",
+        text: `please fill all`,
+        icon: "error",
+        dangerMode: true,
+        buttons: [false, "cancel"],
+      });
+    } else updateVehicleInfo();
   };
   const handleChange = (e) => {
     setVehicleDetail({ ...vehicleDetail, [e.target.name]: e.target.value });
     console.log(vehicleDetail);
   };
-  const activeEdit = () => {};
+
   return (
     <div className="main-bar" id="driver-detail">
       <div
@@ -91,9 +107,10 @@ const VehicleDetail = () => {
         }}
       >
         <MdKeyboardArrowLeft size={30} />
-        <Link to={"/vehicle"}>Vehicle</Link>
+        <Link to={"/vehicle"}>Back To Vehicle</Link>
       </div>
       <div className="manage-window  detail-content mx-auto">
+        {loading ? <LoadingPage message={"loading data"} /> : ""}
         <form onSubmit={(e) => handleSubmit(e)}>
           <p className="detail-part">Vehicle Detail</p>
           <hr />
@@ -116,6 +133,7 @@ const VehicleDetail = () => {
                 name="manufactureDate"
                 disabled={!edit}
                 onChange={(e) => handleChange(e)}
+                type="date"
               />
             </div>
             <div className="flex-grow">
@@ -145,8 +163,8 @@ const VehicleDetail = () => {
                   name="vehicleCondition"
                   onChange={(e) => handleChange(e)}
                 >
-                  <option value={"old"}>Old</option>
-                  <option value={"New"}>New</option>
+                  <option value={"OLD"}>OLD</option>
+                  <option value={"USED"}>USED</option>
                 </select>
               )}
             </div>
@@ -170,12 +188,22 @@ const VehicleDetail = () => {
           >
             <div className="flex-grow">
               <label>Status</label>
-              <input
-                value={vehicleDetail.status || ""}
-                name="status"
-                disabled={!edit}
-                onChange={(e) => handleChange(e)}
-              />
+              {!edit ? (
+                <input
+                  value={vehicleDetail.status || ""}
+                  name="status"
+                  disabled
+                />
+              ) : (
+                <select
+                  onChange={(e) => handleChange(e)}
+                  name="status"
+                  value={vehicleDetail.status || ""}
+                >
+                  <option value={"ONROUTE"}>ONROUTE</option>
+                  <option value={"INSTOCK"}>INSTOCK</option>
+                </select>
+              )}
             </div>
 
             <div className="flex-grow">
@@ -192,7 +220,8 @@ const VehicleDetail = () => {
               <input
                 value={vehicleDetail.vehicleOwner || ""}
                 name="vehicleOwner"
-                disabled
+                disabled={!edit}
+                onChange={(e) => handleChange(e)}
               />
             </div>
           </div>
