@@ -9,7 +9,7 @@
   background-color: white;
   border-radius: 10px;
   margin-right: auto;
-  flex: 1;
+  flex-grow: 1;
   max-width: 1200px;
   padding-top: 20px;
   padding-bottom: 20px;

@@ -117,7 +117,7 @@ function Drivers() {
       )}
       <h2 style={{}}>Driver</h2>
       <hr className="hr" />
-      <div className="main-bar-driver">
+      <div className="main-bar-content">
         {error ? (
           <>
             <p

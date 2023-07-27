@@ -10,6 +10,10 @@ body {
   box-sizing: border-box;
   background-color: rgb(247, 247, 247);
   font-family: "Poppins", sans-serif;
+  overflow-y: scroll;
+}
+body::-webkit-scrollbar {
+  width: 1px;
 }
 .main-container {
   margin-left: auto;
@@ -20,7 +24,27 @@ body {
   display: flex;
   justify-content: center;
 }
-
+.search-bar {
+  margin-top: 10px;
+  display: flex;
+  width: 200px;
+  align-items: center;
+  background-color: rgb(227, 227, 227);
+  border-radius: 5px;
+  outline: black;
+  margin-left: auto;
+}
+.search-bar input {
+  background-color: transparent;
+  width: 100%;
+  display: block;
+  margin-bottom: 0px;
+  font-size: 15px;
+  border: none;
+  padding: 5px 10px;
+  height: 40px;
+  outline: none;
+}
 @media (max-width: 576px) {
   .main-container {
     max-width: 376px;

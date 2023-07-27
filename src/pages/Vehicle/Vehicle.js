@@ -5,6 +5,7 @@ import {
   MdCarCrash,
   MdDirectionsCar,
   MdOutlineLocalParking,
+  MdSearch,
 } from "react-icons/md";
 import ReactLoading from "react-loading";
 import TopCards from "../../components/cards/TopCards";
@@ -38,6 +39,7 @@ const Vehicle = () => {
       Authorization: `Bearer ${jwt}`,
     },
   };
+  const [refresh, setRefresh] = useState(false);
   useEffect(() => {
     const getVehicleData = async () => {
       setLoading(true);
@@ -48,7 +50,7 @@ const Vehicle = () => {
       getVehicleInStock();
     };
     getVehicleData();
-  }, []);
+  }, [refresh]);
   const showErrorMessage = () => {
     swal({
       title: "Server respond With 401",
@@ -263,47 +265,74 @@ const Vehicle = () => {
       <div>
         <h2 style={{}}>Vehicles</h2>
         <hr className="hr" />
-
-        {loading ? (
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              width: "100%",
-              flexDirection: "column",
-              rowGap: "50px",
-            }}
-          >
-            <ReactLoading type="bars" width={100} height={50} color="black" />
-            <p>Loading Data Please Wait</p>
-          </div>
-        ) : (
-          !error && (
+        <div className="main-bar-content">
+          {error ? (
             <>
-              <div className="top-card-holder">
-                {topCardDetail.map((item, index) => (
-                  <TopCards
-                    title={item.title}
-                    icon={item.icon}
-                    data={item.data}
-                    color={item.color}
-                    key={index}
-                    handleCardChange={() => handleCardChange(item.name)}
-                    active={activeCard}
-                    name={item.name}
-                  />
-                ))}
-              </div>
-              <div className="">
-                <VehicleTable
-                  target={tableData}
-                  handleManage={(val) => handleManage(val)}
-                  showDetail={(val) => showDetail(val)}
-                />
-              </div>
+              <p
+                style={{
+                  textAlign: "center",
+                  fontSize: "25px",
+                  marginTop: "50px",
+                  color: "red",
+                }}
+              >
+                {error}
+              </p>
+              <button
+                className="btn center w-300"
+                onClick={() => setRefresh(true)}
+              >
+                Refresh Page
+              </button>
             </>
-          )
-        )}
+          ) : (
+            ""
+          )}
+          {loading ? (
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                width: "100%",
+                flexDirection: "column",
+                rowGap: "50px",
+              }}
+            >
+              <ReactLoading type="bars" width={100} height={50} color="black" />
+              <p>Loading Data Please Wait</p>
+            </div>
+          ) : (
+            !error && (
+              <>
+                <div className="top-card-holder">
+                  {topCardDetail.map((item, index) => (
+                    <TopCards
+                      title={item.title}
+                      icon={item.icon}
+                      data={item.data}
+                      color={item.color}
+                      key={index}
+                      handleCardChange={() => handleCardChange(item.name)}
+                      active={activeCard}
+                      name={item.name}
+                    />
+                  ))}
+                </div>
+                <div className="">
+                  <div className="search-bar">
+                    <input type="text" name="search" placeholder="Search..." />
+                    <MdSearch size={25} />
+                  </div>
+                  <VehicleTable
+                    target={tableData}
+                    handleManage={(val) => handleManage(val)}
+                    showDetail={(val) => showDetail(val)}
+                  />
+                </div>
+              </>
+            )
+          )}
+        </div>
       </div>
     </div>
   );
