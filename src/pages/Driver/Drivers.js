@@ -8,6 +8,7 @@ import DriversTable from "./DriversTable";
 import "./driver.css";
 import ManageDriver from "./ManageDriver";
 import DriverDetail from "./DriverDetail";
+import { useNavigate } from "react-router-dom";
 function Drivers() {
   const [allDrivers, setAllDrivers] = useState([]);
   const [onRoute, setOnRoute] = useState([]);
@@ -17,6 +18,7 @@ function Drivers() {
   // const [error, setError] = useState();
   const [tableData, setTableData] = useState(allDrivers);
   const { payload, loading, error, setRefresh } = useLoadContext();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getAllApiData = async () => {
@@ -103,6 +105,7 @@ function Drivers() {
   const showDetail = (item) => {
     setDetail(true);
     setDriverDetail(item);
+    navigate(`/driver/detail/${item.id}`);
   };
   const filterTable = (e) => {
     const { value } = e.target;
@@ -132,9 +135,9 @@ function Drivers() {
           driverDetail={driverDetail}
         />
       )}
-      {detail && (
+      {/* {detail && (
         <DriverDetail driverDetail={driverDetail} setDetail={setDetail} />
-      )}
+      )} */}
       <h2 style={{}}>Driver</h2>
       <hr className="hr" />
       <div className="main-bar-content">

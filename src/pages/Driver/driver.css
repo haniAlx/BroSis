@@ -50,6 +50,17 @@
   display: flex;
   justify-content: space-around;
 }
+.img-licence:hover {
+  position: absolute;
+  left: -10%;
+  top: -80%;
+  scale: 1.5;
+  width: 300px !important;
+  height: 400px !important;
+  object-fit: contain !important;
+  cursor: pointer;
+  padding-bottom: 5px !important;
+}
 @media (max-width: 1200px) {
   .main-bar-content {
     max-width: 86vw;

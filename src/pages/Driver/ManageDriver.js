@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import "./manage.css";
+import "./modalpop.css";
 import swal from "sweetalert";
 function ManageDriver({ setShowManage, driverDetail }) {
   const api = "http://164.90.174.113:9090";
   /*************************Total vehicles***************/
   const allVehicleapi = `${api}/Api/Admin/All/Vehicles`;
-  const updateStatusapi =
-    `${api}/Api/Vehicle/ChangeDriverStatus`;
+  const updateStatusapi = `${api}/Api/Vehicle/ChangeDriverStatus`;
   const [allVehicles, setAllVehicles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [plateNumber, setPlateNumber] = useState(driverDetail.plateNumber);
@@ -80,7 +79,11 @@ function ManageDriver({ setShowManage, driverDetail }) {
   };
 
   return (
-    <div className="manage-modal" id="driver-manage" onClick={() => hideModal()}>
+    <div
+      className="manage-modal"
+      id="driver-manage"
+      onClick={() => hideModal()}
+    >
       <div className="manage-modal-content">
         <div className="modal-title">
           <p>Mangage Driver Status</p>

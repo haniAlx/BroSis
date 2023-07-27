@@ -11,8 +11,9 @@ const VehicleDetail = () => {
   const [vehicleDetail, setVehicleDetail] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState();
-  const [updatedData, setUpdateData] = useState(vehicleDetail);
   const [edit, setEdit] = useState(false);
+  const [backup, setBackUp] = useState();
+  const [updating, setUpdating] = useState(false);
   const jwt = JSON.parse(localStorage.getItem("jwt"));
   const options = {
     headers: {
@@ -21,37 +22,54 @@ const VehicleDetail = () => {
       Authorization: `Bearer ${jwt}`,
     },
   };
-  useEffect(() => {
-    console.log(vehicleId);
-    const getDetail = async () => {
-      setLoading(true);
-      try {
-        const res = await fetch(apiVehicleDetail, options);
-        console.log("response", res.status);
-        if (res.status == 401) {
-          //showErrorMessage();
-          setLoading(false);
-          setError("Unable to Load!! server respond with 401");
-        }
-        const data = await res.json();
-        if (data && res.ok) {
-          console.log(data);
-          setVehicleDetail(data);
-          setUpdateData(vehicleDetail);
-        }
-        if (res.status == 400) {
-          setError("Invalid API server 400");
-        }
-      } catch (e) {
-        console.log(e.message);
-        setError(e.message);
+
+  const getDetail = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch(apiVehicleDetail, options);
+      console.log("response", res.status);
+      if (res.status == 401) {
+        //showErrorMessage();
         setLoading(false);
-      } finally {
-        setLoading(false);
+        setError("Unable to Load!! server respond with 401");
       }
-    };
+      const data = await res.json();
+      if (data && res.ok) {
+        setVehicleDetail(data);
+        setBackUp(data);
+      }
+      if (res.status == 400) {
+        setError("Invalid API server 400");
+      }
+    } catch (e) {
+      console.log(e.message);
+      setError(e.message);
+      setLoading(false);
+    } finally {
+      setLoading(false);
+    }
+  };
+  useEffect(() => {
     getDetail();
   }, []);
+  const showSuccessMessage = (e) => {
+    swal({
+      title: "Server Message",
+      text: `${e}`,
+      icon: "success",
+      dangerMode: true,
+      buttons: [false, "OK"],
+    });
+  };
+  const showErrorMessage = (e) => {
+    swal({
+      title: "Error occured ",
+      text: `${e.message}`,
+      icon: "error",
+      dangerMode: true,
+      buttons: [false, "OK"],
+    });
+  };
   const updateVehicleInfo = async () => {
     const options = {
       method: "PUT",
@@ -60,27 +78,35 @@ const VehicleDetail = () => {
         Accept: "application/json",
         Authorization: `Bearer ${jwt}`,
       },
-      body: JSON.stringify(updatedData),
+      body: JSON.stringify(vehicleDetail),
     };
     const url = `${api}/Api/Admin/UpdateVehicleInfo/${vehicleId}`;
     try {
       const response = await fetch(url, options);
       const result = await response.json();
+      console.log(result);
+      showSuccessMessage(result.message);
     } catch (e) {
       setError(e);
+      showErrorMessage(e);
+      console.log(e);
+    } finally {
+      setEdit(false);
+      setUpdating(false);
+      getDetail();
     }
   };
   const handleSubmit = (e) => {
     e.preventDefault();
     if (
-      vehicleDetail.id == "" ||
+      vehicleDetail.id.toString() == "" ||
       vehicleDetail.manufactureDate == "" ||
       vehicleDetail.plateNumber == "" ||
       vehicleDetail.vehicleCondition == "" ||
       vehicleDetail.vehicleCatagory == "" ||
       vehicleDetail.capacity == "" ||
       vehicleDetail.status == "" ||
-      vehicleDetail.driver ||
+      vehicleDetail.driver == "" ||
       vehicleDetail.vehicleOwner == ""
     ) {
       swal({
@@ -90,15 +116,17 @@ const VehicleDetail = () => {
         dangerMode: true,
         buttons: [false, "cancel"],
       });
-    } else updateVehicleInfo();
+    } else {
+      updateVehicleInfo();
+      setUpdating(true);
+    }
   };
   const handleChange = (e) => {
     setVehicleDetail({ ...vehicleDetail, [e.target.name]: e.target.value });
-    console.log(vehicleDetail);
   };
 
   return (
-    <div className="main-bar" id="driver-detail">
+    <div className="main-bar">
       <div
         style={{
           display: "flex",
@@ -111,6 +139,7 @@ const VehicleDetail = () => {
       </div>
       <div className="manage-window  detail-content mx-auto">
         {loading ? <LoadingPage message={"loading data"} /> : ""}
+        {updating ? <LoadingPage message={"updating data"} /> : ""}
         <form onSubmit={(e) => handleSubmit(e)}>
           <p className="detail-part">Vehicle Detail</p>
           <hr />
@@ -143,6 +172,7 @@ const VehicleDetail = () => {
                 name="plateNumber"
                 disabled={!edit}
                 onChange={(e) => handleChange(e)}
+                type="number"
               />
             </div>
             <div className="flex-grow">
@@ -150,7 +180,8 @@ const VehicleDetail = () => {
               <input
                 value={vehicleDetail.vehicleCatagory || ""}
                 name="vehicleCatagory"
-                disabled
+                disabled={!edit}
+                onChange={(e) => handleChange(e)}
               />
             </div>
             <div className="flex-grow " style={{}}>
@@ -175,6 +206,7 @@ const VehicleDetail = () => {
                 name="capacity"
                 disabled={!edit}
                 onChange={(e) => handleChange(e)}
+                type="number"
               />
             </div>
           </div>
@@ -240,7 +272,10 @@ const VehicleDetail = () => {
                 alignItems: "center",
                 columnGap: "4px",
               }}
-              onClick={() => setEdit(!edit)}
+              onClick={() => {
+                setEdit(!edit);
+                setVehicleDetail(backup);
+              }}
             >
               {edit ? "Cancel" : "Edit"}
               <MdModeEdit color="white" width={25} />
