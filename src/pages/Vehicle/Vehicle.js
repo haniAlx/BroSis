@@ -41,6 +41,7 @@ const Vehicle = () => {
   };
   const [refresh, setRefresh] = useState(false);
   useEffect(() => {
+    setError("");
     const getVehicleData = async () => {
       setLoading(true);
       getAllVehicle();
