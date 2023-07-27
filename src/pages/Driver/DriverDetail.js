@@ -255,6 +255,7 @@ const DriverDetail = () => {
                 value={driverDetail.experience || ""}
                 name="experience"
                 disabled={!edit}
+                type="number"
                 onChange={(e) => handleChange(e)}
               />
             </div>
@@ -273,6 +274,7 @@ const DriverDetail = () => {
                 value={driverDetail.licenseIssueDate || ""}
                 name="licenseIssueDate"
                 disabled={!edit}
+                type="date"
                 onChange={(e) => handleChange(e)}
               />
             </div>
@@ -282,6 +284,7 @@ const DriverDetail = () => {
                 value={driverDetail.licenseExpireDate || ""}
                 name="licenseExpireDate"
                 disabled={!edit}
+                type="date"
                 onChange={(e) => handleChange(e)}
               />
             </div>
@@ -291,6 +294,7 @@ const DriverDetail = () => {
                 value={driverDetail.licenseGrade || ""}
                 name="licenseGrade"
                 disabled={!edit}
+                type="text"
                 onChange={(e) => handleChange(e)}
               />
             </div>
@@ -300,6 +304,7 @@ const DriverDetail = () => {
                 value={driverDetail.licenseNumber || ""}
                 name="licenseNumber"
                 disabled={!edit}
+                type="number"
                 onChange={(e) => handleChange(e)}
               />
             </div>
