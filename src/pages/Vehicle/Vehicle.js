@@ -255,6 +255,22 @@ const Vehicle = () => {
         setTableData(allVehicle);
     }
   };
+  const filterTable = (e) => {
+    const { value } = e.target;
+    const result = allVehicle.filter((item) => {
+      return (
+        item.driverName.toLowerCase().includes(value.toLowerCase()) ||
+        item.vehicleName.toLowerCase().includes(value.toLowerCase()) ||
+        item.vehicleOwner.toLowerCase().includes(value.toLowerCase()) ||
+        item.vehicleCatagory.toLowerCase().includes(value.toLowerCase()) ||
+        item.plateNumber.toLowerCase().includes(value.toLowerCase()) ||
+        item.status.toLowerCase().includes(value.toLowerCase()) ||
+        item.plateNumber.toLowerCase().includes(value.toLowerCase())
+      );
+    });
+    setTableData(result);
+    if (value == "") setTableData(allVehicle);
+  };
   const navigate = useNavigate();
   const handleManage = () => {};
   const showDetail = (item) => {
@@ -280,7 +296,7 @@ const Vehicle = () => {
               </p>
               <button
                 className="btn center w-300"
-                onClick={() => setRefresh(true)}
+                onClick={() => setRefresh(!refresh)}
               >
                 Refresh Page
               </button>
@@ -320,7 +336,12 @@ const Vehicle = () => {
                 </div>
                 <div className="">
                   <div className="search-bar">
-                    <input type="text" name="search" placeholder="Search..." />
+                    <input
+                      type="text"
+                      name="search"
+                      placeholder="Search..."
+                      onChange={(e) => filterTable(e)}
+                    />
                     <MdSearch size={25} />
                   </div>
                   <VehicleTable

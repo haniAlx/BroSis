@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ReactLoading from "react-loading";
 import TopCards from "../../components/cards/TopCards";
-import { MdError, MdPeople, MdVerified } from "react-icons/md";
+import { MdError, MdPeople, MdSearch, MdVerified } from "react-icons/md";
 import { FaRoute } from "react-icons/fa";
 import { useLoadContext } from "../../components/context/DataLoadContext";
 import DriversTable from "./DriversTable";
@@ -104,6 +104,26 @@ function Drivers() {
     setDetail(true);
     setDriverDetail(item);
   };
+  const filterTable = (e) => {
+    const { value } = e.target;
+    const result = allDrivers.filter((item) => {
+      return (
+        item.driverName.toLowerCase().includes(value.toLowerCase()) ||
+        item.vehicleOwner.toLowerCase().includes(value.toLowerCase()) ||
+        item.experience
+          .toString()
+          .toLowerCase()
+          .includes(value.toLowerCase()) ||
+        item.licenseNumber
+          .toString()
+          .toLowerCase()
+          .includes(value.toLowerCase()) ||
+        item.status.toLowerCase().includes(value.toLowerCase())
+      );
+    });
+    setTableData(result);
+    if (value == "") setTableData(allDrivers);
+  };
   return (
     <div className="main-bar">
       {showManage && (
@@ -171,6 +191,15 @@ function Drivers() {
                 ))}
               </div>
               <div className="">
+                <div className="search-bar">
+                  <input
+                    type="text"
+                    name="search"
+                    placeholder="Search..."
+                    onChange={(e) => filterTable(e)}
+                  />
+                  <MdSearch size={25} />
+                </div>
                 <DriversTable
                   target={tableData}
                   handleManage={(val) => handleManage(val)}
