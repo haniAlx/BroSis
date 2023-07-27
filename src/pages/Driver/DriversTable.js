@@ -22,9 +22,9 @@ const DriversTable = ({ target, handleManage, showDetail }) => {
               <th>Driver Name</th>
               <th>License Number</th>
               <th>Experience</th>
-              <th>LicenseGrade</th>
+              <th>License Grade</th>
               <th>Status</th>
-              <th>VehicleOwner</th>
+              <th>Vehicle Owner</th>
               <th>Detail</th>
               <th>Manage</th>
             </tr>
