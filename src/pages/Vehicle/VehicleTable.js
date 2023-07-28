@@ -43,10 +43,12 @@ const VehicleTable = ({ target, handleManage, showDetail }) => {
                   <td
                     style={{
                       color: `${
-                        item.status.toLowerCase() === "unassigned"
+                        item.status.toLowerCase() === "maintaining"
                           ? "red"
-                          : item.status.toLowerCase() === "assigned"
+                          : item.status.toLowerCase() === "parked"
                           ? "green"
+                          : item.status.toLowerCase() == "instock"
+                          ? "blue"
                           : "orange"
                       }`,
                     }}

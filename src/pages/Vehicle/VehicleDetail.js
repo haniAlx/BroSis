@@ -64,14 +64,14 @@ const VehicleDetail = () => {
       if (data && res.ok) {
         setVehicleDetail(data);
         setBackUp(data);
+        setNewData({ status: data.status });
         console.log(data);
       }
       if (res.status == 400) {
         setError("Invalid API server 400");
       }
     } catch (e) {
-      console.log(e.message);
-      showErrorMessage(e.message);
+      showErrorMessage(e);
     } finally {
       setLoading(false);
     }
@@ -127,7 +127,6 @@ const VehicleDetail = () => {
       const result = await response.json();
       console.log(result);
       const mess = result["message"];
-      console.log(mess);
       if (response.ok) {
         showSuccessMessage(mess);
       } else {
@@ -162,8 +161,7 @@ const VehicleDetail = () => {
       const sure = await showConfirmationMessage();
       if (sure) {
         updateVehicleInfo();
-        if (newData.status && newData.status != "")
-          changeVehicleStatus(newData.status);
+        changeVehicleStatus(newData.status);
         setUpdating(true);
       }
     }
