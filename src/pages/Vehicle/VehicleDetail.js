@@ -42,11 +42,20 @@ const VehicleDetail = () => {
       buttons: [false, "OK"],
     });
   };
+  const showConfirmationMessage = async () => {
+    let response = await swal({
+      title: "Are you sure ?",
+      text: `Do you want to Procced`,
+      icon: "warning",
+      dangerMode: true,
+      buttons: ["cancel", "Procced"],
+    });
+    return response;
+  };
   const getDetail = async () => {
     setLoading(true);
     try {
       const res = await fetch(apiVehicleDetail, options);
-      console.log("response", res.status);
       if (res.status == 401) {
         //showErrorMessage();
         setError("Unable to Load!! server respond with 401");
@@ -129,7 +138,7 @@ const VehicleDetail = () => {
       showErrorMessage(error.message);
     }
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (
       vehicleDetail.id.toString() == "" ||
@@ -150,10 +159,13 @@ const VehicleDetail = () => {
         buttons: [false, "cancel"],
       });
     } else {
-      updateVehicleInfo();
-      if (newData.status && newData.status != "")
-        changeVehicleStatus(newData.status);
-      setUpdating(true);
+      const sure = await showConfirmationMessage();
+      if (sure) {
+        updateVehicleInfo();
+        if (newData.status && newData.status != "")
+          changeVehicleStatus(newData.status);
+        setUpdating(true);
+      }
     }
   };
   const handleChange = (e) => {
@@ -191,26 +203,7 @@ const VehicleDetail = () => {
               <label>ID</label>
               <input value={vehicleDetail.id || ""} name="id" disabled />
             </div>
-            <div className="flex-grow">
-              <label>Manufacture Date</label>
-              <input
-                value={vehicleDetail.manufactureDate || ""}
-                name="manufactureDate"
-                disabled={!edit}
-                onChange={(e) => handleChange(e)}
-                type="date"
-              />
-            </div>
-            <div className="flex-grow">
-              <label>Plate Number</label>
-              <input
-                value={vehicleDetail.plateNumber || ""}
-                name="plateNumber"
-                disabled={!edit}
-                onChange={(e) => handleChange(e)}
-                type="number"
-              />
-            </div>
+
             <div className="flex-grow">
               <label>Vehicle Type</label>
               <input
@@ -230,8 +223,9 @@ const VehicleDetail = () => {
                   name="vehicleCondition"
                   onChange={(e) => handleChange(e)}
                 >
-                  <option value={"OLD"}>OLD</option>
-                  <option value={"NEW"}>NEW</option>
+                  <option value={"old"}>old</option>
+                  <option value={"used"}>used</option>
+                  <option value={"new"}>new</option>
                 </select>
               )}
             </div>
@@ -240,6 +234,46 @@ const VehicleDetail = () => {
               <input
                 value={vehicleDetail.capacity || ""}
                 name="capacity"
+                disabled={!edit}
+                onChange={(e) => handleChange(e)}
+                type="number"
+              />
+            </div>
+            <div className="flex-grow " style={{}}>
+              <label>Vehicle Name</label>
+              <input
+                value={vehicleDetail.vehicleName || ""}
+                name="vehicleName"
+                disabled={!edit}
+                onChange={(e) => handleChange(e)}
+                type="text"
+              />
+            </div>
+            <div className="flex-grow " style={{}}>
+              <label>Vehicle ID</label>
+              <input
+                value={vehicleDetail.deviceID || ""}
+                name="deviceID"
+                disabled
+                type="number"
+                onChange={(e) => handleChange(e)}
+              />
+            </div>
+            <div className="flex-grow">
+              <label>Manufacture Date</label>
+              <input
+                value={vehicleDetail.manufactureDate || ""}
+                name="manufactureDate"
+                disabled={!edit}
+                onChange={(e) => handleChange(e)}
+                type="date"
+              />
+            </div>
+            <div className="flex-grow">
+              <label>Plate Number</label>
+              <input
+                value={vehicleDetail.plateNumber || ""}
+                name="plateNumber"
                 disabled={!edit}
                 onChange={(e) => handleChange(e)}
                 type="number"
