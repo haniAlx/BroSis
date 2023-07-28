@@ -8,6 +8,7 @@ const VehicleDetail = () => {
   const { vehicleId } = useParams();
   const api = "http://164.90.174.113:9090";
   const apiVehicleDetail = `${api}/Api/Admin/All/Vehicles/${vehicleId}`;
+  const apiVehicleStatus = `${api}/Api/Vehicle/SetStatus`;
   const [vehicleDetail, setVehicleDetail] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState();
@@ -23,36 +24,6 @@ const VehicleDetail = () => {
       Authorization: `Bearer ${jwt}`,
     },
   };
-
-  const getDetail = async () => {
-    setLoading(true);
-    try {
-      const res = await fetch(apiVehicleDetail, options);
-      console.log("response", res.status);
-      if (res.status == 401) {
-        //showErrorMessage();
-        setLoading(false);
-        setError("Unable to Load!! server respond with 401");
-      }
-      const data = await res.json();
-      if (data && res.ok) {
-        setVehicleDetail(data);
-        setBackUp(data);
-      }
-      if (res.status == 400) {
-        setError("Invalid API server 400");
-      }
-    } catch (e) {
-      console.log(e.message);
-      setError(e.message);
-      setLoading(false);
-    } finally {
-      setLoading(false);
-    }
-  };
-  useEffect(() => {
-    getDetail();
-  }, []);
   const showSuccessMessage = (e) => {
     swal({
       title: "Server Message",
@@ -71,6 +42,35 @@ const VehicleDetail = () => {
       buttons: [false, "OK"],
     });
   };
+  const getDetail = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch(apiVehicleDetail, options);
+      console.log("response", res.status);
+      if (res.status == 401) {
+        //showErrorMessage();
+        setError("Unable to Load!! server respond with 401");
+      }
+      const data = await res.json();
+      if (data && res.ok) {
+        setVehicleDetail(data);
+        setBackUp(data);
+        console.log(data);
+      }
+      if (res.status == 400) {
+        setError("Invalid API server 400");
+      }
+    } catch (e) {
+      console.log(e.message);
+      showErrorMessage(e.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+  useEffect(() => {
+    getDetail();
+  }, []);
+
   const updateVehicleInfo = async () => {
     const options = {
       method: "PUT",
@@ -85,7 +85,6 @@ const VehicleDetail = () => {
     try {
       const response = await fetch(url, options);
       const result = await response.json();
-      console.log(result);
       showSuccessMessage(result.message);
     } catch (e) {
       setError(e);
@@ -96,6 +95,38 @@ const VehicleDetail = () => {
       setUpdating(false);
       getDetail();
       setNewData({});
+    }
+  };
+  const changeVehicleStatus = async (status) => {
+    const plateNumber = vehicleDetail.plateNumber;
+    let newStatus = {
+      status,
+      plateNumber,
+    };
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${jwt}`,
+      },
+      body: JSON.stringify(newStatus),
+    };
+
+    try {
+      const response = await fetch(apiVehicleStatus, options);
+      const result = await response.json();
+      console.log(result);
+      const mess = result["message"];
+      console.log(mess);
+      if (response.ok) {
+        showSuccessMessage(mess);
+      } else {
+        showErrorMessage(mess);
+      }
+    } catch (error) {
+      console.error(error);
+      showErrorMessage(error.message);
     }
   };
   const handleSubmit = (e) => {
@@ -120,6 +151,8 @@ const VehicleDetail = () => {
       });
     } else {
       updateVehicleInfo();
+      if (newData.status && newData.status != "")
+        changeVehicleStatus(newData.status);
       setUpdating(true);
     }
   };
@@ -197,8 +230,8 @@ const VehicleDetail = () => {
                   name="vehicleCondition"
                   onChange={(e) => handleChange(e)}
                 >
-                  <option value={"old"}>old</option>
-                  <option value={"new"}>new</option>
+                  <option value={"OLD"}>OLD</option>
+                  <option value={"NEW"}>NEW</option>
                 </select>
               )}
             </div>
@@ -237,6 +270,8 @@ const VehicleDetail = () => {
                 >
                   <option value={"ONROUTE"}>ONROUTE</option>
                   <option value={"INSTOCK"}>INSTOCK</option>
+                  <option value={"PARKED"}>PARKED</option>
+                  <option value={"MAINTAINING"}>MAINTAINING</option>
                 </select>
               )}
             </div>
