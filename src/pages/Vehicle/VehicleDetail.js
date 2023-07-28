@@ -24,6 +24,7 @@ const VehicleDetail = () => {
       Authorization: `Bearer ${jwt}`,
     },
   };
+  /**SWAL SUCCESS MESSAGE   */
   const showSuccessMessage = (e) => {
     swal({
       title: "Server Message",
@@ -33,6 +34,7 @@ const VehicleDetail = () => {
       buttons: [false, "OK"],
     });
   };
+  /** SWAL ERROR MESSAGE */
   const showErrorMessage = (e) => {
     swal({
       title: "Error occured ",
@@ -42,6 +44,7 @@ const VehicleDetail = () => {
       buttons: [false, "OK"],
     });
   };
+  /** SWAL CONFIRMATION MESSAGE  */
   const showConfirmationMessage = async () => {
     let response = await swal({
       title: "Are you sure ?",
@@ -52,6 +55,7 @@ const VehicleDetail = () => {
     });
     return response;
   };
+  /** GET VEHICLE DETAIL  */
   const getDetail = async () => {
     setLoading(true);
     try {
@@ -81,6 +85,7 @@ const VehicleDetail = () => {
   }, []);
 
   const updateVehicleInfo = async () => {
+    /** UPDATING VEHICLE INFO  */
     const options = {
       method: "PUT",
       headers: {
@@ -106,6 +111,7 @@ const VehicleDetail = () => {
       setNewData({});
     }
   };
+  /** UPDATE VEHICLE STATUS */
   const changeVehicleStatus = async (status) => {
     const plateNumber = vehicleDetail.plateNumber;
     let newStatus = {
@@ -137,8 +143,10 @@ const VehicleDetail = () => {
       showErrorMessage(error.message);
     }
   };
+  /** HANDLING SUBMIT ON FORM */
   const handleSubmit = async (e) => {
     e.preventDefault();
+    /** CHEKING IF ANY OF INPUT IS EMPTY */
     if (
       vehicleDetail.id.toString() == "" ||
       vehicleDetail.manufactureDate == "" ||
@@ -158,6 +166,7 @@ const VehicleDetail = () => {
         buttons: [false, "cancel"],
       });
     } else {
+      /** WAITING CONFIRMATION FROM USER  */
       const sure = await showConfirmationMessage();
       if (sure) {
         updateVehicleInfo();
@@ -166,6 +175,7 @@ const VehicleDetail = () => {
       }
     }
   };
+  /** HANDLING INPUT CHANGES */
   const handleChange = (e) => {
     setVehicleDetail({ ...vehicleDetail, [e.target.name]: e.target.value });
     setNewData({ ...newData, [e.target.name]: e.target.value });
