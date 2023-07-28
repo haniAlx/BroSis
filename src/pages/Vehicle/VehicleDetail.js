@@ -11,6 +11,7 @@ const VehicleDetail = () => {
   const [vehicleDetail, setVehicleDetail] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState();
+  const [newData, setNewData] = useState({});
   const [edit, setEdit] = useState(false);
   const [backup, setBackUp] = useState();
   const [updating, setUpdating] = useState(false);
@@ -78,7 +79,7 @@ const VehicleDetail = () => {
         Accept: "application/json",
         Authorization: `Bearer ${jwt}`,
       },
-      body: JSON.stringify(vehicleDetail),
+      body: JSON.stringify(newData),
     };
     const url = `${api}/Api/Admin/UpdateVehicleInfo/${vehicleId}`;
     try {
@@ -94,6 +95,7 @@ const VehicleDetail = () => {
       setEdit(false);
       setUpdating(false);
       getDetail();
+      setNewData({});
     }
   };
   const handleSubmit = (e) => {
@@ -123,6 +125,7 @@ const VehicleDetail = () => {
   };
   const handleChange = (e) => {
     setVehicleDetail({ ...vehicleDetail, [e.target.name]: e.target.value });
+    setNewData({ ...newData, [e.target.name]: e.target.value });
   };
 
   return (
@@ -194,8 +197,8 @@ const VehicleDetail = () => {
                   name="vehicleCondition"
                   onChange={(e) => handleChange(e)}
                 >
-                  <option value={"OLD"}>OLD</option>
-                  <option value={"USED"}>USED</option>
+                  <option value={"old"}>old</option>
+                  <option value={"new"}>new</option>
                 </select>
               )}
             </div>
