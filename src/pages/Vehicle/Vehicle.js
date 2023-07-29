@@ -32,6 +32,7 @@ const Vehicle = () => {
   const apiParked = `${mainAPI}/Api/Admin/All/Vehicles/Status/PARKED`;
   const apiChangeAssignedDriver = `${mainAPI}/Api/Vehicle/ChangeAssignedDriver`;
   const jwt = JSON.parse(localStorage.getItem("jwt"));
+  const navigate = useNavigate();
   const options = {
     headers: {
       "Content-Type": "application/json",
@@ -64,7 +65,7 @@ const Vehicle = () => {
       if (signin) {
         localStorage.removeItem("user");
         setCurrentUser(null);
-        navigator("/");
+        navigate("/");
       }
     });
   };
@@ -272,7 +273,7 @@ const Vehicle = () => {
     setTableData(result);
     if (value == "") setTableData(allVehicle);
   };
-  const navigate = useNavigate();
+
   const handleManage = () => {};
   const showDetail = (item) => {
     navigate(`/vehicle/detail/${item.id}`);

@@ -18,7 +18,9 @@ const UserTable = ({ target }) => {
     navigate(`/users/${user.roles}/${user.id}`);
   };
   const addDriver = () => {};
-  const addVehicle = () => {};
+  const addVehicle = () => {
+    navigate(`/users/addVehicle`);
+  };
   return (
     <div>
       <div className="table-container">
