@@ -15,6 +15,8 @@ import { useUserContext } from "./components/context/UserContext";
 import VehicleDetail from "./pages/Vehicle/VehicleDetail";
 import DriverDetail from "./pages/Driver/DriverDetail";
 import Users from "./pages/User/Users";
+import UserDetail from "./pages/User/UserDetail";
+import AddVehicle from "./pages/User/AddVehicle";
 
 function App() {
   const { currentUser } = useUserContext();
@@ -36,6 +38,11 @@ function App() {
                       <Route path="/vehicle" element={<Vehicle />} />
                       <Route path="/driver" element={<Drivers />} />
                       <Route path="/users" element={<Users />} />
+                      <Route path="/users/:role/:id" element={<UserDetail />} />
+                      <Route
+                        path="/users/addVehicle"
+                        element={<AddVehicle />}
+                      />
                       <Route
                         path="/vehicle/detail/:vehicleId"
                         element={<VehicleDetail />}

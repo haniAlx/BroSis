@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./modalpop.css";
 import swal from "sweetalert";
+import { mainAPI } from "../../components/mainAPI";
 function ManageDriver({ setShowManage, driverDetail }) {
-  const api = "http://164.90.174.113:9090";
-  /*************************Total vehicles***************/
-  const allVehicleapi = `${api}/Api/Admin/All/Vehicles`;
-  const updateStatusapi = `${api}/Api/Vehicle/ChangeDriverStatus`;
+ 
+  const allVehicleapi = `${mainAPI}/Api/Admin/All/Vehicles`;
+  const updateStatusapi = `${mainAPI}/Api/Vehicle/ChangeDriverStatus`;
   const [allVehicles, setAllVehicles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [plateNumber, setPlateNumber] = useState(driverDetail.plateNumber);

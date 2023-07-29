@@ -4,10 +4,11 @@ import { MdKeyboardArrowLeft, MdModeEdit } from "react-icons/md";
 import { Link, useParams } from "react-router-dom";
 import LoadingPage from "../../components/LoadingPage";
 import swal from "sweetalert";
+import { mainAPI } from "../../components/mainAPI";
 const DriverDetail = () => {
   const { driverId } = useParams();
-  const api = "http://164.90.174.113:9090";
-  const apiDriverDetail = `${api}/Api/Admin/All/Drivers/${driverId}`;
+  const apiDriverDetail = `${mainAPI}/Api/Admin/All/Drivers/${driverId}`;
+  const apiUpdateDriverDetail = `${mainAPI}/Api/Admin/UpdateDriverInfo/${driverId}`;
   const [driverDetail, setDriverDetail] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState();
@@ -81,9 +82,9 @@ const DriverDetail = () => {
       },
       body: JSON.stringify(driverDetail),
     };
-    const url = `${api}/Api/Admin/UpdateDriverInfo/${driverId}`;
+   
     try {
-      const response = await fetch(url, options);
+      const response = await fetch(apiUpdateDriverDetail, options);
       const result = await response.json();
       console.log(result);
       showSuccessMessage(result.message);

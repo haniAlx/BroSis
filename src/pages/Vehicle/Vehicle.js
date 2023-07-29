@@ -13,6 +13,7 @@ import VehicleTable from "./VehicleTable";
 import swal from "sweetalert";
 import { useUserContext } from "../../components/context/UserContext";
 import { useNavigate } from "react-router-dom";
+import { mainAPI } from "../../components/mainAPI";
 const Vehicle = () => {
   const [allVehicle, setAllVehicle] = useState([]);
   const [vehicleonRoute, setVehicleOnRoute] = useState([]);
@@ -24,13 +25,12 @@ const Vehicle = () => {
   const [activeCard, setActiveCard] = useState("totalVehicle");
   const [loading, setLoading] = useState("");
   const { setCurrentUser } = useUserContext();
-  const api = "http://164.90.174.113:9090";
-  const apiAllVehicle = `${api}/Api/Admin/All/Vehicles`;
-  const apiMaintaining = `${api}/Api/Admin/All/Vehicles/Status/MAINTAINING`;
-  const apiVehicleOnRoute = `${api}/Api/Admin/All/Vehicles/Status/ONROUTE`;
-  const apiInStock = `${api}/Api/Admin/All/Vehicles/Status/INSTOCK`;
-  const apiParked = `${api}/Api/Admin/All/Vehicles/Status/PARKED`;
-  const apiChangeAssignedDriver = `${api}/Api/Vehicle/ChangeAssignedDriver`;
+  const apiAllVehicle = `${mainAPI}/Api/Admin/All/Vehicles`;
+  const apiMaintaining = `${mainAPI}/Api/Admin/All/Vehicles/Status/MAINTAINING`;
+  const apiVehicleOnRoute = `${mainAPI}/Api/Admin/All/Vehicles/Status/ONROUTE`;
+  const apiInStock = `${mainAPI}/Api/Admin/All/Vehicles/Status/INSTOCK`;
+  const apiParked = `${mainAPI}/Api/Admin/All/Vehicles/Status/PARKED`;
+  const apiChangeAssignedDriver = `${mainAPI}/Api/Vehicle/ChangeAssignedDriver`;
   const jwt = JSON.parse(localStorage.getItem("jwt"));
   const options = {
     headers: {

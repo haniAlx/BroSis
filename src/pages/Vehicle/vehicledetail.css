@@ -4,7 +4,6 @@
 .manage-window {
   max-width: 700px;
   margin-left: 20px;
-  width: 90vw;
 }
 .manage-window .modal-title {
   border-bottom: 2px solid rgb(159, 159, 159);
@@ -29,6 +28,7 @@
   height: 40px;
   border-radius: 5px;
   font-size: 15px;
+  max-width: 340px;
 }
 .manage-window input[type="date"] {
   min-width: 200px;

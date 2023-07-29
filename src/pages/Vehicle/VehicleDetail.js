@@ -4,11 +4,13 @@ import "./vehicledetail.css";
 import { MdKeyboardArrowLeft, MdModeEdit } from "react-icons/md";
 import swal from "sweetalert";
 import LoadingPage from "../../components/LoadingPage";
+import { showErrorMessage, showSuccessMessage } from "../../components/SwalMessages";
+import { mainAPI } from "../../components/mainAPI";
 const VehicleDetail = () => {
   const { vehicleId } = useParams();
-  const api = "http://164.90.174.113:9090";
-  const apiVehicleDetail = `${api}/Api/Admin/All/Vehicles/${vehicleId}`;
-  const apiVehicleStatus = `${api}/Api/Vehicle/SetStatus`;
+  const apiVehicleDetail = `${mainAPI}/Api/Admin/All/Vehicles/${vehicleId}`;
+  const apiVehicleStatus = `${mainAPI}/Api/Vehicle/SetStatus`;
+  const apiVehicleCatagory = `${mainAPI}/Api/Admin/All/VehicleCatagory`;
   const [vehicleDetail, setVehicleDetail] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState();
@@ -16,6 +18,7 @@ const VehicleDetail = () => {
   const [edit, setEdit] = useState(false);
   const [backup, setBackUp] = useState();
   const [updating, setUpdating] = useState(false);
+  const [vehicleCatagory, setVehicleCatagory] = useState([]);
   const jwt = JSON.parse(localStorage.getItem("jwt"));
   const options = {
     headers: {
@@ -24,26 +27,7 @@ const VehicleDetail = () => {
       Authorization: `Bearer ${jwt}`,
     },
   };
-  /**SWAL SUCCESS MESSAGE   */
-  const showSuccessMessage = (e) => {
-    swal({
-      title: "Server Message",
-      text: `${e}`,
-      icon: "success",
-      dangerMode: true,
-      buttons: [false, "OK"],
-    });
-  };
-  /** SWAL ERROR MESSAGE */
-  const showErrorMessage = (e) => {
-    swal({
-      title: "Error occured ",
-      text: `${e.message}`,
-      icon: "error",
-      dangerMode: true,
-      buttons: [false, "OK"],
-    });
-  };
+  
   /** SWAL CONFIRMATION MESSAGE  */
   const showConfirmationMessage = async () => {
     let response = await swal({
@@ -80,8 +64,32 @@ const VehicleDetail = () => {
       setLoading(false);
     }
   };
+  const getVehicleCatagory = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch(apiVehicleCatagory, options);
+      if (res.status == 401) {
+        //showErrorMessage();
+        setError("Unable to Load!! server respond with 401");
+      }
+      const data = await res.json();
+      if (data && res.ok) {
+        console.log(data);
+        setVehicleCatagory(data.vehicleCatagories);
+      }
+      if (res.status == 400) {
+        setError("Invalid API server 400");
+      }
+    } catch (e) {
+      showErrorMessage(e);
+    } finally {
+      setLoading(false);
+    }
+  };
+  /** CALLING GETDETAIL WHEN PAGE STARTED */
   useEffect(() => {
     getDetail();
+    getVehicleCatagory();
   }, []);
 
   const updateVehicleInfo = async () => {
@@ -95,7 +103,7 @@ const VehicleDetail = () => {
       },
       body: JSON.stringify(newData),
     };
-    const url = `${api}/Api/Admin/UpdateVehicleInfo/${vehicleId}`;
+    const url = `${mainAPI}/Api/Admin/UpdateVehicleInfo/${vehicleId}`;
     try {
       const response = await fetch(url, options);
       const result = await response.json();
@@ -213,13 +221,26 @@ const VehicleDetail = () => {
             </div>
 
             <div className="flex-grow">
-              <label>Vehicle Type</label>
-              <input
-                value={vehicleDetail.vehicleCatagory || ""}
-                name="vehicleCatagory"
-                disabled={!edit}
-                onChange={(e) => handleChange(e)}
-              />
+              <label>Vehicle Catagory</label>
+              {!edit ? (
+                <input
+                  value={vehicleDetail.vehicleCatagory || ""}
+                  name="vehicleCatagory"
+                  disabled
+                />
+              ) : (
+                <select
+                  value={vehicleDetail.vehicleCatagory || ""}
+                  name="vehicleCatagory"
+                  onChange={(e) => handleChange(e)}
+                >
+                  {vehicleCatagory.map((item, index) => (
+                    <option value={item.catagory} key={index}>
+                      {item.catagory}
+                    </option>
+                  ))}
+                </select>
+              )}
             </div>
             <div className="flex-grow " style={{}}>
               <label>Vehicle Condition</label>
