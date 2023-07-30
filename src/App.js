@@ -18,6 +18,7 @@ import Users from "./pages/User/Users";
 import UserDetail from "./pages/User/UserDetail";
 import AddVehicle from "./pages/User/AddVehicle";
 import AddDriver from "./pages/User/AddDriver";
+import AssignDriver from "./pages/Vehicle/AssignDriver";
 
 function App() {
   const { currentUser } = useUserContext();
@@ -45,7 +46,7 @@ function App() {
                         element={<AddDriver />}
                       />
                       <Route
-                        path="/users/addVehicle"
+                        path="/users/addVehicle/:ownerPhone"
                         element={<AddVehicle />}
                       />
                       <Route
@@ -55,6 +56,10 @@ function App() {
                       <Route
                         path="/driver/detail/:driverId"
                         element={<DriverDetail />}
+                      />
+                      <Route
+                        path="/vehicle/assign/:ownerId/:plateNumber"
+                        element={<AssignDriver />}
                       />
                       <Route path="*" element={<ErrorPage />} />
                     </Routes>
