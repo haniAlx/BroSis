@@ -27,8 +27,7 @@ const Users = () => {
   };
   /** REFRESH WHEN THERE IS NETWORK ERROR */
   const [refresh, setRefresh] = useState(false);
-  
-  
+
   /** GET VEHICLE DETAIL  */
   const getDetail = async () => {
     setLoading(true);
@@ -41,7 +40,7 @@ const Users = () => {
       const data = await res.json();
       if (data && res.ok) {
         setallUsers(data.vehicleOwnerINF);
-        console.log(data);
+        setTableData(data.vehicleOwnerINF);
       }
       if (res.status == 400) {
         setError("Invalid API server 400");
@@ -52,30 +51,9 @@ const Users = () => {
       setLoading(false);
     }
   };
-  const getVehicleCatagory = async () => {
-    setLoading(true);
-    try {
-      const res = await fetch(apiVehicleCatagory, options);
-      if (res.status == 401) {
-        //showErrorMessage();
-        setError("Unable to Load!! server respond with 401");
-      }
-      const data = await res.json();
-      if (data && res.ok) {
-        console.log(data);
-      }
-      if (res.status == 400) {
-        setError("Invalid API server 400");
-      }
-    } catch (e) {
-      showErrorMessage(e);
-    } finally {
-      setLoading(false);
-    }
-  };
+
   useEffect(() => {
     getDetail();
-    getVehicleCatagory();
   }, []);
   const topCardDetail = [
     {
@@ -110,13 +88,13 @@ const Users = () => {
   const handleCardChange = (name) => {
     setActiveCard(name);
     switch (name) {
-      case "totalVehicle":
+      case "totalusers":
+        setTableData(allUsers);
+        break;
+      case "cargo":
         setTableData("");
         break;
-      case "onRoute":
-        setTableData("");
-        break;
-      case "parked":
+      case "indivisual":
         setTableData("");
         break;
       case "inStock":
@@ -133,17 +111,15 @@ const Users = () => {
     const { value } = e.target;
     const result = allUsers.filter((item) => {
       return (
-        item.driverName.toLowerCase().includes(value.toLowerCase()) ||
-        item.vehicleName.toLowerCase().includes(value.toLowerCase()) ||
-        item.vehicleOwner.toLowerCase().includes(value.toLowerCase()) ||
-        item.vehicleCatagory.toLowerCase().includes(value.toLowerCase()) ||
-        item.plateNumber.toLowerCase().includes(value.toLowerCase()) ||
-        item.status.toLowerCase().includes(value.toLowerCase()) ||
-        item.plateNumber.toLowerCase().includes(value.toLowerCase())
+        item.companyName.toLowerCase().includes(value.toLowerCase()) ||
+        item.firstName.toLowerCase().includes(value.toLowerCase()) ||
+        item.email.toLowerCase().includes(value.toLowerCase()) ||
+        item.phoneNumber.toLowerCase().includes(value.toLowerCase()) ||
+        item.roles.toLowerCase().includes(value.toLowerCase())
       );
     });
     setTableData(result);
-    if (value == "") setTableData("");
+    if (value == "") setTableData(allUsers);
   };
   return (
     <div className="main-bar">
@@ -213,7 +189,7 @@ const Users = () => {
                     />
                     <MdSearch size={25} />
                   </div>
-                  <UserTable target={allUsers} />
+                  <UserTable target={tableData} />
                 </div>
               </>
             )
