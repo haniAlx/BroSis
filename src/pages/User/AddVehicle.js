@@ -2,18 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaStarOfLife } from "react-icons/fa";
 import { MdKeyboardArrowLeft } from "react-icons/md";
-import { Link } from "react-router-dom";
-import { showErrorMessage } from "../../components/SwalMessages";
+import { Link, useParams } from "react-router-dom";
+import {
+  showErrorMessage,
+  showSuccessMessage,
+} from "../../components/SwalMessages";
 import { mainAPI } from "../../components/mainAPI";
-
-const CustomInput = ({ value, name, label, type }) => {
-  return (
-    <div className="flex-grow">
-      <label>{label}</label>
-      <input name={name} type={type} />
-    </div>
-  );
-};
+import LoadingPage from "../../components/LoadingPage";
 
 const AddVehicle = () => {
   const {
@@ -22,9 +17,12 @@ const AddVehicle = () => {
     register,
   } = useForm();
   const apiVehicleCatagory = `${mainAPI}/Api/Admin/All/VehicleCatagory`;
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [vehicleCatagory, setVehicleCatagory] = useState([]);
+  const [vehicleConditions, setVehicleConditions] = useState([]);
   const jwt = JSON.parse(localStorage.getItem("jwt"));
+  // GETTING OWNER PHONE FROM PARAMS
+  const { ownerPhone } = useParams();
   const options = {
     headers: {
       "Content-Type": "application/json",
@@ -66,14 +64,15 @@ const AddVehicle = () => {
   ];
   const handleFormSubmit = (formdata) => {
     console.log(formdata);
+    let data = { ...formdata, ownerPhone };
+    addVehicle(data);
   };
-  const getVehicleCatagory = async () => {
-    setLoading(true);
+  const getVehicleCatagorys = async () => {
     try {
       const res = await fetch(apiVehicleCatagory, options);
       if (res.status == 401) {
         //showErrorMessage();
-        showErrorMessage({ message: "401 server respond" });
+        showErrorMessage({ message: "Session Expire 401" });
       }
       const data = await res.json();
       if (data && res.ok) {
@@ -81,13 +80,60 @@ const AddVehicle = () => {
       }
     } catch (e) {
       showErrorMessage(e);
+    }
+  };
+  const apiVehicleCondition = `${mainAPI}/Api/Admin/All/VehicleCondition`;
+  const getVehicleConditions = async () => {
+    try {
+      const res = await fetch(apiVehicleCondition, options);
+      if (res.status == 401) {
+        showErrorMessage({ message: "Session Expire 401" });
+      }
+      const data = await res.json();
+      if (data && res.ok) {
+        setVehicleConditions(data.vehicleConditions);
+        console.log(data.vehicleConditions);
+      }
+    } catch (e) {
+      showErrorMessage(e);
+    }
+  };
+  // ***** FOR GETTING VEHICLE CATAGORY AND CONDITION
+  useEffect(() => {
+    getVehicleCatagorys();
+    getVehicleConditions();
+  }, []);
+  const addVehicle = async (vehicle) => {
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${jwt}`,
+      },
+      body: JSON.stringify(vehicle),
+    };
+    const url = `${mainAPI}/Api/Vehicle/AddVehicle`;
+    setLoading(true);
+    try {
+      const response = await fetch(url, options);
+      const result = await response.json();
+      console.log(result);
+      const mess = result["message"];
+      if (response.ok) {
+        console.log("updated successful");
+        showSuccessMessage({ message: mess });
+      } else {
+        console.log("failed");
+        showErrorMessage({ message: mess });
+      }
+    } catch (error) {
+      console.error(error);
+      showErrorMessage(error);
     } finally {
       setLoading(false);
     }
   };
-  useEffect(() => {
-    getVehicleCatagory();
-  }, []);
   return (
     <div className="main-bar">
       <div
@@ -100,9 +146,11 @@ const AddVehicle = () => {
         <MdKeyboardArrowLeft size={30} />
         <Link to={"/users"}>Back To Users</Link>
       </div>
+      {/* SHOWING POP UP */}
+      {loading ? <LoadingPage message={"Submiting Data Please wait"} /> : ""}
       <div className="manage-window  detail-content mx-auto">
         <form onSubmit={handleSubmit(handleFormSubmit)}>
-          <p className="detail-part">Company Information</p>
+          <p className="detail-part">ADD VEHICLE</p>
           <hr />
           <div
             style={{
@@ -140,7 +188,9 @@ const AddVehicle = () => {
             ))}
             {/* ADDING SELECT TAGS */}
             <div className="flex-grow">
-              <label>Vehicle Catagory</label>
+              <label>
+                Vehicle Catagory <FaStarOfLife color="red" size={8} />
+              </label>
               <select
                 name="vehicleCatagory"
                 {...register("vehicleCatagory", {
@@ -165,7 +215,9 @@ const AddVehicle = () => {
               </span>
             </div>
             <div className="flex-grow " style={{}}>
-              <label>Vehicle Condition</label>
+              <label>
+                Vehicle Condition <FaStarOfLife color="red" size={8} />
+              </label>
               <select
                 name="vehicleCondition"
                 {...register("vehicleCondition", {
@@ -174,9 +226,11 @@ const AddVehicle = () => {
                 className="align-left-m0"
               >
                 <option value={""}>Select Condition</option>
-                <option value={"old"}>old</option>
-                <option value={"used"}>used</option>
-                <option value={"new"}>new</option>
+                {vehicleConditions.map((condition, index) => (
+                  <option value={condition.conditionName} key={index}>
+                    {condition.conditionName}
+                  </option>
+                ))}
               </select>
               <span
                 style={{
@@ -188,9 +242,7 @@ const AddVehicle = () => {
               </span>
             </div>
           </div>
-          <button className="btn" onClick={() => console.log(errors)}>
-            Submit
-          </button>
+          <button className="btn w-300 mx-auto mt-20">Submit</button>
         </form>
       </div>
     </div>
