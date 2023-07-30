@@ -17,7 +17,9 @@ const UserTable = ({ target }) => {
   const showDetail = (user) => {
     navigate(`/users/${user.roles}/${user.id}`);
   };
-  const addDriver = () => {};
+  const addDriver = (item) => {
+    navigate(`/users/addDriver/${item.phoneNumber}`);
+  };
   const addVehicle = () => {
     navigate(`/users/addVehicle`);
   };
