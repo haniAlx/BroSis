@@ -75,7 +75,7 @@ const Vehicle = () => {
       const res = await fetch(apiAllVehicle, options);
       console.log("response", res.status);
       if (res.status == 401) {
-        showErrorMessage();
+        showErrorMessage({ message: "Your Session is expired" });
         setLoading(false);
         setError("Unable to Load!! server respond with 401");
       }

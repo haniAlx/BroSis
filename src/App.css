@@ -47,6 +47,10 @@ body::-webkit-scrollbar {
   height: 40px;
   outline: none;
 }
+.align-left-m0 {
+  text-align: left !important;
+  margin-bottom: 0 !important;
+}
 @media (max-width: 576px) {
   .main-container {
     max-width: 376px;

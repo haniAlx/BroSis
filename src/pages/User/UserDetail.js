@@ -143,7 +143,6 @@ const UserDetail = () => {
         }
         const data = await res.json();
         if (data && res.ok) {
-          console.log(data);
           let info = {
             companyName: data.ownerINF.companyName,
             companyType: data.ownerINF.companyType,
