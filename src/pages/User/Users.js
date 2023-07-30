@@ -35,7 +35,9 @@ const Users = () => {
       const res = await fetch(apiVehicleOwners, options);
       if (res.status == 401) {
         //showErrorMessage();
-        setError("Unable to Load!! server respond with 401");
+        showErrorMessage({
+          message: "Unable to Load!! server respond with 401",
+        });
       }
       const data = await res.json();
       if (data && res.ok) {
