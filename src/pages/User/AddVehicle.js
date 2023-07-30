@@ -77,7 +77,6 @@ const AddVehicle = () => {
       }
       const data = await res.json();
       if (data && res.ok) {
-        console.log(data);
         setVehicleCatagory(data.vehicleCatagories);
       }
     } catch (e) {
@@ -126,10 +125,7 @@ const AddVehicle = () => {
                     {...register(inputs.name, {
                       required: `${inputs.label} is required`,
                     })}
-                    style={{
-                      textAlign: "left",
-                      marginBottom: "0",
-                    }}
+                    className="align-left-m0"
                   />
                   <span
                     style={{
@@ -150,6 +146,7 @@ const AddVehicle = () => {
                 {...register("vehicleCatagory", {
                   required: `${"Vehicle Catagory"} is required`,
                 })}
+                className="align-left-m0"
               >
                 <option value={""}>Select Catagory</option>
                 {vehicleCatagory.map((item, index) => (
@@ -174,6 +171,7 @@ const AddVehicle = () => {
                 {...register("vehicleCondition", {
                   required: `${"vehicleCondition"} is required`,
                 })}
+                className="align-left-m0"
               >
                 <option value={""}>Select Condition</option>
                 <option value={"old"}>old</option>
