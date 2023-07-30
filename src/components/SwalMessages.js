@@ -15,8 +15,8 @@ export const showErrorMessage = (e) => {
 /**SWAL SUCCESS MESSAGE   */
 export const showSuccessMessage = (e) => {
   swal({
-    title: "Server Message",
-    text: `${e}`,
+    title: "Success",
+    text: `${e.message}`,
     icon: "success",
     dangerMode: true,
     buttons: [false, "OK"],

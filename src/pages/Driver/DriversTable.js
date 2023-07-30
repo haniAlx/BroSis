@@ -1,17 +1,20 @@
 import { Pagination } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const DriversTable = ({ target, handleManage, showDetail }) => {
-  const [page, setCurentPage] = useState(1);
+  const [page, setPage] = useState(1);
   const [postPerPage, setpostPerPage] = useState(5);
   const lastIndexOfPage = page * postPerPage;
   const firstIndexPage = lastIndexOfPage - postPerPage;
   const currentPage = target.slice(firstIndexPage, lastIndexOfPage);
-  const totalPages = target.length / page;
+  const totalPages = target.length;
   const onShowSizeChange = (current, pageSize) => {
     setpostPerPage(pageSize);
     console.log(pageSize);
   };
+  useEffect(() => {
+    setPage(1);
+  }, [target]);
   return (
     <div>
       <div className="table-container">
@@ -80,7 +83,7 @@ const DriversTable = ({ target, handleManage, showDetail }) => {
         </table>
       </div>
       <Pagination
-        onChange={(page) => setCurentPage(page)}
+        onChange={(page) => setPage(page)}
         pageSize={postPerPage}
         current={page}
         total={totalPages}

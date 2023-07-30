@@ -51,6 +51,13 @@ body::-webkit-scrollbar {
   text-align: left !important;
   margin-bottom: 0 !important;
 }
+.mx-auto {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+.mt-20 {
+  margin-top: 10px !important;
+}
 @media (max-width: 576px) {
   .main-container {
     max-width: 376px;

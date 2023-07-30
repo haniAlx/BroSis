@@ -27,7 +27,6 @@ const DriverDetail = () => {
     setLoading(true);
     try {
       const res = await fetch(apiDriverDetail, options);
-      console.log("response", res.status);
       if (res.status == 401) {
         //showErrorMessage();
         setLoading(false);
@@ -82,7 +81,7 @@ const DriverDetail = () => {
       },
       body: JSON.stringify(driverDetail),
     };
-   
+
     try {
       const response = await fetch(apiUpdateDriverDetail, options);
       const result = await response.json();

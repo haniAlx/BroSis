@@ -4,7 +4,10 @@ import "./vehicledetail.css";
 import { MdKeyboardArrowLeft, MdModeEdit } from "react-icons/md";
 import swal from "sweetalert";
 import LoadingPage from "../../components/LoadingPage";
-import { showErrorMessage, showSuccessMessage } from "../../components/SwalMessages";
+import {
+  showErrorMessage,
+  showSuccessMessage,
+} from "../../components/SwalMessages";
 import { mainAPI } from "../../components/mainAPI";
 const VehicleDetail = () => {
   const { vehicleId } = useParams();
@@ -19,6 +22,7 @@ const VehicleDetail = () => {
   const [backup, setBackUp] = useState();
   const [updating, setUpdating] = useState(false);
   const [vehicleCatagory, setVehicleCatagory] = useState([]);
+  const [vehicleConditions, setVehicleConditions] = useState([]);
   const jwt = JSON.parse(localStorage.getItem("jwt"));
   const options = {
     headers: {
@@ -27,7 +31,7 @@ const VehicleDetail = () => {
       Authorization: `Bearer ${jwt}`,
     },
   };
-  
+
   /** SWAL CONFIRMATION MESSAGE  */
   const showConfirmationMessage = async () => {
     let response = await swal({
@@ -53,7 +57,7 @@ const VehicleDetail = () => {
         setVehicleDetail(data);
         setBackUp(data);
         setNewData({ status: data.status });
-        console.log(data);
+        // console.log(data);
       }
       if (res.status == 400) {
         setError("Invalid API server 400");
@@ -86,10 +90,27 @@ const VehicleDetail = () => {
       setLoading(false);
     }
   };
+  const apiVehicleCondition = `${mainAPI}/Api/Admin/All/VehicleCondition`;
+  const getVehicleConditions = async () => {
+    try {
+      const res = await fetch(apiVehicleCondition, options);
+      if (res.status == 401) {
+        showErrorMessage({ message: "Session Expire 401" });
+      }
+      const data = await res.json();
+      if (data && res.ok) {
+        setVehicleConditions(data.vehicleConditions);
+        console.log(data.vehicleConditions);
+      }
+    } catch (e) {
+      showErrorMessage(e);
+    }
+  };
   /** CALLING GETDETAIL WHEN PAGE STARTED */
   useEffect(() => {
     getDetail();
     getVehicleCatagory();
+    getVehicleConditions();
   }, []);
 
   const updateVehicleInfo = async () => {
@@ -107,7 +128,7 @@ const VehicleDetail = () => {
     try {
       const response = await fetch(url, options);
       const result = await response.json();
-      showSuccessMessage(result.message);
+      showSuccessMessage(result);
     } catch (e) {
       setError(e);
       showErrorMessage(e);
@@ -139,10 +160,9 @@ const VehicleDetail = () => {
     try {
       const response = await fetch(apiVehicleStatus, options);
       const result = await response.json();
-      console.log(result);
       const mess = result["message"];
       if (response.ok) {
-        showSuccessMessage(mess);
+        showSuccessMessage(result);
       } else {
         showErrorMessage(mess);
       }
@@ -252,9 +272,11 @@ const VehicleDetail = () => {
                   name="vehicleCondition"
                   onChange={(e) => handleChange(e)}
                 >
-                  <option value={"old"}>old</option>
-                  <option value={"used"}>used</option>
-                  <option value={"new"}>new</option>
+                  {vehicleConditions.map((condition, index) => (
+                    <option value={condition.conditionName} key={index}>
+                      {condition.conditionName}
+                    </option>
+                  ))}
                 </select>
               )}
             </div>

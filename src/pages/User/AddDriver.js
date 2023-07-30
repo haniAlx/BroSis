@@ -10,7 +10,6 @@ import { useForm } from "react-hook-form";
 import { FaStarOfLife } from "react-icons/fa";
 import LoadingPage from "../../components/LoadingPage";
 import axios from "axios";
-import DriverDetail from "../Driver/DriverDetail";
 
 const AddDriver = () => {
   const {
@@ -18,18 +17,11 @@ const AddDriver = () => {
     formState: { errors },
     register,
   } = useForm();
+  //   GETTING OWNER PHONE FROM PARAMS
   const { ownerPhone } = useParams();
-  const apiAddDriver = `${mainAPI}/Api/Driver/AddDriver`;
   const [loading, setLoading] = useState(false);
-  const [vehicleCatagory, setVehicleCatagory] = useState([]);
   const jwt = JSON.parse(localStorage.getItem("jwt"));
-  const options = {
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-      Authorization: `Bearer ${jwt}`,
-    },
-  };
+
   const vehicleinputForms = [
     {
       label: "Full Name",
@@ -92,7 +84,6 @@ const AddDriver = () => {
       ownerPhone,
       file: driverPicData,
     };
-    console.log(driverData);
     const driver = new FormData();
     driver.append("driverName", driverData.driverName);
     driver.append("ownerPhone", ownerPhone);
@@ -128,14 +119,11 @@ const AddDriver = () => {
         },
       })
       .then((res) => {
-        console.log(res);
-        localStorage.setItem("message", JSON.stringify(res.data["message"]));
-        const mess = localStorage.getItem("message");
-        console.log(res);
-        showSuccessMessage({ message: "success" });
+        const mess = res.data["message"];
+        showSuccessMessage({ message: "Driver Added" });
       })
       .catch((e) => {
-        showErrorMessage(e);
+        showErrorMessage(e.response.data);
         console.log(e);
       })
       .finally(() => setLoading(false));
@@ -170,14 +158,13 @@ const AddDriver = () => {
   const [driverPicData, setDriverPicData] = useState("");
   /** HANDLIN LICENCE PICTRUE */
   const handleFile = (e) => {
-    console.log(e.target.files[0]);
     if (e.target.files[0]) {
+      //  FOR DISPALYING IMAGE WHEN CHOOSEN
       setLicensePic(URL.createObjectURL(e.target.files[0]));
       setLicensePicData(e.target.files[0]);
     } else setLicensePic("");
   };
   const handleDriverPic = (e) => {
-    console.log(e.target.files[0]);
     if (e.target.files[0]) {
       setDriverPic(URL.createObjectURL(e.target.files[0]));
       setDriverPicData(e.target.files[0]);
@@ -308,7 +295,7 @@ const AddDriver = () => {
               </div>
             </div>
           </div>
-          <button className="btn">Submit</button>
+          <button className="btn w-300 mx-auto">Submit</button>
         </form>
       </div>
     </div>

@@ -14,10 +14,6 @@
   color: black;
 }
 
-.mx-auto {
-  margin-left: auto;
-  margin-right: auto;
-}
 .manage-window input,
 .manage-window select {
   background-color: rgb(227, 227, 227);

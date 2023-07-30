@@ -23,7 +23,7 @@ const Vehicle = () => {
   const [tableData, setTableData] = useState(allVehicle);
   const [error, setError] = useState("");
   const [activeCard, setActiveCard] = useState("totalVehicle");
-  const [loading, setLoading] = useState("");
+  const [loading, setLoading] = useState(false);
   const { setCurrentUser } = useUserContext();
   const apiAllVehicle = `${mainAPI}/Api/Admin/All/Vehicles`;
   const apiMaintaining = `${mainAPI}/Api/Admin/All/Vehicles/Status/MAINTAINING`;
@@ -83,7 +83,6 @@ const Vehicle = () => {
       if (data && res.ok) {
         console.log(data);
         setAllVehicle(data.vehiclesINF);
-        //work on this
         setTableData(data.vehiclesINF);
       }
       if (res.status == 400) {
@@ -109,8 +108,6 @@ const Vehicle = () => {
       const data = await res.json();
       if (data && res.ok) {
         setVehicleOnRoute(data.inRoutelist);
-        //work on this
-        //setTableData(data.vehiclesINF);
       }
       if (res.status == 400) {
         setError("Invalid API server 400");
@@ -135,7 +132,6 @@ const Vehicle = () => {
       const data = await res.json();
       if (data && res.ok) {
         setParked(data.parkedList);
-        //work on this
       }
       if (res.status == 400) {
         setError("Invalid API server 400");
@@ -187,7 +183,7 @@ const Vehicle = () => {
         setInStock(data.stockedList);
       }
       if (res.status == 400) {
-        setError("Invalid API server 400");
+        setError("server 400");
       }
     } catch (e) {
       console.log(e.message);
@@ -274,7 +270,9 @@ const Vehicle = () => {
     if (value == "") setTableData(allVehicle);
   };
 
-  const handleManage = () => {};
+  const handleAssign = (item) => {
+    navigate(`/vehicle/assign/${item.ownerID}/${item.plateNumber}`);
+  };
   const showDetail = (item) => {
     navigate(`/vehicle/detail/${item.id}`);
   };
@@ -348,7 +346,7 @@ const Vehicle = () => {
                   </div>
                   <VehicleTable
                     target={tableData}
-                    handleManage={(val) => handleManage(val)}
+                    handleAssign={(val) => handleAssign(val)}
                     showDetail={(val) => showDetail(val)}
                   />
                 </div>

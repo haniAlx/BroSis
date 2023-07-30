@@ -7,7 +7,6 @@ import { useLoadContext } from "../../components/context/DataLoadContext";
 import DriversTable from "./DriversTable";
 import "./driver.css";
 import ManageDriver from "./ManageDriver";
-import DriverDetail from "./DriverDetail";
 import { useNavigate } from "react-router-dom";
 function Drivers() {
   const [allDrivers, setAllDrivers] = useState([]);
