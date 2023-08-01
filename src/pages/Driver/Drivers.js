@@ -16,9 +16,10 @@ function Drivers() {
   const [permit, setPermit] = useState([]);
   // const [error, setError] = useState();
   const [tableData, setTableData] = useState(allDrivers);
+  //*** Getting DATA FROM USELOADCONTECT FROM DATALOADCONTEXT */
   const { payload, loading, error, setRefresh } = useLoadContext();
   const navigate = useNavigate();
-
+  //** USEEFFECT FOR POPULATING DATA TO assigned,unassigned permit and alldrivers */
   useEffect(() => {
     const getAllApiData = async () => {
       setAllDrivers(payload.allDrivers);
@@ -32,7 +33,7 @@ function Drivers() {
 
     return () => {};
   }, [loading]);
-
+  // **** TOP CARD INFROMATION
   const topCardDetail = [
     {
       title: "Total Driver",
@@ -70,8 +71,9 @@ function Drivers() {
       name: "permit",
     },
   ];
+  // SETTING ACTIVE CARD TOTOAL DRIVERS BY DEFAULT
   const [activeCard, setActiveCard] = useState("totalDrivers");
-  /** Handling Card Change */
+  /** Handling Card Change WHEN SELECTED */
   const handleCardChange = (name) => {
     setActiveCard(name);
     switch (name) {
@@ -96,13 +98,11 @@ function Drivers() {
   };
   const [showManage, setShowManage] = useState(false);
   const [driverDetail, setDriverDetail] = useState();
-  const [detail, setDetail] = useState(false);
   const handleManage = (item) => {
     setShowManage(true);
     setDriverDetail(item);
   };
   const showDetail = (item) => {
-    setDetail(true);
     setDriverDetail(item);
     navigate(`/driver/detail/${item.id}`);
   };
@@ -127,90 +127,92 @@ function Drivers() {
     if (value == "") setTableData(allDrivers);
   };
   return (
-    <div className="main-bar">
+    <div>
       {showManage && (
         <ManageDriver
           setShowManage={setShowManage}
           driverDetail={driverDetail}
         />
       )}
-      {/* {detail && (
+      <div className="main-bar">
+        {/* {detail && (
         <DriverDetail driverDetail={driverDetail} setDetail={setDetail} />
       )} */}
-      <h2 style={{}}>Driver</h2>
-      <hr className="hr" />
-      <div className="main-bar-content">
-        {error ? (
-          <>
-            <p
+        <h2 style={{}}>Driver</h2>
+        <hr className="hr" />
+        <div className="main-bar-content">
+          {error ? (
+            <>
+              <p
+                style={{
+                  textAlign: "center",
+                  fontSize: "25px",
+                  marginTop: "50px",
+                  color: "red",
+                }}
+              >
+                {error}
+              </p>
+              <button
+                className="btn center w-300"
+                onClick={() => setRefresh(true)}
+              >
+                Refresh Page
+              </button>
+            </>
+          ) : (
+            ""
+          )}
+          {loading ? (
+            <div
               style={{
-                textAlign: "center",
-                fontSize: "25px",
-                marginTop: "50px",
-                color: "red",
+                display: "flex",
+                alignItems: "center",
+                width: "100%",
+                flexDirection: "column",
+                rowGap: "50px",
               }}
             >
-              {error}
-            </p>
-            <button
-              className="btn center w-300"
-              onClick={() => setRefresh(true)}
-            >
-              Refresh Page
-            </button>
-          </>
-        ) : (
-          ""
-        )}
-        {loading ? (
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              width: "100%",
-              flexDirection: "column",
-              rowGap: "50px",
-            }}
-          >
-            <ReactLoading type="bars" width={100} height={50} color="black" />
-            <p>Loading Data Please Wait</p>
-          </div>
-        ) : (
-          !error && (
-            <>
-              <div className="top-card-holder">
-                {topCardDetail.map((item, index) => (
-                  <TopCards
-                    title={item.title}
-                    icon={item.icon}
-                    data={item.data}
-                    color={item.color}
-                    key={index}
-                    handleCardChange={() => handleCardChange(item.name)}
-                    active={activeCard}
-                    name={item.name}
-                  />
-                ))}
-              </div>
-              <div className="">
-                <div className="search-bar">
-                  <input
-                    type="text"
-                    name="search"
-                    placeholder="Search..."
-                    onChange={(e) => filterTable(e)}
-                  />
-                  <MdSearch size={25} />
+              <ReactLoading type="bars" width={100} height={50} color="black" />
+              <p>Loading Data Please Wait</p>
+            </div>
+          ) : (
+            !error && (
+              <>
+                <div className="top-card-holder">
+                  {topCardDetail.map((item, index) => (
+                    <TopCards
+                      title={item.title}
+                      icon={item.icon}
+                      data={item.data}
+                      color={item.color}
+                      key={index}
+                      handleCardChange={() => handleCardChange(item.name)}
+                      active={activeCard}
+                      name={item.name}
+                    />
+                  ))}
                 </div>
-                <DriversTable
-                  target={tableData}
-                  handleManage={(val) => handleManage(val)}
-                  showDetail={(val) => showDetail(val)}
-                />
-              </div>
-            </>
-          )
-        )}
+                <div className="">
+                  <div className="search-bar">
+                    <input
+                      type="text"
+                      name="search"
+                      placeholder="Search..."
+                      onChange={(e) => filterTable(e)}
+                    />
+                    <MdSearch size={25} />
+                  </div>
+                  <DriversTable
+                    target={tableData}
+                    handleManage={(val) => handleManage(val)}
+                    showDetail={(val) => showDetail(val)}
+                  />
+                </div>
+              </>
+            )
+          )}
+        </div>
       </div>
     </div>
   );

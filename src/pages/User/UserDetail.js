@@ -8,6 +8,7 @@ import {
   showSuccessMessage,
 } from "../../components/SwalMessages";
 import swal from "sweetalert";
+import DriversTable from "../Driver/DriversTable";
 
 const CustomInput = ({ value, handleChange, name, label, edit, type }) => {
   return (
@@ -203,7 +204,7 @@ const UserDetail = () => {
       const mess = result["message"];
       if (response.ok) {
         console.log("updated successful");
-        showSuccessMessage(mess);
+        showSuccessMessage({ message: mess });
         setRefresh(!refresh);
       } else {
         console.log("failed");
@@ -264,308 +265,314 @@ const UserDetail = () => {
   };
 
   return (
-    <div className="main-bar">
-      <div
-        style={{
-          display: "flex",
-          columnGap: "10px",
-          alignItems: "center",
-        }}
-      >
-        <MdKeyboardArrowLeft size={30} />
-        <Link to={"/users"}>Back To Users</Link>
-      </div>
-      <div className="manage-window  detail-content mx-auto">
-        {loading ? <LoadingPage message={"loading data"} /> : ""}
-        {updating ? <LoadingPage message={"updating data"} /> : ""}
-        <form onSubmit={(e) => handleSubmit(e)}>
-          {/* **************** Company Information */}
-          <p className="detail-part">Company Information</p>
-          <hr />
+    <div className="main-bar-wrapper">
+      {loading ? <LoadingPage message={"loading data"} /> : ""}
+      {updating ? <LoadingPage message={"updating data"} /> : ""}
 
-          <div
-            style={{
-              display: "flex",
-              columnGap: "20px",
-              flexWrap: "wrap",
-            }}
-          >
-            <CustomInput
-              name={"companyName"}
-              value={companyInfo.companyName || ""}
-              edit={edit}
-              handleChange={handleChange}
-              label={"Company Name"}
-              type={"text"}
-            />
+      <div className="main-bar">
+        {/* **************** USER DETAIL MAINBAR */}
+        <div
+          style={{
+            display: "flex",
+            columnGap: "10px",
+            alignItems: "center",
+          }}
+        >
+          <MdKeyboardArrowLeft size={30} />
+          <Link to={"/users"}>Back To Users</Link>
+        </div>
+        <div className="manage-window  detail-content mx-auto">
+          <form onSubmit={(e) => handleSubmit(e)}>
+            {/* **************** Company Information */}
+            <p className="detail-part">Company Information</p>
+            <hr />
 
-            <div className="flex-grow">
-              <label>Company Type</label>
-              {!edit ? (
-                <input
-                  value={companyInfo.companyType || ""}
-                  name="companyType"
-                  disabled
-                />
-              ) : (
-                <select
-                  value={companyInfo.companyType || ""}
-                  name="companyType"
-                  onChange={(e) => handleChange(e)}
-                >
-                  {companyType.map((item, index) => (
-                    <option value={item.companyType} key={index}>
-                      {item.companyType}
-                    </option>
-                  ))}
-                </select>
-              )}
-            </div>
-            <div className="flex-grow " style={{}}>
-              <label>Company Sector</label>
-              {!edit ? (
-                <input value={companyInfo.companySector || ""} disabled />
-              ) : (
-                <select
-                  value={companyInfo.companySector || ""}
-                  name="companySector"
-                  onChange={(e) => handleChange(e)}
-                >
-                  {companySector.map((item, index) => (
-                    <option key={index} value={item.sectorName}>
-                      {item.sectorName}
-                    </option>
-                  ))}
-                </select>
-              )}
-            </div>
-          </div>
-          {/* *******************  OWNER ADDRESS DIV ****************/}
-
-          {role === "INDIVIDUAL" ? (
-            <p className="detail-part">Owner Address</p>
-          ) : (
-            <p className="detail-part">Company Address</p>
-          )}
-          <div
-            style={{
-              display: "flex",
-              columnGap: "20px",
-              flexWrap: "wrap",
-            }}
-          >
-            <div className="flex-grow " style={{}}>
-              <label>Region</label>
-              <input
-                value={companyInfo.region || ""}
-                name="region"
-                disabled={!edit}
-                onChange={(e) => handleChange(e)}
-                type="text"
-              />
-            </div>
-            <div className="flex-grow " style={{}}>
-              <label>Sub City</label>
-              <input
-                value={companyInfo.subCity || ""}
-                name="subCity"
-                disabled={!edit}
-                onChange={(e) => handleChange(e)}
-                type="text"
-              />
-            </div>
-            <div className="flex-grow " style={{}}>
-              <label>Specific Location</label>
-              <input
-                value={companyInfo.specificLocation || ""}
-                name="specificLocation"
-                disabled={!edit}
-                onChange={(e) => handleChange(e)}
-                type="text"
-              />
-            </div>
-            <div className="flex-grow" style={{}}>
-              <label>City</label>
-              <input
-                value={companyInfo.city || ""}
-                name="city"
-                disabled={!edit}
-                onChange={(e) => handleChange(e)}
-                type="text"
-              />
-            </div>
-            <div className="flex-grow " style={{}}>
-              <label>Woreda</label>
-              <input
-                value={companyInfo.woreda || ""}
-                name="woreda"
-                disabled={!edit}
-                onChange={(e) => handleChange(e)}
-                type="text"
-              />
-            </div>
-            <div className="flex-grow" style={{}}>
-              <label>House Number</label>
-              <input
-                value={companyInfo.houseNumber || ""}
-                name="houseNumber"
-                disabled={!edit}
-                type="text"
-                onChange={(e) => handleChange(e)}
-              />
-            </div>
-            <div className="flex-grow">
-              <label>Phone Number</label>
-              <input
-                value={companyInfo.phone || ""}
-                name="phone"
-                disabled={!edit}
-                onChange={(e) => handleChange(e)}
-                type="tel"
-              />
-            </div>
-          </div>
-          {/* *******************  OWNER INFORMATION DIV ****************/}
-          <p className="detail-part">Owner Information</p>
-          <div
-            style={{
-              display: "flex",
-              columnGap: "20px",
-              flexWrap: "wrap",
-            }}
-          >
-            <div className="flex-grow">
-              <label>First Name</label>
-              <input
-                value={companyInfo.firstName || ""}
-                name="firstName"
-                disabled={!edit}
-                onChange={(e) => handleChange(e)}
-                type="text"
-              />
-            </div>
-            <div className="flex-grow">
-              <label>Last Name</label>
-              <input
-                value={companyInfo.lastName || ""}
-                name="lastName"
-                disabled={!edit}
-                onChange={(e) => handleChange(e)}
-                type="text"
-              />
-            </div>
-            <div className="flex-grow">
-              <label>Phone Number</label>
-              <input
-                value={companyInfo.phoneNumber || ""}
-                name="ownerPhoneNumber"
-                disabled={!edit}
-                onChange={(e) => {
-                  setNewData({ ...newData, [e.target.name]: e.target.value });
-                  setCompanyInfo({
-                    ...companyInfo,
-                    phoneNumber: e.target.value,
-                  });
-                }}
-                type="tel"
-              />
-            </div>
-            <div className="flex-grow">
-              <label>Email</label>
-              <input
-                value={companyInfo.email || ""}
-                name="email"
-                disabled={!edit}
-                onChange={(e) => handleChange(e)}
-                type="email"
-                required
-              />
-            </div>
-          </div>
-          <p className="detail-part">Additional Information</p>
-          <div
-            style={{
-              display: "flex",
-              columnGap: "20px",
-              flexWrap: "wrap",
-            }}
-          >
-            <div className="flex-grow">
-              <label>Notification Priference</label>
-              {!edit ? (
-                <input
-                  value={companyInfo.notificationmedia || ""}
-                  name="notificationmedia"
-                  disabled
-                />
-              ) : (
-                <select
-                  onChange={(e) => handleChange(e)}
-                  name="notificationmedia"
-                  value={companyInfo.notificationmedia || ""}
-                >
-                  {notification.map((item, index) => (
-                    <option key={index} value={item.medium}>
-                      {" "}
-                      {item.medium}
-                    </option>
-                  ))}
-                </select>
-              )}
-            </div>
-
-            <div className="flex-grow">
-              <label>Service Needed</label>
-              {!edit ? (
-                <input
-                  value={companyInfo.serviceRequired || ""}
-                  name="serviceRequired"
-                  disabled
-                />
-              ) : (
-                <select
-                  onChange={(e) => handleChange(e)}
-                  name="serviceRequired"
-                  value={companyInfo.serviceRequired || ""}
-                >
-                  {service.map((item, index) => (
-                    <option key={index} value={item.service}>
-                      {" "}
-                      {item.service}
-                    </option>
-                  ))}
-                </select>
-              )}
-            </div>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-            }}
-          >
-            <span
-              className={`btn ${edit ? "btn-bg-lightred" : "btn-bg-gray"}`}
+            <div
               style={{
-                maxWidth: "150px",
                 display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                columnGap: "4px",
-              }}
-              onClick={() => {
-                setEdit(!edit);
+                columnGap: "20px",
+                flexWrap: "wrap",
               }}
             >
-              {edit ? "Cancel" : "Edit"}
-              <MdModeEdit color="white" width={25} />
-            </span>
-            <button className="btn w-300" disabled={!edit}>
-              Update
-            </button>
-          </div>
-        </form>
+              <CustomInput
+                name={"companyName"}
+                value={companyInfo.companyName || ""}
+                edit={edit}
+                handleChange={handleChange}
+                label={"Company Name"}
+                type={"text"}
+              />
+
+              <div className="flex-grow">
+                <label>Company Type</label>
+                {!edit ? (
+                  <input
+                    value={companyInfo.companyType || ""}
+                    name="companyType"
+                    disabled
+                  />
+                ) : (
+                  <select
+                    value={companyInfo.companyType || ""}
+                    name="companyType"
+                    onChange={(e) => handleChange(e)}
+                  >
+                    {companyType.map((item, index) => (
+                      <option value={item.companyType} key={index}>
+                        {item.companyType}
+                      </option>
+                    ))}
+                  </select>
+                )}
+              </div>
+              <div className="flex-grow " style={{}}>
+                <label>Company Sector</label>
+                {!edit ? (
+                  <input value={companyInfo.companySector || ""} disabled />
+                ) : (
+                  <select
+                    value={companyInfo.companySector || ""}
+                    name="companySector"
+                    onChange={(e) => handleChange(e)}
+                  >
+                    {companySector.map((item, index) => (
+                      <option key={index} value={item.sectorName}>
+                        {item.sectorName}
+                      </option>
+                    ))}
+                  </select>
+                )}
+              </div>
+            </div>
+            {/* *******************  OWNER ADDRESS DIV ****************/}
+
+            {role === "INDIVIDUAL" ? (
+              <p className="detail-part">Owner Address</p>
+            ) : (
+              <p className="detail-part">Company Address</p>
+            )}
+            <div
+              style={{
+                display: "flex",
+                columnGap: "20px",
+                flexWrap: "wrap",
+              }}
+            >
+              <div className="flex-grow " style={{}}>
+                <label>Region</label>
+                <input
+                  value={companyInfo.region || ""}
+                  name="region"
+                  disabled={!edit}
+                  onChange={(e) => handleChange(e)}
+                  type="text"
+                />
+              </div>
+              <div className="flex-grow " style={{}}>
+                <label>Sub City</label>
+                <input
+                  value={companyInfo.subCity || ""}
+                  name="subCity"
+                  disabled={!edit}
+                  onChange={(e) => handleChange(e)}
+                  type="text"
+                />
+              </div>
+              <div className="flex-grow " style={{}}>
+                <label>Specific Location</label>
+                <input
+                  value={companyInfo.specificLocation || ""}
+                  name="specificLocation"
+                  disabled={!edit}
+                  onChange={(e) => handleChange(e)}
+                  type="text"
+                />
+              </div>
+              <div className="flex-grow" style={{}}>
+                <label>City</label>
+                <input
+                  value={companyInfo.city || ""}
+                  name="city"
+                  disabled={!edit}
+                  onChange={(e) => handleChange(e)}
+                  type="text"
+                />
+              </div>
+              <div className="flex-grow " style={{}}>
+                <label>Woreda</label>
+                <input
+                  value={companyInfo.woreda || ""}
+                  name="woreda"
+                  disabled={!edit}
+                  onChange={(e) => handleChange(e)}
+                  type="text"
+                />
+              </div>
+              <div className="flex-grow" style={{}}>
+                <label>House Number</label>
+                <input
+                  value={companyInfo.houseNumber || ""}
+                  name="houseNumber"
+                  disabled={!edit}
+                  type="text"
+                  onChange={(e) => handleChange(e)}
+                />
+              </div>
+              <div className="flex-grow">
+                <label>Phone Number</label>
+                <input
+                  value={companyInfo.phone || ""}
+                  name="phone"
+                  disabled={!edit}
+                  onChange={(e) => handleChange(e)}
+                  type="tel"
+                />
+              </div>
+            </div>
+            {/* *******************  OWNER INFORMATION DIV ****************/}
+            <p className="detail-part">Owner Information</p>
+            <div
+              style={{
+                display: "flex",
+                columnGap: "20px",
+                flexWrap: "wrap",
+              }}
+            >
+              <div className="flex-grow">
+                <label>First Name</label>
+                <input
+                  value={companyInfo.firstName || ""}
+                  name="firstName"
+                  disabled={!edit}
+                  onChange={(e) => handleChange(e)}
+                  type="text"
+                />
+              </div>
+              <div className="flex-grow">
+                <label>Last Name</label>
+                <input
+                  value={companyInfo.lastName || ""}
+                  name="lastName"
+                  disabled={!edit}
+                  onChange={(e) => handleChange(e)}
+                  type="text"
+                />
+              </div>
+              <div className="flex-grow">
+                <label>Phone Number</label>
+                <input
+                  value={companyInfo.phoneNumber || ""}
+                  name="ownerPhoneNumber"
+                  disabled={!edit}
+                  onChange={(e) => {
+                    setNewData({ ...newData, [e.target.name]: e.target.value });
+                    setCompanyInfo({
+                      ...companyInfo,
+                      phoneNumber: e.target.value,
+                    });
+                  }}
+                  type="tel"
+                />
+              </div>
+              <div className="flex-grow">
+                <label>Email</label>
+                <input
+                  value={companyInfo.email || ""}
+                  name="email"
+                  disabled={!edit}
+                  onChange={(e) => handleChange(e)}
+                  type="email"
+                  required
+                />
+              </div>
+            </div>
+            <p className="detail-part">Additional Information</p>
+            <div
+              style={{
+                display: "flex",
+                columnGap: "20px",
+                flexWrap: "wrap",
+              }}
+            >
+              <div className="flex-grow">
+                <label>Notification Priference</label>
+                {!edit ? (
+                  <input
+                    value={companyInfo.notificationmedia || ""}
+                    name="notificationmedia"
+                    disabled
+                  />
+                ) : (
+                  <select
+                    onChange={(e) => handleChange(e)}
+                    name="notificationmedia"
+                    value={companyInfo.notificationmedia || ""}
+                  >
+                    {notification.map((item, index) => (
+                      <option key={index} value={item.medium}>
+                        {" "}
+                        {item.medium}
+                      </option>
+                    ))}
+                  </select>
+                )}
+              </div>
+
+              <div className="flex-grow">
+                <label>Service Needed</label>
+                {!edit ? (
+                  <input
+                    value={companyInfo.serviceRequired || ""}
+                    name="serviceRequired"
+                    disabled
+                  />
+                ) : (
+                  <select
+                    onChange={(e) => handleChange(e)}
+                    name="serviceRequired"
+                    value={companyInfo.serviceRequired || ""}
+                  >
+                    {service.map((item, index) => (
+                      <option key={index} value={item.service}>
+                        {" "}
+                        {item.service}
+                      </option>
+                    ))}
+                  </select>
+                )}
+              </div>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+            >
+              <span
+                className={`btn ${edit ? "btn-bg-lightred" : "btn-bg-gray"}`}
+                style={{
+                  maxWidth: "150px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  columnGap: "4px",
+                }}
+                onClick={() => {
+                  setEdit(!edit);
+                }}
+              >
+                {edit ? "Cancel" : "Edit"}
+                <MdModeEdit color="white" width={25} />
+              </span>
+              <button className="btn w-300" disabled={!edit}>
+                Update
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
+      {/* ***************************** USER DETAIL TABLES TO BE ADDED HERE */}
+      <div className="main-bar"></div>
     </div>
   );
 };

@@ -5,6 +5,11 @@
   margin-left: auto !important;
   margin-right: auto !important;
 }
+.main-bar-wrapper {
+  display: flex;
+  row-gap: 40px;
+  flex-direction: column;
+}
 .main-bar {
   background-color: white;
   border-radius: 10px;

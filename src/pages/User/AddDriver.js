@@ -16,6 +16,7 @@ const AddDriver = () => {
     handleSubmit,
     formState: { errors },
     register,
+    reset,
   } = useForm();
   //   GETTING OWNER PHONE FROM PARAMS
   const { ownerPhone } = useParams();
@@ -121,6 +122,12 @@ const AddDriver = () => {
       .then((res) => {
         const mess = res.data["message"];
         showSuccessMessage({ message: "Driver Added" });
+        //RESETING INPUT FIELDS
+        reset();
+        setLicensePic("");
+        setLicensePicData("");
+        setDriverPic("");
+        setDriverPicData("");
       })
       .catch((e) => {
         showErrorMessage(e.response.data);

@@ -15,6 +15,7 @@ const AddVehicle = () => {
     handleSubmit,
     formState: { errors },
     register,
+    reset,
   } = useForm();
   const apiVehicleCatagory = `${mainAPI}/Api/Admin/All/VehicleCatagory`;
   const [loading, setLoading] = useState(false);
@@ -45,7 +46,7 @@ const AddVehicle = () => {
     },
     {
       label: "ManuFacture Date",
-      name: "manufactrueDate",
+      name: "manufactureDate",
       type: "date",
       placeholder: "Manufacture Date",
     },
@@ -62,11 +63,7 @@ const AddVehicle = () => {
       placeholder: "Capactiy",
     },
   ];
-  const handleFormSubmit = (formdata) => {
-    console.log(formdata);
-    let data = { ...formdata, ownerPhone };
-    addVehicle(data);
-  };
+
   const getVehicleCatagorys = async () => {
     try {
       const res = await fetch(apiVehicleCatagory, options);
@@ -103,6 +100,14 @@ const AddVehicle = () => {
     getVehicleCatagorys();
     getVehicleConditions();
   }, []);
+  const handleFormSubmit = (formdata) => {
+    console.log(formdata);
+    let data = { ...formdata, ownerPhone };
+    console.log(data);
+    // CALLING ADDVEHICLE WITH DATA ARGUMENT
+    addVehicle(data);
+  };
+  //ADD Vehicle FUNCTION
   const addVehicle = async (vehicle) => {
     const options = {
       method: "POST",
@@ -120,12 +125,15 @@ const AddVehicle = () => {
       const result = await response.json();
       console.log(result);
       const mess = result["message"];
+      const error = result.error;
       if (response.ok) {
         console.log("updated successful");
         showSuccessMessage({ message: mess });
+        //RESET INPUT FIEDS
+        reset();
       } else {
         console.log("failed");
-        showErrorMessage({ message: mess });
+        showErrorMessage({ message: error });
       }
     } catch (error) {
       console.error(error);

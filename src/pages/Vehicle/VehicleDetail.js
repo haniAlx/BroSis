@@ -366,8 +366,7 @@ const VehicleDetail = () => {
               <input
                 value={vehicleDetail.driver || ""}
                 name="driver"
-                disabled={!edit}
-                onChange={(e) => handleChange(e)}
+                disabled
               />
             </div>
             <div className="flex-grow">
@@ -375,8 +374,7 @@ const VehicleDetail = () => {
               <input
                 value={vehicleDetail.vehicleOwner || ""}
                 name="vehicleOwner"
-                disabled={!edit}
-                onChange={(e) => handleChange(e)}
+                disabled
               />
             </div>
           </div>

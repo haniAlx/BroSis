@@ -98,7 +98,7 @@ const AssignDriver = () => {
         showSuccessMessage({ message: mess });
         setRefresh(!refresh);
       } else {
-        showErrorMessage({ message: mess });
+        showErrorMessage({ message: result.error });
       }
     } catch (error) {
       console.log(error + "error");

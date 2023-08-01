@@ -34,117 +34,150 @@ const Homepage = () => {
     populateDate();
   }, [loading]);
   return (
-    <div className="main-bar">
-      <div>
-        <h2 style={{}}>Driver Analysis</h2>
-        <hr className="hr" />
-        {loading ? (
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              width: "100%",
-              flexDirection: "column",
-              rowGap: "10px",
-            }}
-          >
-            <ReactLoading type="cylon" width={60} height={20} color="black" />
-            <p>Loading Data Please Wait</p>
-          </div>
-        ) : (
-          ""
-        )}
-        {error ? (
-          <>
-            <p
-              style={{
-                textAlign: "center",
-                fontSize: "25px",
-                marginTop: "50px",
-                color: "red",
-              }}
-            >
-              {error}
-            </p>
-            <button
-              className="btn w-300 center"
-              onClick={() => setRefresh(true)}
-            >
-              Refresh Page
-            </button>
-          </>
-        ) : (
-          <div className="chart-container">
+    <div className="main-bar-wrapper">
+      <div className="main-bar">
+        <div>
+          <h2 style={{}}>Driver Analysis</h2>
+          <hr className="hr" />
+          {loading ? (
             <div
               style={{
                 display: "flex",
-                gap: "10px",
+                alignItems: "center",
+                width: "100%",
+                flexDirection: "column",
+                rowGap: "10px",
               }}
             >
-              <div>
-                <CircularBar
-                  text={loading ? "loading" : "onRoute"}
-                  max={
-                    (payload.onRoute.length / payload.allDrivers.length) * 100
-                  }
-                  color={""}
-                />
-                <CircularBar
-                  text={loading ? "loading" : "Assigned"}
-                  max={
-                    (payload.assigned.length / payload.allDrivers.length) * 100
-                  }
-                  color={""}
-                />
-              </div>
-              <div>
-                <CircularBar
-                  text={loading ? "loading " : "UnAssigned"}
-                  max={
-                    (payload.unassigned.length / payload.allDrivers.length) *
-                    100
-                  }
-                  color={""}
-                />
-                <CircularBar
-                  text={loading ? "loading " : "Permit"}
-                  max={
-                    (payload.permit.length / payload.allDrivers.length) * 100
-                  }
-                  color={""}
-                />
-              </div>
+              <ReactLoading type="cylon" width={60} height={20} color="black" />
+              <p>Loading Data Please Wait</p>
             </div>
-            {/* <div style={{ maxWidth: "400px", position: "relative" }}>
+          ) : (
+            ""
+          )}
+          {error ? (
+            <>
+              <p
+                style={{
+                  textAlign: "center",
+                  fontSize: "25px",
+                  marginTop: "50px",
+                  color: "red",
+                }}
+              >
+                {error}
+              </p>
+              <button
+                className="btn w-300 center"
+                onClick={() => setRefresh(true)}
+              >
+                Refresh Page
+              </button>
+            </>
+          ) : (
+            <div className="chart-container">
+              <div
+                style={{
+                  display: "flex",
+                  gap: "10px",
+                }}
+              >
+                <div>
+                  <CircularBar
+                    text={loading ? "loading" : "onRoute"}
+                    max={
+                      (payload.onRoute.length / payload.allDrivers.length) * 100
+                    }
+                    color={""}
+                  />
+                  <CircularBar
+                    text={loading ? "loading" : "Assigned"}
+                    max={
+                      (payload.assigned.length / payload.allDrivers.length) *
+                      100
+                    }
+                    color={""}
+                  />
+                </div>
+                <div>
+                  <CircularBar
+                    text={loading ? "loading " : "UnAssigned"}
+                    max={
+                      (payload.unassigned.length / payload.allDrivers.length) *
+                      100
+                    }
+                    color={""}
+                  />
+                  <CircularBar
+                    text={loading ? "loading " : "Permit"}
+                    max={
+                      (payload.permit.length / payload.allDrivers.length) * 100
+                    }
+                    color={""}
+                  />
+                </div>
+              </div>
+              {/* <div style={{ maxWidth: "400px", position: "relative" }}>
           <DoughnutChart chartData={data} />
         </div> */}
-            <div
-              style={{
-                maxWidth: "700px",
-                position: "relative",
-                height: "300px",
-              }}
-            >
-              <BarChar chartData={data} />
+              <div
+                style={{
+                  maxWidth: "700px",
+                  position: "relative",
+                  height: "300px",
+                }}
+              >
+                <BarChar chartData={data} />
+              </div>
             </div>
+          )}
+          <div>
+            <Link className="link-goto" to={"/driver"}>
+              Go To Driveres
+            </Link>
           </div>
-        )}
-        <div>
-          <Link className="link-goto" to={"/driver"}>
-            Go To Driveres
-          </Link>
         </div>
-        <h2 style={{ marginTop: "100px" }}>Market Analysis</h2>
-        <hr className="hr" />
-        <div className="chart-container">
-          <div style={{ maxWidth: "400px", position: "relative" }}>
-            <DoughnutChart chartData={data} />
-          </div>
-          <div
-            style={{ maxWidth: "700px", position: "relative", height: "300px" }}
-          >
-            <BarChar chartData={data} />
-          </div>
+      </div>
+      {/* *************************MARKET PAGE *************** */}
+      <div className="main-bar">
+        <div>
+          <h2>Market Analysis</h2>
+          <hr className="hr" />
+          {error ? (
+            <>
+              <p
+                style={{
+                  textAlign: "center",
+                  fontSize: "25px",
+                  marginTop: "50px",
+                  color: "red",
+                }}
+              >
+                {error}
+              </p>
+              <button
+                className="btn w-300 center"
+                onClick={() => setRefresh(true)}
+              >
+                Refresh Page
+              </button>
+            </>
+          ) : (
+            <div className="chart-container">
+              <div style={{ maxWidth: "400px", position: "relative" }}>
+                <DoughnutChart chartData={data} />
+              </div>
+              <div
+                style={{
+                  maxWidth: "700px",
+                  position: "relative",
+                  height: "300px",
+                }}
+              >
+                <BarChar chartData={data} />
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

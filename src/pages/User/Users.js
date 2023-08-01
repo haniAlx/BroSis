@@ -55,7 +55,7 @@ const Users = () => {
   };
 
   useEffect(() => {
-    getDetail();
+    getDetail();//Getting Users Information from getDetail
   }, []);
   const topCardDetail = [
     {

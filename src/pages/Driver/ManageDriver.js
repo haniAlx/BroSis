@@ -2,25 +2,32 @@ import React, { useEffect, useState } from "react";
 import "./modalpop.css";
 import swal from "sweetalert";
 import { mainAPI } from "../../components/mainAPI";
+import { useLoadContext } from "../../components/context/DataLoadContext";
+
 function ManageDriver({ setShowManage, driverDetail }) {
- 
+  //  ** APIURLS
   const allVehicleapi = `${mainAPI}/Api/Admin/All/Vehicles`;
   const updateStatusapi = `${mainAPI}/Api/Vehicle/ChangeDriverStatus`;
+  const statusUrl = `${mainAPI}/Api/Admin/DriverStatus/All`;
   const [allVehicles, setAllVehicles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [plateNumber, setPlateNumber] = useState(driverDetail.plateNumber);
+  const [driverLicense, setDriverLicense] = useState(
+    driverDetail.licenseNumber
+  );
+  const { setRefresh, refresh } = useLoadContext();
+  const [status, setStatus] = useState([]);
   const [driverStatus, setDriverStatus] = useState(driverDetail.status);
   const jwt = JSON.parse(localStorage.getItem("jwt"));
-
+  const options = {
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      Authorization: `Bearer ${jwt}`,
+    },
+  };
   useEffect(() => {
     const getAllVehicles = () => {
-      const options = {
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          Authorization: `Bearer ${jwt}`,
-        },
-      };
       fetch(allVehicleapi, options)
         .then((respnse) => respnse.json())
         .then((data) => {
@@ -31,7 +38,20 @@ function ManageDriver({ setShowManage, driverDetail }) {
         .catch((e) => console.log(e));
     };
     getAllVehicles();
+    getDriverStatus();
   }, []);
+  // ************************** Getting DRiver STATUS
+  const getDriverStatus = async () => {
+    setLoading(true);
+    fetch(statusUrl, options)
+      .then((respnse) => respnse.json())
+      .then((data) => {
+        console.log("Status data", data);
+        if (data.driverStatus) setStatus(data.driverStatus);
+        setLoading(false);
+      })
+      .catch((e) => console.log(e));
+  };
   /** Closing modal */
   const hideModal = () => {
     const modal = document.getElementById("driver-manage");
@@ -41,11 +61,14 @@ function ManageDriver({ setShowManage, driverDetail }) {
       }
     };
   };
+
+  // ********* UPDATING DRIVER STATUS
   const updateStatus = async () => {
     let update = {
       driverStatus,
-      plateNumber,
+      driverLicense,
     };
+    console.log(driverStatus);
     const options = {
       method: "PUT",
       headers: {
@@ -59,14 +82,14 @@ function ManageDriver({ setShowManage, driverDetail }) {
       const response = await fetch(updateStatusapi, options);
       const result = await response.json();
       console.log(result);
-      const error = result.error;
       if (response.ok) {
-        swal("Successful", `${error}`, "success", {
+        swal("Successful", `${result.message}`, "success", {
           buttons: false,
           timer: 2000,
         });
+        setRefresh(!refresh);
       } else {
-        swal(`Failed To update ${error}`, "", "error");
+        swal(`Failed To update `, `${result.message}`, "error");
       }
     } catch (error) {
       console.error(error);
@@ -97,7 +120,7 @@ function ManageDriver({ setShowManage, driverDetail }) {
             <label>Vehicles</label>
             {loading ? (
               "please wait while loading.."
-            ) : (
+            ) : driverStatus != "UNASSIGNED" ? (
               <select
                 value={plateNumber || ""}
                 onChange={(e) => setPlateNumber(e.target.value)}
@@ -108,6 +131,8 @@ function ManageDriver({ setShowManage, driverDetail }) {
                   </option>
                 ))}
               </select>
+            ) : (
+              <p>Driver is UNASSIGNED</p>
             )}
 
             <label>Status</label>
@@ -115,10 +140,11 @@ function ManageDriver({ setShowManage, driverDetail }) {
               value={driverStatus || ""}
               onChange={(e) => setDriverStatus(e.target.value)}
             >
-              <option value={"ASSIGNED"}>ASSIGNED</option>
-              <option value={"UNASSIGNED"}>UNASSIGNED</option>
-              <option value={"ONROUTE"}>ONROUTE</option>
-              <option value={"PERMIC"}>PERMIT</option>
+              {status.map((st, index) => (
+                <option value={st.driverStatus} key={index}>
+                  {st.driverStatus}
+                </option>
+              ))}
             </select>
             {loading ? (
               <button className="btn-manage btn" disabled>
