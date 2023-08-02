@@ -1,7 +1,7 @@
 import { Pagination } from "antd";
 import React, { useEffect, useState } from "react";
 
-const VehicleTable = ({ target, handleAssign, showDetail }) => {
+const VehicleTable = ({ target, handleChange, showDetail, handleAssign }) => {
   const [page, setPage] = useState(1);
   const [postPerPage, setpostPerPage] = useState(5);
   const lastIndexOfPage = page * postPerPage;
@@ -27,7 +27,7 @@ const VehicleTable = ({ target, handleAssign, showDetail }) => {
               <th>Vehice Type</th>
               <th>Plate Number</th>
               <th>Status</th>
-              <th>DriverName</th>
+              <th>Assigned Driver</th>
               <th>Detail</th>
               <th>Assign Driver</th>
             </tr>
@@ -57,7 +57,9 @@ const VehicleTable = ({ target, handleAssign, showDetail }) => {
                   >
                     {item.status}
                   </td>
-                  <td>{item.driverName}</td>
+                  <td>
+                    {item.driverName == "null" ? "UNASSIGNED" : item.driverName}
+                  </td>
                   <td>
                     <button
                       className="table-btn"
@@ -67,12 +69,21 @@ const VehicleTable = ({ target, handleAssign, showDetail }) => {
                     </button>
                   </td>
                   <td>
-                    <button
-                      className="table-btn"
-                      onClick={() => handleAssign(item)}
-                    >
-                      Assign
-                    </button>
+                    {item.driverName == "null" ? (
+                      <button
+                        className="table-btn"
+                        onClick={() => handleAssign(item)}
+                      >
+                        Assign
+                      </button>
+                    ) : (
+                      <button
+                        className="table-btn"
+                        onClick={() => handleChange(item)}
+                      >
+                        Change Driver
+                      </button>
+                    )}
                   </td>
                 </tr>
               ))

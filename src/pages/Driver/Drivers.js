@@ -5,7 +5,7 @@ import { MdError, MdPeople, MdSearch, MdVerified } from "react-icons/md";
 import { FaRoute } from "react-icons/fa";
 import { useLoadContext } from "../../components/context/DataLoadContext";
 import DriversTable from "./DriversTable";
-import "./driver.css";
+import "./tables.css";
 import ManageDriver from "./ManageDriver";
 import { useNavigate } from "react-router-dom";
 function Drivers() {
