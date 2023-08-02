@@ -270,8 +270,11 @@ const Vehicle = () => {
     if (value == "") setTableData(allVehicle);
   };
 
+  const handleChange = (item) => {
+    navigate(`/vehicle/changeAssign/${item.ownerID}/${item.plateNumber}`);
+  };
   const handleAssign = (item) => {
-    navigate(`/vehicle/assign/${item.ownerID}/${item.plateNumber}`);
+    navigate(`/vehicle/changeAssign/${item.ownerID}/${item.plateNumber}/assign`);
   };
   const showDetail = (item) => {
     navigate(`/vehicle/detail/${item.id}`);
@@ -346,6 +349,7 @@ const Vehicle = () => {
                   </div>
                   <VehicleTable
                     target={tableData}
+                    handleChange={(val) => handleChange(val)}
                     handleAssign={(val) => handleAssign(val)}
                     showDetail={(val) => showDetail(val)}
                   />
