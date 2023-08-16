@@ -4,6 +4,7 @@ const ContextUser = createContext(null);
 export function useUserContext() {
   return useContext(ContextUser);
 }
+
 function UserContext({ children }) {
   const [currentUser, setCurrentUser] = useState("");
   useEffect(() => {

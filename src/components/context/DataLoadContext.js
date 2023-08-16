@@ -2,8 +2,10 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import { useUserContext } from "./UserContext";
+import { mainAPI } from "../mainAPI";
 
 const LoadDataContext = React.createContext(null);
+// EXPORTING USELOADCONTEXT AND
 export const useLoadContext = () => useContext(LoadDataContext);
 const DataLoadContext = ({ children }) => {
   const [loading, setLoading] = useState(false);
@@ -14,12 +16,11 @@ const DataLoadContext = ({ children }) => {
   const [permit, setPermit] = useState([]);
   const [error, setError] = useState(null);
   const [refresh, setRefresh] = useState(false);
-  const api = "http://164.90.174.113:9090";
-  const apiAllDrivers = `${api}/Api/Admin/All/Drivers`;
-  const apiOnRoute = `${api}/Api/Admin/Drivers/ONROUTE`;
-  const apiAssigned = `${api}/Api/Admin/Drivers/ASSIGNED`;
-  const apiUnAssigned = `${api}/Api/Admin/Drivers/UNASSIGNED`;
-  const apiPermit = `${api}/Api/Admin/Drivers/PERMIT`;
+  const apiAllDrivers = `${mainAPI}/Api/Admin/All/Drivers`;
+  const apiOnRoute = `${mainAPI}/Api/Admin/Drivers/ONROUTE`;
+  const apiAssigned = `${mainAPI}/Api/Admin/Drivers/ASSIGNED`;
+  const apiUnAssigned = `${mainAPI}/Api/Admin/Drivers/UNASSIGNED`;
+  const apiPermit = `${mainAPI}/Api/Admin/Drivers/PERMIT`;
   const navigator = useNavigate();
   const { setCurrentUser, currentUser } = useUserContext();
   /**  GET JWT */
@@ -41,7 +42,7 @@ const DataLoadContext = ({ children }) => {
   //     if (!allDataLoaded) setError("Unable to Connet to Database");
   //   }, 6000);
   useEffect(() => {
-    const getAllApiData = async () => {
+    const getAllDriversData = async () => {
       setError("");
       await getAllDrivers();
       await getAssigned();
@@ -52,10 +53,11 @@ const DataLoadContext = ({ children }) => {
       setRefresh(false);
     };
     setLoading(true);
-    getAllApiData();
+    getAllDriversData();
 
     return () => {};
   }, [currentUser, refresh]);
+  // To Get ALL DRIVERS DETAIL INCLUDING ONROUTE,PERMIT,ASSIGNED, AND UNASSIGNED
   const getAllDrivers = async () => {
     try {
       const res = await fetch(apiAllDrivers, options);
@@ -94,6 +96,7 @@ const DataLoadContext = ({ children }) => {
       setLoading(false);
     }
   };
+  // TO GET ONROUTE DRIVER DATA
   const getOnRoute = async () => {
     try {
       const res = await fetch(apiOnRoute, options);
@@ -107,6 +110,7 @@ const DataLoadContext = ({ children }) => {
       setError(e.message + " try to refresh page");
     }
   };
+  // TO GET ASSIGNED DRIVER DATA
   const getAssigned = async () => {
     try {
       const res = await fetch(apiAssigned, options);
@@ -120,6 +124,7 @@ const DataLoadContext = ({ children }) => {
       setError(e.message);
     }
   };
+  // TO GET UNASSIGNED DRIVER DATA
   const getUnAssigned = async () => {
     try {
       const res = await fetch(apiUnAssigned, options);
@@ -133,6 +138,7 @@ const DataLoadContext = ({ children }) => {
       setError(e.message);
     }
   };
+  // ********************************* TO GET PERMIT DATA OF DRIVER
   const getPermit = async () => {
     try {
       const res = await fetch(apiPermit, options);

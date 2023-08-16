@@ -4,6 +4,7 @@ function CircularBar({ max, color, text }) {
   const [progress, setProgress] = useState(0);
   const count = useRef(0);
   useEffect(() => {
+    //USED FOR SETTING THE CIRCULAR BAR PROGRESS
     const timeout = setInterval(() => {
       if (count.current >= max) clearInterval(timeout);
       if (count.current < max) count.current++;

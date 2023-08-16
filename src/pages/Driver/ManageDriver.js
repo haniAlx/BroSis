@@ -3,6 +3,7 @@ import "./modalpop.css";
 import swal from "sweetalert";
 import { mainAPI } from "../../components/mainAPI";
 import { useLoadContext } from "../../components/context/DataLoadContext";
+import { showErrorMessage } from "../../components/SwalMessages";
 
 function ManageDriver({ setShowManage, driverDetail }) {
   //  ** APIURLS
@@ -17,6 +18,8 @@ function ManageDriver({ setShowManage, driverDetail }) {
   );
   const { setRefresh, refresh } = useLoadContext();
   const [status, setStatus] = useState([]);
+  const [unAssignedVehicles, setUnAssignedVehicles] = useState([]);
+  const [error, setError] = useState("");
   const [driverStatus, setDriverStatus] = useState(driverDetail.status);
   const jwt = JSON.parse(localStorage.getItem("jwt"));
   const options = {
@@ -27,20 +30,11 @@ function ManageDriver({ setShowManage, driverDetail }) {
     },
   };
   useEffect(() => {
-    const getAllVehicles = () => {
-      fetch(allVehicleapi, options)
-        .then((respnse) => respnse.json())
-        .then((data) => {
-          console.log("allVehicles data", data.vehiclesINF);
-          if (data.vehiclesINF) setAllVehicles(data.vehiclesINF);
-          setLoading(false);
-        })
-        .catch((e) => console.log(e));
-    };
-    getAllVehicles();
+    // ********** GETTING UNASSIGNEDvEHICLES USING DRIVER NAME **********
+    getUnAssignedVehicles();
     getDriverStatus();
   }, []);
-  // ************************** Getting DRiver STATUS
+  // ************************** GETTING DRIVER sTATUS **************
   const getDriverStatus = async () => {
     setLoading(true);
     fetch(statusUrl, options)
@@ -61,7 +55,34 @@ function ManageDriver({ setShowManage, driverDetail }) {
       }
     };
   };
-
+  //  ******* GETTING UNASSIGNED VEHICLES ************
+  const apiAllVehicle = `${mainAPI}/Api/Admin/All/Vehicles`;
+  const getUnAssignedVehicles = async () => {
+    try {
+      setLoading(true);
+      const res = await fetch(apiAllVehicle, options);
+      console.log("response", res.status);
+      if (res.status == 401) {
+        showErrorMessage({ message: "Your Session is expired" });
+      }
+      const data = await res.json();
+      if (data && res.ok) {
+        const unAssignedVehicles = data.vehiclesINF.filter(
+          (item) => item.driverName == "null"
+        );
+        setUnAssignedVehicles(unAssignedVehicles);
+        // filter here
+      }
+      if (res.status == 400) {
+        setError("Invalid API server 400");
+      }
+    } catch (e) {
+      console.log(e.message);
+      setError(e.message);
+    } finally {
+      setLoading(false);
+    }
+  };
   // ********* UPDATING DRIVER STATUS
   const updateStatus = async () => {
     let update = {
@@ -120,19 +141,19 @@ function ManageDriver({ setShowManage, driverDetail }) {
             <label>Vehicles</label>
             {loading ? (
               "please wait while loading.."
-            ) : driverStatus != "UNASSIGNED" ? (
+            ) : driverStatus != "ASSIGNED" ? (
               <select
                 value={plateNumber || ""}
                 onChange={(e) => setPlateNumber(e.target.value)}
               >
-                {allVehicles.map((vehicle, index) => (
+                {unAssignedVehicles.map((vehicle, index) => (
                   <option value={vehicle.plateNumber} key={index}>
                     {vehicle.plateNumber}
                   </option>
                 ))}
               </select>
             ) : (
-              <p>Driver is UNASSIGNED</p>
+              <p>Driver is ASSIGNED</p>
             )}
 
             <label>Status</label>

@@ -101,9 +101,7 @@ const AddVehicle = () => {
     getVehicleConditions();
   }, []);
   const handleFormSubmit = (formdata) => {
-    console.log(formdata);
     let data = { ...formdata, ownerPhone };
-    console.log(data);
     // CALLING ADDVEHICLE WITH DATA ARGUMENT
     addVehicle(data);
   };
@@ -123,17 +121,14 @@ const AddVehicle = () => {
     try {
       const response = await fetch(url, options);
       const result = await response.json();
-      console.log(result);
       const mess = result["message"];
-      const error = result.error;
       if (response.ok) {
         console.log("updated successful");
         showSuccessMessage({ message: mess });
         //RESET INPUT FIEDS
         reset();
       } else {
-        console.log("failed");
-        showErrorMessage({ message: error });
+        showErrorMessage({ message: mess });
       }
     } catch (error) {
       console.error(error);

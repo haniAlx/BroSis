@@ -16,7 +16,6 @@ const ChangeDriver = () => {
   const [refresh, setRefresh] = useState(false);
   const [loading, setLoading] = useState(false);
   const [unassigned, setUnassigned] = useState([]);
-  const [licenseNumber, setLicenseNumber] = useState("");
   const apiOwnerDrivers = `${mainAPI}/Api/Admin/Drivers/All/${ownerId}`;
   useEffect(() => {
     setError("");

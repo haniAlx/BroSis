@@ -10,8 +10,9 @@ import ReactLoading from "react-loading";
 const Homepage = () => {
   const [data, setData] = useState({
     labels: ["Vehicle", "User", "Driver", "Compony"],
-    datasets: [{ label: "hello", data: [1, 2, 3, 4] }],
+    datasets: [{ label: "DATA", data: [1, 2, 3, 4] }],
   });
+  // GETTING DATA FROM LOADCONTEXT
   const { payload, loading, error, setRefresh } = useLoadContext();
 
   useEffect(() => {
@@ -83,6 +84,7 @@ const Homepage = () => {
                 }}
               >
                 <div>
+                  {/* IT IS BETTER TO SAY PERCENT THAN MAX */}
                   <CircularBar
                     text={loading ? "loading" : "onRoute"}
                     max={
@@ -96,6 +98,7 @@ const Homepage = () => {
                       (payload.assigned.length / payload.allDrivers.length) *
                       100
                     }
+                    // (12/20)*100
                     color={""}
                   />
                 </div>

@@ -71,7 +71,7 @@ const VehicleTable = ({ target, handleChange, showDetail, handleAssign }) => {
                   <td>
                     {item.driverName == "null" ? (
                       <button
-                        className="table-btn"
+                        className="table-btn btn-bg-lightred"
                         onClick={() => handleAssign(item)}
                       >
                         Assign
