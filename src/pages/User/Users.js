@@ -13,10 +13,17 @@ const Users = () => {
   const [error, setError] = useState("");
   const [activeCard, setActiveCard] = useState("totalVehicle");
   const [loading, setLoading] = useState("");
+  const [companyUser, setCompanyUser] = useState([]);
+  const [indivisualUser, setIndivisualUser] = useState([]);
+  const [cargoUsers, setCargoUsers] = useState([]);
   const apiVehicleOwners = `${mainAPI}/Api/Admin/All/VehicleOwners`;
   const apiVehicleCatagory = `${mainAPI}/Api/Admin/All/VehicleCatagory`;
   const apiVehicleCondition = `${mainAPI}/Api/Admin/All/VehicleCondition`;
   const apiaddVehicle = `${mainAPI}/Api/Vehicle/AddVehicle`;
+  //Company Api
+  const apiCompany = `${mainAPI}/Api/Admin/All/VehicleOwners/Role/owner`;
+  //Individual API
+  const apiIndivisual = `${mainAPI}/Api/Admin/All/VehicleOwners/Role/individual`;
   const jwt = JSON.parse(localStorage.getItem("jwt"));
   const options = {
     headers: {
@@ -29,7 +36,7 @@ const Users = () => {
   const [refresh, setRefresh] = useState(false);
 
   /** GET VEHICLE DETAIL  */
-  const getDetail = async () => {
+  const getAllUserDetail = async () => {
     setLoading(true);
     try {
       const res = await fetch(apiVehicleOwners, options);
@@ -41,6 +48,7 @@ const Users = () => {
       }
       const data = await res.json();
       if (data && res.ok) {
+        console.log(data);
         setallUsers(data.vehicleOwnerINF);
         setTableData(data.vehicleOwnerINF);
       }
@@ -53,9 +61,82 @@ const Users = () => {
       setLoading(false);
     }
   };
-
+  //***** Company Users */
+  const getCompanyUser = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch(apiCompany, options);
+      if (res.status == 401) {
+        //showErrorMessage();
+        showErrorMessage({
+          message: "Unable to Load!! server respond with 401",
+        });
+      }
+      const data = await res.json();
+      if (data && res.ok) {
+        setCompanyUser(data.vehicleOwnerINF);
+      }
+      if (res.status == 400) {
+        setError("Invalid API server 400");
+      }
+    } catch (e) {
+      showErrorMessage(e);
+    } finally {
+      setLoading(false);
+    }
+  };
+  const getIndivisualUser = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch(apiIndivisual, options);
+      if (res.status == 401) {
+        //showErrorMessage();
+        showErrorMessage({
+          message: "Unable to Load!! server respond with 401",
+        });
+      }
+      const data = await res.json();
+      if (data && res.ok) {
+        //console.log(data, "indivisual");
+        setIndivisualUser(data.vehicleOwnerINF);
+      }
+      if (res.status == 400) {
+        setError("Invalid API server 400");
+      }
+    } catch (e) {
+      showErrorMessage(e);
+    } finally {
+      setLoading(false);
+    }
+  };
+  const getCargoUser = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch(apiVehicleOwners, options);
+      if (res.status == 401) {
+        //showErrorMessage();
+        showErrorMessage({
+          message: "Unable to Load!! server respond with 401",
+        });
+      }
+      const data = await res.json();
+      if (data && res.ok) {
+        //console.log(data);
+      }
+      if (res.status == 400) {
+        setError("Invalid API server 400");
+      }
+    } catch (e) {
+      showErrorMessage(e);
+    } finally {
+      setLoading(false);
+    }
+  };
   useEffect(() => {
-    getDetail();//Getting Users Information from getDetail
+    getAllUserDetail(); //Getting Users Information from getDetail
+    getCompanyUser();
+    getIndivisualUser();
+    getCargoUser();
   }, []);
   const topCardDetail = [
     {
@@ -74,14 +155,14 @@ const Users = () => {
     },
     {
       title: "Indivisual",
-      data: 0,
+      data: indivisualUser.length || 0,
       icon: FaUser,
       color: "rgb(102, 255, 94)",
       name: "indivisual",
     },
     {
       title: "Company",
-      data: 0,
+      data: companyUser.length || 0,
       icon: FaBuildingColumns,
       color: "rgb(223, 94, 255)",
       name: "company",
@@ -97,13 +178,10 @@ const Users = () => {
         setTableData("");
         break;
       case "indivisual":
-        setTableData("");
+        setTableData(indivisualUser);
         break;
-      case "inStock":
-        setTableData("");
-        break;
-      case "maintenance":
-        setTableData("");
+      case "company":
+        setTableData(companyUser);
         break;
       default:
         setTableData("");
