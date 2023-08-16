@@ -8,7 +8,9 @@ import {
   showSuccessMessage,
 } from "../../components/SwalMessages";
 import swal from "sweetalert";
-import DriversTable from "../Driver/DriversTable";
+import ReactLoading from "react-loading";
+import Drivers from "../Driver/Drivers";
+import Vehicle from "../Vehicle/Vehicle";
 
 const CustomInput = ({ value, handleChange, name, label, edit, type }) => {
   return (
@@ -31,7 +33,7 @@ const UserDetail = () => {
   //   const apiVehicleDetail = `${api}/Api/Admin/All/Vehicles/${vehicleId}`;
   //   const apiVehicleStatus = `${api}/Api/Vehicle/SetStatus`;
   //   const apiVehicleCatagory = `${api}/Api/Admin/All/VehicleCatagory`;
-  const [userDetail, setUserDetail] = useState({});
+  const [userData, setUserData] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState();
   const [newData, setNewData] = useState({});
@@ -44,6 +46,7 @@ const UserDetail = () => {
   const [companyType, setcompanyType] = useState([]);
   const [companySector, setcompanySector] = useState([]);
   const [companyInfo, setCompanyInfo] = useState({});
+  const [driverData, setriverData] = useState({});
   const jwt = JSON.parse(localStorage.getItem("jwt"));
   const options = {
     headers: {
@@ -144,6 +147,9 @@ const UserDetail = () => {
         }
         const data = await res.json();
         if (data && res.ok) {
+          console.log(data);
+          setUserData(data.ownerINF);
+
           let info = {
             companyName: data.ownerINF.companyName,
             companyType: data.ownerINF.companyType,
@@ -161,6 +167,7 @@ const UserDetail = () => {
             houseNumber: data.ownerINF.companyAddressINF.houseNum,
             ownerPhoneNumber: "",
           };
+          //for back up data
           setCompanyInfo({
             ...info,
             phoneNumber: data.ownerINF.phoneNumber,
@@ -571,8 +578,64 @@ const UserDetail = () => {
           </form>
         </div>
       </div>
-      {/* ***************************** USER DETAIL TABLES TO BE ADDED HERE */}
-      <div className="main-bar"></div>
+      {/* ***************************** USER Driver DETAIL TABLES TO BE ADDED HERE */}
+      <div className="main-bar">
+        {loading ? (
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              width: "100%",
+              flexDirection: "column",
+              rowGap: "50px",
+            }}
+          >
+            <ReactLoading type="bars" width={100} height={50} color="black" />
+            <p>Loading Data Please Wait</p>
+          </div>
+        ) : (
+          !error && (
+            <Drivers
+              driverData={{
+                assigned: userData.assignedDriverINFs,
+                unassigned: userData.unassignedDriverINFs,
+                allDrivers: userData.drivers,
+                permit: userData.permitDriverINFs,
+                onRoute: userData.onRouteDriverINFs,
+              }}
+            />
+          )
+        )}
+      </div>
+      {/* ***************************** USER Vehicle DETAIL TABLES TO BE ADDED HERE */}
+      <div className="main-bar">
+        {loading ? (
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              width: "100%",
+              flexDirection: "column",
+              rowGap: "50px",
+            }}
+          >
+            <ReactLoading type="bars" width={100} height={50} color="black" />
+            <p>Loading Data Please Wait</p>
+          </div>
+        ) : (
+          !error && (
+            <Vehicle
+              vehicleData={{
+                allVehicles: userData.vehicles,
+                parked: userData.parkedVehicles,
+                inStock: userData.inStockVehicles,
+                onRoute: userData.onRouteVehicles,
+                maintenance: userData.maintainingVehicles,
+              }}
+            />
+          )
+        )}
+      </div>
     </div>
   );
 };
