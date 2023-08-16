@@ -8,7 +8,7 @@ import DriversTable from "./DriversTable";
 import "./tables.css";
 import ManageDriver from "./ManageDriver";
 import { useNavigate } from "react-router-dom";
-function Drivers() {
+function Drivers({ driverData }) {
   const [allDrivers, setAllDrivers] = useState([]);
   const [onRoute, setOnRoute] = useState([]);
   const [Assigned, setAssigned] = useState([]);
@@ -29,7 +29,15 @@ function Drivers() {
       setPermit(payload.permit);
       setTableData(payload.allDrivers);
     };
-    getAllApiData();
+    if (driverData) {
+      console.log(driverData);
+      setAllDrivers(driverData.allDrivers);
+      setAssigned(driverData.assigned);
+      setOnRoute(driverData.onRoute);
+      setUnassigned(driverData.unassigned);
+      setPermit(driverData.permit);
+      setTableData(driverData.allDrivers);
+    } else getAllApiData();
 
     return () => {};
   }, [loading]);
@@ -37,35 +45,35 @@ function Drivers() {
   const topCardDetail = [
     {
       title: "Total Driver",
-      data: allDrivers.length || 0,
+      data: allDrivers?.length || 0,
       icon: MdPeople,
       color: "rgb(94, 175, 255)",
       name: "totalDrivers",
     },
     {
       title: "OnRoute",
-      data: onRoute.length || 0,
+      data: onRoute?.length || 0,
       icon: FaRoute,
       color: "rgb(255, 234, 94)",
       name: "onRoute",
     },
     {
       title: "Assigned",
-      data: Assigned.length || 0,
+      data: Assigned?.length || 0,
       icon: MdVerified,
       color: "rgb(102, 255, 94)",
       name: "assigned",
     },
     {
       title: "Unassigned",
-      data: unassigned.length || 0,
+      data: unassigned?.length || 0,
       icon: MdError,
       color: "rgb(255, 94, 116)",
       name: "unassigned",
     },
     {
       title: "Permit",
-      data: permit.length || 0,
+      data: permit?.length || 0,
       icon: MdError,
       color: "rgb(223, 94, 255)",
       name: "permit",
