@@ -14,7 +14,7 @@ import swal from "sweetalert";
 import { useUserContext } from "../../components/context/UserContext";
 import { useNavigate } from "react-router-dom";
 import { mainAPI } from "../../components/mainAPI";
-const Vehicle = () => {
+const Vehicle = ({ vehicleData }) => {
   const [allVehicle, setAllVehicle] = useState([]);
   const [vehicleonRoute, setVehicleOnRoute] = useState([]);
   const [parked, setParked] = useState([]);
@@ -30,7 +30,6 @@ const Vehicle = () => {
   const apiVehicleOnRoute = `${mainAPI}/Api/Admin/All/Vehicles/Status/ONROUTE`;
   const apiInStock = `${mainAPI}/Api/Admin/All/Vehicles/Status/INSTOCK`;
   const apiParked = `${mainAPI}/Api/Admin/All/Vehicles/Status/PARKED`;
-  const apiChangeAssignedDriver = `${mainAPI}/Api/Vehicle/ChangeAssignedDriver`;
   const jwt = JSON.parse(localStorage.getItem("jwt"));
   const navigate = useNavigate();
   const options = {
@@ -51,7 +50,13 @@ const Vehicle = () => {
       getVehicleMaintaning();
       getVehicleInStock();
     };
-    getVehicleData();
+    if (vehicleData) {
+      setAllVehicle(vehicleData.allVehicles);
+      setVehicleOnRoute(vehicleData.onRoute);
+      setParked(vehicleData.parked);
+      setInStock(vehicleData.inStock);
+      setMaintence(vehicleData.maintenance);
+    } else getVehicleData();
   }, [refresh]);
   const showErrorMessage = () => {
     swal({
@@ -225,7 +230,7 @@ const Vehicle = () => {
     },
     {
       title: "Maintenance",
-      data: maintence.length || 0,
+      data: maintence?.length || 0,
       icon: MdCarCrash,
       color: "rgb(255, 94, 116)",
       name: "maintenance",
@@ -274,7 +279,9 @@ const Vehicle = () => {
     navigate(`/vehicle/changeAssign/${item.ownerID}/${item.plateNumber}`);
   };
   const handleAssign = (item) => {
-    navigate(`/vehicle/changeAssign/${item.ownerID}/${item.plateNumber}/assign`);
+    navigate(
+      `/vehicle/changeAssign/${item.ownerID}/${item.plateNumber}/assign`
+    );
   };
   const showDetail = (item) => {
     navigate(`/vehicle/detail/${item.id}`);
