@@ -19,6 +19,8 @@ import UserDetail from "./pages/User/UserDetail";
 import AddVehicle from "./pages/User/AddVehicle";
 import AddDriver from "./pages/User/AddDriver";
 import ChangeDriver from "./pages/Vehicle/ChangeDriver";
+import Market from "./pages/Market/Market";
+import MarketDetail from "./pages/Market/MarketDetail";
 
 function App() {
   const { currentUser } = useUserContext();
@@ -64,6 +66,11 @@ function App() {
                       <Route
                         path="/vehicle/changeAssign/:ownerId/:plateNumber/:state"
                         element={<ChangeDriver />}
+                      />
+                      <Route path="/market" element={<Market />} />
+                      <Route
+                        path="/market/marketDetail/:id"
+                        element={<MarketDetail />}
                       />
                       <Route path="*" element={<ErrorPage />} />
                     </Routes>
