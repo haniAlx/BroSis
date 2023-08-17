@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {
+  MdBusinessCenter,
   MdDashboard,
   MdDirectionsCar,
   MdOutlineManageAccounts,
@@ -13,6 +14,7 @@ const SideBar = () => {
     vehicle: false,
     driver: false,
     users: false,
+    market: false,
   });
   const navigator = useNavigate();
   const changeRoute = (val) => {
@@ -21,6 +23,7 @@ const SideBar = () => {
       vehicle: false,
       driver: false,
       users: false,
+      market: false,
       [val]: true,
     });
     navigator(`/${val}`);
@@ -57,6 +60,13 @@ const SideBar = () => {
                 size={25}
               />
               <p>Users</p>
+            </li>
+            <li onClick={() => changeRoute("market")}>
+              <MdBusinessCenter
+                color={`${current.market ? "Yellow" : "black"}`}
+                size={25}
+              />
+              <p>Market</p>
             </li>
           </ul>
         </div>
