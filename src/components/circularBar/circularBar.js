@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./circularBar.css";
-function CircularBar({ max, color, text }) {
+function CircularBar({ max, color, text, bgcolor }) {
   const [progress, setProgress] = useState(0);
   const count = useRef(0);
   useEffect(() => {
@@ -19,9 +19,9 @@ function CircularBar({ max, color, text }) {
     <div
       className="circular-bar-container"
       style={{
-        backgroundImage: `conic-gradient(#2976f2 ${
+        backgroundImage: `conic-gradient(${color ? color : "#2976f2"} ${
           count.current * 3.6
-        }deg,#70a7ff 3.6deg)`,
+        }deg,${bgcolor ? bgcolor : "#70a7ff"} 3.6deg)`,
       }}
     >
       <div className="circular-bar">

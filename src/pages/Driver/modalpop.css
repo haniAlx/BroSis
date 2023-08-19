@@ -61,6 +61,13 @@
   margin: 5px 0;
   cursor: pointer;
 }
+.btn-bg-blue {
+  background-color: rgb(8, 80, 170);
+  transition: all 0.3s ease-in-out;
+}
+.btn-bg-blue:hover {
+  background-color: rgb(5, 48, 100);
+}
 .btn-manage {
   background-color: rgb(146, 49, 198);
 }

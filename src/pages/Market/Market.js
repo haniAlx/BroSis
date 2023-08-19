@@ -26,8 +26,9 @@ const Market = () => {
         const res = await fetch(apiCargo, options);
         if (res.ok) {
           const data = await res.json();
-          setAllData(data.cargos);
-          setCargos(data.cargos);
+          let tmp1 = data.cargos.filter((cargo) => cargo.status !== "FINISHED");
+          setAllData(tmp1);
+          setCargos(tmp1);
           let temp = data.cargos.filter((cargo) => cargo.status === "FINISHED");
           setFinished(temp);
           console.log(data.cargos, temp);
@@ -48,7 +49,8 @@ const Market = () => {
         cargo.cargoOwner.toLowerCase().includes(value) ||
         cargo.pickUp.toLowerCase().includes(value) ||
         cargo.dropOff.toLowerCase().includes(value) ||
-        cargo.weight.toLowerCase().includes(value)
+        cargo.weight.toLowerCase().includes(value) ||
+        cargo.status.toLowerCase().includes(value)
       );
     });
     setCargos(result);
