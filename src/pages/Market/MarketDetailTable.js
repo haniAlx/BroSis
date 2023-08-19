@@ -1,7 +1,7 @@
 import { Pagination } from "antd";
 import React, { useEffect, useState } from "react";
 
-const MarketDetailTable = ({ target }) => {
+const MarketDetailTable = ({ target, marketStatus }) => {
   const [page, setPage] = useState(1);
   const [postPerPage, setpostPerPage] = useState(5);
   const lastIndexOfPage = page * postPerPage;
@@ -29,6 +29,7 @@ const MarketDetailTable = ({ target }) => {
               <th>Plate Number</th>
               <th>Vehicle Capacity</th>
               <th>State</th>
+              {marketStatus === "FINISHED" ? <th>Payment</th> : ""}
             </tr>
           </thead>
 
@@ -44,6 +45,18 @@ const MarketDetailTable = ({ target }) => {
 
                   <td>{item.vehicleCapacity || "NULL"}</td>
                   <td>{item.driverState || "NULL"}</td>
+                  {marketStatus === "FINISHED" ? (
+                    <td>
+                      <button
+                        className="btn btn-bg-blue"
+                        style={{ height: "30px" }}
+                      >
+                        Pay
+                      </button>
+                    </td>
+                  ) : (
+                    ""
+                  )}
                 </tr>
               ))
             ) : (
