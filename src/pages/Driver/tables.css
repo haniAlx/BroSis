@@ -5,7 +5,7 @@
   overflow-x: auto;
 }
 .data-table td {
-  padding: 15px;
+  padding: 10px;
 }
 .data-table th {
   padding: 15px;
@@ -18,7 +18,7 @@
   border-radius: 4px 10px;
 }
 .data-table th {
-  background-color: rgba(14, 18, 23, 0.997);
+  background-color: rgba(8, 80, 170);
   color: white;
   text-align: left;
 }
