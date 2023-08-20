@@ -66,7 +66,7 @@ const Homepage = () => {
                   color: "red",
                 }}
               >
-                {error}
+                {error === "Failed to fetch" ? "NO INTERNET CONNECTION" : error}
               </p>
               <button
                 className="btn w-300 center"

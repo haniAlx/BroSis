@@ -1,6 +1,9 @@
 .w-300 {
   width: 300px !important;
 }
+.mb-1 {
+  margin-bottom: 1rem;
+}
 .center {
   margin-left: auto !important;
   margin-right: auto !important;

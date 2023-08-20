@@ -159,7 +159,7 @@ function Drivers({ driverData }) {
                   color: "red",
                 }}
               >
-                {error}
+                  {error === "Failed to fetch" ? "NO INTERNET CONNECTION" : error}
               </p>
               <button
                 className="btn center w-300"

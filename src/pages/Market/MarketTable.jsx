@@ -20,6 +20,7 @@ const MarketTable = ({ target }) => {
   const showDetail = (item) => {
     navigate(`/market/marketDetail/${item.id}`);
   };
+
   return (
     <div>
       <div className="table-container">
