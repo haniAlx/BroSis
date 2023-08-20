@@ -91,7 +91,6 @@ const DataLoadContext = ({ children }) => {
         setError("Invalid API server 400");
       }
     } catch (e) {
-      console.log(e.message);
       setError(e.message);
       setLoading(false);
     }
@@ -106,8 +105,7 @@ const DataLoadContext = ({ children }) => {
         setError("Invalid API server 400");
       }
     } catch (e) {
-      console.log(e.message);
-      setError(e.message + " try to refresh page");
+      setError(e.message);
     }
   };
   // TO GET ASSIGNED DRIVER DATA
@@ -120,7 +118,6 @@ const DataLoadContext = ({ children }) => {
         setError("Invalid API server 400");
       }
     } catch (e) {
-      console.log(e.message);
       setError(e.message);
     }
   };
@@ -134,7 +131,6 @@ const DataLoadContext = ({ children }) => {
         setError("Invalid API server 400");
       }
     } catch (e) {
-      console.log(e.message);
       setError(e.message);
     }
   };
@@ -148,7 +144,6 @@ const DataLoadContext = ({ children }) => {
         setError("Invalid API server 400");
       }
     } catch (e) {
-      console.log(e.message);
       setError(e.message);
     }
   };
