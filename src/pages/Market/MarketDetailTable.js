@@ -1,7 +1,8 @@
 import { Pagination } from "antd";
 import React, { useEffect, useState } from "react";
+import Paymodal from "./Paymodal";
 
-const MarketDetailTable = ({ target, marketStatus }) => {
+const MarketDetailTable = ({ target, marketStatus, cargoId }) => {
   const [page, setPage] = useState(1);
   const [postPerPage, setpostPerPage] = useState(5);
   const lastIndexOfPage = page * postPerPage;
@@ -16,8 +17,18 @@ const MarketDetailTable = ({ target, marketStatus }) => {
   useEffect(() => {
     setPage(1);
   }, [target]);
+  const [driverPhone, setDriverPhone] = useState("");
+  const [showpay, setShowpay] = useState(false);
+  console.log("cargo id is ", cargoId);
   return (
     <div>
+      {showpay && (
+        <Paymodal
+          setShowpay={setShowpay}
+          driverPhone={driverPhone}
+          cargoId={cargoId}
+        />
+      )}
       <div className="table-container">
         <table className="data-table">
           <thead>
@@ -50,6 +61,10 @@ const MarketDetailTable = ({ target, marketStatus }) => {
                       <button
                         className="btn btn-bg-blue"
                         style={{ height: "30px" }}
+                        onClick={() => {
+                          setShowpay(true);
+                          setDriverPhone(item.driverPhone);
+                        }}
                       >
                         Pay
                       </button>
