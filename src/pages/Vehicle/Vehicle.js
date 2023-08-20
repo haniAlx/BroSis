@@ -94,7 +94,6 @@ const Vehicle = ({ vehicleData }) => {
         setError("Invalid API server 400");
       }
     } catch (e) {
-      console.log(e.message);
       setError(e.message);
       setLoading(false);
     } finally {
@@ -118,7 +117,6 @@ const Vehicle = ({ vehicleData }) => {
         setError("Invalid API server 400");
       }
     } catch (e) {
-      console.log(e.message);
       setError(e.message);
       setLoading(false);
     } finally {
@@ -142,7 +140,6 @@ const Vehicle = ({ vehicleData }) => {
         setError("Invalid API server 400");
       }
     } catch (e) {
-      console.log(e.message);
       setError(e.message);
       setLoading(false);
     } finally {
@@ -167,7 +164,6 @@ const Vehicle = ({ vehicleData }) => {
         setError("Invalid API server 400");
       }
     } catch (e) {
-      console.log(e.message);
       setError(e.message);
       setLoading(false);
     } finally {
@@ -191,7 +187,6 @@ const Vehicle = ({ vehicleData }) => {
         setError("server 400");
       }
     } catch (e) {
-      console.log(e.message);
       setError(e.message);
       setLoading(false);
     } finally {
@@ -302,7 +297,7 @@ const Vehicle = ({ vehicleData }) => {
                   color: "red",
                 }}
               >
-                {error}
+                {error === "Failed to fetch" ? "NO INTERNET CONNECTION" : error}
               </p>
               <button
                 className="btn center w-300"
