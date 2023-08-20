@@ -86,9 +86,9 @@ const DriverDetail = () => {
       console.log(result);
       showSuccessMessage(result);
     } catch (e) {
-      setError(e);
-      showErrorMessage(e);
-      console.log(e);
+      setError(e.message);
+      showErrorMessage(e.message);
+      //console.log(e.message);
     } finally {
       setUpdating(false);
       getDetail();
@@ -151,7 +151,7 @@ const DriverDetail = () => {
               color: "red",
             }}
           >
-            Error occured
+              {error === "Failed to fetch" ? "NO INTERNET CONNECTION" : error}
           </p>
           <button
             className="btn center w-300"
