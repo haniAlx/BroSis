@@ -4,7 +4,7 @@ import "./market_input.css";
 import CircularBar from "../../components/circularBar/circularBar";
 import "./market_chart.css";
 import { mainAPI } from "../../components/mainAPI";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
   showErrorMessage,
   showSuccessMessage,
@@ -53,18 +53,6 @@ const MarketDetail = () => {
       .finally(setLoading(false));
   };
   useEffect(() => {
-    // setChartData(
-    //   {
-    //     labels: ["FINISHED", "REMAINING"],
-    //     datasets: [
-    //       {
-    //         label: "Summary",
-    //         data: [8, 2],
-    //         backgroundColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)"],
-    //       },
-    //     ],
-    //   }[reload]
-    // );
     const getCargoDetail = async () => {
       setLoading(true);
       fetch(apiCargo, options)
@@ -161,7 +149,6 @@ const ActiveMarket = ({
   chartData,
 }) => {
   const id = cargoData.id;
-  console.log(id);
   const jwt = JSON.parse(localStorage.getItem("jwt"));
 
   ///    HANDLE SENDTOCARGO FUNCTION
@@ -278,8 +265,12 @@ const ActiveMarket = ({
       ) : (
         ""
       )}
-
-      <MarketDetailTable target={cargoDriver} marketStatus={cargoData.status} />
+      {/* PASSING CARGO ID FOR MARKETDETAIL TABLE FOR PAYMENT  */}
+      <MarketDetailTable
+        target={cargoDriver}
+        marketStatus={cargoData.status}
+        cargoId={cargoData.id}
+      />
     </>
   );
 };
