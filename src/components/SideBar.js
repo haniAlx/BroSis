@@ -68,6 +68,13 @@ const SideBar = () => {
               />
               <p>Market</p>
             </li>
+            <li onClick={() => changeRoute("companyOwnerRegister")}>
+              <MdBusinessCenter
+                color={`${current.companyOwnerRegister ? "Yellow" : "black"}`}
+                size={25}
+              />
+              <p>Registration</p>
+            </li>
           </ul>
         </div>
       </div>
