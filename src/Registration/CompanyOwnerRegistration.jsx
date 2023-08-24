@@ -279,61 +279,47 @@ const CompanyOwnerRegistration = () => {
 
             ]
 
+
         };
+ 
 
     CompanyOwnerRegistration(item);
   };
   const CompanyOwnerRegistration = async (CompanyOwnerInfo) => {
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "auto",
-        Accept: "application/json",
-        Authorization: `Bearer ${jwt}`,
-      },
-      body: JSON.stringify(CompanyOwnerInfo),
+  
+    const headers = {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      Authorization: `Bearer ${jwt}`,
     };
+  
     setLoading(true);
-    axios
-      .post(`${mainAPI}/Api/Company/CreateCompany`, CompanyOwnerInfo, {
-        headers: {
-          "Content-Type": "Auto",
-          Authorization: `Bearer ${jwt}`,
-        },
-      })
-      .then((res) => {
-        const mess = res.data["message"];
+  
+    try {
+      const response = await fetch(`${mainAPI}/Api/Company/CreateCompany`, {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify(CompanyOwnerInfo),
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        const mess = data.message;
         showSuccessMessage({ message: "Company owner Added" });
-        //RESETING INPUT FIELDS
+        // RESETING INPUT FIELDS
         reset();
-      })
-      .catch((e) => {
-        showErrorMessage(e.response.data);
-        console.log(e);
-      })
-      .finally(() => setLoading(false));
-    // try {
-    //   setLoading(true);
-    //   const res = await fetch(apiCompanyOwnerRegistration, options);
-    //   console.log("response", res.status);
-    //   if (res.status == 401) {
-    //     showErrorMessage({ message: "Your Session is expired" });
-    //   }
-    //   const data = await res.json();
-    //   if (data && res.ok) {
-    //     console.log(data);
-    //     showSuccessMessage({ message: "Driver Added" });
-    //   }
-    //   if (res.status == 400) {
-    //     showErrorMessage({ message: "Invalid API" });
-    //   }
-    // } catch (e) {
-    //   console.log(e.message);
-    //   setLoading(false);
-    // } finally {
-    //   setLoading(false);
-    // }
+      } else {
+        const errorData = await response.json();
+        showErrorMessage(errorData);
+        console.log(errorData);
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
   };
+  
 
   /** HANDLIN LICENCE PICTRUE */
 
@@ -352,8 +338,15 @@ const CompanyOwnerRegistration = () => {
            {loading ? <LoadingPage message={"Submiting Data Please wait"} /> : ""}
       <div className="manage-window  detail-content mx-auto">
         <form onSubmit={handleSubmit(handleFormSubmit)}>
-              <p className="detail-part">Company Information</p>
+              <div className="registrationChoicee">
+                    <button className="Active">Company</button>
+                    <Link to='/IndividualRegister'> <button>Individual</button></Link>  
+                    <Link to='/cargoOwnerRegister'><button>Cargo</button></Link>
+              </div>
               <hr />
+              <br/>
+              <h2>Company Information</h2>
+              <br/>
           <div
                     style={{
                     display: "flex",
