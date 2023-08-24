@@ -278,7 +278,6 @@ const ActiveMarket = ({
 const NewMarket = ({ cargoData, reload, setReload }) => {
   const [price, setPrice] = useState();
   const [loading, setLoading] = useState(false);
-  
   const handlePost = () => {
     if (!price) {
       showErrorMessage({ message: "Please set Price" });
