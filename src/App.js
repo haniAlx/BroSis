@@ -22,7 +22,9 @@ import ChangeDriver from "./pages/Vehicle/ChangeDriver";
 import Market from "./pages/Market/Market";
 import MarketDetail from "./pages/Market/MarketDetail";
 import CompanyOwnerRegistration from "./Registration/CompanyOwnerRegistration";
-
+import IndividualRegistration from "./Registration/IndividualRegistration";
+import CargoOwnerRegistration from "./Registration/CargoOwnerRegistration";
+import CargoDetail from "./pages/User/CargoDetail";
 function App() {
   const { currentUser } = useUserContext();
 
@@ -44,6 +46,9 @@ function App() {
                       <Route path="/driver" element={<Drivers />} />
                       <Route path="/users" element={<Users />} />
                       <Route path="/companyOwnerRegister" element={<CompanyOwnerRegistration />} />
+                      <Route path="/IndividualRegister" element={<IndividualRegistration />} />
+                      <Route path="/cargoOwnerRegister" element={<CargoOwnerRegistration />} />
+                      <Route path="/cargoOwnerDetail/:id" element={<CargoDetail/>}/>
                       <Route path="/users/:role/:id" element={<UserDetail />} />
                       <Route
                         path="/users/addDriver/:ownerPhone"
