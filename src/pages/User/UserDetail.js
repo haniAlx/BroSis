@@ -11,6 +11,7 @@ import swal from "sweetalert";
 import ReactLoading from "react-loading";
 import Drivers from "../Driver/Drivers";
 import Vehicle from "../Vehicle/Vehicle";
+import { BsToggleOn,BsToggleOff } from "react-icons/bs"
 
 const CustomInput = ({ value, handleChange, name, label, edit, type }) => {
   return (
@@ -147,9 +148,9 @@ const UserDetail = () => {
         }
         const data = await res.json();
         if (data && res.ok) {
-          console.log(data);
+         
           setUserData(data.ownerINF);
-
+          console.log(userData);
           let info = {
             companyName: data.ownerINF.companyName,
             companyType: data.ownerINF.companyType,
@@ -270,6 +271,33 @@ const UserDetail = () => {
     setCompanyInfo({ ...companyInfo, [e.target.name]: e.target.value });
     setNewData({ ...newData, [e.target.name]: e.target.value });
   };
+/**Enable Disable user */
+const enableUser = async () => {
+  
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${jwt}`,
+      }
+    };
+    const EnableDisableApi = `${api}/Api/User/disable/${id}`;
+    setLoading(true);
+    try {
+      const res = await fetch(EnableDisableApi, options);
+      if (res.ok) {
+        const data = await res.json();
+        setRefresh(!refresh)
+        showSuccessMessage({ message: data.message });
+      }
+    } catch (e) {
+      showErrorMessage({ message: e });
+    } finally {
+      setLoading(false);
+     // Reloading the Page for getting status;
+    }
+  };
 
   return (
     <div className="main-bar-wrapper">
@@ -291,7 +319,15 @@ const UserDetail = () => {
         <div className="manage-window  detail-content mx-auto">
           <form onSubmit={(e) => handleSubmit(e)}>
             {/* **************** Company Information */}
-            <p className="detail-part">Company Information</p>
+            <div style={{display:'flex',
+                          alignItems:'center',
+                          justifyContent:'space-around' }}        >
+            <p className="detail-part">Company Information</p> 
+            {userData.enabled == true ? <BsToggleOn  style={{color:'green'}} onClick={()=>enableUser(id)}size="3rem"></BsToggleOn> : 
+             <BsToggleOff style={{color:'red'}}onClick={()=>enableUser(id)} size="3rem"></BsToggleOff>
+                                        }
+            </div>
+           
             <hr />
 
             <div
