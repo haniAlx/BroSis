@@ -5,9 +5,11 @@ import { MdSearch } from "react-icons/md";
 import { FaBuildingColumns } from "react-icons/fa6";
 import { FaTruckMoving, FaUser, FaUsers } from "react-icons/fa";
 import UserTable from "./UserTable";
+import CargoTable from './CargoTable'
 import { showErrorMessage } from "../../components/SwalMessages";
 import { mainAPI } from "../../components/mainAPI";
 const Users = () => {
+  const [isCargo,setIsCargo]=useState(false)
   const [allUsers, setallUsers] = useState([]);
   const [tableData, setTableData] = useState([]);
   const [error, setError] = useState("");
@@ -17,6 +19,7 @@ const Users = () => {
   const [indivisualUser, setIndivisualUser] = useState([]);
   const [cargoUsers, setCargoUsers] = useState([]);
   const apiVehicleOwners = `${mainAPI}/Api/Admin/All/VehicleOwners`;
+  const apiCargoOwners = `${mainAPI}/Api/Admin/All/CargoOwners`; 
   const apiVehicleCatagory = `${mainAPI}/Api/Admin/All/VehicleCatagory`;
   const apiVehicleCondition = `${mainAPI}/Api/Admin/All/VehicleCondition`;
   const apiaddVehicle = `${mainAPI}/Api/Vehicle/AddVehicle`;
@@ -112,7 +115,7 @@ const Users = () => {
   const getCargoUser = async () => {
     setLoading(true);
     try {
-      const res = await fetch(apiVehicleOwners, options);
+      const res = await fetch(apiCargoOwners, options);
       if (res.status == 401) {
         //showErrorMessage();
         showErrorMessage({
@@ -122,6 +125,7 @@ const Users = () => {
       const data = await res.json();
       if (data && res.ok) {
         //console.log(data);
+        setCargoUsers(data.cargoOwners)
       }
       if (res.status == 400) {
         setError("Invalid API server 400");
@@ -141,14 +145,14 @@ const Users = () => {
   const topCardDetail = [
     {
       title: "Total Users",
-      data: allUsers.length || 0,
+      data: (allUsers.length + cargoUsers.length) || 0,
       icon: FaUsers,
       color: "rgb(94, 175, 255)",
       name: "totalusers",
     },
     {
       title: "Cargo",
-      data: 0,
+      data: cargoUsers.length || 0,
       icon: FaTruckMoving,
       color: "rgb(255, 151, 39)",
       name: "cargo",
@@ -173,15 +177,21 @@ const Users = () => {
     switch (name) {
       case "totalusers":
         setTableData(allUsers);
+        setIsCargo(false)
         break;
       case "cargo":
-        setTableData("");
+        setTableData(cargoUsers);
+        setIsCargo(true)
         break;
       case "indivisual":
         setTableData(indivisualUser);
+        setIsCargo(false)
+
         break;
       case "company":
         setTableData(companyUser);
+        setIsCargo(false)
+
         break;
       default:
         setTableData("");
@@ -198,8 +208,8 @@ const Users = () => {
         item.roles.toLowerCase().includes(value.toLowerCase())
       );
     });
-    setTableData(result);
-    if (value == "") setTableData(allUsers);
+    setTableData(isCargo ? cargoUsers : result);
+    if (value == "") setTableData(isCargo ? cargoUsers : result);
   };
   return (
     <div className="main-bar">
@@ -269,7 +279,7 @@ const Users = () => {
                     />
                     <MdSearch size={25} />
                   </div>
-                  <UserTable target={tableData} />
+                 { isCargo ? <CargoTable target={cargoUsers}/>:<UserTable target={tableData} />}
                 </div>
               </>
             )
