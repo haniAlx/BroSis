@@ -1,6 +1,6 @@
 .nav-container {
   height: 60px;
-  background-color: rgb(6, 5, 23);
+  background-color: rgb(53, 45, 192);
   margin-bottom: 50px;
 }
 .nav-items {
@@ -12,7 +12,7 @@
   margin-right: 50px;
 }
 .nav-logo .logo {
-  color: rgb(215, 226, 2);
+  color: rgb(254, 254, 254);
   font-size: 30px;
   font-weight: 700;
 }
