@@ -6,6 +6,8 @@ import LoadingPage from "../../components/LoadingPage";
 import swal from "sweetalert";
 import { mainAPI } from "../../components/mainAPI";
 import { showSuccessMessage } from "../../components/SwalMessages";
+import { BsToggleOn,BsToggleOff } from "react-icons/bs"
+
 const DriverDetail = () => {
   //DriverID From Router parameter
   const { driverId } = useParams();
@@ -127,6 +129,34 @@ const DriverDetail = () => {
   const handleChange = (e) => {
     setDriverDetail({ ...driverDetail, [e.target.name]: e.target.value });
   };
+
+  /*********Enable disable user */
+  const enableUser = async () => {
+  
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${jwt}`,
+      }
+    };
+    const EnableDisableApi = `${mainAPI}/Api/User/disable/${driverDetail.id}`;
+    setLoading(true);
+    try {
+      const res = await fetch(EnableDisableApi, options);
+      if (res.ok) {
+        const data = await res.json();
+        setRefresh(!refresh)
+        showSuccessMessage({ message: data.message });
+      }
+    } catch (e) {
+      showErrorMessage({ message: e });
+    } finally {
+      setLoading(false);
+     // Reloading the Page for getting status;
+    }
+  };
   return (
     <div className="main-bar">
       <div
@@ -169,7 +199,10 @@ const DriverDetail = () => {
             <div
               className=""
               style={{
-                width: "100px",
+                display:'flex',
+                alignItems:'center',
+                justifyContent:'space-between',
+                width: "200px",
                 height: "100px",
                 marginLeft: "auto",
                 marginRight: "auto",
@@ -180,12 +213,15 @@ const DriverDetail = () => {
                 alt={`${driverDetail.driverName || ""} pic`}
                 style={{
                   display: "block",
-                  objectFit: "cover",
-                  width: "100%",
+                  // objectFit: "cover",
+                  width: "60%",
                   height: "100%",
                   borderRadius: "50%",
                 }}
               />
+               {driverDetail.enabled == true ? <BsToggleOn onClick={()=>enableUser()} style={{color:'green'}} size="3rem"></BsToggleOn> : 
+             <BsToggleOff onClick={()=>enableUser()}style={{color:'red'}}size="3rem"></BsToggleOff>
+                                        }
             </div>
 
             <p className="driver-name">{driverDetail.driverName || ""}</p>
@@ -219,8 +255,7 @@ const DriverDetail = () => {
                 <input
                   value={driverDetail.phoneNumber || ""}
                   name="userName"
-                  disabled={!edit}
-                  onChange={(e) => handleChange(e)}
+                  disabled
                 />
               </div>
               <div className="flex-grow">
@@ -228,8 +263,7 @@ const DriverDetail = () => {
                 <input
                   value={driverDetail.id || ""}
                   name="id"
-                  disabled={!edit}
-                  onChange={(e) => handleChange(e)}
+                  disabled
                 />
               </div>
               <div className="flex-grow">
@@ -237,8 +271,7 @@ const DriverDetail = () => {
                 <input
                   value={driverDetail.role || ""}
                   name="role"
-                  disabled={!edit}
-                  onChange={(e) => handleChange(e)}
+                  disabled
                 />
               </div>
               <div className="flex-grow">
@@ -247,8 +280,7 @@ const DriverDetail = () => {
                   value={driverDetail.birthDate || ""}
                   name="birthDate"
                   type="date"
-                  disabled={!edit}
-                  onChange={(e) => handleChange(e)}
+                  disabled
                 />
               </div>
               <div className="flex-grow " style={{}}>
