@@ -85,6 +85,7 @@ const AddDriver = () => {
       ownerPhone,
       file: driverPicData,
     };
+    console.log(driverData)
     const driver = new FormData();
     driver.append("driverName", driverData.driverName);
     driver.append("ownerPhone", ownerPhone);
