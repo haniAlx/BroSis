@@ -27,10 +27,34 @@
   padding-left: 10px;
 }
 .detail-content .detail-part {
+
+  align-items:center ;
   font-weight: bold;
   font-size: 18px;
   text-transform: uppercase;
   margin-bottom: 1px;
+}
+.registrationChoicee{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.registrationChoicee button{
+  margin: .5em;
+  padding: 1.5em;
+  border-radius: .5em;
+  font-size: medium;
+}
+.Active {
+  width: 150px;
+  height: 100px;
+ 
+  font-weight: bolder;
+  font-size: large;
+  background-color: rgb(173, 206, 230);
+  border: none;
+  box-shadow: 2px 5px 4px rgb(152, 152, 153);
+
 }
 .detail-content hr {
   margin-bottom: 20px;
