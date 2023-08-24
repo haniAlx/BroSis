@@ -11,7 +11,7 @@ const Navigation = () => {
       <div className="nav-container">
         <div className="nav-items">
           <div className="nav-logo">
-            <p className="logo">Bazzra</p>
+            <p className="logo">Bazra-Tracker</p>
           </div>
           <div className="navigations">
             <ul className="nav-list">
