@@ -35,43 +35,43 @@ const SideBar = () => {
           <ul className="sidebar-list">
             <li onClick={() => changeRoute("dashboard")}>
               <MdDashboard
-                color={`${current.dashboard ? "Yellow" : "black"}`}
-                size={25}
+                color={`${current.dashboard ? "rgb(8, 80, 170)" : "rgb(112, 167, 255)"}`}
+                size={35}
               />
               <p>Home</p>
             </li>
             <li onClick={() => changeRoute("vehicle")}>
               <MdDirectionsCar
-                color={`${current.vehicle ? "Yellow" : "black"}`}
-                size={25}
+                color={`${current.vehicle ? "rgb(8, 80, 170)" : "rgb(112, 167, 255)"}`}
+                size={35}
               />
               <p>Vehicle</p>
             </li>
             <li onClick={() => changeRoute("driver")}>
               <MdOutlineManageAccounts
-                color={`${current.driver ? "Yellow" : "black"}`}
-                size={25}
+                color={`${current.driver ? "rgb(8, 80, 170)" : "rgb(112, 167, 255)"}`}
+                size={35}
               />
               <p>Driver</p>
             </li>
             <li onClick={() => changeRoute("users")}>
               <MdPeople
-                color={`${current.users ? "Yellow" : "black"}`}
-                size={25}
+                color={`${current.users ? "rgb(8, 80, 170)" : "rgb(112, 167, 255)"}`}
+                size={35}
               />
               <p>Users</p>
             </li>
             <li onClick={() => changeRoute("market")}>
               <MdBusinessCenter
-                color={`${current.market ? "Yellow" : "black"}`}
-                size={25}
+                color={`${current.market ? "rgb(8, 80, 170)" : "rgb(112, 167, 255)"}`}
+                size={35}
               />
               <p>Market</p>
             </li>
             <li onClick={() => changeRoute("companyOwnerRegister")}>
               <MdBusinessCenter
-                color={`${current.companyOwnerRegister ? "Yellow" : "black"}`}
-                size={25}
+                color={`${current.companyOwnerRegister ? "rgb(8, 80, 170)" : "rgb(112, 167, 255)"}`}
+                size={35}
               />
               <p>Registration</p>
             </li>
