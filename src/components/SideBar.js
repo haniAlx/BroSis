@@ -77,7 +77,7 @@ const SideBar = () => {
               />
               <p>Registration</p>
             </li>
-            <li onClick={() => changeRoute("companyOwnerRegister")}>
+            <li onClick={() => changeRoute("settings")}>
               <AiFillSetting
                 color={`${current.setting ? "rgb(8, 80, 170)" : "rgb(112, 167, 255)"}`}
                 size={35}
