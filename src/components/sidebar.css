@@ -1,4 +1,6 @@
 .sidebar-container {
+  width: 150px;
+  padding-top: 3em;
 }
 .sidebar-list {
   list-style-type: none;

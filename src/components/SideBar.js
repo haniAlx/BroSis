@@ -5,7 +5,9 @@ import {
   MdDirectionsCar,
   MdOutlineManageAccounts,
   MdPeople,
+  MdOutlineAppRegistration
 } from "react-icons/md";
+import {AiFillSetting} from 'react-icons/ai'
 import "./sidebar.css";
 import { useNavigate } from "react-router-dom";
 const SideBar = () => {
@@ -69,11 +71,18 @@ const SideBar = () => {
               <p>Market</p>
             </li>
             <li onClick={() => changeRoute("companyOwnerRegister")}>
-              <MdBusinessCenter
+              <MdOutlineAppRegistration
                 color={`${current.companyOwnerRegister ? "rgb(8, 80, 170)" : "rgb(112, 167, 255)"}`}
                 size={35}
               />
               <p>Registration</p>
+            </li>
+            <li onClick={() => changeRoute("companyOwnerRegister")}>
+              <AiFillSetting
+                color={`${current.setting ? "rgb(8, 80, 170)" : "rgb(112, 167, 255)"}`}
+                size={35}
+              />
+              <p>Settings</p>
             </li>
           </ul>
         </div>

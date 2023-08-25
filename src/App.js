@@ -37,8 +37,9 @@ function App() {
               <div>
                 <Navigation />
                 <div className="main-container">
+                <SideBar />
                   <div className="container_mv">
-                    <SideBar />
+                   
                     <Routes>
                       <Route path="/" element={<Homepage />} />
                       <Route path="/dashboard" element={<Homepage />}></Route>
