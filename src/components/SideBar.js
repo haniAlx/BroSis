@@ -10,6 +10,7 @@ import {
 import {AiFillSetting} from 'react-icons/ai'
 import "./sidebar.css";
 import { useNavigate } from "react-router-dom";
+import NewMarkets from "../pages/Market/NewMarkets";
 const SideBar = () => {
   const [current, setCurrent] = useState({
     dashboard: true,
@@ -32,6 +33,7 @@ const SideBar = () => {
   };
   return (
     <div>
+      <NewMarkets/>
       <div className="sidebar-container">
         <div className="sidebar-items">
           <ul className="sidebar-list">
