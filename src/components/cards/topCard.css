@@ -8,12 +8,31 @@
   transition: all 0.3s ease-in-out;
   cursor: pointer;
 }
+
 .topcard-container:hover {
   background-color: rgb(28, 62, 61) !important;
 }
 
 .active-card {
   background-color: rgb(28, 62, 61) !important;
+}
+.settingtopcard-container{
+  max-width: 200px;
+  min-width: 170px;
+  height: 100px;
+  border-radius: 6px;
+  /* box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px; */
+  padding: 10px;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  background-color: rgb(112, 167, 255)!important;
+}
+.settingtopcard-container:hover {
+  background-color: rgb(66, 119, 219) !important;
+}
+
+.settingactive-card {
+  background-color:rgb(66, 119, 219) !important;
 }
 .card-title {
   color: white;

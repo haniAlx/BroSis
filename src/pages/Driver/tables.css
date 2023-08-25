@@ -51,6 +51,14 @@
   display: flex;
   justify-content: space-around;
 }
+.setting-card-holder {
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  width: 100%;
+  gap: .5em;
+  justify-content: space-around;
+}
 .img-licence:hover {
   position: absolute;
   left: -10%;

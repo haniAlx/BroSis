@@ -25,6 +25,8 @@ import CompanyOwnerRegistration from "./Registration/CompanyOwnerRegistration";
 import IndividualRegistration from "./Registration/IndividualRegistration";
 import CargoOwnerRegistration from "./Registration/CargoOwnerRegistration";
 import CargoDetail from "./pages/User/CargoDetail";
+import Settings from "./components/Settings/Settings"
+
 function App() {
   const { currentUser } = useUserContext();
 
@@ -51,6 +53,7 @@ function App() {
                       <Route path="/cargoOwnerRegister" element={<CargoOwnerRegistration />} />
                       <Route path="/cargoOwnerDetail/:id" element={<CargoDetail/>}/>
                       <Route path="/users/:role/:id" element={<UserDetail />} />
+                      <Route path='/settings' element={ <Settings/>}/>
                       <Route
                         path="/users/addDriver/:ownerPhone"
                         element={<AddDriver />}
@@ -83,6 +86,7 @@ function App() {
                       <Route path="*" element={<ErrorPage />} />
                     </Routes>
                   </div>
+                  <Settings/>
                 </div>
               </div>
             </>
