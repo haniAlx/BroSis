@@ -28,6 +28,8 @@ const MarketDetail = () => {
   });
   const apiCargoDriver = `${mainAPI}/Api/Admin/All/CargoDrivers/${id}`;
   const apiCargo = `${mainAPI}/Api/Admin/All/Cargos/${id}`;
+   /****isNew */
+   const [isNew,setIsNew]=useState(false )
   const jwt = JSON.parse(localStorage.getItem("jwt")); // Getting the token from login api
   const options = {
     headers: {
@@ -59,6 +61,7 @@ const MarketDetail = () => {
         .then((res) => res.json())
         .then((res) => {
           console.log(res);
+          setIsNew(res.status === "NEW" ? true :false)
           setCargoData(res);
           setWeight(res.weight);
           setRemaining(res.remaining);
@@ -72,6 +75,8 @@ const MarketDetail = () => {
     getCargoDetail();
     getCargoDriver();
   }, [refresh]);
+
+ 
   return (
     <div className="main-bar">
       <div>
@@ -116,21 +121,22 @@ const MarketDetail = () => {
           )}
           {!loading && !error && (
             <>
-              {cargoData.status == "NEW" ? (
-                <NewMarket
-                  cargoData={cargoData}
-                  reload={reload}
-                  setReload={setReload}
-                />
-              ) : (
+              {!isNew? (
                 <ActiveMarket
-                  cargoData={cargoData}
-                  loading={loading}
-                  weight={weight}
-                  remaining={remaining}
-                  cargoDriver={cargoDriver}
-                  chartData={chartData}
-                />
+                cargoData={cargoData}
+                loading={loading}
+                weight={weight}
+                remaining={remaining}
+                cargoDriver={cargoDriver}
+                chartData={chartData}
+              />
+              ) : (
+               
+                <NewMarket
+                cargoData={cargoData}
+                reload={reload}
+                setReload={setReload}
+              />
               )}
             </>
           )}
