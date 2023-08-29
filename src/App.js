@@ -86,7 +86,6 @@ function App() {
                       <Route path="*" element={<ErrorPage />} />
                     </Routes>
                   </div>
-                  <Settings/>
                 </div>
               </div>
             </>
