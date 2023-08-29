@@ -6,8 +6,9 @@ import { FaBuildingColumns } from "react-icons/fa6";
 import { FaTruckMoving, FaUser, FaUsers } from "react-icons/fa";
 import { showErrorMessage } from "../../components/SwalMessages";
 import { mainAPI } from "../../components/mainAPI";
+import UserTable from "../../pages/User/UserTable";
 const Users = () => {
-  const [isCargo,setIsCargo]=useState(false)
+  const [name,setname]=useState(false)
   const [tableData, setTableData] = useState([]);
   const [error, setError] = useState("");
   const [activeCard, setActiveCard] = useState("totalVehicle");
@@ -56,10 +57,10 @@ const Users = () => {
   const [refresh, setRefresh] = useState(false);
 
   /** GET VEHICLE DETAIL  */
-  const getNotification = async () => {
+  const getRole = async () => {
     setLoading(true);
     try {
-      const res = await fetch(apinotification, options);
+      const res = await fetch(apiRoles, options);
       if (res.status == 401) {
         //showErrorMessage();
         showErrorMessage({
@@ -69,6 +70,7 @@ const Users = () => {
       const data = await res.json();
       if (data && res.ok) {
         console.log(data);
+        setRole(data.roles)
         
       }
       if (res.status == 400) {
@@ -81,10 +83,10 @@ const Users = () => {
     }
   };
   //***** Company Users */
-  const getCompanyUser = async () => {
+  const getTrip = async () => {
     setLoading(true);
     try {
-      const res = await fetch(apiAlertType, options);
+      const res = await fetch(apiTripType, options);
       if (res.status == 401) {
         //showErrorMessage();
         showErrorMessage({
@@ -94,6 +96,7 @@ const Users = () => {
       const data = await res.json();
       if (data && res.ok) {
         console.log(data)
+        setTripType(data.triptypes)
        
       }
       if (res.status == 400) {
@@ -105,10 +108,10 @@ const Users = () => {
       setLoading(false);
     }
   };
-  const getIndivisualUser = async () => {
+  const getService = async () => {
     setLoading(true);
     try {
-      const res = await fetch(apiBusinessSector, options);
+      const res = await fetch(apiService, options);
       if (res.status == 401) {
         //showErrorMessage();
         showErrorMessage({
@@ -117,7 +120,8 @@ const Users = () => {
       }
       const data = await res.json();
       if (data && res.ok) {
-        //console.log(data, "indivisual");
+        console.log(data);
+        setservice(data.service)
       
       }
       if (res.status == 400) {
@@ -129,7 +133,108 @@ const Users = () => {
       setLoading(false);
     }
   };
-  const getCargoUser = async () => {
+  const getNOtification= async () => {
+    setLoading(true);
+    try {
+      const res = await fetch(apinotification, options);
+      if (res.status == 401) {
+        //showErrorMessage();
+        showErrorMessage({
+          message: "Unable to Load!! server respond with 401",
+        });
+      }
+      const data = await res.json();
+      if (data && res.ok) {
+        console.log(data)
+        setNotification(data.notificationMedias)
+      }
+      if (res.status == 400) {
+        setError("Invalid API server 400");
+      }
+    } catch (e) {
+      showErrorMessage(e);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const getCompanySector = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch(apiCompanySector, options);
+      if (res.status == 401) {
+        //showErrorMessage();
+        showErrorMessage({
+          message: "Unable to Load!! server respond with 401",
+        });
+      }
+      const data = await res.json();
+      if (data && res.ok) {
+        console.log(data);
+        setcompanySector(data.companySectors)
+        
+      }
+      if (res.status == 400) {
+        setError("Invalid API server 400");
+      }
+    } catch (e) {
+      showErrorMessage(e);
+    } finally {
+      setLoading(false);
+    }
+  };
+  //***** Company Users */
+  const getCompanyType= async () => {
+    setLoading(true);
+    try {
+      const res = await fetch(apiCompanyType, options);
+      if (res.status == 401) {
+        //showErrorMessage();
+        showErrorMessage({
+          message: "Unable to Load!! server respond with 401",
+        });
+      }
+      const data = await res.json();
+      if (data && res.ok) {
+        console.log(data)
+        setcompanyType(data.companyTypes)
+       
+      }
+      if (res.status == 400) {
+        setError("Invalid API server 400");
+      }
+    } catch (e) {
+      showErrorMessage(e);
+    } finally {
+      setLoading(false);
+    }
+  };
+  const getBusinessSector= async () => {
+    setLoading(true);
+    try {
+      const res = await fetch(apiBusinessSector, options);
+      if (res.status == 401) {
+        //showErrorMessage();
+        showErrorMessage({
+          message: "Unable to Load!! server respond with 401",
+        });
+      }
+      const data = await res.json();
+      if (data && res.ok) {
+        console.log(data);
+        setBusinessSector(data.businessSectors)
+      
+      }
+      if (res.status == 400) {
+        setError("Invalid API server 400");
+      }
+    } catch (e) {
+      showErrorMessage(e);
+    } finally {
+      setLoading(false);
+    }
+  };
+  const getBusinessType= async () => {
     setLoading(true);
     try {
       const res = await fetch(apiBusinessType, options);
@@ -142,6 +247,7 @@ const Users = () => {
       const data = await res.json();
       if (data && res.ok) {
         console.log(data)
+        setBusinessType(data.businessSectors)
       }
       if (res.status == 400) {
         setError("Invalid API server 400");
@@ -152,9 +258,203 @@ const Users = () => {
       setLoading(false);
     }
   };
+  const getDriverStatus= async () => {
+    setLoading(true);
+    try {
+      const res = await fetch(apiDriverStatus, options);
+      if (res.status == 401) {
+        //showErrorMessage();
+        showErrorMessage({
+          message: "Unable to Load!! server respond with 401",
+        });
+      }
+      const data = await res.json();
+      if (data && res.ok) {
+        console.log(data);
+        setDriverStatus(data.driverStatus)
+        
+      }
+      if (res.status == 400) {
+        setError("Invalid API server 400");
+      }
+    } catch (e) {
+      showErrorMessage(e);
+    } finally {
+      setLoading(false);
+    }
+  };
+  //***** Company Users */
+  const getDriverState= async () => {
+    setLoading(true);
+    try {
+      const res = await fetch(apiDriverState, options);
+      if (res.status == 401) {
+        //showErrorMessage();
+        showErrorMessage({
+          message: "Unable to Load!! server respond with 401",
+        });
+      }
+      const data = await res.json();
+      if (data && res.ok) {
+        console.log(data)
+        setDriverState(data.driverState)
+       
+      }
+      if (res.status == 400) {
+        setError("Invalid API server 400");
+      }
+    } catch (e) {
+      showErrorMessage(e);
+    } finally {
+      setLoading(false);
+    }
+  };
+  const getAlert = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch(apiAlertType, options);
+      if (res.status == 401) {
+        //showErrorMessage();
+        showErrorMessage({
+          message: "Unable to Load!! server respond with 401",
+        });
+      }
+      const data = await res.json();
+      if (data && res.ok) {
+        console.log(data);
+        setAlertType(data.alertTypes)
+      
+      }
+      if (res.status == 400) {
+        setError("Invalid API server 400");
+      }
+    } catch (e) {
+      showErrorMessage(e);
+    } finally {
+      setLoading(false);
+    }
+  };
+  const getCargoType= async () => {
+    setLoading(true);
+    try {
+      const res = await fetch(apiCargoType, options);
+      if (res.status == 401) {
+        //showErrorMessage();
+        showErrorMessage({
+          message: "Unable to Load!! server respond with 401",
+        });
+      }
+      const data = await res.json();
+      if (data && res.ok) {
+        console.log(data)
+        setCargoType(data.cargoTypes)
+      }
+      if (res.status == 400) {
+        setError("Invalid API server 400");
+      }
+    } catch (e) {
+      showErrorMessage(e);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const getLogoAvatar= async () => {
+    setLoading(true);
+    try {
+      const res = await fetch(apiLogoAvatar, options);
+      if (res.status == 401) {
+        //showErrorMessage();
+        showErrorMessage({
+          message: "Unable to Load!! server respond with 401",
+        });
+      }
+      const data = await res.json();
+      if (data && res.ok) {
+        console.log(data);
+        setLogoAvatar(data.avatar,data.logo)
+        
+      }
+      if (res.status == 400) {
+        setError("Invalid API server 400");
+      }
+    } catch (e) {
+      showErrorMessage(e);
+    } finally {
+      setLoading(false);
+    }
+  };
+  //***** Company Users */
+  const getVehicleCatagory= async () => {
+    setLoading(true);
+    try {
+      const res = await fetch(apiVehicleCatagory, options);
+      if (res.status == 401) {
+        //showErrorMessage();
+        showErrorMessage({
+          message: "Unable to Load!! server respond with 401",
+        });
+      }
+      const data = await res.json();
+      if (data && res.ok) {
+        console.log(data)
+        setVehicleCatagory(data.vehicleCatagories)
+       
+      }
+      if (res.status == 400) {
+        setError("Invalid API server 400");
+      }
+    } catch (e) {
+      showErrorMessage(e);
+    } finally {
+      setLoading(false);
+    }
+  };
+  const getvehicleCondition= async () => {
+    setLoading(true);
+    try {
+      const res = await fetch(apiVehicleCondition, options);
+      if (res.status == 401) {
+        //showErrorMessage();
+        showErrorMessage({
+          message: "Unable to Load!! server respond with 401",
+        });
+      }
+      const data = await res.json();
+      if (data && res.ok) {
+        console.log(data);
+        setVehicleCondition(data.vehicleConditions)
+      
+      }
+      if (res.status == 400) {
+        setError("Invalid API server 400");
+      }
+    } catch (e) {
+      showErrorMessage(e);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
   const [topCardDetail, setTopCardDetail] = useState([]);
 
   useEffect(() => {
+    getRole()
+    getAlert()
+    getBusinessSector()
+    getBusinessType()
+    getCompanySector()
+    getCompanyType()
+    getDriverState()
+    getDriverStatus()
+    getLogoAvatar()
+    getNOtification()
+    getService()
+    getTrip()
+    getVehicleCatagory()
+    getvehicleCondition()
+    getCargoType()
     const generateRandomColor = () => {
       const randomColorValue = Math.floor(Math.random() * 16777215).toString(16); // Generates a random hex color value
       return `#${randomColorValue}`;
@@ -162,109 +462,109 @@ const Users = () => {
 
     const initialTopCardDetail = [
       {
-        title: "Total Users",
-        data: 0,
+        title: "Role",
+        data: role.length || 0,
         icon: FaUsers,
         color: generateRandomColor(),
         name: "Role",
       },
       {
-        title: "Cargo",
-        data: 0,
+        title: "Notification",
+        data: notification.length || 0,
         icon: FaTruckMoving,
-        color: generateRandomColor(),
-        name: "Trip",
-      },
-      {
-        title: "Indivisual",
-        data: 0,
-        icon: FaUser,
         color: generateRandomColor(),
         name: "Notification",
       },
       {
-        title: "Company Sector",
-        data: 0,
-        icon: FaBuildingColumns,
-        color: generateRandomColor(),
-        name: "CompanySector",
-      },
-      {
-        title: "Company Type",
-        data: 0,
-        icon: FaUsers,
-        color: generateRandomColor(),
-        name: "CompanyType",
-      },
-      {
-        title: "Cargo Type",
-        data: 0,
-        icon: FaTruckMoving,
-        color: generateRandomColor(),
-        name: "cargoType",
-      },
-      {
-        title: "Business Sector",
-        data: 0,
-        icon: FaUser,
-        color: generateRandomColor(),
-        name: "BusinessSector",
-      },
-      {
-        title: "Business Sector",
-        data: 0,
-        icon: FaBuildingColumns,
-        color: generateRandomColor(),
-        name: "BusinessSector",
-      },
-      {
-        title: "Service",
-        data: 0,
-        icon: FaUsers,
-        color: generateRandomColor(),
-        name: "service",
-      },
-      {
-        title: "Driver State",
-        data: 0,
-        icon: FaTruckMoving,
-        color: generateRandomColor(),
-        name: "DriverState",
-      },
-      {
         title: "Driver Status",
-        data: 0,
+        data: driverStatus.length || 0,
         icon: FaUser,
         color: generateRandomColor(),
         name: "DriverStatus",
       },
       {
-        title: "Vehicle Catagory",
-        data: 0,
+        title: "Driver State",
+        data: driverState.length || 0,
         icon: FaBuildingColumns,
         color: generateRandomColor(),
-        name: "VehicleCatagory",
+        name: "DriverState",
+      },
+      {
+        title: "Alert Type",
+        data: alertType.length || 0,
+        icon: FaUsers,
+        color: generateRandomColor(),
+        name: "AlertType",
+      },
+      {
+        title: "Business Sector",
+        data: businessSector.length || 0,
+        icon: FaTruckMoving,
+        color: generateRandomColor(),
+        name: "BusinessSector",
+      },
+      {
+        title: "Business Type",
+        data: businessType.length || 0,
+        icon: FaUser,
+        color: generateRandomColor(),
+        name: "BusinessType",
       },
       {
         title: "Vehicle Condition",
-        data: 0,
-        icon: FaUsers,
+        data: vehicleCondition.length || 0,
+        icon: FaBuildingColumns,
         color: generateRandomColor(),
         name: "VehicleCondition",
       },
       {
-        title: "Avatar & Logo",
-        data: 0,
-        icon: FaTruckMoving,
+        title: "Vehicle Catagory",
+        data: vehicleCatagory.length || 0,
+        icon: FaUsers,
         color: generateRandomColor(),
-        name: "AvatarLogo",
+        name: "VehicleCatagory",
       },
       {
-        title: "Alert",
-        data: 0,
+        title: "Logo Avatar",
+        data: 2,
+        icon: FaTruckMoving,
+        color: generateRandomColor(),
+        name: "LogoAvatar",
+      },
+      {
+        title: "Trip Type",
+        data: tripType.length || 0,
+        icon: FaUser,
+        color: generateRandomColor(),
+        name: "TripType",
+      },
+      {
+        title: "Cargo Type",
+        data: cargoType.length || 0,
+        icon: FaBuildingColumns,
+        color: generateRandomColor(),
+        name: "CargoType",
+      },
+      {
+        title: "Company Sector",
+        data: companySector.length || 0,
+        icon: FaUsers,
+        color: generateRandomColor(),
+        name: "CompanySector",
+      },
+      {
+        title: "CompanyType",
+        data: companyType.length || 0,
+        icon: FaTruckMoving,
+        color: generateRandomColor(),
+        name: "CompanyType",
+      },
+      {
+        title: "service",
+        data: service.length || 0,
         icon: FaUser,
         color: 'whitesmoke',
-        name: "Alert",
+        name: "service",
       }
     ];
 
@@ -275,33 +575,99 @@ const Users = () => {
   const handleCardChange = (name) => {
     setActiveCard(name);
     switch (name) {
-      case "totalusers":
-        setTableData("");
-        setIsCargo(false)
+      case "Role":
+        setTableData(role);
+        setname("Role")
         break;
-      case "cargo":
-        setTableData("");
-        setIsCargo(true)
-        break;
-      case "indivisual":
-        setTableData("");
-        setIsCargo(false)
+     
+      case "DriverStatus":
+        setTableData(driverState);
+        setname("DriverStatus")
 
         break;
-      case "company":
-        setTableData("");
-        setIsCargo(false)
+      case "DriverState":
+        setTableData(driverState);
+        setname("DriverState")
 
         break;
-      default:
+    
+    case "AlertType":
+        setTableData(alertType);
+        setname("AlertType")
+        break;
+        case "BusinessSector":
+        setTableData(businessSector);
+        setname("BusinessSector")
+        break;
+        case "BusinessType":
+        setTableData(businessType);
+        setname("BusinessType")
+
+        break;
+        case "VehicleCondition":
+        setTableData(vehicleCondition);
+        setname("VehicleCondition")
+        break;
+        case "VehicleCatagory":
+        setTableData(vehicleCatagory);
+        setname("VehicleCatagory")
+        break;
+      case "Notification":
+        setTableData(notification);
+        setname("Notification")
+        break;
+      case "LogoAvatar":
+        setTableData(LogoAvatar);
+        setname("LogoAvatar")
+
+        break;
+      case "TripType":
+        setTableData(tripType);
+        setname("TripType")
+
+        break;
+    
+    case "CargoType":
+        setTableData(cargoType);
+        setname("CargoType")
+        break;
+        case "CompanySector":
+        setTableData(companySector);
+        setname("CompanySector")
+        break;
+        case "CompanyType":
+        setTableData(companyType);
+        setname("CompanyType")
+
+        break;
+        case "service":
+        setTableData(service);
+        setname("service")
+
+        break;
+        default:
         setTableData("");
+        
     }
   };
-
+  const filterTable = (e) => {
+    const { value } = e.target;
+    const result = role.filter((item) => {
+      return (
+        item.companyName.toLowerCase().includes(value.toLowerCase()) ||
+        item.firstName.toLowerCase().includes(value.toLowerCase()) ||
+        item.email.toLowerCase().includes(value.toLowerCase()) ||
+        item.phoneNumber.toLowerCase().includes(value.toLowerCase()) ||
+        item.roles.toLowerCase().includes(value.toLowerCase())
+      );
+    });
+    setTableData(result);
+    if (value == "") setTableData(result);
+  };
   return (
-    <div style={{width:'100%'}}>
+    <div className="main-bar">
       <div>
-        <div >
+        <div className="main-bar-content" >
           {error ? (
             <>
               <p
@@ -340,7 +706,11 @@ const Users = () => {
           ) : (
             !error && (
               <>
+               <h2>System Settings</h2>
+               <hr />
+               <br />
                 <div className="setting-card-holder">
+                   
                   {topCardDetail.map((item, index) => (
                     <SettingCard
                       title={item.title}
@@ -359,6 +729,18 @@ const Users = () => {
             )
           )}
         </div>
+        <div className="">
+                  <div className="search-bar">
+                    <input
+                      type="text"
+                      name="search"
+                      placeholder="Search..."
+                      onChange={(e) => filterTable(e)}
+                    />
+                    <MdSearch size={25} />
+                  </div>
+                <UserTable target={tableData} name={name}/>
+                </div>
       </div>
     </div>
   );
