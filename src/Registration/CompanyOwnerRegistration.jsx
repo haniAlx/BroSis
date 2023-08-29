@@ -395,9 +395,9 @@ const CompanyOwnerRegistration = () => {
               >
                 <option value={""}>Select Company Type</option>
                 {
-                            companyType.map(item => {
+                            companyType.map((index,item) => {
                                 return <>
-                                    <option>{item.companyType}</option>
+                                    <option key={index}>{item.companyType}</option>
                                 </>
                             })
                         }
@@ -424,9 +424,9 @@ const CompanyOwnerRegistration = () => {
               >
                 <option value={""}>Select Company Sector</option>
                 {
-                            companySector.map(item => {
+                            companySector.map((item,index) => {
                                 return <>
-                                    <option>{item.sectorName}</option>
+                                    <option key={index}>{item.sectorName}</option>
                                 </>
                             })
                         }
@@ -505,9 +505,9 @@ const CompanyOwnerRegistration = () => {
               >
                 <option value={""}>Select Service Required</option>
                 {
-                            service.map(item => {
+                            service.map((index,item) => {
                                 return <>
-                                    <option>{item.service}</option>
+                                    <option key={index}>{item.service}</option>
                                 </>
                             })
                         }
@@ -535,9 +535,9 @@ const CompanyOwnerRegistration = () => {
               >
                 <option value={""}>Select Notification media</option>
                 {
-                            notification.map(item => {
+                            notification.map((index,item) => {
                                 return <>
-                                    <option>{item.medium}</option>
+                                    <option key={index}>{item.medium}</option>
                                 </>
                             })
                         }
@@ -576,9 +576,9 @@ const CompanyOwnerRegistration = () => {
                       >
                         <option value={""}>Select Service Required</option>
                         {
-                                    vehicleCatagory.map(item => {
+                                    vehicleCatagory.map((index,item) => {
                                         return <>
-                                            <option>{item.catagory}</option>
+                                            <option key={index}>{item.catagory}</option>
                                         </>
                                     })
                                 }
@@ -606,9 +606,9 @@ const CompanyOwnerRegistration = () => {
                   >
                     <option value={""}>Select vehicle condition</option>
                     {
-                                vehicleConditions.map(item => {
+                                vehicleConditions.map((index,item) => {
                                     return <>
-                                        <option>{item.conditionName}</option>
+                                        <option key={index}>{item.conditionName}</option>
                                     </>
                                 })
                             }
