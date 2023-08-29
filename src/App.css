@@ -16,10 +16,10 @@ body::-webkit-scrollbar {
   width: 1px;
 }
 .main-container {
-  /* margin-left: auto; */
-  /* margin-right: auto; */
+  /* margin-left: auto;
+  margin-right: auto; */
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
  
 }
 
@@ -98,7 +98,11 @@ body::-webkit-scrollbar {
 }
 @media (min-width: 1300px) {
   .main-container {
-    margin: 0 auto;
+   
+    margin: 0 auto 100px 0;
+    max-width:80%;
+  }
+  .container_mv{
     max-width: 90%;
   }
   .sidebar-container {
