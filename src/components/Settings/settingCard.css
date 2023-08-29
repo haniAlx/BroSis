@@ -1,0 +1,23 @@
+.setting-cards {
+  width: 100%;
+  background-color: white;
+  box-shadow: 0px 10px 20px -4px rgba(0, 0, 0, 0.1);
+  padding: 20px 30px 20px;
+  margin-top: 10px;
+  transition: height 2s;
+}
+
+.setting-title-container {
+  display: flex;
+  justify-content: space-between;
+}
+.setting-sublist {
+  list-style-type: none;
+}
+.setting-sublist li {
+  border-bottom: 0.5px solid rgb(181, 181, 181);
+  padding: 10px 20px;
+}
+.setting-list-container {
+  transition: max-height 1s;
+}
