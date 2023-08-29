@@ -25,7 +25,8 @@ import CompanyOwnerRegistration from "./Registration/CompanyOwnerRegistration";
 import IndividualRegistration from "./Registration/IndividualRegistration";
 import CargoOwnerRegistration from "./Registration/CargoOwnerRegistration";
 import CargoDetail from "./pages/User/CargoDetail";
-import Settings from "./components/Settings/Settings"
+import Settings from "./components/Settings/Settings";
+import SettingsUpdate from "./components/Settings/SettingsUpdate";
 
 function App() {
   const { currentUser } = useUserContext();
@@ -39,21 +40,36 @@ function App() {
               <div>
                 <Navigation />
                 <div className="main-container">
-                <SideBar />
+                  <SideBar />
                   <div className="container_mv">
-                   
                     <Routes>
                       <Route path="/" element={<Homepage />} />
                       <Route path="/dashboard" element={<Homepage />}></Route>
                       <Route path="/vehicle" element={<Vehicle />} />
                       <Route path="/driver" element={<Drivers />} />
                       <Route path="/users" element={<Users />} />
-                      <Route path="/companyOwnerRegister" element={<CompanyOwnerRegistration />} />
-                      <Route path="/IndividualRegister" element={<IndividualRegistration />} />
-                      <Route path="/cargoOwnerRegister" element={<CargoOwnerRegistration />} />
-                      <Route path="/cargoOwnerDetail/:id" element={<CargoDetail/>}/>
+                      <Route
+                        path="/companyOwnerRegister"
+                        element={<CompanyOwnerRegistration />}
+                      />
+                      <Route
+                        path="/IndividualRegister"
+                        element={<IndividualRegistration />}
+                      />
+                      <Route
+                        path="/cargoOwnerRegister"
+                        element={<CargoOwnerRegistration />}
+                      />
+                      <Route
+                        path="/cargoOwnerDetail/:id"
+                        element={<CargoDetail />}
+                      />
                       <Route path="/users/:role/:id" element={<UserDetail />} />
-                      <Route path='/settings' element={ <Settings/>}/>
+                      <Route path="/settings" element={<Settings />} />
+                      <Route
+                        path="/settingsUpdate"
+                        element={<SettingsUpdate />}
+                      />
                       <Route
                         path="/users/addDriver/:ownerPhone"
                         element={<AddDriver />}
