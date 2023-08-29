@@ -6,13 +6,13 @@ import { FaBuildingColumns } from "react-icons/fa6";
 import { FaTruckMoving, FaUser, FaUsers } from "react-icons/fa";
 import { showErrorMessage } from "../../components/SwalMessages";
 import { mainAPI } from "../../components/mainAPI";
-import SettingTable from './SettingTable'
+import SettingTable from "./SettingTable";
 const Users = () => {
-  const [name,setname]=useState('')
+  const [name, setname] = useState("");
   const [tableData, setTableData] = useState([]);
   const [error, setError] = useState("");
   const [activeCard, setActiveCard] = useState("totalVehicle");
-  const [loading, setLoading] = useState("");
+  const [loading, setLoading] = useState(true);
   const [notification, setNotification] = useState([]);
   const [role, setRole] = useState([]);
   const [driverStatus, setDriverStatus] = useState([]);
@@ -28,23 +28,23 @@ const Users = () => {
   const [companySector, setcompanySector] = useState([]);
   const [companyType, setcompanyType] = useState([]);
   const [service, setservice] = useState([]);
-  
+
   const apinotification = `${mainAPI}/Api/Admin/All/NotificationMedium`;
-  const apiCompanySector= `${mainAPI}/Api/Admin/All/CompanySector/`; 
-  const apiCompanyType= `${mainAPI}/Api/Admin/All/CompanyType/`; 
-  const apiService= `${mainAPI}/Api/Admin/All/Services`; 
-  const apiRoles= `${mainAPI}/Api/Admin/All`; 
-  const apiDriverStatus= `${mainAPI}/Api/Admin/DriverStatus/All`; 
-  const apiAlertType= `${mainAPI}/Api/Admin/AlertType/All/`; 
-  const apiTripType= `${mainAPI}/Api/Admin/TripType/All`; 
-  const apiBusinessSector= `${mainAPI}/Api/Admin/All/BusinessSectors`;
+  const apiCompanySector = `${mainAPI}/Api/Admin/All/CompanySector/`;
+  const apiCompanyType = `${mainAPI}/Api/Admin/All/CompanyType/`;
+  const apiService = `${mainAPI}/Api/Admin/All/Services`;
+  const apiRoles = `${mainAPI}/Api/Admin/All`;
+  const apiDriverStatus = `${mainAPI}/Api/Admin/DriverStatus/All`;
+  const apiAlertType = `${mainAPI}/Api/Admin/AlertType/All/`;
+  const apiTripType = `${mainAPI}/Api/Admin/TripType/All`;
+  const apiBusinessSector = `${mainAPI}/Api/Admin/All/BusinessSectors`;
   const apiBusinessType = `${mainAPI}/Api/Admin/All/BusinessTypes`;
   const apiCargoType = `${mainAPI}/Api/Admin/All/CargoType`;
-  const apiDriverState= `${mainAPI}/Api/Admin/DriverState/All`;
-  const apiLogoAvatar= `${mainAPI}/Api/Admin/LogoandAvatar`;
+  const apiDriverState = `${mainAPI}/Api/Admin/DriverState/All`;
+  const apiLogoAvatar = `${mainAPI}/Api/Admin/LogoandAvatar`;
   const apiVehicleCatagory = `${mainAPI}/Api/Admin/All/VehicleCatagory`;
   const apiVehicleCondition = `${mainAPI}/Api/Admin/All/VehicleCondition`;
- 
+
   const jwt = JSON.parse(localStorage.getItem("jwt"));
   const options = {
     headers: {
@@ -70,8 +70,7 @@ const Users = () => {
       const data = await res.json();
       if (data && res.ok) {
         console.log(data);
-        setRole(data.roles)
-        
+        setRole(data.roles);
       }
       if (res.status == 400) {
         setError("Invalid API server 400");
@@ -95,9 +94,8 @@ const Users = () => {
       }
       const data = await res.json();
       if (data && res.ok) {
-        console.log(data)
-        setTripType(data.triptypes)
-       
+        console.log(data);
+        setTripType(data.triptypes);
       }
       if (res.status == 400) {
         setError("Invalid API server 400");
@@ -121,8 +119,7 @@ const Users = () => {
       const data = await res.json();
       if (data && res.ok) {
         console.log(data);
-        setservice(data.service)
-      
+        setservice(data.service);
       }
       if (res.status == 400) {
         setError("Invalid API server 400");
@@ -133,7 +130,7 @@ const Users = () => {
       setLoading(false);
     }
   };
-  const getNOtification= async () => {
+  const getNOtification = async () => {
     setLoading(true);
     try {
       const res = await fetch(apinotification, options);
@@ -145,8 +142,8 @@ const Users = () => {
       }
       const data = await res.json();
       if (data && res.ok) {
-        console.log(data)
-        setNotification(data.notificationMedias)
+        console.log(data);
+        setNotification(data.notificationMedias);
       }
       if (res.status == 400) {
         setError("Invalid API server 400");
@@ -171,8 +168,7 @@ const Users = () => {
       const data = await res.json();
       if (data && res.ok) {
         console.log(data);
-        setcompanySector(data.companySectors)
-        
+        setcompanySector(data.companySectors);
       }
       if (res.status == 400) {
         setError("Invalid API server 400");
@@ -184,7 +180,7 @@ const Users = () => {
     }
   };
   //***** Company Users */
-  const getCompanyType= async () => {
+  const getCompanyType = async () => {
     setLoading(true);
     try {
       const res = await fetch(apiCompanyType, options);
@@ -196,9 +192,8 @@ const Users = () => {
       }
       const data = await res.json();
       if (data && res.ok) {
-        console.log(data)
-        setcompanyType(data.companyTypes)
-       
+        console.log(data);
+        setcompanyType(data.companyTypes);
       }
       if (res.status == 400) {
         setError("Invalid API server 400");
@@ -209,7 +204,7 @@ const Users = () => {
       setLoading(false);
     }
   };
-  const getBusinessSector= async () => {
+  const getBusinessSector = async () => {
     setLoading(true);
     try {
       const res = await fetch(apiBusinessSector, options);
@@ -222,8 +217,7 @@ const Users = () => {
       const data = await res.json();
       if (data && res.ok) {
         console.log(data);
-        setBusinessSector(data.businessSectors)
-      
+        setBusinessSector(data.businessSectors);
       }
       if (res.status == 400) {
         setError("Invalid API server 400");
@@ -234,7 +228,7 @@ const Users = () => {
       setLoading(false);
     }
   };
-  const getBusinessType= async () => {
+  const getBusinessType = async () => {
     setLoading(true);
     try {
       const res = await fetch(apiBusinessType, options);
@@ -246,8 +240,8 @@ const Users = () => {
       }
       const data = await res.json();
       if (data && res.ok) {
-        console.log(data)
-        setBusinessType(data.businessSectors)
+        console.log(data);
+        setBusinessType(data.businessSectors);
       }
       if (res.status == 400) {
         setError("Invalid API server 400");
@@ -258,7 +252,7 @@ const Users = () => {
       setLoading(false);
     }
   };
-  const getDriverStatus= async () => {
+  const getDriverStatus = async () => {
     setLoading(true);
     try {
       const res = await fetch(apiDriverStatus, options);
@@ -271,8 +265,7 @@ const Users = () => {
       const data = await res.json();
       if (data && res.ok) {
         console.log(data);
-        setDriverStatus(data.driverStatus)
-        
+        setDriverStatus(data.driverStatus);
       }
       if (res.status == 400) {
         setError("Invalid API server 400");
@@ -284,7 +277,7 @@ const Users = () => {
     }
   };
   //***** Company Users */
-  const getDriverState= async () => {
+  const getDriverState = async () => {
     setLoading(true);
     try {
       const res = await fetch(apiDriverState, options);
@@ -296,9 +289,8 @@ const Users = () => {
       }
       const data = await res.json();
       if (data && res.ok) {
-        console.log(data)
-        setDriverState(data.driverState)
-       
+        console.log(data);
+        setDriverState(data.driverState);
       }
       if (res.status == 400) {
         setError("Invalid API server 400");
@@ -322,8 +314,7 @@ const Users = () => {
       const data = await res.json();
       if (data && res.ok) {
         console.log(data);
-        setAlertType(data.alertTypes)
-      
+        setAlertType(data.alertTypes);
       }
       if (res.status == 400) {
         setError("Invalid API server 400");
@@ -334,7 +325,7 @@ const Users = () => {
       setLoading(false);
     }
   };
-  const getCargoType= async () => {
+  const getCargoType = async () => {
     setLoading(true);
     try {
       const res = await fetch(apiCargoType, options);
@@ -346,8 +337,8 @@ const Users = () => {
       }
       const data = await res.json();
       if (data && res.ok) {
-        console.log(data)
-        setCargoType(data.cargoTypes)
+        console.log(data);
+        setCargoType(data.cargoTypes);
       }
       if (res.status == 400) {
         setError("Invalid API server 400");
@@ -359,7 +350,7 @@ const Users = () => {
     }
   };
 
-  const getLogoAvatar= async () => {
+  const getLogoAvatar = async () => {
     setLoading(true);
     try {
       const res = await fetch(apiLogoAvatar, options);
@@ -372,8 +363,7 @@ const Users = () => {
       const data = await res.json();
       if (data && res.ok) {
         console.log(data);
-        setLogoAvatar(data.avatar,data.logo)
-        
+        setLogoAvatar(data.avatar, data.logo);
       }
       if (res.status == 400) {
         setError("Invalid API server 400");
@@ -385,7 +375,7 @@ const Users = () => {
     }
   };
   //***** Company Users */
-  const getVehicleCatagory= async () => {
+  const getVehicleCatagory = async () => {
     setLoading(true);
     try {
       const res = await fetch(apiVehicleCatagory, options);
@@ -397,9 +387,8 @@ const Users = () => {
       }
       const data = await res.json();
       if (data && res.ok) {
-        console.log(data)
-        setVehicleCatagory(data.vehicleCatagories)
-       
+        console.log(data);
+        setVehicleCatagory(data.vehicleCatagories);
       }
       if (res.status == 400) {
         setError("Invalid API server 400");
@@ -410,7 +399,8 @@ const Users = () => {
       setLoading(false);
     }
   };
-  const getvehicleCondition= async () => {
+  console.log(notification.length, role.length);
+  const getvehicleCondition = async () => {
     setLoading(true);
     try {
       const res = await fetch(apiVehicleCondition, options);
@@ -423,8 +413,7 @@ const Users = () => {
       const data = await res.json();
       if (data && res.ok) {
         console.log(data);
-        setVehicleCondition(data.vehicleConditions)
-      
+        setVehicleCondition(data.vehicleConditions);
       }
       if (res.status == 400) {
         setError("Invalid API server 400");
@@ -436,220 +425,221 @@ const Users = () => {
     }
   };
 
-console.log(notification.length,role.length)
   const [topCardDetail, setTopCardDetail] = useState([]);
 
   useEffect(() => {
-    getRole()
-    getAlert()
-    getBusinessSector()
-    getBusinessType()
-    getCompanySector()
-    getCompanyType()
-    getDriverState()
-    getDriverStatus()
-    getLogoAvatar()
-    getNOtification()
-    getService()
-    getTrip()
-    getVehicleCatagory()
-    getvehicleCondition()
-    getCargoType()
-    const generateRandomColor = () => {
-      const randomColorValue = Math.floor(Math.random() * 16777215).toString(16); // Generates a random hex color value
-      return `#${randomColorValue}`;
-    };
-
-    const initialTopCardDetail = [
-      {
-        title: "Role",
-        data: role.length || 0,
-        icon: FaUsers,
-        color: generateRandomColor(),
-        name: "Role",
-      },
-      {
-        title: "Notification",
-        data: notification.length || 0,
-        icon: FaTruckMoving,
-        color: generateRandomColor(),
-        name: "Notification",
-      },
-      {
-        title: "Driver Status",
-        data: driverStatus.length || 0,
-        icon: FaUser,
-        color: generateRandomColor(),
-        name: "DriverStatus",
-      },
-      {
-        title: "Driver State",
-        data: driverState.length || 0,
-        icon: FaBuildingColumns,
-        color: generateRandomColor(),
-        name: "DriverState",
-      },
-      {
-        title: "Alert Type",
-        data: alertType.length || 0,
-        icon: FaUsers,
-        color: generateRandomColor(),
-        name: "AlertType",
-      },
-      {
-        title: "Business Sector",
-        data: businessSector.length || 0,
-        icon: FaTruckMoving,
-        color: generateRandomColor(),
-        name: "BusinessSector",
-      },
-      {
-        title: "Business Type",
-        data: businessType.length || 0,
-        icon: FaUser,
-        color: generateRandomColor(),
-        name: "BusinessType",
-      },
-      {
-        title: "Vehicle Condition",
-        data: vehicleCondition.length || 0,
-        icon: FaBuildingColumns,
-        color: generateRandomColor(),
-        name: "VehicleCondition",
-      },
-      {
-        title: "Vehicle Catagory",
-        data: vehicleCatagory.length || 0,
-        icon: FaUsers,
-        color: generateRandomColor(),
-        name: "VehicleCatagory",
-      },
-      {
-        title: "Logo Avatar",
-        data: 2,
-        icon: FaTruckMoving,
-        color: generateRandomColor(),
-        name: "LogoAvatar",
-      },
-      {
-        title: "Trip Type",
-        data: tripType.length || 0,
-        icon: FaUser,
-        color: generateRandomColor(),
-        name: "TripType",
-      },
-      {
-        title: "Cargo Type",
-        data: cargoType.length || 0,
-        icon: FaBuildingColumns,
-        color: generateRandomColor(),
-        name: "CargoType",
-      },
-      {
-        title: "Company Sector",
-        data: companySector.length || 0,
-        icon: FaUsers,
-        color: generateRandomColor(),
-        name: "CompanySector",
-      },
-      {
-        title: "CompanyType",
-        data: companyType.length || 0,
-        icon: FaTruckMoving,
-        color: generateRandomColor(),
-        name: "CompanyType",
-      },
-      {
-        title: "service",
-        data: service.length || 0,
-        icon: FaUser,
-        color: 'whitesmoke',
-        name: "service",
-      }
-    ];
-
+    getRole();
+    getAlert();
+    getBusinessSector();
+    getBusinessType();
+    getCompanySector();
+    getCompanyType();
+    getDriverState();
+    getDriverStatus();
+    getLogoAvatar();
+    getNOtification();
+    getService();
+    getTrip();
+    getVehicleCatagory();
+    getvehicleCondition();
+    getCargoType();
     setTopCardDetail(initialTopCardDetail);
     setTableData(role);
-    setname("Role")
+    setname("Role");
   }, []);
-  
-  
+  useEffect(() => {
+    setTopCardDetail(initialTopCardDetail);
+  }, [loading]);
+  const generateRandomColor = () => {
+    const randomColorValue = Math.floor(Math.random() * 16777215).toString(16); // Generates a random hex color value
+    return `#${randomColorValue}`;
+  };
+
+  // ADDING TOP CARD TO THE PAGE
+
+  const initialTopCardDetail = [
+    {
+      title: "Role",
+      data: role.length || 0,
+      icon: FaUsers,
+      color: generateRandomColor(),
+      name: "Role",
+    },
+    {
+      title: "Notification",
+      data: notification.length || 0,
+      icon: FaTruckMoving,
+      color: generateRandomColor(),
+      name: "Notification",
+    },
+    {
+      title: "Driver Status",
+      data: driverStatus.length || 0,
+      icon: FaUser,
+      color: generateRandomColor(),
+      name: "DriverStatus",
+    },
+    {
+      title: "Driver State",
+      data: driverState.length || 0,
+      icon: FaBuildingColumns,
+      color: generateRandomColor(),
+      name: "DriverState",
+    },
+    {
+      title: "Alert Type",
+      data: alertType.length || 0,
+      icon: FaUsers,
+      color: generateRandomColor(),
+      name: "AlertType",
+    },
+    {
+      title: "Business Sector",
+      data: businessSector.length || 0,
+      icon: FaTruckMoving,
+      color: generateRandomColor(),
+      name: "BusinessSector",
+    },
+    {
+      title: "Business Type",
+      data: businessType.length || 0,
+      icon: FaUser,
+      color: generateRandomColor(),
+      name: "BusinessType",
+    },
+    {
+      title: "Vehicle Condition",
+      data: vehicleCondition.length || 0,
+      icon: FaBuildingColumns,
+      color: generateRandomColor(),
+      name: "VehicleCondition",
+    },
+    {
+      title: "Vehicle Catagory",
+      data: vehicleCatagory.length || 0,
+      icon: FaUsers,
+      color: generateRandomColor(),
+      name: "VehicleCatagory",
+    },
+    {
+      title: "Logo Avatar",
+      data: 2,
+      icon: FaTruckMoving,
+      color: generateRandomColor(),
+      name: "LogoAvatar",
+    },
+    {
+      title: "Trip Type",
+      data: tripType.length || 0,
+      icon: FaUser,
+      color: generateRandomColor(),
+      name: "TripType",
+    },
+    {
+      title: "Cargo Type",
+      data: cargoType.length || 0,
+      icon: FaBuildingColumns,
+      color: generateRandomColor(),
+      name: "CargoType",
+    },
+    {
+      title: "Company Sector",
+      data: companySector.length || 0,
+      icon: FaUsers,
+      color: generateRandomColor(),
+      name: "CompanySector",
+    },
+    {
+      title: "CompanyType",
+      data: companyType.length || 0,
+      icon: FaTruckMoving,
+      color: generateRandomColor(),
+      name: "CompanyType",
+    },
+    {
+      title: "service",
+      data: service.length || 0,
+      icon: FaUser,
+      color: "whitesmoke",
+      name: "service",
+    },
+  ];
+
   const handleCardChange = (name) => {
     setActiveCard(name);
     switch (name) {
       case "Role":
         setTableData(role);
-        setname("Role")
+        setname("Role");
         break;
-     
+
       case "DriverStatus":
         setTableData(driverState);
-        setname("DriverStatus")
+        setname("DriverStatus");
 
         break;
       case "DriverState":
         setTableData(driverState);
-        setname("DriverState")
+        setname("DriverState");
 
         break;
-    
-    case "AlertType":
+
+      case "AlertType":
         setTableData(alertType);
-        setname("AlertType")
+        setname("AlertType");
         break;
-        case "BusinessSector":
+      case "BusinessSector":
         setTableData(businessSector);
-        setname("BusinessSector")
+        setname("BusinessSector");
         break;
-        case "BusinessType":
+      case "BusinessType":
         setTableData(businessType);
-        setname("BusinessType")
+        setname("BusinessType");
 
         break;
-        case "VehicleCondition":
+      case "VehicleCondition":
         setTableData(vehicleCondition);
-        setname("VehicleCondition")
+        setname("VehicleCondition");
         break;
-        case "VehicleCatagory":
+      case "VehicleCatagory":
         setTableData(vehicleCatagory);
-        setname("VehicleCatagory")
+        setname("VehicleCatagory");
         break;
       case "Notification":
         setTableData(notification);
-        setname("Notification")
+        setname("Notification");
         break;
       case "LogoAvatar":
         setTableData(LogoAvatar);
-        setname("LogoAvatar")
+        setname("LogoAvatar");
 
         break;
       case "TripType":
         setTableData(tripType);
-        setname("TripType")
+        setname("TripType");
 
         break;
-    
-    case "CargoType":
+
+      case "CargoType":
         setTableData(cargoType);
-        setname("CargoType")
+        setname("CargoType");
         break;
-        case "CompanySector":
+      case "CompanySector":
         setTableData(companySector);
-        setname("CompanySector")
+        setname("CompanySector");
         break;
-        case "CompanyType":
+      case "CompanyType":
         setTableData(companyType);
-        setname("CompanyType")
+        setname("CompanyType");
 
         break;
-        case "service":
+      case "service":
         setTableData(service);
-        setname("service")
+        setname("service");
 
         break;
-        default:
+      default:
         setTableData("");
-        
     }
   };
   const filterTable = (e) => {
@@ -669,7 +659,7 @@ console.log(notification.length,role.length)
   return (
     <div className="main-bar">
       <div>
-        <div className="main-bar-content" >
+        <div className="main-bar-content">
           {error ? (
             <>
               <p
@@ -708,11 +698,10 @@ console.log(notification.length,role.length)
           ) : (
             !error && (
               <>
-               <h2>System Settings</h2>
-               <hr />
-               <br />
+                <h2>System Settings</h2>
+                <hr />
+                <br />
                 <div className="setting-card-holder">
-                   
                   {topCardDetail.map((item, index) => (
                     <SettingCard
                       title={item.title}
@@ -726,23 +715,22 @@ console.log(notification.length,role.length)
                     />
                   ))}
                 </div>
-             
               </>
             )
           )}
         </div>
         <div className="">
-                  <div className="search-bar">
-                    <input
-                      type="text"
-                      name="search"
-                      placeholder="Search..."
-                      onChange={(e) => filterTable(e)}
-                    />
-                    <MdSearch size={25} />
-                  </div>
-                <SettingTable target={tableData} name={name}/>
-                </div>
+          <div className="search-bar">
+            <input
+              type="text"
+              name="search"
+              placeholder="Search..."
+              onChange={(e) => filterTable(e)}
+            />
+            <MdSearch size={25} />
+          </div>
+          <SettingTable target={tableData} name={name} />
+        </div>
       </div>
     </div>
   );
