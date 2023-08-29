@@ -1,8 +1,10 @@
 import { Pagination } from "antd";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { FaEdit } from "react-icons/fa";
 
 const UserTable = ({ target,name }) => {
+  console.log(target,name)
   const [page, setPage] = useState(1);
   const [postPerPage, setpostPerPage] = useState(5);
   const lastIndexOfPage = page * postPerPage;
@@ -40,10 +42,10 @@ const UserTable = ({ target,name }) => {
           </thead>
 
           <tbody>
-          {name  === 'LogoAvatar' ?  <tr className={styles.active_row}>
-                            <td>{dataSource2.id}</td>
-                            <td>{dataSource2.avatar}</td>
-                            <td>{dataSource2.logo}</td>
+          {name  === 'LogoAvatar' ?  <tr className="active_row">
+                            <td>{target.id}</td>
+                            <td>{target.avatar}</td>
+                            <td>{target.logo}</td>
                             <td>
                                 <p className='notification_actions'>
                                     <FaEdit title='Edit' className='action_edit' size="1.4rem" color='green'
@@ -57,20 +59,21 @@ const UserTable = ({ target,name }) => {
                            </tr>
                             
                             :target.map(item => (
-                        <tr className={styles.active_row}>
+                        <tr className="active_row" key={item.id}>
                             <td>{item.id}</td>
-                            { name == 'Alert Type' ?  <td>{item.alertType}</td> :
-                            name == 'Roles Type'?  <td>{item.name}</td>:
-                            name == 'Driver Status'?  <td>{item.driverStatus}</td>:
-                            name == 'Notification Preference'?  <td>{item.medium}</td>:
-                            name == 'Vehicle Condition'?  <td>{item.conditionName}</td>:
-                            name == 'Service Needed'?  <td>{item.service}</td>:
-                            name == 'Vehicle Category'?  <td>{item.catagory}</td>:
-                            name == 'Company Type' ?  <td>{item.companyType}</td>:
-                            name == 'Company Sector'?  <td>{item.sectorName}</td>:
-                            name == 'Business Type' || name == 'Business Sector'?  <td>{item.businessSectors}</td>:
-                            name == 'Trip type'?  <td>{item.triptypes}</td>:
-                            name == 'Cargo type' ?  <td>{item.cargoType}</td>:
+                            { name === 'AlertType' ?  <td>{item.alertType}</td> :
+                            name === 'Role'?  <td>{item.name}</td>:
+                            name === 'DriverStatus'?  <td>{item.driverStatus}</td>:
+                            name === 'DriverState'?  <td>{item.driverState}</td>:
+                            name === 'Notification'?  <td>{item.medium}</td>:
+                            name === 'VehicleCondition'?  <td>{item.conditionName}</td>:
+                            name === 'service'?  <td>{item.service}</td>:
+                            name === 'VehicleCatagory'?  <td>{item.catagory}</td>:
+                            name === 'CompanyType' ?  <td>{item.companyType}</td>:
+                            name === 'CompanySector'?  <td>{item.sectorName}</td>:
+                            name === 'BusinessType' || name === 'BusinessSector'?  <td>{item.businessSectors}</td>:
+                            name === 'TripType'?  <td>{item.triptypes}</td>:
+                            name === 'CargoType' ?  <td>{item.cargoType}</td>:
                                     <td>{item.driverState}</td>}
                             
                             <td>

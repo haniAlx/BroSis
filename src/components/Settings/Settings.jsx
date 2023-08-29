@@ -6,9 +6,9 @@ import { FaBuildingColumns } from "react-icons/fa6";
 import { FaTruckMoving, FaUser, FaUsers } from "react-icons/fa";
 import { showErrorMessage } from "../../components/SwalMessages";
 import { mainAPI } from "../../components/mainAPI";
-import UserTable from "../../pages/User/UserTable";
+import SettingTable from './SettingTable'
 const Users = () => {
-  const [name,setname]=useState(false)
+  const [name,setname]=useState('')
   const [tableData, setTableData] = useState([]);
   const [error, setError] = useState("");
   const [activeCard, setActiveCard] = useState("totalVehicle");
@@ -436,7 +436,7 @@ const Users = () => {
     }
   };
 
-
+console.log(notification.length,role.length)
   const [topCardDetail, setTopCardDetail] = useState([]);
 
   useEffect(() => {
@@ -569,6 +569,8 @@ const Users = () => {
     ];
 
     setTopCardDetail(initialTopCardDetail);
+    setTableData(role);
+    setname("Role")
   }, []);
   
   
@@ -739,7 +741,7 @@ const Users = () => {
                     />
                     <MdSearch size={25} />
                   </div>
-                <UserTable target={tableData} name={name}/>
+                <SettingTable target={tableData} name={name}/>
                 </div>
       </div>
     </div>
