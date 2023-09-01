@@ -47,7 +47,7 @@ export default function NewMarkets() {
       } catch (error) {
         console.error('An error occurred:', error);
       }
-    }, 20000);
+    }, 60000);
 
     return () => clearInterval(APICall);
   }, []);
