@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { MdSearch } from "react-icons/md";
 import ReactLoading from "react-loading";
 import SystemSetting from "./SystemSetting";
+import  UserSetting  from "./UserSetting";
+import PersonalSetting from "./PersonalSetting";
 import "./settingCard.css";
 const SettingsUpdate = () => {
   const [error, setError] = useState("");
@@ -55,6 +57,9 @@ const SettingsUpdate = () => {
                 <br />
                 {/* <div className="setting-card-holder"></div> */}
                 <SystemSetting />
+                <UserSetting />
+                <PersonalSetting/>
+                
               </>
             )
           )}

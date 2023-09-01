@@ -10,14 +10,41 @@
 .setting-title-container {
   display: flex;
   justify-content: space-between;
+  font-size: larger;
+  font-weight: bold;
 }
 .setting-sublist {
   list-style-type: none;
 }
-.setting-sublist li {
+/* .setting-sublist li {
   border-bottom: 0.5px solid rgb(181, 181, 181);
   padding: 10px 20px;
-}
+} */
 .setting-list-container {
   transition: max-height 1s;
+}
+.span{
+  font-weight: bolder;
+}
+.listCard{
+  border-bottom: 2px solid rgb(188, 185, 185);
+  font-size: medium;
+  transition: padding 2s;
+  padding: 10px 20px;
+}
+.Listctive-card{
+  border-bottom: 2px solid rgb(188, 185, 185);
+  background-color: rgb(213, 245, 213);
+  font-size: large;
+  transition: padding 2s;
+  padding: 15px 25px;
+}
+.listCard:hover{
+  font-size: larger;
+  transition: font-size .5s;
+}
+.System-table{
+  border: 2px solid red;
+  height: auto;
+  width: 30rem;
 }

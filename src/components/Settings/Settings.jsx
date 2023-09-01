@@ -443,125 +443,121 @@ const Users = () => {
     getVehicleCatagory();
     getvehicleCondition();
     getCargoType();
-    const generateRandomColor = () => {
-      const randomColorValue = Math.floor(Math.random() * 16777215).toString(
-        16
-      ); // Generates a random hex color value
-      return `#${randomColorValue}`;
-    };
+ 
 
-    const initialTopCardDetail = [
-      {
-        title: "Role",
-        data: role.length || 0,
-        icon: FaUsers,
-        color: generateRandomColor(),
-        name: "Role",
-      },
-      {
-        title: "Notification",
-        data: notification.length || 0,
-        icon: FaTruckMoving,
-        color: generateRandomColor(),
-        name: "Notification",
-      },
-      {
-        title: "Driver Status",
-        data: driverStatus.length || 0,
-        icon: FaUser,
-        color: generateRandomColor(),
-        name: "DriverStatus",
-      },
-      {
-        title: "Driver State",
-        data: driverState.length || 0,
-        icon: FaBuildingColumns,
-        color: generateRandomColor(),
-        name: "DriverState",
-      },
-      {
-        title: "Alert Type",
-        data: alertType.length || 0,
-        icon: FaUsers,
-        color: generateRandomColor(),
-        name: "AlertType",
-      },
-      {
-        title: "Business Sector",
-        data: businessSector.length || 0,
-        icon: FaTruckMoving,
-        color: generateRandomColor(),
-        name: "BusinessSector",
-      },
-      {
-        title: "Business Type",
-        data: businessType.length || 0,
-        icon: FaUser,
-        color: generateRandomColor(),
-        name: "BusinessType",
-      },
-      {
-        title: "Vehicle Condition",
-        data: vehicleCondition.length || 0,
-        icon: FaBuildingColumns,
-        color: generateRandomColor(),
-        name: "VehicleCondition",
-      },
-      {
-        title: "Vehicle Catagory",
-        data: vehicleCatagory.length || 0,
-        icon: FaUsers,
-        color: generateRandomColor(),
-        name: "VehicleCatagory",
-      },
-      {
-        title: "Logo Avatar",
-        data: 2,
-        icon: FaTruckMoving,
-        color: generateRandomColor(),
-        name: "LogoAvatar",
-      },
-      {
-        title: "Trip Type",
-        data: tripType.length || 0,
-        icon: FaUser,
-        color: generateRandomColor(),
-        name: "TripType",
-      },
-      {
-        title: "Cargo Type",
-        data: cargoType.length || 0,
-        icon: FaBuildingColumns,
-        color: generateRandomColor(),
-        name: "CargoType",
-      },
-      {
-        title: "Company Sector",
-        data: companySector.length || 0,
-        icon: FaUsers,
-        color: generateRandomColor(),
-        name: "CompanySector",
-      },
-      {
-        title: "CompanyType",
-        data: companyType.length || 0,
-        icon: FaTruckMoving,
-        color: generateRandomColor(),
-        name: "CompanyType",
-      },
-      {
-        title: "service",
-        data: service.length || 0,
-        icon: FaUser,
-        color: "whitesmoke",
-        name: "service",
-      },
-    ];
-
-    setTopCardDetail(initialTopCardDetail);
+    
     setTableData(role);
     setname("Role");
   }, []);
+
+  const TopCardDetail = [
+    {
+      title: "Role",
+      data: role.length || 0,
+      icon: FaUsers,
+      color: "",
+      name: "Role",
+    },
+    {
+      title: "Notification",
+      data: notification.length || 0,
+      icon: FaTruckMoving,
+      color: "",
+      name: "Notification",
+    },
+    {
+      title: "Driver Status",
+      data: driverStatus.length || 0,
+      icon: FaUser,
+      color: "",
+      name: "DriverStatus",
+    },
+    {
+      title: "Driver State",
+      data: driverState.length || 0,
+      icon: FaBuildingColumns,
+      color: "",
+      name: "DriverState",
+    },
+    {
+      title: "Alert Type",
+      data: alertType.length || 0,
+      icon: FaUsers,
+      color: "",
+      name: "AlertType",
+    },
+    {
+      title: "Business Sector",
+      data: businessSector.length || 0,
+      icon: FaTruckMoving,
+      color: "",
+      name: "BusinessSector",
+    },
+    {
+      title: "Business Type",
+      data: businessType.length || 0,
+      icon: FaUser,
+      color: "",
+      name: "BusinessType",
+    },
+    {
+      title: "Vehicle Condition",
+      data: vehicleCondition.length || 0,
+      icon: FaBuildingColumns,
+      color: "",
+      name: "VehicleCondition",
+    },
+    {
+      title: "Vehicle Catagory",
+      data: vehicleCatagory.length || 0,
+      icon: FaUsers,
+      color: "",
+      name: "VehicleCatagory",
+    },
+    {
+      title: "Logo Avatar",
+      data: 2,
+      icon: FaTruckMoving,
+      color: "",
+      name: "LogoAvatar",
+    },
+    {
+      title: "Trip Type",
+      data: tripType.length || 0,
+      icon: FaUser,
+      color: "",
+      name: "TripType",
+    },
+    {
+      title: "Cargo Type",
+      data: cargoType.length || 0,
+      icon: FaBuildingColumns,
+      color: "",
+      name: "CargoType",
+    },
+    {
+      title: "Company Sector",
+      data: companySector.length || 0,
+      icon: FaUsers,
+      color: "",
+      name: "CompanySector",
+    },
+    {
+      title: "CompanyType",
+      data: companyType.length || 0,
+      icon: FaTruckMoving,
+      color: "",
+      name: "CompanyType",
+    },
+    {
+      title: "service",
+      data: service.length || 0,
+      icon: FaUser,
+      color: "whitesmoke",
+      name: "service",
+    },
+  ];
+
 
   const handleCardChange = (name) => {
     setActiveCard(name);
@@ -700,7 +696,7 @@ const Users = () => {
                 <hr />
                 <br />
                 <div className="setting-card-holder">
-                  {topCardDetail.map((item, index) => (
+                  {TopCardDetail.map((item, index) => (
                     <SettingCard
                       title={item.title}
                       icon={item.icon}
