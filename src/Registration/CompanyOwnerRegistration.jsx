@@ -339,9 +339,9 @@ const CompanyOwnerRegistration = () => {
       <div className="manage-window  detail-content mx-auto">
         <form onSubmit={handleSubmit(handleFormSubmit)}>
               <div className="registrationChoicee">
-                    <button className="Active">Company</button>
-                    <Link to='/IndividualRegister'> <button>Individual</button></Link>  
-                    <Link to='/cargoOwnerRegister'><button>Cargo</button></Link>
+                    <h2 className="Active">Company</h2>
+                    <Link className="link" to='/IndividualRegister'> <h2>Individual</h2></Link>  
+                    <Link  className="link" to='/cargoOwnerRegister'><h2>Cargo</h2></Link>
               </div>
               <hr />
               <br/>
