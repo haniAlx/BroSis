@@ -16,13 +16,13 @@ const Navigation = () => {
           <div className="navigations">
             <ul className="nav-list">
               <li>
-                <MdMenu color="white" size={25} />
+                <MdMenu color="black" size={25} />
               </li>
               <li>
-                <MdNotificationsNone color="white" size={25} />
+                <MdNotificationsNone color="black" size={25} />
               </li>
               <li>
-                <MdOutlineAccountCircle color="white" size={25} />
+                <MdOutlineAccountCircle color="black" size={25} />
               </li>
             </ul>
           </div>
