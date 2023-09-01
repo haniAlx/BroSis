@@ -22,7 +22,8 @@ body::-webkit-scrollbar {
 
 .container_mv {
   display: flex;
-  justify-content: center;
+  justify-content: left;
+  /* align-items: center; */
 }
 .search-bar {
   margin-top: 10px;
@@ -95,7 +96,7 @@ body::-webkit-scrollbar {
 }
 @media (min-width: 1300px) {
   .main-container {
-    max-width: 1250px;
+    max-width: 80%;
   }
   .sidebar-container {
     display: block;
