@@ -112,20 +112,20 @@ export default function ConfirmPass(){
                         <h1>Change Password</h1>
                         <div className='Signin  confirm'>
                             <label>Phone number</label>
-                            <input type='text' 
+                            <input className="signInput" type='text' 
                             placeholder='Enter your phone number'
                             onChange={e => setusername(e.target.value)} 
                             name="username"
                             ></input>
                             <label>PIN</label>
-                            <input type='password'
+                            <input className="signInput" type='password'
                              placeholder='Enter your Pin'
                              onChange={e => setpin(e.target.value)}
                                    name="pin"
                                    />
                             <label>Password</label>
                             <div className="passWrapper">
-                                <input
+                                <input className="signInput"
                                     id="passInput"
                                     type={pass ? "text" : "password"}
                                     placeholder="Password"
@@ -141,7 +141,7 @@ export default function ConfirmPass(){
                                 )}
                             <label>Confirm Password</label>
                             <div className="passWrapper">
-                                <input
+                                <input className="signInput"
                                     id="passInput"
                                     type={confirm ? "text" : "password"}
                                     placeholder="Password"
