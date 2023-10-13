@@ -1,34 +1,42 @@
 .sidebar-container {
-  width: 150px;
-  padding-top: 3em;
+  width: 200px;
 }
 .sidebar-list {
+  padding-top: 50px;
   list-style-type: none;
   display: flex;
   row-gap: 20px;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  /* background-color: aliceblue; */
 }
+
 .sidebar-list li {
   display: flex;
   align-items: center;
   flex-direction: column;
-  width: 100px;
+  width: 130px;
   height: 60px;
   font-size: 14px;
   color:black;
+  border-bottom: 1px solid rgb(216, 213, 213);
+
 }
+/* .sidebar-list :hover{
+  border-bottom: 1.5px solid rgb(168, 165, 245);
+transition: border-bottom 1s ;
+} */
 .ActiveSideBar{
-  font-size: 3em ; 
+  font-size: 2em ; 
   transition: font-size 1s;
   color: rgb(8, 80, 170);
 }
 .sideBar:hover{
-  font-size: 3.5em ; 
+  font-size: 2em ; 
   transition: font-size 1s;
 }
 .sideBar{
-  font-size: 2rem;
+  font-size: 1.5rem;
   transition: font-size 1s;
   /* transition-delay: 2s; */
 }
