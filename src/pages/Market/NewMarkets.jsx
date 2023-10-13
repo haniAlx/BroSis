@@ -61,8 +61,13 @@ export default function NewMarkets() {
   };
 
   return (
-    <div>
-    {jobStatus != null && jobStatus >= 1 && <Link to='/market'><ToastContainer /></Link> }
+    <div >
+    {jobStatus != null && jobStatus >= 1 && <Link to='/market'><ToastContainer 
+    style={{
+      width: "200px", // Set the desired width
+      maxHeight: "50px",
+      fontSize:'.75em',// Set the desired height
+    }} /></Link> }
     </div>
   );
 }

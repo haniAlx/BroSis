@@ -74,9 +74,15 @@ const MarketDetail = () => {
     };
     getCargoDetail();
     getCargoDriver();
+
+   
   }, [refresh]);
 
- 
+
+  const handleRefresh = () => {
+    setRefresh(!refresh)
+
+  };
   return (
     <div className="main-bar">
       <div>
@@ -129,6 +135,7 @@ const MarketDetail = () => {
                 remaining={remaining}
                 cargoDriver={cargoDriver}
                 chartData={chartData}
+                handleRefresh={handleRefresh}
               />
               ) : (
                
@@ -152,6 +159,7 @@ const ActiveMarket = ({
   weight,
   remaining,
   cargoDriver,
+  handleRefresh,
   chartData,
 }) => {
   const id = cargoData.id;
@@ -181,17 +189,18 @@ const ActiveMarket = ({
       showErrorMessage({ message: e.message });
     }
   };
-  //
+  //useEffect
+
   return (
-    <>
-      <div className="chart-container char-market">
+    <div onClick={handleRefresh}>
+      <div  className="chart-container char-market">
         <CircularBar
           text={loading ? "loading" : "Finished"}
           max={((weight - remaining) / weight) * 100}
           color={"green"}
           bgcolor={"#88F6A0"}
         />
-        <div>
+        <div >
           <p>
             Total weight <span style={{ fontWeight: "bold" }}> {weight}</span>
           </p>
@@ -277,7 +286,7 @@ const ActiveMarket = ({
         marketStatus={cargoData.status}
         cargoId={cargoData.id}
       />
-    </>
+    </div>
   );
 };
 //New Market data
