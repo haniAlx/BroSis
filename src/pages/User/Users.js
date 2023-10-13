@@ -11,6 +11,7 @@ import { mainAPI } from "../../components/mainAPI";
 const Users = () => {
   const [isCargo,setIsCargo]=useState(false)
   const [allUsers, setallUsers] = useState([]);
+  const [filterData,setFilterData]=useState([])
   const [tableData, setTableData] = useState([]);
   const [error, setError] = useState("");
   const [activeCard, setActiveCard] = useState("totalVehicle");
@@ -141,7 +142,7 @@ const Users = () => {
     getCompanyUser();
     getIndivisualUser();
     getCargoUser();
-  }, []);
+  }, [refresh]);
   const topCardDetail = [
     {
       title: "Total Users",
@@ -177,19 +178,23 @@ const Users = () => {
     switch (name) {
       case "totalusers":
         setTableData(allUsers);
+        setFilterData(allUsers);
         setIsCargo(false)
         break;
       case "cargo":
         setTableData(cargoUsers);
+         setFilterData(cargoUsers);
         setIsCargo(true)
         break;
       case "indivisual":
         setTableData(indivisualUser);
+        setFilterData(indivisualUser);
         setIsCargo(false)
 
         break;
       case "company":
         setTableData(companyUser);
+        setFilterData(companyUser);
         setIsCargo(false)
 
         break;
@@ -199,22 +204,41 @@ const Users = () => {
   };
   const filterTable = (e) => {
     const { value } = e.target;
-    const result = allUsers.filter((item) => {
-      return (
-        item.companyName.toLowerCase().includes(value.toLowerCase()) ||
-        item.firstName.toLowerCase().includes(value.toLowerCase()) ||
-        item.email.toLowerCase().includes(value.toLowerCase()) ||
-        item.phoneNumber.toLowerCase().includes(value.toLowerCase()) ||
-        item.roles.toLowerCase().includes(value.toLowerCase())
+    const result = (isCargo ? cargoUsers : tableData).filter((item) => {
+      // console.log(item)
+ if(isCargo) {  
+ console.log('cargo')
+  return (
+        
+        (item.ownerName && item.ownerName.toString().toLowerCase().includes(value.toLowerCase())) ||
+        // (item.businessINF.businessName && item.businessINF.businessName.toString().toLowerCase().includes(value.toLowerCase())) ||
+        // (item.businessINF.licenseNumber && item.businessINF.licenseNumber.toString().toLowerCase().includes(value.toLowerCase())) ||
+        (item.phoneNumber && item.phoneNumber.toString().toLowerCase().includes(value.toLowerCase())) ||
+        // (item.businessINF.tinNumber && item.businessINF.tinNumber.toString().toLowerCase().includes(value.toLowerCase())) ||
+        (item.enabled && item.enabled.toString().toLowerCase().includes(value.toLowerCase())) 
+      
+      ); 
+    }
+      else {
+        return (
+          (item.companyName && item.companyName.toString().toLowerCase().includes(value.toLowerCase())) ||
+          (item.firstName && item.firstName.toString().toLowerCase().includes(value.toLowerCase())) ||
+          (item.email && item.email.toString().toLowerCase().includes(value.toLowerCase())) ||
+          (item.phoneNumber && item.phoneNumber.toString().toLowerCase().includes(value.toLowerCase())) ||
+          (item.totalDrivers && item.totalDrivers.toString().toLowerCase().includes(value.toLowerCase())) ||
+          (item.totalVehicles && item.totalVehicles.toString().toLowerCase().includes(value.toLowerCase())) ||
+          (item.roles && item.roles.toString().toLowerCase().includes(value.toLowerCase()))
+        
       );
+    }
     });
-    setTableData(isCargo ? cargoUsers : result);
-    if (value == "") setTableData(isCargo ? cargoUsers : result);
+    setTableData(result);
+    if (value == "") setTableData(isCargo ? cargoUsers : filterData);
   };
   return (
     <div className="main-bar">
       <div>
-        <h2 style={{}}>Users</h2>
+        <h2 onClick={() => setRefresh(!refresh)} style={{}}>Users</h2>
         <hr className="hr" />
         <div className="main-bar-content">
           {error ? (

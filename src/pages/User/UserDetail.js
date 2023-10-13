@@ -304,11 +304,11 @@ const enableUser = async () => {
   };
 
   return (
-    <div className="main-bar-wrapper">
+    <div className="main-bar">
       {loading ? <LoadingPage message={"loading data"} /> : ""}
       {updating ? <LoadingPage message={"updating data"} /> : ""}
 
-      <div className="main-bar">
+      <div className="main-bar-wrapper">
         {/* **************** USER DETAIL MAINBAR */}
         <div
           style={{
