@@ -35,8 +35,8 @@ const Homepage = () => {
     populateDate();
   }, [loading]);
   return (
-    <div className="main-bar-wrapper">
-      <div className="main-bar">
+    <div className="main-bar">
+      <div className=" main-bar-wrapper">
         <div>
           <h2 style={{}}>Driver Analysis</h2>
           <hr className="hr" />
@@ -125,7 +125,7 @@ const Homepage = () => {
         </div> */}
               <div
                 style={{
-                  maxWidth: "700px",
+                  maxWidth: "400px",
                   position: "relative",
                   height: "300px",
                 }}
@@ -142,10 +142,10 @@ const Homepage = () => {
         </div>
       </div>
       {/* *************************MARKET PAGE *************** */}
-      <div className="main-bar">
+      <div className="main-bar-wrapper">
         <div>
           <h2>Market Analysis</h2>
-          <hr className="hr" />
+          <hr className="hr"></hr>
           {error ? (
             <>
               <p
