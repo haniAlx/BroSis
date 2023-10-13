@@ -21,7 +21,7 @@ function SettingCards({
       onClick={handleCardChange}
     >
       <div className="card-title">
-        <h4>{title}</h4>
+       {title}
       </div>
       <div className="card-data">
         <div className="card-val">{data}</div>

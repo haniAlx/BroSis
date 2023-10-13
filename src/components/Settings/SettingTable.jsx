@@ -2,9 +2,16 @@ import { Pagination } from "antd";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaEdit } from "react-icons/fa";
+import PopUp from './PopUp';
+import UpdatePopUp from './UpdatePopUp'
 
 const UserTable = ({ target,setShowSetting,name }) => {
   console.log(target,name,setShowSetting)
+  const [popup, setPop] = useState(false);
+  const [data,setData]=useState(target)
+  const closePopup = () => {
+      setPop(false);
+  }
   const [page, setPage] = useState(1);
   const [postPerPage, setpostPerPage] = useState(5);
   const lastIndexOfPage = page * postPerPage;
@@ -47,7 +54,8 @@ const UserTable = ({ target,setShowSetting,name }) => {
       >
           <p>Mangage System Setting</p> 
         </div>
-        <button className="btn">ADD {name}</button>
+        {/* <button className="btn" >ADD {name}</button> */}
+        <PopUp title={name} />
         <table className="data-table">
 
           <thead>
@@ -77,7 +85,7 @@ const UserTable = ({ target,setShowSetting,name }) => {
                            </tr>
                             
                             :target.map((item,index) => (
-                        <tr className="active_row" key={item.id}>
+                        <tr className="active_row" key={index}>
                             <td>{item.id}</td>
                             { name === 'AlertType' ?  <td>{item.alertType}</td> :
                             name === 'Role'?  <td>{item.name}</td>:
@@ -96,22 +104,40 @@ const UserTable = ({ target,setShowSetting,name }) => {
                                     <td>{item.driverState}</td>}
                             
                             <td>
-                        <p className='notification_actions'>
-                            <FaEdit title='Edit' className='action_edit' size="1.4rem" color='green'
-                                onClick={() => {
-                                    //  dleClickEdit21(avatar.avatar, avatar.logo, "Update_Avatar", "Edit Avatar and logo ")
-                                    }}>
+                       
+                                  <UpdatePopUp title={name} target={target} id={item.id} />
 
-                                                            </FaEdit>
-                                                    </p>
-                                                </td>
+                           </td>
                                                         
-                                                    </tr>
+                           </tr>
                                                 ))}
 
           </tbody>
         </table>
+
       </div>
+      {/* <div>
+      {popup ?
+                    <div>
+                        <div className='popup0'> 
+                            <div className='popup-innerq'>
+                                <div onClick={closePopup} className='close'>X</div>
+                                <div className='fgf'>
+                                    <h2 className='mnm'>{title}</h2>
+                                    <form className='form'  onSubmit={handleSubmit(onSubmit)}>
+                                    <input   defaultValue={value} onChange={(e) => setvalue(e.target.value)}></input>
+                                    <div className='send_button'>
+                                        <button className='popup_add'>Add</button>
+                                        <button onClick={closePopup} className='popup_cancle'>Cancle</button>
+                                    </div>
+                                    </form>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div> : ""}
+      </div> */}
       {/* <Pagination
         onChange={(page) => setPage(page)}
         pageSize={postPerPage}
