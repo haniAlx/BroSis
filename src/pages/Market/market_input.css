@@ -8,3 +8,7 @@
   margin-left: auto;
   margin-right: auto;
 }
+.ToastContainer{
+  border: 2px solid red;
+  height: 50px ; 
+}

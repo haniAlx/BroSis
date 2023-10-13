@@ -20,6 +20,7 @@ const Alerts = () => {
   const [AccidentAlert, setAccidentAlert] = useState([]);
   const [DriverAlert, setDriverAlert] = useState([]);
   const [tableData, setTableData] = useState(OffRoadAlert);
+  const [filterData,setFilterData]=useState([])
   const [error, setError] = useState("");
   const [activeCard, setActiveCard] = useState("OffRoadAlert");
   const [loading, setLoading] = useState(false);
@@ -167,13 +168,17 @@ const Alerts = () => {
     switch (name) {
     case "Offroad Alert":
         setTableData(OffRoadAlert);
+        setFilterData(OffRoadAlert);
+
         break;
       case "Accident Alert":
         setTableData(AccidentAlert);
+        setFilterData(AccidentAlert);
         break;
       
       case "Driver Alert":
         setTableData(DriverAlert);
+        setFilterData(DriverAlert);
         break;
       default:
         setTableData(OffRoadAlert);
@@ -193,7 +198,7 @@ const Alerts = () => {
       );
     });
     setTableData(result);
-    if (value == "") setTableData(OffRoadAlert);
+    if (value == "") setTableData(filterData);
   };
 
   return (
