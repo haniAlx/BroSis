@@ -135,14 +135,14 @@ function Drivers({ driverData }) {
     if (value == "") setTableData(allDrivers);
   };
   return (
-    <div>
+    <div className="main-bar">
       {showManage && (
         <ManageDriver
           setShowManage={setShowManage}
           driverDetail={driverDetail}
         />
       )}
-      <div className="main-bar">
+      <div >
         {/* {detail && (
         <DriverDetail driverDetail={driverDetail} setDetail={setDetail} />
       )} */}

@@ -46,10 +46,14 @@
   font-size: medium;
 }
 .Active {
-  font-size: 2.5em;
-  color: rgb(2, 90, 168);
+  font-size: 2em;
+  color: rgb(3, 64, 117);
+  transition: font-size 1s;
+
 }
 .link{
+  font-size: 1em;
+  transition: font-size 1s;
   text-decoration: none;
   color: black;
 }
