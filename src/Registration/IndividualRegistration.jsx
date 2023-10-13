@@ -290,13 +290,13 @@ const IndividualRegistration = () => {
       <div className="manage-window  detail-content mx-auto">
         <form onSubmit={handleSubmit(handleFormSubmit)}>
               <div className="registrationChoicee">
-               <Link className='link' to='/companyOwnerRegister'> <h2>Company</h2></Link> 
-                <h2 className="Active">Individual</h2>
-               <Link className='link' to='/cargoOwnerRegister'><h2>Cargo</h2></Link> 
+               <Link className='link' to='/companyOwnerRegister'> <h3>Company</h3></Link> 
+                <h3 className="Active">Individual</h3>
+               <Link className='link' to='/cargoOwnerRegister'><h3>Cargo</h3></Link> 
               </div>
               <hr />
                 <br/>
-         <h2>Owner Information</h2>
+         <h3>Owner Information</h3>
          <br/>
          <div
            style={{
@@ -336,7 +336,7 @@ const IndividualRegistration = () => {
 
         </div>
         <br/>
-        <h2>Additional Information</h2>
+        <h3>Additional Information</h3>
         <br/>
              <div
              
@@ -359,9 +359,9 @@ const IndividualRegistration = () => {
               >
                 <option value={""}>Select Service Required</option>
                 {
-                            service.map(item => {
+                            service.map((item,index) => {
                                 return <>
-                                    <option>{item.service}</option>
+                                    <option key={index}>{item.service}</option>
                                 </>
                             })
                         }
@@ -389,9 +389,9 @@ const IndividualRegistration = () => {
               >
                 <option value={""}>Select Notification media</option>
                 {
-                            notification.map(item => {
+                            notification.map((item,index) => {
                                 return <>
-                                    <option>{item.medium}</option>
+                                    <option key={index}>{item.medium}</option>
                                 </>
                             })
                         }
@@ -407,7 +407,7 @@ const IndividualRegistration = () => {
                 </div>
          </div>
     <br/>
-    <h2>Vehicle Information</h2>
+    <h3>Vehicle Information</h3>
     <br/>
     <div
         
@@ -430,9 +430,9 @@ const IndividualRegistration = () => {
                       >
                         <option value={""}>Select Service Required</option>
                         {
-                                    vehicleCatagory.map(item => {
+                                    vehicleCatagory.map((item,index) => {
                                         return <>
-                                            <option>{item.catagory}</option>
+                                            <option key={index}>{item.catagory}</option>
                                         </>
                                     })
                                 }
@@ -460,9 +460,9 @@ const IndividualRegistration = () => {
                   >
                     <option value={""}>Select vehicle condition</option>
                     {
-                                vehicleConditions.map(item => {
+                                vehicleConditions.map((item,index) => {
                                     return <>
-                                        <option>{item.conditionName}</option>
+                                        <option key={index}>{item.conditionName}</option>
                                     </>
                                 })
                             }
