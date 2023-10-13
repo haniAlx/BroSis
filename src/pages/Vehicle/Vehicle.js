@@ -284,7 +284,7 @@ const Vehicle = ({ vehicleData }) => {
   return (
     <div className="main-bar">
       <div>
-        <h2 style={{}}>Vehicles</h2>
+        <h2 onClick={() => setRefresh(!refresh)}>Vehicles</h2>
         <hr className="hr" />
         <div className="main-bar-content">
           {error ? (
