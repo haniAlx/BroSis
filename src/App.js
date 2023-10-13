@@ -31,7 +31,7 @@ import Alerts from './components/Alerts/Alerts'
 import AlertsHistory from "./components/Alerts/AlertHistory";
 function App() {
   const { currentUser } = useUserContext();
-
+  // {currentUser || null ? '' : localStorage.removeItem('jwt')}
   return (
     <>
       <BrowserRouter>

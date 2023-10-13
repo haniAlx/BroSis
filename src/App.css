@@ -18,12 +18,14 @@ body::-webkit-scrollbar {
 .main-container {
   margin-left: auto;
   margin-right: auto;
+  /* width: 100% important; */
 }
 
 .container_mv {
   display: flex;
   justify-content: left;
-  /* align-items: center; */
+  /* width: 80%; */
+  justify-content: center;
 }
 .search-bar {
   margin-top: 10px;
@@ -88,7 +90,7 @@ body::-webkit-scrollbar {
 
 @media (min-width: 992px) {
   .main-container {
-    max-width: 992px;
+    max-width: 100%;
   }
   .sidebar-container {
     display: block;
@@ -96,9 +98,11 @@ body::-webkit-scrollbar {
 }
 @media (min-width: 1300px) {
   .main-container {
-    max-width: 80%;
+    max-width: 100%;
+
   }
   .sidebar-container {
     display: block;
+
   }
 }

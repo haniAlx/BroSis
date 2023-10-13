@@ -24,8 +24,8 @@ const CargoOwnerRegistration = () => {
   const serviceapi = `${mainAPI}/Api/Admin/All/Services`;
   const businessSectorapi = `${mainAPI}/Api/Admin/All/BusinessSectors`;
   const businessTypeapi = `${mainAPI}/Api/Admin/All/BusinessTypes`;
-  const [businessSector, setbusinessSector] = useState("");
-  const [businessType, setbusinessType] = useState("");
+  const [businessSector, setbusinessSector] = useState([]);
+  const [businessType, setbusinessType] = useState([]);
   const [error, setError] = useState();
   const [licenseFile, setLicenseFile] = useState("");
   const [tinFile, setTinFile] = useState("");
@@ -121,6 +121,7 @@ const CargoOwnerRegistration = () => {
           const data = await res.json();
           if (data && res.ok) {
             setbusinessSector(data.businessSectors);
+            console.log(data)
           }
           if (res.status == 400) {
             setError("Invalid API server 400");
@@ -138,6 +139,7 @@ const CargoOwnerRegistration = () => {
           const data = await res.json();
           if (data && res.ok) {
             setbusinessType(data.businessSectors);
+            console.log(data)
           }
           if (res.status == 400) {
             setError("Invalid API server 400");
@@ -256,13 +258,13 @@ const CargoOwnerRegistration = () => {
       <div className="manage-window  detail-content mx-auto">
         <form onSubmit={handleSubmit(handleFormSubmit)}>
               <div className="registrationChoicee">
-                    <Link className='link' to='/companyOwnerRegister'><h2>Company</h2></Link> 
-                    <Link className='link' to='/IndividualRegister'> <h2>Individual</h2></Link>  
-                    <h2 className="Active">Cargo</h2>
+                    <Link className='link' to='/companyOwnerRegister'><h3>Company</h3></Link> 
+                    <Link className='link' to='/IndividualRegister'> <h3>Individual</h3></Link>  
+                    <h3 className="Active">Cargo</h3>
               </div>
               <hr />
               <br/>
-              <h2>Owner Information</h2>
+              <h3>Owner Information</h3>
               <br/>
           <div
                     style={{
@@ -300,7 +302,7 @@ const CargoOwnerRegistration = () => {
                   ))}
                 <div/>
                 <br />
-                 <h2>Business Information</h2>
+                 <h3>Business Information</h3>
                 <br /><br />
             <div
                     style={{
@@ -324,14 +326,14 @@ const CargoOwnerRegistration = () => {
                         className="align-left-m0"
                       >
                         <option value={""}>Select Business Type</option>
-                        <option value={"Food"}>Food       </option>
-                        {/* {
+                        {/* <option value={"Food"}>Food       </option> */}
+                        {
                                     businessType.map(item =>
                                            ( 
                                            <option key={item.businessType}>{item.businessType}</option>
                                         
                                     ))
-                                } */}
+                                }
                             </select>
                             <span
                               style={{
@@ -356,14 +358,14 @@ const CargoOwnerRegistration = () => {
                             className="align-left-m0"
                         >
                             <option value={""}>Select Company Sector</option>
-                            <option value={"PLC"}>PLC</option>
-                            {/* {
+                            {/* <option value={"PLC"}>PLC</option> */}
+                            {
                                         businessSector.map(item => {
                                             return <>
                                                 <option>{item.businessSector}</option>
                                             </>
                                         })
-                                    } */}
+                                    }
                         </select>
                         <span
                             style={{
