@@ -3,13 +3,19 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 import { useSearchParams } from "react-router-dom";
 
 const SystemSetting = () => {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
   const showSettingList = () => {
-    setShow(!show);
-    // const listSettingContainer = document.getElementById("show-setting");
-    // listSettingContainer.style.maxHeight = "auto";
-    // listSettingContainer.style.overflow = "auto";
-    // console.log("setting");
+    const listSettingContainer = document.getElementById("show-setting");
+    const listarrow = document.getElementById("list-arrow");
+    console.log(listSettingContainer);
+    if (listSettingContainer.classList.contains("show-list")) {
+      listSettingContainer.classList.remove("show-list");
+    } else {
+      listSettingContainer.classList.add("show-list");
+    }
+    if (listarrow.classList.contains("rotate")) {
+      listarrow.classList.remove("rotate");
+    } else listarrow.classList.add("rotate");
   };
   return (
     <div className="setting-cards">
@@ -18,7 +24,7 @@ const SystemSetting = () => {
         onClick={() => showSettingList()}
       >
         SystemSetting
-        <MdKeyboardArrowDown size={20} />
+        <MdKeyboardArrowDown size={20} className="list-arrow" id="list-arrow" />
       </div>
       {show && (
         <div className="setting-list-container" id="show-setting">
