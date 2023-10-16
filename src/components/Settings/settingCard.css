@@ -21,12 +21,12 @@
   padding: 10px 20px;
 } */
 .setting-list-container {
-  max-height: 0;
+  /* max-height: 0; */
   overflow: hidden;
   transition: max-height 0.5s ease-in-out;
 }
-.setting-list-container.show-list {
-  max-height: 150px;
+.setting-list-container .show-list {
+  /* max-height: 150px; */
 }
 .list-arrow {
   transform: rotate(0deg);
@@ -34,27 +34,27 @@
 .rotate {
   transform: rotate(180deg);
 }
-.span{
+.span {
   font-weight: bolder;
 }
-.listCard{
+.listCard {
   border-bottom: 2px solid rgb(188, 185, 185);
   font-size: medium;
   transition: padding 2s;
   padding: 10px 20px;
 }
-.Listctive-card{
+.Listctive-card {
   border-bottom: 2px solid rgb(188, 185, 185);
   background-color: rgb(213, 245, 213);
   font-size: large;
   transition: padding 2s;
   padding: 15px 25px;
 }
-.listCard:hover{
+.listCard:hover {
   font-size: larger;
-  transition: font-size .5s;
+  transition: font-size 0.5s;
 }
-.System-table{
+.System-table {
   border: 2px solid red;
   height: auto;
   width: 30rem;
@@ -69,7 +69,7 @@
   z-index: 1;
   margin-left: 15%;
 }
-.popup_modal_edit{
+.popup_modal_edit {
   width: 70%;
   height: 10px;
   position: fixed;
@@ -77,7 +77,7 @@
   z-index: 1;
   margin-left: 20%;
 }
-.popup_modal_delete{
+.popup_modal_delete {
   width: 70%;
   height: 10px;
   position: fixed;
@@ -85,7 +85,7 @@
   z-index: 1;
   margin-left: 20%;
 }
-.popup_main_delete{
+.popup_main_delete {
   border-radius: 5px 5px 5px 5px;
   box-shadow: 0px 0px 0px 1000px rgba(0, 0, 0, 0.75);
   background-color: #eeeeee;
@@ -96,20 +96,18 @@
   padding-top: 50px;
   /* background-color: red */
 }
-.popup_main_delete h3{
+.popup_main_delete h3 {
   /* background-color: red; */
   text-align: center;
 }
 
 .popup_close_button {
-
   margin-top: 30px;
   margin-bottom: 2%;
   margin-right: 35%;
   display: flex;
   justify-content: end;
   z-index: 1;
-
 }
 
 .popup_close_button {
@@ -121,7 +119,6 @@
   color: white;
   /* background-color: #ff0000; */
   border: none;
-
 }
 
 .x-button-report .x-press-report:hover {
@@ -154,7 +151,6 @@
 .popup_main input:focus {
   box-shadow: 0px 0px 2px 1px rgba(21, 113, 146, 0.4);
   border: 1px solid rgba(21, 113, 146, 0.4);
-
 }
 
 .send_button {
@@ -189,11 +185,11 @@
   width: 120px;
 }
 
-.qwess{
+.qwess {
   background-color: white;
 }
 
-.popup-innerq{
+.popup-innerq {
   position: relative;
   padding: 3%;
   /* padding-top: 2%; 
@@ -205,7 +201,7 @@
   border-radius: 6px;
   padding-top: 4%;
 }
-.popup0{
+.popup0 {
   position: fixed;
   top: 0;
   left: 0;
@@ -215,5 +211,5 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 2; 
+  z-index: 2;
 }
