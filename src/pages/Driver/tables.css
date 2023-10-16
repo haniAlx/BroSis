@@ -1,16 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;700;800;900&display=swap");
 .table-container {
-  height: 400px;
+  height: 300px;
   overflow-y: auto;
   overflow-x: auto;
 }
 .data-table td {
-  padding: 10px;
+  padding: 5px;
+  font-size: 12px;
+
 }
 .data-table th {
-  padding: 15px;
-  font-size: 15px;
-  font-weight: 500;
+  padding: 10px;
+  font-size: 12px;
+  font-weight: 300;
 }
 .data-table tr {
   border-top: 0.4px solid rgb(197, 197, 197);
@@ -39,7 +41,7 @@
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
-  font-size: 14px;
+  font-size: 10px;
   font-weight: bold;
   width: 100%;
 }
@@ -73,7 +75,7 @@
 
 @media (max-width: 992px) {
   .table-container {
-    max-width: 700px;
+    max-width: 600px;
   }
   .main-bar-content {
     max-width: 90vw;

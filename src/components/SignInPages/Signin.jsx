@@ -116,6 +116,7 @@ export default function SignIn() {
           <div className="Signin">
             <label>Phone number</label>
             <input
+            className="signInput"
               type="text"
               id="nameInput"
               placeholder="Username"
@@ -130,6 +131,7 @@ export default function SignIn() {
             <label>Password</label>
             <div className="passWrapper">
               <input
+              className="signInput"
                 id="passInput"
                 type={pass ? "text" : "password"}
                 placeholder="Password"

@@ -46,15 +46,16 @@
   font-size: medium;
 }
 .Active {
-  width: 150px;
-  height: 100px;
- 
-  font-weight: bolder;
-  font-size: large;
-  background-color: rgb(173, 206, 230);
-  border: none;
-  box-shadow: 2px 5px 4px rgb(152, 152, 153);
+  font-size: 2em;
+  color: rgb(3, 64, 117);
+  transition: font-size 1s;
 
+}
+.link{
+  font-size: 1em;
+  transition: font-size 1s;
+  text-decoration: none;
+  color: black;
 }
 .detail-content hr {
   margin-bottom: 20px;

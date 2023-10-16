@@ -7,6 +7,7 @@ import {
   MdPeople,
   MdOutlineAppRegistration
 } from "react-icons/md";
+import { HiBellAlert } from "react-icons/hi2";
 import {AiFillSetting} from 'react-icons/ai'
 import "./sidebar.css";
 import { useNavigate } from "react-router-dom";
@@ -39,53 +40,63 @@ const SideBar = () => {
           <ul className="sidebar-list">
             <li onClick={() => changeRoute("dashboard")}>
               <MdDashboard
-                color={`${current.dashboard ? "rgb(8, 80, 170)" : "rgb(112, 167, 255)"}`}
-                size={35}
+                className={`${current.dashboard ? "ActiveSideBar" : "sideBar"}`}
+                
               />
               <p>Home</p>
             </li>
             <li onClick={() => changeRoute("vehicle")}>
               <MdDirectionsCar
-                color={`${current.vehicle ? "rgb(8, 80, 170)" : "rgb(112, 167, 255)"}`}
-                size={35}
+                className={`${current.vehicle ? "ActiveSideBar" : "sideBar"}`}
+                
               />
               <p>Vehicle</p>
             </li>
             <li onClick={() => changeRoute("driver")}>
               <MdOutlineManageAccounts
-                color={`${current.driver ? "rgb(8, 80, 170)" : "rgb(112, 167, 255)"}`}
-                size={35}
+                className={`${current.driver ? "ActiveSideBar" : "sideBar"}`}
+                
               />
               <p>Driver</p>
             </li>
             <li onClick={() => changeRoute("users")}>
               <MdPeople
-                color={`${current.users ? "rgb(8, 80, 170)" : "rgb(112, 167, 255)"}`}
-                size={35}
+                className={`${current.users ? "ActiveSideBar" : "sideBar"}`}
+                
               />
               <p>Users</p>
             </li>
             <li onClick={() => changeRoute("market")}>
               <MdBusinessCenter
-                color={`${current.market ? "rgb(8, 80, 170)" : "rgb(112, 167, 255)"}`}
-                size={35}
+                className={`${current.market ? "ActiveSideBar" : "sideBar"}`}
+                
               />
               <p>Market</p>
             </li>
+            <li onClick={() => changeRoute("alerts")}>
+              <HiBellAlert
+                className={`${current.alerts ? "ActiveSideBar" : "sideBar"}`}
+                
+              />
+              
+              <p>Alerts</p>
+            </li>
             <li onClick={() => changeRoute("companyOwnerRegister")}>
               <MdOutlineAppRegistration
-                color={`${current.companyOwnerRegister ? "rgb(8, 80, 170)" : "rgb(112, 167, 255)"}`}
-                size={35}
+                className={`${current.companyOwnerRegister ? "ActiveSideBar" : "sideBar"}`}
+                
               />
+              
               <p>Registration</p>
             </li>
             <li onClick={() => changeRoute("settings")}>
               <AiFillSetting
-                color={`${current.setting ? "rgb(8, 80, 170)" : "rgb(112, 167, 255)"}`}
-                size={35}
+                className={`${current.settings ? "ActiveSideBar" : "sideBar"}`}
+                
               />
               <p>Settings</p>
             </li>
+
           </ul>
         </div>
       </div>

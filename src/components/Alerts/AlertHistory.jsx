@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { FaRoute } from "react-icons/fa";
 import {
   MdAutoGraph,
@@ -9,27 +10,23 @@ import {
 } from "react-icons/md";
 import ReactLoading from "react-loading";
 import TopCards from "../../components/cards/TopCards";
-import VehicleTable from "./VehicleTable";
+import AlertTable from './AlertTable'
 import swal from "sweetalert";
 import { useUserContext } from "../../components/context/UserContext";
 import { useNavigate } from "react-router-dom";
 import { mainAPI } from "../../components/mainAPI";
-const Vehicle = ({ vehicleData }) => {
-  const [allVehicle, setAllVehicle] = useState([]);
-  const [vehicleonRoute, setVehicleOnRoute] = useState([]);
-  const [parked, setParked] = useState([]);
-  const [inStock, setInStock] = useState([]);
-  const [maintence, setMaintence] = useState([]);
-  const [tableData, setTableData] = useState(allVehicle);
+const AlertsHistory = () => {
+  const [OffRoadAlert, setOffRoadAlert] = useState([]);
+  const [AccidentAlert, setAccidentAlert] = useState([]);
+  const [DriverAlert, setDriverAlert] = useState([]);
+  const [tableData, setTableData] = useState(OffRoadAlert);
   const [error, setError] = useState("");
-  const [activeCard, setActiveCard] = useState("totalVehicle");
+  const [activeCard, setActiveCard] = useState("OffRoadAlert");
   const [loading, setLoading] = useState(false);
   const { setCurrentUser } = useUserContext();
-  const apiAllVehicle = `${mainAPI}/Api/Admin/All/Vehicles`;
-  const apiMaintaining = `${mainAPI}/Api/Admin/All/Vehicles/Status/MAINTAINING`;
-  const apiVehicleOnRoute = `${mainAPI}/Api/Admin/All/Vehicles/Status/ONROUTE`;
-  const apiInStock = `${mainAPI}/Api/Admin/All/Vehicles/Status/INSTOCK`;
-  const apiParked = `${mainAPI}/Api/Admin/All/Vehicles/Status/PARKED`;
+  const apiOffroadAlert = `${mainAPI}/Api/Admin/AlertsHistory/DRIVER`;
+  const apiAccidentAlert = `${mainAPI}/Api/Admin/AlertsHistory/ACCIDENT`;
+  const apiDriverAlert = `${mainAPI}/Api/Admin/AlertsHistory/DRIVER`;
   const jwt = JSON.parse(localStorage.getItem("jwt"));
   const navigate = useNavigate();
   const options = {
@@ -42,22 +39,12 @@ const Vehicle = ({ vehicleData }) => {
   const [refresh, setRefresh] = useState(false);
   useEffect(() => {
     setError("");
-    const getVehicleData = async () => {
       setLoading(true);
-      getAllVehicle();
-      getVehicleOnRoute();
-      getVehicleParked();
-      getVehicleMaintaning();
-      getVehicleInStock();
-    };
-    if (vehicleData) {
-      setAllVehicle(vehicleData.allVehicles);
-      setVehicleOnRoute(vehicleData.onRoute);
-      setParked(vehicleData.parked);
-      setInStock(vehicleData.inStock);
-      setMaintence(vehicleData.maintenance);
-    } else getVehicleData();
-  }, [refresh]);
+      getAccidentAlert();
+      getOffroadAlert();
+      getDriverAlert();
+      setActiveCard('Offroad Alert')
+      }, [refresh]);
   const showErrorMessage = () => {
     swal({
       title: "Server respond With 401",
@@ -74,10 +61,10 @@ const Vehicle = ({ vehicleData }) => {
       }
     });
   };
-  const getAllVehicle = async () => {
+  const getOffroadAlert = async () => {
     try {
       setLoading(true);
-      const res = await fetch(apiAllVehicle, options);
+      const res = await fetch(apiOffroadAlert, options);
       console.log("response", res.status);
       if (res.status == 401) {
         showErrorMessage({ message: "Your Session is expired" });
@@ -87,8 +74,8 @@ const Vehicle = ({ vehicleData }) => {
       const data = await res.json();
       if (data && res.ok) {
         console.log(data);
-        setAllVehicle(data.vehiclesINF);
-        setTableData(data.vehiclesINF);
+        setOffRoadAlert(data.inactiveAlerts,data.activeAlerts);
+        setTableData(data.inactiveAlerts,data.activeAlerts);
       }
       if (res.status == 400) {
         setError("Invalid API server 400");
@@ -100,10 +87,10 @@ const Vehicle = ({ vehicleData }) => {
       setLoading(false);
     }
   };
-  const getVehicleOnRoute = async () => {
+  const getAccidentAlert= async () => {
     try {
       setLoading(true);
-      const res = await fetch(apiVehicleOnRoute, options);
+      const res = await fetch(apiAccidentAlert, options);
       if (res.status == 401) {
         showErrorMessage();
         setLoading(false);
@@ -111,7 +98,8 @@ const Vehicle = ({ vehicleData }) => {
       }
       const data = await res.json();
       if (data && res.ok) {
-        setVehicleOnRoute(data.inRoutelist);
+        console.log(data)
+        setAccidentAlert(data.inactiveAlerts,data.activeAlerts);
       }
       if (res.status == 400) {
         setError("Invalid API server 400");
@@ -123,10 +111,10 @@ const Vehicle = ({ vehicleData }) => {
       setLoading(false);
     }
   };
-  const getVehicleParked = async () => {
+  const getDriverAlert = async () => {
     try {
       setLoading(true);
-      const res = await fetch(apiParked, options);
+      const res = await fetch(apiDriverAlert, options);
       if (res.status == 401) {
         showErrorMessage();
         setLoading(false);
@@ -134,7 +122,8 @@ const Vehicle = ({ vehicleData }) => {
       }
       const data = await res.json();
       if (data && res.ok) {
-        setParked(data.parkedList);
+        console.log(data)
+        setDriverAlert(data.activeAlerts,data.inactiveAlerts);
       }
       if (res.status == 400) {
         setError("Invalid API server 400");
@@ -146,145 +135,78 @@ const Vehicle = ({ vehicleData }) => {
       setLoading(false);
     }
   };
-  const getVehicleMaintaning = async () => {
-    try {
-      setLoading(true);
-      const res = await fetch(apiMaintaining, options);
-      if (res.status == 401) {
-        showErrorMessage();
-        setLoading(false);
-        setError("Unable to Load!! server respond with 401");
-      }
-      const data = await res.json();
-      if (data && res.ok) {
-        setMaintence(data.maintainingList);
-        //work on this
-      }
-      if (res.status == 400) {
-        setError("Invalid API server 400");
-      }
-    } catch (e) {
-      setError(e.message);
-      setLoading(false);
-    } finally {
-      setLoading(false);
-    }
-  };
-  const getVehicleInStock = async () => {
-    try {
-      setLoading(true);
-      const res = await fetch(apiInStock, options);
-      if (res.status == 401) {
-        showErrorMessage();
-        setLoading(false);
-        setError("Unable to Load!! server respond with 401");
-      }
-      const data = await res.json();
-      if (data && res.ok) {
-        setInStock(data.stockedList);
-      }
-      if (res.status == 400) {
-        setError("server 400");
-      }
-    } catch (e) {
-      setError(e.message);
-      setLoading(false);
-    } finally {
-      setLoading(false);
-    }
-  };
+ 
+
 
   const topCardDetail = [
     {
-      title: "Total Vehicle",
-      data: allVehicle.length || 0,
+        title: "Off Road",
+        data: OffRoadAlert?.length || 0,
+        icon: FaRoute,
+        color: "rgb(226, 91, 91)",
+        name: "Offroad Alert",
+      },
+    {
+      title: "Accident",
+      data: AccidentAlert?.length || 0,
       icon: MdDirectionsCar,
-      color: "rgb(94, 175, 255)",
-      name: "totalVehicle",
+      color: "rgb(255, 94, 172)",
+      name: "Accident Alert",
     },
+   
     {
-      title: "Vehicle OnRoute",
-      data: vehicleonRoute.length || 0,
-      icon: FaRoute,
-      color: "rgb(255, 151, 39)",
-      name: "onRoute",
-    },
-    {
-      title: "Parked",
-      data: parked.length || 0,
+      title: "Driver Accident",
+      data: DriverAlert?.length || 0,
       icon: MdOutlineLocalParking,
-      color: "rgb(102, 255, 94)",
-      name: "parked",
-    },
-    {
-      title: "In Stock",
-      data: inStock.length || 0,
-      icon: MdAutoGraph,
-      color: "rgb(223, 94, 255)",
-      name: "inStock",
-    },
-    {
-      title: "Maintenance",
-      data: maintence?.length || 0,
-      icon: MdCarCrash,
-      color: "rgb(255, 94, 116)",
-      name: "maintenance",
-    },
+      color: "rgb(251, 74, 39)",
+      name: "Driver Alert",
+    }
   ];
   const handleCardChange = (name) => {
     setActiveCard(name);
     switch (name) {
-      case "totalVehicle":
-        setTableData(allVehicle);
+    case "Offroad Alert":
+        setTableData(OffRoadAlert);
         break;
-      case "onRoute":
-        setTableData(vehicleonRoute);
+      case "Accident Alert":
+        setTableData(AccidentAlert);
         break;
-      case "parked":
-        setTableData(parked);
-        break;
-      case "inStock":
-        setTableData(inStock);
-        break;
-      case "maintenance":
-        setTableData(maintence);
+      
+      case "Driver Alert":
+        setTableData(DriverAlert);
         break;
       default:
-        setTableData(allVehicle);
+        setTableData(OffRoadAlert);
     }
   };
   const filterTable = (e) => {
     const { value } = e.target;
-    const result = allVehicle.filter((item) => {
+    const result = tableData.filter((item) => {
       return (
-        item.driverName.toLowerCase().includes(value.toLowerCase()) ||
-        item.vehicleName.toLowerCase().includes(value.toLowerCase()) ||
-        item.vehicleOwner.toLowerCase().includes(value.toLowerCase()) ||
-        item.vehicleCatagory.toLowerCase().includes(value.toLowerCase()) ||
-        item.plateNumber.toLowerCase().includes(value.toLowerCase()) ||
-        item.status.toLowerCase().includes(value.toLowerCase()) ||
+        item.alertType.toLowerCase().includes(value.toLowerCase()) ||
+        item.alertfinish.toLowerCase().includes(value.toLowerCase()) ||
+        item.alertocation.toLowerCase().includes(value.toLowerCase()) ||
+        item.driver.toLowerCase().includes(value.toLowerCase()) ||
+        item.owner.toLowerCase().includes(value.toLowerCase()) ||
         item.plateNumber.toLowerCase().includes(value.toLowerCase())
+        
       );
     });
     setTableData(result);
-    if (value == "") setTableData(allVehicle);
+    if (value == "") setTableData(OffRoadAlert);
   };
 
-  const handleChange = (item) => {
-    navigate(`/vehicle/changeAssign/${item.ownerID}/${item.plateNumber}`);
-  };
-  const handleAssign = (item) => {
-    navigate(
-      `/vehicle/changeAssign/${item.ownerID}/${item.plateNumber}/assign`
-    );
-  };
-  const showDetail = (item) => {
-    navigate(`/vehicle/detail/${item.id}`);
-  };
   return (
     <div className="main-bar">
       <div>
-        <h2 onClick={() => setRefresh(!refresh)}>Vehicles</h2>
+        <div style={{display:'flex',
+                justifyContent:'space-around',
+                padding:'20px 0 30px 0'}}> 
+               <Link to='/alerts'> <h2 style={{}}>Current Alerts</h2></Link> 
+           <h2 style={{}}>Alerts History</h2>
+           
+        </div>
+       
         <hr className="hr" />
         <div className="main-bar-content">
           {error ? (
@@ -349,11 +271,8 @@ const Vehicle = ({ vehicleData }) => {
                     />
                     <MdSearch size={25} />
                   </div>
-                  <VehicleTable
+                  <AlertTable
                     target={tableData}
-                    handleChange={(val) => handleChange(val)}
-                    handleAssign={(val) => handleAssign(val)}
-                    showDetail={(val) => showDetail(val)}
                   />
                 </div>
               </>
@@ -365,4 +284,4 @@ const Vehicle = ({ vehicleData }) => {
   );
 };
 
-export default Vehicle;
+export default AlertsHistory;

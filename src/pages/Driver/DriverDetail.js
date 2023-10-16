@@ -4,6 +4,7 @@ import { MdKeyboardArrowLeft, MdModeEdit } from "react-icons/md";
 import { Link, useParams } from "react-router-dom";
 import LoadingPage from "../../components/LoadingPage";
 import swal from "sweetalert";
+import axios from "axios";
 import { mainAPI } from "../../components/mainAPI";
 import { showSuccessMessage } from "../../components/SwalMessages";
 import { BsToggleOn,BsToggleOff } from "react-icons/bs"
@@ -12,12 +13,12 @@ const DriverDetail = () => {
   //DriverID From Router parameter
   const { driverId } = useParams();
   const apiDriverDetail = `${mainAPI}/Api/Admin/All/Drivers/${driverId}`;
-  const apiUpdateDriverDetail = `${mainAPI}/Api/Admin/UpdateDriverInfo/${driverId}`;
+  const apiUpdateDriverDetail = `${mainAPI}/Api/Admin/UpdateInfo/Driver/${driverId}`;
   const [driverDetail, setDriverDetail] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState();
   const [updating, setUpdating] = useState(false);
-  const [backup, setBackUp] = useState({});
+  const [newData, setNew] = useState({});
   const [edit, setEdit] = useState(false);
   const [refresh, setRefresh] = useState(false);
   const jwt = JSON.parse(localStorage.getItem("jwt"));
@@ -40,8 +41,27 @@ const DriverDetail = () => {
       }
       const data = await res.json();
       if (data && res.ok) {
-        setDriverDetail(data);
-        setBackUp(data);
+       
+        let info ={
+          id:data.id,
+          role:data.role,
+          status:data.status,
+          owner:data.vehicleOwner,
+          driverName:data.driverName,
+          licensePic: data.licensePic,
+          licenseNumber:data.licenseNumber,
+          driverPic:data.driverPic,
+          phoneNumber:data.phoneNumber,
+          birthDate:data.birthDate,
+          experience: data.experience,
+          licenseGrade: data.licenseGrade,
+          gender:data.gender,
+          licenseIssueDate: data.licenseIssueDate,
+          licenseExpireDate: data.licenseExpireDate
+        }
+        setDriverDetail(info);
+        console.log(data)
+        setNew(info)
       }
       if (res.status == 400) {
         setError("Invalid API server 400");
@@ -70,36 +90,57 @@ const DriverDetail = () => {
     });
   };
   // ********************* UPDATE DRIVER INFO FUNCTION
-  const updateDriverInfo = async () => {
-    setEdit(false);
-    const options = {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: `Bearer ${jwt}`,
-      },
-      body: JSON.stringify(driverDetail),
-    };
+  const handleFormSubmit =async () => {
+  
+    console.log(newData,'hiiiiiiiiiii');
+    const driver = new FormData();
+    driver.append("driverName", newData.driverName);
+    // driver.append("licensePic", newData.licensePic);
+    driver.append("licenseNumber", '');
+    // driver.append("driverPic", newData.driverPic);
+    driver.append("driverPhone", '');
+    driver.append("birthDate", newData.birthDate);
+    driver.append("experience", newData.experience);
+    driver.append("licenseGrade", newData.licenseGrade);
+    driver.append("gender", newData.gender);
+    driver.append("licenseIssueDate", newData.licenseIssueDate);
+    driver.append("licenseExpireDate", newData.licenseExpireDate);
 
     try {
-      const response = await fetch(apiUpdateDriverDetail, options);
-      const result = await response.json();
-      console.log(result);
-      showSuccessMessage(result);
-    } catch (e) {
-      setError(e.message);
-      showErrorMessage(e.message);
-      //console.log(e.message);
+      const response = await axios.put(
+        apiUpdateDriverDetail,
+        driver,
+        {
+          headers: {
+            "Content-Type": "auto",
+            Authorization: `Bearer ${jwt}`,
+          },
+        }
+      );
+      localStorage.setItem("message", JSON.stringify(response.data["message"]));
+      const mess = localStorage.getItem("message");
+      if (response.status == 200) {
+        console.log("updated successful");
+        showSuccessMessage({ message: mess });
+        setRefresh(!refresh);
+      } else {
+        console.log("failed");
+        swal("Update Failed", mess || "Server respond 500", "error");
+      }
+    } catch (error) {
+      console.error(error);
+      showErrorMessage(error);
     } finally {
       setUpdating(false);
-      getDetail();
+      setRefresh(!refresh);
+      setEdit(false);
     }
+
   };
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     if (
-      driverDetail.id.toString() == "" ||
       driverDetail.phoneNumber == "" ||
       driverDetail.birthDate == "" ||
       driverDetail.driverName == "" ||
@@ -121,14 +162,22 @@ const DriverDetail = () => {
         buttons: [false, "cancel"],
       });
     } else {
-      updateDriverInfo();
+      handleFormSubmit();
       setUpdating(true);
     }
   };
   //HANDLING EDITED DATA
   const handleChange = (e) => {
-    setDriverDetail({ ...driverDetail, [e.target.name]: e.target.value });
-  };
+      const { name, value } = e.target;
+      setDriverDetail({ ...driverDetail,
+        [e.target.name]: e.target.value })
+      setNew((prevData) => ({
+        ...prevData,
+        [name]: value || prevData[name], // Keep the existing value if the input is empty
+      }))
+
+    };
+  
 
   /*********Enable disable user */
   const enableUser = async () => {
@@ -236,7 +285,7 @@ const DriverDetail = () => {
               }}
               onClick={() => {
                 setEdit(!edit);
-                setDriverDetail(backup);
+                // setDriverDetail(backup);
               }}
             >
               {edit ? "Cancel" : "Edit"}
@@ -277,9 +326,9 @@ const DriverDetail = () => {
               <div className="flex-grow">
                 <label>Date Of Birth</label>
                 <input
-                  value={driverDetail.birthDate || ""}
+                  defaultValue={driverDetail.birthDate || ""}
                   name="birthDate"
-                  type="date"
+                  type="text"
                   disabled
                 />
               </div>
@@ -287,13 +336,13 @@ const DriverDetail = () => {
                 <label>Gender</label>
                 {!edit ? (
                   <input
-                    value={driverDetail.gender || ""}
+                    defaultValue={driverDetail.gender || ""}
                     name="gender"
                     disabled
                   />
                 ) : (
                   <select
-                    value={driverDetail.gender || ""}
+                    defaultValue={driverDetail.gender || ""}
                     name="gender"
                     onChange={(e) => handleChange(e)}
                   >
@@ -305,7 +354,7 @@ const DriverDetail = () => {
               <div className="flex-grow">
                 <label>Experience</label>
                 <input
-                  value={driverDetail.experience || ""}
+                  defaultValue={driverDetail.experience || ""}
                   name="experience"
                   disabled={!edit}
                   type="number"
@@ -324,27 +373,27 @@ const DriverDetail = () => {
               <div className="flex-grow">
                 <label>Licence IssueDate</label>
                 <input
-                  value={driverDetail.licenseIssueDate || ""}
+                  defaultValue={driverDetail.licenseIssueDate || ""}
                   name="licenseIssueDate"
                   disabled={!edit}
-                  type="date"
+                  type="text"
                   onChange={(e) => handleChange(e)}
                 />
               </div>
               <div className="flex-grow">
                 <label>Licence ExpireDate</label>
                 <input
-                  value={driverDetail.licenseExpireDate || ""}
+                  defaultValue={driverDetail.licenseExpireDate || ""}
                   name="licenseExpireDate"
                   disabled={!edit}
-                  type="date"
+                  type="text"
                   onChange={(e) => handleChange(e)}
                 />
               </div>
               <div className="flex-grow">
                 <label>Licence Grade</label>
                 <input
-                  value={driverDetail.licenseGrade || ""}
+                  defaultValue={driverDetail.licenseGrade || ""}
                   name="licenseGrade"
                   disabled={!edit}
                   type="text"
@@ -354,11 +403,10 @@ const DriverDetail = () => {
               <div className="flex-grow">
                 <label>Licence Number</label>
                 <input
-                  value={driverDetail.licenseNumber || ""}
+                  defaultValue={driverDetail.licenseNumber || ""}
                   name="licenseNumber"
-                  disabled={!edit}
+                  disabled
                   type="number"
-                  onChange={(e) => handleChange(e)}
                 />
               </div>
               <div
@@ -378,8 +426,8 @@ const DriverDetail = () => {
                     objectFit: "cover",
                     borderRadius: "5px",
                     display: "block",
-                    width: "100%",
-                    height: "100%",
+                    width: "50%",
+                    height: "50%",
                     overflow: "hidden",
                     marginBottom: "10px",
                   }}
@@ -406,7 +454,7 @@ const DriverDetail = () => {
               <div className="flex-grow">
                 <label>Vehicle Owner</label>
                 <input
-                  value={driverDetail.vehicleOwner || ""}
+                  value={driverDetail.owner || ""}
                   name="vehicleOwner"
                   disabled
                 />

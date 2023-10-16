@@ -27,10 +27,11 @@ import CargoOwnerRegistration from "./Registration/CargoOwnerRegistration";
 import CargoDetail from "./pages/User/CargoDetail";
 import Settings from "./components/Settings/Settings";
 import SettingsUpdate from "./components/Settings/SettingsUpdate";
-
+import Alerts from './components/Alerts/Alerts'
+import AlertsHistory from "./components/Alerts/AlertHistory";
 function App() {
   const { currentUser } = useUserContext();
-
+  // {currentUser || null ? '' : localStorage.removeItem('jwt')}
   return (
     <>
       <BrowserRouter>
@@ -41,8 +42,9 @@ function App() {
                 <Navigation />
 
                 <div className="main-container">
+                  
                   <div className="container_mv">
-                    <SideBar />
+                  <SideBar />
                     <Routes>
                       <Route path="/" element={<Homepage />} />
                       <Route path="/dashboard" element={<Homepage />}></Route>
@@ -66,7 +68,7 @@ function App() {
                         element={<CargoDetail />}
                       />
                       <Route path="/users/:role/:id" element={<UserDetail />} />
-                      <Route path="/settings" element={<Settings />} />
+                      <Route path="/settings" element={<SettingsUpdate />} />
                       <Route
                         path="/settingsUpdate"
                         element={<SettingsUpdate />}
@@ -99,6 +101,14 @@ function App() {
                       <Route
                         path="/market/marketDetail/:id"
                         element={<MarketDetail />}
+                      />
+                      <Route
+                        path="/alerts"
+                        element={<Alerts />}
+                      />
+                       <Route
+                        path="/alerthistory"
+                        element={<AlertsHistory />}
                       />
                       <Route path="*" element={<ErrorPage />} />
                     </Routes>

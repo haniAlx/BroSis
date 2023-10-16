@@ -3,6 +3,7 @@
   column-gap: 20px;
 }
 .underline {
+  border: none;
   border-bottom: 1px solid black;
 }
 .cargo-d p:last-child {
@@ -11,4 +12,7 @@
 }
 .cargo-d {
   margin-bottom: 20px;
+}
+:disabled{
+  cursor: not-allowed;
 }

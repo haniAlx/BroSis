@@ -224,12 +224,12 @@ const cargoDetail = () => {
       );
       localStorage.setItem("message", JSON.stringify(response.data["message"]));
       const mess = localStorage.getItem("message");
-      if (response.ok) {
-        console.log("updated successful");
+      if (response.status === 200) {
+        console.log(mess);
         showSuccessMessage({ message: mess });
         setRefresh(!refresh);
-      } else {
-        console.log("failed");
+       } else {
+        console.log(mess);
         swal("Update Failed", mess || "Server respond 500", "error");
       }
     } catch (error) {
@@ -291,11 +291,11 @@ const cargoDetail = () => {
   };
 
   return (
-    <div className="main-bar-wrapper">
+    <div className="main-bar">
       {loading ? <LoadingPage message={"loading data"} /> : ""}
       {updating ? <LoadingPage message={"updating data"} /> : ""}
 
-      <div className="main-bar">
+      <div className="main-bar-wrapper">
         {/* **************** USER DETAIL MAINBAR */}
         <div
           style={{
@@ -310,7 +310,7 @@ const cargoDetail = () => {
         <div className="manage-window  detail-content mx-auto">
           <form onSubmit={(e) => handleSubmit(e)}>
             {/* **************** Company Information */}
-            <p className="detail-part">Company  Information</p>
+            <p className="detail-part">Cargo Owner Information</p>
             <hr />
 
             {/* *******************  OWNER ADDRESS DIV ****************/}

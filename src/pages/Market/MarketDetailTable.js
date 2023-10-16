@@ -13,7 +13,7 @@ const MarketDetailTable = ({ target, marketStatus, cargoId }) => {
     setpostPerPage(pageSize);
     console.log(pageSize);
   };
-
+console.log(target)
   useEffect(() => {
     setPage(1);
   }, [target]);
@@ -62,11 +62,14 @@ const MarketDetailTable = ({ target, marketStatus, cargoId }) => {
                         className="btn btn-bg-blue"
                         style={{ height: "30px" }}
                         onClick={() => {
+                          // console.log(item.driverPhone)
                           setShowpay(true);
                           setDriverPhone(item.driverPhone);
                         }}
+                        disabled={item.payment == "PAID" ?  true : false}
                       >
-                        Pay
+                        {item.payment == "PAID" ?  'PAID' :'Pay'
+                      }
                       </button>
                     </td>
                   ) : (

@@ -1,6 +1,8 @@
 .nav-container {
-  height: 60px;
-  background-color: rgb(53, 45, 192);
+  height: 70px;
+  box-shadow: -1px 2px 12px 1px rgba(200, 224, 247, 0.75);
+-webkit-box-shadow: -1px 2px 12px 1px rgba(200, 215, 228, 0.75);
+-moz-box-shadow: -1px 2px 12px 1px rgba(167, 207, 242, 0.75);
   margin-bottom: 50px;
 }
 .nav-items {
@@ -12,8 +14,7 @@
   margin-right: 50px;
 }
 .nav-logo .logo {
-  color: rgb(254, 254, 254);
-  font-size: 30px;
+  color: black;  font-size: 30px;
   font-weight: 700;
 }
 .nav-list {

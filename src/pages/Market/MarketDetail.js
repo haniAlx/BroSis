@@ -74,9 +74,15 @@ const MarketDetail = () => {
     };
     getCargoDetail();
     getCargoDriver();
+
+   
   }, [refresh]);
 
- 
+
+  const handleRefresh = () => {
+    setRefresh(!refresh)
+
+  };
   return (
     <div className="main-bar">
       <div>
@@ -129,6 +135,7 @@ const MarketDetail = () => {
                 remaining={remaining}
                 cargoDriver={cargoDriver}
                 chartData={chartData}
+                handleRefresh={handleRefresh}
               />
               ) : (
                
@@ -152,6 +159,7 @@ const ActiveMarket = ({
   weight,
   remaining,
   cargoDriver,
+  handleRefresh,
   chartData,
 }) => {
   const id = cargoData.id;
@@ -181,17 +189,18 @@ const ActiveMarket = ({
       showErrorMessage({ message: e.message });
     }
   };
-  //
+  //useEffect
+
   return (
-    <>
-      <div className="chart-container char-market">
+    <div onClick={handleRefresh}>
+      <div  className="chart-container char-market">
         <CircularBar
           text={loading ? "loading" : "Finished"}
           max={((weight - remaining) / weight) * 100}
           color={"green"}
           bgcolor={"#88F6A0"}
         />
-        <div>
+        <div >
           <p>
             Total weight <span style={{ fontWeight: "bold" }}> {weight}</span>
           </p>
@@ -277,20 +286,67 @@ const ActiveMarket = ({
         marketStatus={cargoData.status}
         cargoId={cargoData.id}
       />
-    </>
+    </div>
   );
 };
 //New Market data
 const NewMarket = ({ cargoData, reload, setReload }) => {
   const [price, setPrice] = useState();
+  const [isPaid,setIsPaid]=useState(false)
+  const [amount,setAmount]=useState()
   const [loading, setLoading] = useState(false);
+  //handle post to cargo owner
+  const jwt = JSON.parse(localStorage.getItem("jwt"));
+  const handlePostCaroOwner = () => {
+    if (!amount) {
+      showErrorMessage({ message: "Please set Amount" });
+    } else postAmount();
+  };
+  const postAmount = async () => {
+   
+    const item = { price:amount };
+    console.log(item)
+    const id = cargoData.id;
+    console.log("user id is", id);
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${jwt}`,
+      },
+      body: JSON.stringify(item),
+    };
+    const api = `${mainAPI}/Api/Admin/setCargoOwnerPrice/${id}`;
+    setLoading(true);
+    try {
+      const res = await fetch(api, options);
+      const data = await res.json();
+      localStorage.setItem('message',JSON.stringify(data["message"]))
+      const message = localStorage.getItem('message')
+      if (res.ok) {
+        
+        showSuccessMessage({ message: message });
+        // setIsPaid(!isPaid)
+      }
+      else{
+        showErrorMessage({ message:message});
+      }
+    } catch (e) {
+      showErrorMessage({ message: e });
+    } finally {
+      setLoading(false);
+      setReload(reload); // Reloading the Page for getting status;
+    }
+  };
+
+  /// handle post to drivers
   const handlePost = () => {
     if (!price) {
       showErrorMessage({ message: "Please set Price" });
     } else postJob();
   };
   const postJob = async () => {
-    const jwt = JSON.parse(localStorage.getItem("jwt"));
     const item = { price: price };
     const id = cargoData.id;
     console.log("user id is", id);
@@ -320,7 +376,68 @@ const NewMarket = ({ cargoData, reload, setReload }) => {
   };
   return (
     <div>
-      {loading ? <LoadingPage message={"Posting Cargo"} /> : ""}
+      {loading ? <LoadingPage message={isPaid ?"Posting Cargo" : 'Sending Amount'} /> : ""}
+      
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-around",
+          flexWrap: "wrap",
+          maxWidth: "800px",
+          rowGap: "25px",
+          marginTop: "30px",
+          marginLeft: "130px",
+          marginRight: "auto",
+        }}
+      >
+        
+        <div>
+          <div className="cargo-d">
+            <p>Date</p>
+            <p className="underline"> {cargoData.date}</p>
+          </div>
+          <div className="cargo-d">
+            <p>Packaging </p>
+            <p className="underline">{cargoData.packaging}</p>
+          </div>
+        </div>
+        <div>
+          <div className="cargo-d">
+            <p>Phone Number</p>
+            <p className="underline"> {cargoData.payment || "NULL"}</p>
+          </div>
+          <div className="cargo-d">
+            <p>Cargo Type</p>
+            <p className="underline"> {cargoData.cargoType}</p>
+          </div>
+        </div>
+        <div>
+          <div className="cargo-d">
+            <p style={{ textAlign: "center" }}>Trip</p>
+            <p className="underline">
+              {cargoData.pickUp} <span style={{ fontWeight: "bold" }}>To</span>{" "}
+              {cargoData.dropOff}
+            </p>
+          </div>
+          <div className="cargo-d">
+            <p>Payment Amount</p>
+            <input
+            className="underline"
+            style={{
+            marginTop: '10px',
+            marginLeft: 'auto',
+            marginRight: 'auto'}}
+            type="text"
+            placeholder="Amount"
+            required
+            onChange={(e) => setAmount(e.target.value)}
+          />
+          </div>
+        </div>
+      </div>
+      <button className="btn w-300 mx-auto"
+      // disabled={isPaid}  
+      onClick={()=>handlePostCaroOwner()}>Send</button>
       <div className="manage-window input new-market-inputs">
         <div>
           <label>Cargo Owner</label>
@@ -350,12 +467,15 @@ const NewMarket = ({ cargoData, reload, setReload }) => {
           <label>Price</label>
           <input
             type="text"
+            
             required
             onChange={(e) => setPrice(e.target.value)}
           />
         </div>
       </div>
-      <button className="btn w-300 mx-auto" onClick={() => handlePost()}>
+      <button className="btn w-300 mx-auto" 
+      // disabled={!isPaid}
+      onClick={() => handlePost()}>
         Post
       </button>
     </div>

@@ -150,6 +150,7 @@ const CompanyOwnerRegistration = () => {
           const data = await res.json();
           if (data && res.ok) {
             setcompanyType(data.companyTypes);
+            console.log(data.companyTypes[0].companyType)
           }
           if (res.status == 400) {
             setError("Invalid API server 400");
@@ -183,7 +184,7 @@ const CompanyOwnerRegistration = () => {
           const data = await res.json();
           if (data && res.ok) {
             setVehicleConditions(data.vehicleConditions);
-            console.log(data.vehicleConditions);
+            // console.log(data.vehicleConditions);
           }
         } catch (e) {
           showErrorMessage(e);
@@ -339,13 +340,13 @@ const CompanyOwnerRegistration = () => {
       <div className="manage-window  detail-content mx-auto">
         <form onSubmit={handleSubmit(handleFormSubmit)}>
               <div className="registrationChoicee">
-                    <button className="Active">Company</button>
-                    <Link to='/IndividualRegister'> <button>Individual</button></Link>  
-                    <Link to='/cargoOwnerRegister'><button>Cargo</button></Link>
+                    <h3 className="Active">Company</h3>
+                    <Link className="link" to='/IndividualRegister'> <h3>Individual</h3></Link>  
+                    <Link  className="link" to='/cargoOwnerRegister'><h3>Cargo</h3></Link>
               </div>
               <hr />
               <br/>
-              <h2>Company Information</h2>
+              <h3>Company Information</h3>
               <br/>
           <div
                     style={{
@@ -395,7 +396,7 @@ const CompanyOwnerRegistration = () => {
               >
                 <option value={""}>Select Company Type</option>
                 {
-                            companyType.map((index,item) => {
+                            companyType.map((item,index) => {
                                 return <>
                                     <option key={index}>{item.companyType}</option>
                                 </>
@@ -442,7 +443,7 @@ const CompanyOwnerRegistration = () => {
                 </div>
          </div>
          <br/>
-         <h2>Owner Information</h2>
+         <h3>Owner Information</h3>
          <br/>
          <div
            style={{
@@ -482,7 +483,7 @@ const CompanyOwnerRegistration = () => {
 
         </div>
         <br/>
-        <h2>Additional Information</h2>
+        <h3>Additional Information</h3>
         <br/>
              <div
              
@@ -505,7 +506,7 @@ const CompanyOwnerRegistration = () => {
               >
                 <option value={""}>Select Service Required</option>
                 {
-                            service.map((index,item) => {
+                            service.map((item,index) => {
                                 return <>
                                     <option key={index}>{item.service}</option>
                                 </>
@@ -535,7 +536,7 @@ const CompanyOwnerRegistration = () => {
               >
                 <option value={""}>Select Notification media</option>
                 {
-                            notification.map((index,item) => {
+                            notification.map((item,index) => {
                                 return <>
                                     <option key={index}>{item.medium}</option>
                                 </>
@@ -576,7 +577,7 @@ const CompanyOwnerRegistration = () => {
                       >
                         <option value={""}>Select Service Required</option>
                         {
-                                    vehicleCatagory.map((index,item) => {
+                                    vehicleCatagory.map((item,index) => {
                                         return <>
                                             <option key={index}>{item.catagory}</option>
                                         </>
@@ -606,7 +607,7 @@ const CompanyOwnerRegistration = () => {
                   >
                     <option value={""}>Select vehicle condition</option>
                     {
-                                vehicleConditions.map((index,item) => {
+                                vehicleConditions.map((item,index) => {
                                     return <>
                                         <option key={index}>{item.conditionName}</option>
                                     </>

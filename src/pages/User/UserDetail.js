@@ -286,10 +286,14 @@ const enableUser = async () => {
     setLoading(true);
     try {
       const res = await fetch(EnableDisableApi, options);
+      const data = await res.json();
       if (res.ok) {
-        const data = await res.json();
+       
         setRefresh(!refresh)
         showSuccessMessage({ message: data.message });
+      }
+      else{
+        showErrorMessage({ message: data.message })
       }
     } catch (e) {
       showErrorMessage({ message: e });
@@ -300,11 +304,11 @@ const enableUser = async () => {
   };
 
   return (
-    <div className="main-bar-wrapper">
+    <div className="main-bar">
       {loading ? <LoadingPage message={"loading data"} /> : ""}
       {updating ? <LoadingPage message={"updating data"} /> : ""}
 
-      <div className="main-bar">
+      <div className="main-bar-wrapper">
         {/* **************** USER DETAIL MAINBAR */}
         <div
           style={{
@@ -330,7 +334,8 @@ const enableUser = async () => {
            
             <hr />
 
-            <div
+           { role === "OWNER" &&
+           <div
               style={{
                 display: "flex",
                 columnGap: "20px",
@@ -386,7 +391,7 @@ const enableUser = async () => {
                   </select>
                 )}
               </div>
-            </div>
+            </div>}
             {/* *******************  OWNER ADDRESS DIV ****************/}
 
             {role === "INDIVIDUAL" ? (

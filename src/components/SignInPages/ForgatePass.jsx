@@ -76,7 +76,7 @@ export default function ForgatePass(){
                         <h1>Generate Pin</h1>
                         <div className='Signin'>
                             <label>Phone number</label>
-                            <input type='phone'
+                            <input className="signInput" type='phone'
                              placeholder='Enter your phone number'
                              value = {phoneNumber} onChange={e => {
                                 setPhoneNumber(e.target.value)
