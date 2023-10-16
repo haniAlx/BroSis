@@ -1,10 +1,10 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { useSearchParams } from "react-router-dom";
 import { mainAPI } from "../../components/mainAPI";
 import { showErrorMessage } from "../../components/SwalMessages";
-import SettingList from './SettingList'
-import SettingTable from './SettingTable'
+import SettingList from "./SettingList";
+import SettingTable from "./SettingTable";
 
 const SystemSetting = () => {
   const [show, setShow] = useState(false);
@@ -440,9 +440,7 @@ const SystemSetting = () => {
     getVehicleCatagory();
     getvehicleCondition();
     getCargoType();
- 
 
-    
     setTableData(role);
     setname("Role");
   }, []);
@@ -450,12 +448,12 @@ const SystemSetting = () => {
     {
       title: "Role",
       data: role.length || 0,
-       name: "Role",
+      name: "Role",
     },
     {
       title: "Notification",
       data: notification.length || 0,
-      
+
       name: "Notification",
     },
     {
@@ -466,18 +464,18 @@ const SystemSetting = () => {
     {
       title: "Driver State",
       data: driverState.length || 0,
-      
+
       name: "DriverState",
     },
     {
       title: "Alert Type",
       data: alertType.length || 0,
-       name: "AlertType",
+      name: "AlertType",
     },
     {
       title: "Business Sector",
       data: businessSector.length || 0,
-      
+
       name: "BusinessSector",
     },
     {
@@ -493,12 +491,12 @@ const SystemSetting = () => {
     {
       title: "Vehicle Catagory",
       data: vehicleCatagory.length || 0,
-       name: "VehicleCatagory",
+      name: "VehicleCatagory",
     },
     {
       title: "Logo Avatar",
-      data: {LogoAvatar},
-      
+      data: { LogoAvatar },
+
       name: "LogoAvatar",
     },
     {
@@ -514,12 +512,12 @@ const SystemSetting = () => {
     {
       title: "Company Sector",
       data: companySector.length || 0,
-       name: "CompanySector",
+      name: "CompanySector",
     },
     {
       title: "CompanyType",
       data: companyType.length || 0,
-      
+
       name: "CompanyType",
     },
     {
@@ -528,7 +526,6 @@ const SystemSetting = () => {
       name: "service",
     },
   ];
-
 
   const handleChange = (name) => {
     setShowSetting(true);
@@ -615,18 +612,24 @@ const SystemSetting = () => {
   // };
 
   const showSettingList = () => {
-    setShow(!show);
-    // const listSettingContainer = document.getElementById("show-setting");
-    // listSettingContainer.style.maxHeight = "auto";
-    // listSettingContainer.style.overflow = "auto";
-    // console.log("setting");
+    const listSettingContainer = document.getElementById("show-setting");
+    const listarrow = document.getElementById("list-arrow");
+    console.log(listSettingContainer);
+    if (listSettingContainer.classList.contains("show-list")) {
+      listSettingContainer.classList.remove("show-list");
+    } else {
+      listSettingContainer.classList.add("show-list");
+    }
+    if (listarrow.classList.contains("rotate")) {
+      listarrow.classList.remove("rotate");
+    } else listarrow.classList.add("rotate");
   };
   return (
     <div className="setting-cards">
-         {showSetting && (
+      {showSetting && (
         <SettingTable
-        name={name}
-        setShowSetting={setShowSetting}
+          name={name}
+          setShowSetting={setShowSetting}
           target={tableData}
         />
       )}
@@ -635,21 +638,24 @@ const SystemSetting = () => {
         onClick={() => showSettingList()}
       >
         SystemSetting
-        <MdKeyboardArrowDown size={20} />
+        <MdKeyboardArrowDown size={20} className="list-arrow" id="list-arrow" />
       </div>
       {show && (
         <div className="setting-list-container" id="show-setting">
           <ul className="setting-sublist">
             {ListCardDetail.map((item, index) => (
-                 <li key={index}>  <SettingList
-                      title={item.title}
-                      data={item.data}
-                      key={index}
-                      handleCardChange={() => handleChange(item.name)}
-                      active={activeCard}
-                      name={item.name}
-                    /></li> 
-                  ))}
+              <li key={index}>
+                {" "}
+                <SettingList
+                  title={item.title}
+                  data={item.data}
+                  key={index}
+                  handleCardChange={() => handleChange(item.name)}
+                  active={activeCard}
+                  name={item.name}
+                />
+              </li>
+            ))}
           </ul>
         </div>
       )}

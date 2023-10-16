@@ -21,7 +21,18 @@
   padding: 10px 20px;
 } */
 .setting-list-container {
-  transition: max-height 1s;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out;
+}
+.setting-list-container.show-list {
+  max-height: 150px;
+}
+.list-arrow {
+  transform: rotate(0deg);
+}
+.rotate {
+  transform: rotate(180deg);
 }
 .span{
   font-weight: bolder;
