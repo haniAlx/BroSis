@@ -10,6 +10,7 @@ import axios from "axios";
 import LoadingPage from "../../components/LoadingPage";
 
 const Paymodal = ({ setShowpay, cargoId, driverPhone }) => {
+
   const [weybill, setWeybill] = useState("");
   const [f1form, setF1form] = useState("");
   const [amount, setAmount] = useState("");
@@ -36,7 +37,8 @@ const Paymodal = ({ setShowpay, cargoId, driverPhone }) => {
     }
     const confirm = await showConfirmationMessage();
     if (confirm) {
-      payDriver();
+      // payDriver();
+      console.log(driverPhone)
     }
   };
   const payDriver = async () => {
@@ -66,8 +68,18 @@ const Paymodal = ({ setShowpay, cargoId, driverPhone }) => {
           Authorization: `Bearer ${jwt}`,
         },
       });
-      console.log(res);
-      showSuccessMessage({ message: "Payment success" });
+      // console.log(res);
+      // showSuccessMessage({ message: "Payment success" });
+      localStorage.setItem("message", JSON.stringify(res.data["message"]));
+      const mess = localStorage.getItem("message");
+      if (res.status == 200) {
+        console.log(mess, "paid successful");
+        showSuccessMessage({ message: mess });
+        setShowpay(false)
+      } else {
+        console.log(mess,"failed");
+        swal("paing Failed", mess || "Server respond 500", "error");
+      }
     } catch (e) {
       showErrorMessage({ message: e.message });
     } finally {
@@ -127,7 +139,7 @@ const Paymodal = ({ setShowpay, cargoId, driverPhone }) => {
               onChange={(e) => setAmount(e.target.value)}
               required
             />
-            <button className=" btn w-300 mx-auto btn-bg-blue">Pay</button>
+            <button className=" btn w-300 mx-auto btn-bg-blue" onClick={()=>payDriver()}>Pay</button>
           </form>
         </div>
       </div>
