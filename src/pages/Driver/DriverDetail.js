@@ -17,9 +17,11 @@ const DriverDetail = () => {
   const [driverDetail, setDriverDetail] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState();
+  const [enabled,setEnabled]=useState('')
   const [updating, setUpdating] = useState(false);
   const [newData, setNew] = useState({});
   const [edit, setEdit] = useState(false);
+  const [date,setDate]=useState('dateString')
   const [refresh, setRefresh] = useState(false);
   const jwt = JSON.parse(localStorage.getItem("jwt"));
   const options = {
@@ -61,6 +63,7 @@ const DriverDetail = () => {
         }
         setDriverDetail(info);
         console.log(data)
+        setEnabled(data.enabled)
         setNew(info)
       }
       if (res.status == 400) {
@@ -75,6 +78,10 @@ const DriverDetail = () => {
     }
   };
   //*********USE EFFECT FOR CALLING getDetail
+  useEffect(()=>{
+
+    setDate(edit ?"date" :"dateString")
+  },[edit])
   useEffect(() => {
     setEdit(false);
     setError("");
@@ -206,6 +213,7 @@ const DriverDetail = () => {
      // Reloading the Page for getting status;
     }
   };
+  console.log(driverDetail)
   return (
     <div className="main-bar">
       <div
@@ -251,29 +259,34 @@ const DriverDetail = () => {
                 display:'flex',
                 alignItems:'center',
                 justifyContent:'space-between',
-                width: "200px",
+                width: "250px",
                 height: "100px",
                 marginLeft: "auto",
-                marginRight: "auto",
+                marginRight: "auto"
               }}
             >
-              <img
-                src={driverDetail.driverPic || ""}
-                alt={`${driverDetail.driverName || ""} pic`}
-                style={{
-                  display: "block",
-                  // objectFit: "cover",
-                  width: "60%",
-                  height: "100%",
-                  borderRadius: "50%",
-                }}
-              />
-               {driverDetail.enabled == true ? <BsToggleOn onClick={()=>enableUser()} style={{color:'green'}} size="3rem"></BsToggleOn> : 
-             <BsToggleOff onClick={()=>enableUser()}style={{color:'red'}}size="3rem"></BsToggleOff>
-                                        }
+                <img
+                  src={driverDetail.driverPic || ""}
+                  alt={`${driverDetail.driverName || ""} pic`}
+                  style={{
+                    display: "block",
+                    // objectFit: "cover",
+                    width: "50%",
+                    height: "100%",
+                    borderRadius: "50%"
+                  }}
+                />
+                <div>
+                {enabled === true ? 
+                <BsToggleOn onClick={()=>enableUser()} style={{color:'green'}} size="3rem"></BsToggleOn> : 
+              <BsToggleOff onClick={()=>enableUser()}style={{color:'red'}}size="3rem"></BsToggleOff>
+                                          }
+               <p className="driver-name" >{driverDetail.driverName || ""}</p>
+                </div>
+               
             </div>
 
-            <p className="driver-name">{driverDetail.driverName || ""}</p>
+           
             <span
               className={`btn ${edit ? "btn-bg-lightred" : "btn-bg-gray"}`}
               style={{
@@ -328,7 +341,7 @@ const DriverDetail = () => {
                 <input
                   defaultValue={driverDetail.birthDate || ""}
                   name="birthDate"
-                  type="text"
+                  type="dateString"
                   disabled
                 />
               </div>
@@ -354,7 +367,8 @@ const DriverDetail = () => {
               <div className="flex-grow">
                 <label>Experience</label>
                 <input
-                  defaultValue={driverDetail.experience || ""}
+                  defaultValue={driverDetail.experience
+                    || ""}
                   name="experience"
                   disabled={!edit}
                   type="number"
@@ -376,7 +390,7 @@ const DriverDetail = () => {
                   defaultValue={driverDetail.licenseIssueDate || ""}
                   name="licenseIssueDate"
                   disabled={!edit}
-                  type="text"
+                  type={date}
                   onChange={(e) => handleChange(e)}
                 />
               </div>
@@ -386,7 +400,7 @@ const DriverDetail = () => {
                   defaultValue={driverDetail.licenseExpireDate || ""}
                   name="licenseExpireDate"
                   disabled={!edit}
-                  type="text"
+                  type={date}
                   onChange={(e) => handleChange(e)}
                 />
               </div>

@@ -136,6 +136,8 @@ function Drivers({ driverData }) {
   };
   return (
     <div className="main-bar">
+     <div className=" main-bar-wrapper">
+
       {showManage && (
         <ManageDriver
           setShowManage={setShowManage}
@@ -148,7 +150,6 @@ function Drivers({ driverData }) {
       )} */}
         <h2 style={{}}>Driver</h2>
         <hr className="hr" />
-        <div className="main-bar-content">
           {error ? (
             <>
               <p
