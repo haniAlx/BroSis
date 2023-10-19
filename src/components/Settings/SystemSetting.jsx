@@ -615,11 +615,27 @@ const SystemSetting = () => {
   // };
 
   const showSettingList = () => {
+<<<<<<< HEAD
     setShow(!show);
     // const listSettingContainer = document.getElementById("show-setting");
     // listSettingContainer.style.maxHeight = "auto";
     // listSettingContainer.style.overflow = "auto";
     // console.log("setting");
+=======
+    // const listSettingContainer = document.getElementById("show-setting");
+    // const listarrow = document.getElementById("list-arrow");
+    // console.log(listSettingContainer);
+    // if (listSettingContainer.classList.contains("show-list")) {
+    //   listSettingContainer.classList.remove("show-list");
+    // } else {
+    //   listSettingContainer.classList.add("show-list");
+    // }
+    // if (listarrow.classList.contains("rotate")) {
+    //   listarrow.classList.remove("rotate");
+    // } else listarrow.classList.add("rotate");
+    setShow(!show);
+    console.log(show);
+>>>>>>> b3eca52cec0cb4bdf22467d64020ca1f13d7f4c0
   };
   return (
     <div className="setting-cards">

@@ -2,6 +2,7 @@
   "name": "project",
   "version": "0.1.0",
   "private": true,
+  "main": "index.js",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -50,7 +51,11 @@
     "eslint-plugin-react": "^7.32.2"
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+<<<<<<< HEAD
   "main": "index.js",
+=======
+  
+>>>>>>> b3eca52cec0cb4bdf22467d64020ca1f13d7f4c0
   "repository": {
     "type": "git",
     "url": "git+https://github.com/haniAlx/BroSiss.git"
@@ -60,4 +65,5 @@
   "bugs": {
     "url": "https://github.com/haniAlx/BroSiss/issues"
   }
+  
 }
