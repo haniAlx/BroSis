@@ -1,43 +1,64 @@
 body{
   margin: 0;
+  padding: 0;
+
   }
   .SigninWrapper{
       display: flex;
-      width: 80%;
+      max-width: 70%;
+      width: 95%;
       height: 60vh;
-      /* border: 2px red solid; */
-      margin: 50px auto;
+      border-radius:2em;  
+      margin: 100px auto;
       box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.1),
       -6px -6px 12px rgba(255, 255, 255, 0.5);
-  
+      overflow: hidden;
+
   }
+  .confirmWrapper{
+    display: flex;
+    max-width: 70%;
+    width: 95%;
+    height: 90vh;
+    border-radius:2em;  
+    margin: 20px auto;
+    box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.1),
+    -6px -6px 12px rgba(255, 255, 255, 0.5);
+}
   label, input{
   display: block;
   }
-  .SigninForm h1{
-      font-size: 2rem;
-  margin: 1em;
-  }
+
   .SigninForm{
       display: flex;
       flex-direction: column;
       align-items: center;
       width:100%;
-      margin: 0 auto;
-      /* border: 2px solid green; */
+      margin: 10px ;
+      /* border: 2px solid blue; */
   }
-  .left-side {
-      display: none;
+  .left-side{
+    display: none;
+
+  }
+  .left-side p {
+font-size: 15px;  
+  }
+  .signInBold{
+    display: block;
+    font-weight: bolder;
+    margin-bottom: 1em;
   }
   .Signin{
   /* border: 2px solid green; */
-  width: 50%;
+  width: 90%;
+  align-items: center;
   }
-  .confirm{
-    /* border: 2px solid red; */
+  /* .confirm{
+    border: 2px solid red;
     width: 30%;
     height: 70%;
-  }
+  } */
   .signInput{
       width: 95%;
       border: 0.1px solid rgb(216, 213, 213);
@@ -48,23 +69,26 @@ body{
       background-color:rgb(226, 242, 247)
   
   }
+  .signintitle{
+    margin-bottom: 1em;
+  }
   input:focus{
     outline: none;
   }
   label{
-      font-size: x-large;
+  
       /* color: green; */
       font-weight: bolder;
   }
   .signIn-btn{
       margin-top: 1em;
-      padding: .7em;
+      padding: .5em;
       width: 60%;
-      border-radius: 1em;
+      border-radius: .5em;
       box-shadow: 1px 2px 0px .5px  rgb(177, 194, 175);
       text-align: center;
       font-size: larger;
-      font-weight:bolder ;
+      font-weight:bold ;
       background-color: rgb(187, 252, 187);
       border: none;
   }
@@ -97,48 +121,42 @@ body{
   
   /******************************/
   
-    @media screen and (min-width: 576px) {
-      .left-side{
+    @media screen and (min-width: 500px) {
+      /* .left-side{
           display: block;
         width: 100%;
         height: 30%;
         border-radius:2em 2em 0 0 ;
-        /* border: 2px solid red; */
-        background-color: rgb(194, 245, 194);
+        background-color: rgb(243, 243, 243);
         opacity: 80%;
       }
       .left-SideInner{
-          /* border: 2px solid red; */
           width: 95%;
           display: flex;
           flex-direction: column;
           align-items: center;
           margin: 0 auto;
   
-      }
+      } */
       .SigninWrapper{
           display: block;
-          /* border: 2px solid red; */
           border-radius:2em ;
-          height: 70vh;
+          /* height: 70vh; */
   
       }
     }
-  
    
-    @media screen and (min-width: 1024px) {
+    @media screen and (min-width: 700px) {
       /* CSS rules for larger screens go here */
       .SigninWrapper{
-          width: 50%;
+          width: 80%;
           display: flex;
-          margin: 140px auto;
-          border-radius: 0 2em  2em;  
           
        }
      .SigninForm{
       justify-content: center;
      }
-      .signIn-btn,.Signin{
+      .signIn-btn{
           width: 60%;
       }
       .left-side {
@@ -150,8 +168,18 @@ body{
         width: 50%;
         height: 100%;
         border-radius:2em 0 0 2em ;
-        /* border: 2px solid red; */
-        background-color: rgb(194, 245, 194);
+        /* border-right: 5px solid rgb(194, 245, 194); */
+        background-color:rgb(216, 213, 213);
         opacity: 80%;
       }
+      .confirmWrapper{
+        margin: 30px auto;
+       }
     }
+    @media screen and (min-width: 1000px) {
+      .SigninWrapper{
+        width: 50%;
+       
+     }
+    }
+   

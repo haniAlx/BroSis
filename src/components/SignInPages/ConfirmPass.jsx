@@ -97,10 +97,10 @@ export default function ConfirmPass(){
 }
     return(
         <>
-            <div className='SigninWrapper'>
+            <div className='confirmWrapper'>
                 <div className='left-side'>
                     <div className='left-SideInner'>
-                    <h2>Bazra Tracker System</h2>
+                    <span className="signInBold">Bazra Tracker System</span>
                     <p>This System controles every movement of a driver and 
                         deliver its package on time.
                     <strong>Trusted by Every one</strong> </p>
@@ -109,8 +109,8 @@ export default function ConfirmPass(){
                     </div>
                 </div>
                     <form  className='SigninForm' onSubmit={onSubmit}>
-                        <h1>Change Password</h1>
-                        <div className='Signin  confirm'>
+                        <h3>Change Password</h3>
+                        <div className='Signin'>
                             <label>Phone number</label>
                             <input className="signInput" type='text' 
                             placeholder='Enter your phone number'

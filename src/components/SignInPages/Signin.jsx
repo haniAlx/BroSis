@@ -102,17 +102,17 @@ export default function SignIn() {
       {showLoading && <LoadingPage message={"Loging You In please Wait"} />}
       <div className="SigninWrapper">
         <div className="left-side">
-          <div className="left-SideInner">
-            <h2>Bazra Tracker System</h2>
+          {/* <div className="left-SideInner"> */}
+            <span className="signInBold">Bazra Tracker System</span>
             <p>
               This System controles every movement of a driver and deliver its
               package on time.
               <strong>Trusted by Every one</strong>{" "}
             </p>
-          </div>
+          {/* </div> */}
         </div>
         <form className="SigninForm" onSubmit={validation}>
-          <h1>Sign in</h1>
+          <h3 className="signintitle">Sign in</h3>
           <div className="Signin">
             <label>Phone number</label>
             <input

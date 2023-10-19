@@ -64,7 +64,7 @@ export default function ForgatePass(){
             <div className='SigninWrapper'>
                 <div className='left-side'>
                     <div className='left-SideInner'>
-                    <h2>Bazra Tracker System</h2>
+                    <span className='signInBold'>Bazra Tracker System</span>
                     <p>This System controles every movement of a driver and 
                         deliver its package on time.
                     <strong>Trusted by Every one</strong> </p>
@@ -73,7 +73,7 @@ export default function ForgatePass(){
                     </div>
                 </div>
                     <form  className='SigninForm' onSubmit={onSubmit}>
-                        <h1>Generate Pin</h1>
+                        <h3 className='signintitle'>Generate Pin</h3>
                         <div className='Signin'>
                             <label>Phone number</label>
                             <input className="signInput" type='phone'
