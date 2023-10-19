@@ -46,7 +46,7 @@ function App() {
                   <div className="container_mv">
                   <SideBar />
                     <Routes>
-                      <Route path="/" element={<Homepage />} />
+                    <Route path="/" element={<Homepage />}></Route>
                       <Route path="/dashboard" element={<Homepage />}></Route>
                       <Route path="/vehicle" element={<Vehicle />} />
                       <Route path="/driver" element={<Drivers />} />

@@ -22,10 +22,11 @@ body::-webkit-scrollbar {
 }
 
 .container_mv {
+  padding-top: 8%;
   display: flex;
   justify-content: left;
   /* width: 80%; */
-  justify-content: center;
+  justify-content: space-around;
 }
 .search-bar {
   margin-top: 10px;
@@ -93,10 +94,10 @@ body::-webkit-scrollbar {
     max-width: 100%;
   }
   .sidebar-container {
-    display: block;
+    display: none;
   }
 }
-@media (min-width: 1300px) {
+@media (min-width: 1200px) {
   .main-container {
     max-width: 100%;
 
