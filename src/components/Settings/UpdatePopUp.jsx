@@ -1,25 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import swal from "sweetalert";
-import {addSetting} from './AddSettings'
+import {editSetting} from './AddSettings'
 import { FaEdit } from "react-icons/fa";
 
 export default function UpdatePopUp({target,id,title}) {
     const [popup, setPop] = useState(false);
-    const [data, setData] = useState('');
- 
-    useEffect(() => {
-        // Set the data state when the component mounts
-  
-      }, [target, id]);
+    const [data, setData] = useState();
+    const [value,setvalue]= useState()
+    const [logo, setLogo]= useState()
+    const [avatar,setAvatar]=useState()
 
-    const handleClickopen = () => {
-        const foundItem = target.find(item => item.id === id);
-        if (foundItem) {
-          setData(foundItem.value); // Assuming the value you want to display is in the 'value' property
+    const handleClickopen = () => {  
+        if (title === 'LogoAvatar')
+        {
+            console.log(target)
+            setAvatar(target[avatar])
+            setLogo(target[logo])
         }
-        else console.log('not working')
-        setPop(!popup);
+        else
+    {
+        const result = target.find(item => item.id === id);
+    console.log(result)
+    setData(result)
+}
+    setPop(!popup);
+
     }
 
     const closePopup = () => {
@@ -31,86 +37,120 @@ export default function UpdatePopUp({target,id,title}) {
 
     const { register, handleSubmit, watch, formState: { errors },
     } = useForm();
+    async function UpdateLogoAvatar() {
+        console.log('logp')
+        const formData = new FormData();
+    
+        // Append the first image to the FormData object if it exists
+        if (logo) {
+            formData.append("logo", logo);
+        }
+    
+        // Append the second image to the FormData object if it exists
+        if (avatar) {
+            formData.append("avatar", avatar);
+        }
+    
+        const options = {
+            method: "PUT",
+            headers: {
+                // Use "multipart/form-data" for file uploads
+                // Remove the "Content-Type" header since it's set automatically
+                "Accept": "application/json",
+                "Authorization": `Bearer ${jwt}`
+            },
+            body: formData, // Send the FormData object as the request body
+        };
+    
+        try {
+            const response = await fetch('http://164.90.174.113:9090/Api/Admin/UpdateLogo', options);
+            const result = await response.json();
+            console.log(result);
+            localStorage.setItem("message", JSON.stringify(result["message"]));
+            const mess = localStorage.getItem("message");
+            console.log(mess);
+            if (response.ok) {
+                swal("Successful",  `${mess}`, "success", {
+                    buttons: false,
+                    timer: 2000,
+                });
+                // setPop(false);
+            } else {
+                console.log("failed");
+                swal(`Failed To Register ${mess}`, "Error", "error");
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
+    
     const onSubmit = (data) => {
         console.log(title,'hii');
-        if (title === 'Role') {
+        if (title === 'name') {
             // Create_Role();
-            addSetting(title,value,`http://164.90.174.113:9090/Api/Admin/Update/Role/${id}`,jwt)
+            editSetting(title,value,`http://164.90.174.113:9090/Api/Admin/Update/Role/${id}`,jwt)
 
         }
-        if (title === 'DriverStatus') {
+        if (title === 'driverStatus') {
             // Create_Driver_Status();
-            addSetting(title,value,'http://164.90.174.113:9090/Api/Admin/CreateDriverStatus',jwt)
+            editSetting(title,value,'http://164.90.174.113:9090/Api/Admin/CreateDriverStatus',jwt)
 
         }
-        if (title === 'AlertType') {
+        
+        if (title === 'alertType') {
             // Create_Alert_Type();
-            addSetting(title,value,`http://164.90.174.113:9090/Api/Admin/AlertType/Update/${id}`,jwt)
+            editSetting(title,value,`http://164.90.174.113:9090/Api/Admin/AlertType/Update/${id}`,jwt)
 
         }
-        if (title === 'TripType') {
-            // Create_Trip_Type();
-            addSetting(title,value,`http://164.90.174.113:9090/Api/Admin/TripType/All/${id}`,jwt)
+        if (title === 'triptypes') {
+            console.log(value)
+            editSetting(title,value,`http://164.90.174.113:9090/Api/Admin/TripType/All/${id}`,jwt)
 
         }
-        if (title === 'Notification') {
+        if (title === 'medium') {
             // Add_Notification();
-            addSetting(title,value,`http://164.90.174.113:9090/Api/Admin/NotificationMedium/Update/${id}`,jwt)
+            editSetting(title,value,`http://164.90.174.113:9090/Api/Admin/NotificationMedium/Update/${id}`,jwt)
 
         }
-        if (title === 'VehicleCondition') {
+        if (title === 'conditionName') {
             // Add_Vehicle_Condition();
-            addSetting(title,value,`http://164.90.174.113:9090/Api/Admin/VehicleCondition/Update/${id}`,jwt)
+            editSetting(title,value,`http://164.90.174.113:9090/Api/Admin/VehicleCondition/Update/${id}`,jwt)
         }
-        if (title === 'VehicleCatagory') { 
+        if (title === 'catagory') { 
             // Add_vehicle_category();
-            addSetting(title,value,`http://164.90.174.113:9090/Api/Admin/VehicleCatagory/Update/${id}`,jwt)
+            editSetting(title,value,`http://164.90.174.113:9090/Api/Admin/VehicleCatagory/Update/${id}`,jwt)
 
         }
-        if (title === 'CompanySector') {
+        if (title === 'sectorName') {
             // Add_company_sector();
-            addSetting(title,value,`http://164.90.174.113:9090/Api/Admin/CompanySector/Update/${id}`,jwt)
+            editSetting(title,value,`http://164.90.174.113:9090/Api/Admin/CompanySector/Update/${id}`,jwt)
 
         }
-        if (title === 'CompanyType') {
+        if (title === 'companyType') {
             // Add_company_type();
-            addSetting(title,value,`http://164.90.174.113:9090/Api/Admin/CompanyType/Update/${id}`,jwt)
+            editSetting(title,value,`http://164.90.174.113:9090/Api/Admin/CompanyType/Update/${id}`,jwt)
 
         }
         if (title === 'service') {
             // Add_Service_Needed();
-            addSetting(title,value,`http://164.90.174.113:9090/Api/Admin/Services/Update/${id}`,jwt)
+            editSetting(title,value,`http://164.90.174.113:9090/Api/Admin/Services/Update/${id}`,jwt)
 
         }
 
     };
-    console.log(title,target,id,data)
 
     // const [notifications, setNotification] = useState("");
-    const [value,setvalue]= useState('')
-    
-    return ( 
-
-        <>
-            <div>
-                     <p className='notification_actions'>
-                            <FaEdit title='Edit' className='action_edit' size="1.4rem" color='green'
-                                onClick={handleClickopen}>
-
-                            </FaEdit>
-                     </p>
-            </div>
-                
-            <div>
-                {popup ?
-                    <div>
+    function output(){
+        if( popup && title !== 'LogoAvatar')
+        { return<>
                         <div className='popup0'> 
                             <div className='popup-innerq'>
-                                <div onClick={closePopup} className='close'>X</div>
+                                <div onClick={closePopup} className='popupclose'>
+                                <h2 className='popupTitle'>Edit {title}</h2>
+                                    X</div>
                                 <div className='fgf'>
-                                    <h2 className='mnm'>Edit {title}</h2>
-                                    <form className='form'  onSubmit={handleSubmit(onSubmit)}>
-                                    <input   defaultValue={data}   onChange={(e) => setData(e.target.value)}></input>
+                                    <form className='popupform'  onSubmit={handleSubmit(onSubmit)}>
+                                    <input   defaultValue={data[title]}   onChange={(e) => setvalue(e.target.value)}></input>
                                     <div className='send_button'>
                                         <button className='popup_add'>Update</button>
                                         <button onClick={closePopup} className='popup_cancle'>Cancle</button>
@@ -121,7 +161,44 @@ export default function UpdatePopUp({target,id,title}) {
 
                             </div>
                         </div>
-                    </div> :''
+                        </>
+                    }
+                  else if(popup && title === 'LogoAvatar')
+                  { 
+                  return <div className='popup0'> 
+                            <div className='popup-innerq'>
+                                <div onClick={closePopup} className='popupclose'>
+                                <h2 className='popupTitle'>Edit {title}</h2> <span>X</span>
+                                </div>
+                                    <form className='popupform'  onSubmit={handleSubmit(UpdateLogoAvatar)}>
+                                    <input  type='file' defaultValue={logo} placeholder='Logo' onChange={(e) => setLogo(e.target.files[0])}></input>
+                                    <input   type='file' defaultValue={avatar} placeholder='Avatar'  onChange={(e) => setAvatar(e.target.files[0])}></input>
+                                    <div className='send_button'>
+                                        <button className='popup_add'>Update</button>
+                                        <button onClick={closePopup} className='popup_cancle'>Cancle</button>
+                                    </div>
+                                    </form>
+
+                                
+
+                            </div>
+                     </div>
+                }
+    }
+    return ( 
+
+        <>
+            <div>
+                     <p className='notification_actions'>
+                            <FaEdit title='Edit' className='action_edit' size="1.4rem" color='green'
+                                onClick={()=>handleClickopen()}>
+
+                            </FaEdit>
+                     </p>
+            </div>
+                
+            <div>
+                {output()
                      }
             </div>
         </>
