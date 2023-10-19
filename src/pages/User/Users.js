@@ -237,10 +237,11 @@ const Users = () => {
   };
   return (
     <div className="main-bar">
+      <div className="main-bar-wrapper">
       <div>
         <h2 onClick={() => setRefresh(!refresh)} style={{}}>Users</h2>
         <hr className="hr" />
-        <div className="main-bar-content">
+        
           {error ? (
             <>
               <p
