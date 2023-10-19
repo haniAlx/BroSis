@@ -198,17 +198,21 @@ const AlertsHistory = () => {
 
   return (
     <div className="main-bar">
+              <div className="main-bar-wrapper">
+
       <div>
+        <h3>Alerts</h3>
+        <hr className="hr" />
         <div style={{display:'flex',
                 justifyContent:'space-around',
                 padding:'20px 0 30px 0'}}> 
-               <Link to='/alerts'> <h2 style={{}}>Current Alerts</h2></Link> 
-           <h2 style={{}}>Alerts History</h2>
+               <Link to='/alerts' style={{textDecoration:'none',fontWeight:'bold',color:'black'}}> 
+               <p >Current Alerts</p></Link> 
+           <p style={{ borderBottom:'2px solid black',fontWeight:'bold'}}>Alerts History</p>
            
         </div>
        
-        <hr className="hr" />
-        <div className="main-bar-content">
+       
           {error ? (
             <>
               <p

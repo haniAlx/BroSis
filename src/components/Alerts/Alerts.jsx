@@ -73,7 +73,7 @@ const Alerts = () => {
         setError("Unable to Load!! server respond with 401");
       }
       const data = await res.json();
-      if (data && res.ok) {
+      if (res.status === 200) {
         console.log(data);
         setOffRoadAlert(data.inactiveAlerts,data.activeAlerts);
         setTableData(data.inactiveAlerts,data.activeAlerts);
@@ -98,7 +98,7 @@ const Alerts = () => {
         setError("Unable to Load!! server respond with 401");
       }
       const data = await res.json();
-      if (data && res.ok) {
+      if (res.status === 200) {
         console.log(data)
         setAccidentAlert(data.inactiveAlerts,data.activeAlerts);
       }
@@ -122,7 +122,7 @@ const Alerts = () => {
         setError("Unable to Load!! server respond with 401");
       }
       const data = await res.json();
-      if (data && res.ok) {
+      if (res.status === 200) {
         console.log(data)
         setDriverAlert(data.activeAlerts,data.inactiveAlerts);
       }
@@ -203,17 +203,25 @@ const Alerts = () => {
 
   return (
     <div className="main-bar">
+     <div className="main-bar-wrapper">
+
       <div>
+        <h2>Alerts</h2>
+        <hr className="hr" />
         <div style={{display:'flex',
                 justifyContent:'space-around',
                 padding:'20px 0 30px 0'}}> 
-                <h2 style={{}}>Current Alerts</h2>
-           <Link to='/alerthistory'><h2 style={{}}>Alerts History</h2></Link> 
+                <p style={{ borderBottom:'2px solid black',fontWeight:'bold'}}>Current Alerts</p>
+                <Link to='/alerthistory' style={{ textDecoration:'none',
+                color:'black',fontWeight:'bold'
+                             }}>
+                  <p >
+                    Alerts History</p>
+                </Link> 
            
         </div>
        
-        <hr className="hr" />
-        <div className="main-bar-content">
+       
           {error ? (
             <>
               <p

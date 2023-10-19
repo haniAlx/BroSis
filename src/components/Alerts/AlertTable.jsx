@@ -16,7 +16,7 @@ const VehicleTable = ({ target, handleChange, showDetail, handleAssign }) => {
     setPage(1);
   }, [target]);
   return (
-    <div>
+    <div >
       <div className="table-container">
         <table className="data-table">
           <thead>
@@ -56,8 +56,7 @@ const VehicleTable = ({ target, handleChange, showDetail, handleAssign }) => {
             )}
           </tbody>
         </table>
-      </div>
-      <Pagination
+        <Pagination
         onChange={(page) => setPage(page)}
         pageSize={postPerPage}
         current={page}
@@ -66,6 +65,8 @@ const VehicleTable = ({ target, handleChange, showDetail, handleAssign }) => {
         showSizeChanger
         onShowSizeChange={onShowSizeChange}
       />
+      </div>
+    
     </div>
   );
 };
