@@ -1,11 +1,34 @@
 import React from "react";
 import "./navigation.css";
+import { useNavigate } from "react-router-dom";
 import {
   MdMenu,
   MdNotificationsNone,
   MdOutlineAccountCircle,
 } from "react-icons/md";
+
+
 const Navigation = () => {
+
+  
+  const navigate = useNavigate();
+  
+    const handleLogout = () => {
+      // Perform logout operations here, e.g., clearing authentication token or user session.
+  
+      // For example, if using localStorage to store a token:
+      localStorage.removeItem('jwt');
+  
+      // Redirect the user to the login page or any other desired action.
+      navigate('/'); // Replace '/login' with the appropriate route.
+  
+      // Alternatively, you can use window.location.replace('/login') to force a full page reload.
+    }
+  const handleProfile= () =>{
+    return <div>
+                  
+           </div>
+  }
   return (
     <div>
       <div className="nav-container">
@@ -22,7 +45,7 @@ const Navigation = () => {
                 <MdNotificationsNone color="black" size={25} />
               </li>
               <li>
-                <MdOutlineAccountCircle color="black" size={25} />
+                <MdOutlineAccountCircle onClick={handleProfile} color="red" size={25} />
               </li>
             </ul>
           </div>
