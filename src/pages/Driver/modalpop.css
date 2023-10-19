@@ -10,7 +10,14 @@
   left: 0;
   z-index: 10;
 }
-
+.Avatar-modal{
+  background-color: rgb(255, 255, 255);
+  padding: 10px 20px;
+  border-radius: 10px;
+  width: 60vw;
+  max-width: 100%;
+  animation: slideInDown 0.8s ease-in;
+}
 .manage-modal .manage-modal-content {
   background-color: white;
   padding: 10px 20px;
