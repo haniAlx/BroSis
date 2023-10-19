@@ -21,7 +21,7 @@ return(
         className="setting-title-container"
         onClick={() => showSettingList()}
       >
-        User Setting
+        User Setting 
         <MdKeyboardArrowDown size={20} />
 
       </div>

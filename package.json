@@ -48,5 +48,16 @@
   "devDependencies": {
     "eslint": "^8.45.0",
     "eslint-plugin-react": "^7.32.2"
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/haniAlx/BroSiss.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/haniAlx/BroSiss/issues"
   }
 }
