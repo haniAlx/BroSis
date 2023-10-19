@@ -58,10 +58,11 @@ const Market = () => {
   };
   return (
     <div className="main-bar">
+      <div className="main-bar-wrapper">
       <div>
         <h2 style={{}}>Market</h2>
         <hr className="hr" />
-        <div className="main-bar-content">
+        
           {loading && (
             <div
               style={{

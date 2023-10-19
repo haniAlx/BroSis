@@ -60,7 +60,8 @@ console.log(target)
                     <td>
                       <button
                         className="btn btn-bg-blue"
-                        style={{ height: "30px" }}
+                        style={{ height: "30px",
+                      backgroundColor:item.payment == "PAID" &&'green' }}
                         onClick={() => {
                           // console.log(item.driverPhone)
                           setShowpay(true);

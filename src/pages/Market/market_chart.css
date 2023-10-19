@@ -12,6 +12,7 @@
 }
 .cargo-d {
   margin-bottom: 20px;
+  font-size: 14px;
 }
 :disabled{
   cursor: not-allowed;
