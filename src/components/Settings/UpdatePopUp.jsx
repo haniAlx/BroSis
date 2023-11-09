@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import swal from "sweetalert";
 import {editSetting} from './AddSettings'
 import { FaEdit } from "react-icons/fa";
+import { mainAPI } from "../../components/mainAPI";
 
 export default function UpdatePopUp({target,id,title}) {
     const [popup, setPop] = useState(false);
@@ -63,7 +64,7 @@ export default function UpdatePopUp({target,id,title}) {
         };
     
         try {
-            const response = await fetch('http://164.90.174.113:9090/Api/Admin/UpdateLogo', options);
+            const response = await fetch('${mainAPI}/Api/Admin/UpdateLogo', options);
             const result = await response.json();
             console.log(result);
             localStorage.setItem("message", JSON.stringify(result["message"]));
@@ -88,52 +89,75 @@ export default function UpdatePopUp({target,id,title}) {
         console.log(title,'hii');
         if (title === 'name') {
             // Create_Role();
-            editSetting(title,value,`http://164.90.174.113:9090/Api/Admin/Update/Role/${id}`,jwt)
+            editSetting(title,value,`${mainAPI}/Api/Admin/Update/Role/${id}`,jwt)
 
         }
         if (title === 'driverStatus') {
             // Create_Driver_Status();
-            editSetting(title,value,'http://164.90.174.113:9090/Api/Admin/CreateDriverStatus',jwt)
+            editSetting(title,value,`${mainAPI}/Api/Admin/Update/DriverStatus/All/${id}`,jwt)
+
+        }
+        if (title === 'driverState') {
+            // Create_Driver_Status();
+            editSetting(title,value,`${mainAPI}/Api/Admin/Update/DriverState/All/${id}`,jwt)
 
         }
         
         if (title === 'alertType') {
             // Create_Alert_Type();
-            editSetting(title,value,`http://164.90.174.113:9090/Api/Admin/AlertType/Update/${id}`,jwt)
+            editSetting(title,value,`${mainAPI}/Api/Admin/AlertType/Update/${id}`,jwt)
 
         }
-        if (title === 'triptypes') {
-            console.log(value)
-            editSetting(title,value,`http://164.90.174.113:9090/Api/Admin/TripType/All/${id}`,jwt)
-
-        }
+  
         if (title === 'medium') {
             // Add_Notification();
-            editSetting(title,value,`http://164.90.174.113:9090/Api/Admin/NotificationMedium/Update/${id}`,jwt)
+            editSetting(title,value,`${mainAPI}/Api/Admin/NotificationMedium/Update/${id}`,jwt)
 
         }
         if (title === 'conditionName') {
             // Add_Vehicle_Condition();
-            editSetting(title,value,`http://164.90.174.113:9090/Api/Admin/VehicleCondition/Update/${id}`,jwt)
+            editSetting(title,value,`${mainAPI}/Api/Admin/VehicleCondition/Update/${id}`,jwt)
+        }
+        if (title === 'service') {
+            // Add_Service_Needed();
+            editSetting(title,value,`${mainAPI}/Api/Admin/Services/Update/${id}`,jwt)
+
         }
         if (title === 'catagory') { 
             // Add_vehicle_category();
-            editSetting(title,value,`http://164.90.174.113:9090/Api/Admin/VehicleCatagory/Update/${id}`,jwt)
-
-        }
-        if (title === 'sectorName') {
-            // Add_company_sector();
-            editSetting(title,value,`http://164.90.174.113:9090/Api/Admin/CompanySector/Update/${id}`,jwt)
+            editSetting(title,value,`${mainAPI}/Api/Admin/VehicleCatagory/Update/${id}`,jwt)
 
         }
         if (title === 'companyType') {
             // Add_company_type();
-            editSetting(title,value,`http://164.90.174.113:9090/Api/Admin/CompanyType/Update/${id}`,jwt)
+            editSetting(title,value,`${mainAPI}/Api/Admin/CompanyType/Update/${id}`,jwt)
 
         }
-        if (title === 'service') {
+        if (title === 'sectorName') {
+            // Add_company_sector();
+            editSetting(title,value,`${mainAPI}/Api/Admin/CompanySector/Update/${id}`,jwt)
+
+        }
+ 
+        if (title === 'businessType') {
+            // Add_company_type();
+            editSetting(title,value,`${mainAPI}/Api/Admin/BusinessType/Update/${id}`,jwt)
+
+        }
+        if (title === 'businessSector') {
+            // Add_company_type();
+            editSetting(title,value,`${mainAPI}/Api/Admin/BusinessSector/Update/${id}`,jwt)
+
+        }
+      
+      if (title === 'triptypes') {
+            console.log(value)
+            editSetting(title,value,`http://164.90.174.113:9090/Api/Admin/TripType/All/${id}`,jwt)
+
+        }
+        if (title === 'cargoType') {
             // Add_Service_Needed();
-            editSetting(title,value,`http://164.90.174.113:9090/Api/Admin/Services/Update/${id}`,jwt)
+            editSetting(title,value,`http://164.90.174.113:9090/Api/Admin/CargoType/Update/${id}`,jwt)
 
         }
 
@@ -150,7 +174,7 @@ export default function UpdatePopUp({target,id,title}) {
                                     X</div>
                                 <div className='fgf'>
                                     <form className='popupform'  onSubmit={handleSubmit(onSubmit)}>
-                                    <input   defaultValue={data[title]}   onChange={(e) => setvalue(e.target.value)}></input>
+                                    <input type='text'  defaultValue={data[title]}   onChange={(e) => setvalue(e.target.value)}></input>
                                     <div className='send_button'>
                                         <button className='popup_add'>Update</button>
                                         <button onClick={closePopup} className='popup_cancle'>Cancle</button>

@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState,useRef, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import swal from "sweetalert";
 import {addSetting} from './AddSettings'
-import { FaEdit } from "react-icons/fa";
+import { mainAPI } from "../../components/mainAPI";
 
 export default function PopUp(props) {
 
+
+    
     const [popup, setPop] = useState(false);
     const [logo,setLogo]=useState('')
     const [avatar, setAvatar]=useState('')
@@ -48,7 +50,7 @@ export default function PopUp(props) {
         };
     
         try {
-            const response = await fetch('http://164.90.174.113:9090/Api/Admin/AddLogoAvatar', options);
+            const response = await fetch(`${mainAPI}/Api/Admin/AddLogoAvatar`, options);
             const result = await response.json();
             console.log(result);
             localStorage.setItem("message", JSON.stringify(result["message"]));
@@ -73,51 +75,71 @@ export default function PopUp(props) {
         console.log(title,'hii');
         if (title === 'name') {
             // Create_Role();
-            addSetting(title,value,'http://164.90.174.113:9090/Api/Admin/CreateRole',jwt)
+            addSetting(title,value,`${mainAPI}/Api/Admin/CreateRole`,jwt)
 
         }
         if (title === 'driverStatus') {
             // Create_Driver_Status();
-            addSetting(title,value,'http://164.90.174.113:9090/Api/Admin/CreateDriverStatus',jwt)
+            addSetting(title,value,`${mainAPI}/Api/Admin/CreateDriverStatus`,jwt)
+
+        }
+        if (title === 'driverState') {
+            // Create_Driver_Status();
+            addSetting(title,value,`${mainAPI}/Api/Admin/CreateDriverState`,jwt)
 
         }
         if (title === 'alertType') {
             // Create_Alert_Type();
-            addSetting(title,value,'http://164.90.174.113:9090/Api/Admin/CreateAlertType',jwt)
+            addSetting(title,value,`${mainAPI}/Api/Admin/CreateAlertType`,jwt)
 
         }
         if (title === 'triptypes') {
             // Create_Trip_Type();
-            addSetting(title,value,'http://164.90.174.113:9090/Api/Admin/CreateTripType',jwt)
+            addSetting(title,value,`${mainAPI}/Api/Admin/CreateTripType`,jwt)
 
         }
         if (title === 'medium') {
             // Add_Notification();
-            addSetting(title,value,'http://164.90.174.113:9090/Api/Admin/CreateNotificationMedium',jwt)
+            addSetting(title,value,`${mainAPI}/Api/Admin/CreateNotificationMedium`,jwt)
 
         }
         if (title === 'conditionName') {
             // Add_Vehicle_Condition();
-            addSetting(title,value,'http://164.90.174.113:9090/Api/Admin/CreateVehicleCondition',jwt)
+            addSetting(title,value,`${mainAPI}/Api/Admin/CreateVehicleCondition`,jwt)
         }
         if (title === 'catagory') { 
             // Add_vehicle_category();
-            addSetting(title,value,'http://164.90.174.113:9090/Api/Admin/CreateVehicleCatagory',jwt)
+            addSetting(title,value,`${mainAPI}/Api/Admin/CreateVehicleCatagory`,jwt)
 
         }
         if (title === 'sectorName') {
             // Add_company_sector();
-            addSetting(title,value,'http://164.90.174.113:9090/Api/Admin/CreateCompanySector',jwt)
+            addSetting(title,value,`${mainAPI}/Api/Admin/CreateCompanySector`,jwt)
+
+        }
+        if (title === 'businessType') {
+            // Add_company_sector();
+            addSetting(title,value,`${mainAPI}/Api/Admin/CreateBusinessType`,jwt)
+
+        }
+        if (title === 'businessSector') {
+            // Add_company_sector();
+            addSetting(title,value,`${mainAPI}/Api/Admin/CreateBusinessSector`,jwt)
 
         }
         if (title === 'companyType') {
             // Add_company_type();
-            addSetting(title,value,'http://164.90.174.113:9090/Api/Admin/CreateCompanyType',jwt)
+            addSetting(title,value,`${mainAPI}/Api/Admin/CreateCompanyType`,jwt)
 
         }
         if (title === 'service') {
             // Add_Service_Needed();
-            addSetting(title,value,'http://164.90.174.113:9090/Api/Admin/CreateServiceNeeded',jwt)
+            addSetting(title,value,`${mainAPI}/Api/Admin/CreateServiceNeeded`,jwt)
+
+        }
+        if (title === 'cargoType') {
+            // Add_Service_Needed();
+            addSetting(title,value,`${mainAPI}/Api/Admin/CreateCargoType`,jwt)
 
         }
 
@@ -131,12 +153,13 @@ export default function PopUp(props) {
                         <div className='popup0'> 
                             <div className='popup-innerq'>
                                 <div onClick={closePopup} className='popupclose'>
-                                <h2 className='popupTitle'>Create {title}</h2> <span>X</span>
+                                <h3 className='popupTitle'>Create {title}</h3> <span>X</span>
+
                                 </div>
                                          
                                    
                                     <form className='popupform'  onSubmit={handleSubmit(onSubmit)}>
-                                    <input   defaultValue={value} placeholder={title}  onChange={(e) => setvalue(e.target.value)}></input>
+                                    <input  type='text' defaultValue={value} placeholder={title}  onChange={(e) => setvalue(e.target.value)}></input>
                                     <div className='send_button'>
                                         <button className='popup_add'>Add</button>
                                         <button onClick={closePopup} className='popup_cancle'>Cancle</button>
