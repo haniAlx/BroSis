@@ -7,11 +7,16 @@ export function useUserContext() {
 
 function UserContext({ children }) {
   const [currentUser, setCurrentUser] = useState("");
+  const [jwt,setJwt]=useState("")
   useEffect(() => {
+    if (localStorage.getItem("user") && JSON.parse(localStorage.getItem("jwt") ))
+    {
     setCurrentUser(JSON.parse(localStorage.getItem("user")));
+    setJwt(JSON.parse(localStorage.getItem("jwt")))
+  }
   }, []);
   return (
-    <ContextUser.Provider value={{ currentUser, setCurrentUser }}>
+    <ContextUser.Provider value={{ currentUser, setCurrentUser ,jwt }}>
       {children}
     </ContextUser.Provider>
   );
