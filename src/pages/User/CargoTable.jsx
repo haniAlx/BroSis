@@ -18,12 +18,6 @@ const UserTable = ({ target }) => {
   const showDetail = (user) => {
     navigate(`/cargoOwnerDetail/${user.id}`);
   };
-  const addDriver = (item) => {
-    navigate(`/users/addDriver/${item.phoneNumber}`);
-  };
-  const addVehicle = (item) => {
-    navigate(`/users/addVehicle/${item.phoneNumber}`);
-  };
   useEffect(() => {
     setPage(1);
   }, [target]);

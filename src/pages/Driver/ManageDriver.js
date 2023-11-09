@@ -7,15 +7,17 @@ import { showErrorMessage } from "../../components/SwalMessages";
 
 function ManageDriver({ setShowManage, driverDetail }) {
   //  ** APIURLS
-  const allVehicleapi = `${mainAPI}/Api/Admin/All/Vehicles`;
-  const updateStatusapi = `${mainAPI}/Api/Vehicle/ChangeDriverStatus`;
-  const statusUrl = `${mainAPI}/Api/Admin/DriverStatus/All`;
-  const [allVehicles, setAllVehicles] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [plateNumber, setPlateNumber] = useState(driverDetail.plateNumber);
   const [driverLicense, setDriverLicense] = useState(
     driverDetail.licenseNumber
   );
+  const allVehicleapi = `${mainAPI}/Api/Admin/All/Vehicle/${driverDetail.vehicleOwnerID}`;
+  const updateStatusapi = `${mainAPI}/Api/Vehicle/ChangeDriverStatus`;
+  const statusUrl = `${mainAPI}/Api/Admin/DriverStatus/All`;
+  const apiAllVehicle = `${mainAPI}/Api/Admin/All/Vehicles`;
+  const [allVehicles, setAllVehicles] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [plateNumber, setPlateNumber] = useState(driverDetail.plateNumber);
+
   const { setRefresh, refresh } = useLoadContext();
   const [status, setStatus] = useState([]);
   const [unAssignedVehicles, setUnAssignedVehicles] = useState([]);
@@ -56,11 +58,10 @@ function ManageDriver({ setShowManage, driverDetail }) {
     };
   };
   //  ******* GETTING UNASSIGNED VEHICLES ************
-  const apiAllVehicle = `${mainAPI}/Api/Admin/All/Vehicles`;
   const getUnAssignedVehicles = async () => {
     try {
       setLoading(true);
-      const res = await fetch(apiAllVehicle, options);
+      const res = await fetch(allVehicleapi, options);
       console.log("response", res.status);
       if (res.status == 401) {
         showErrorMessage({ message: "Your Session is expired" });
@@ -68,7 +69,7 @@ function ManageDriver({ setShowManage, driverDetail }) {
       const data = await res.json();
       if (data && res.ok) {
         const unAssignedVehicles = data.vehiclesINF.filter(
-          (item) => item.driverName == "null"
+          (item) => item.driverCondition === null
         );
         setUnAssignedVehicles(unAssignedVehicles);
         // filter here
@@ -85,9 +86,12 @@ function ManageDriver({ setShowManage, driverDetail }) {
   };
   // ********* UPDATING DRIVER STATUS
   const updateStatus = async () => {
+    console.log( driverStatus,
+      driverLicense)
     let update = {
       driverStatus,
       driverLicense,
+      plateNumber
     };
     console.log(driverStatus);
     const options = {
@@ -121,7 +125,7 @@ function ManageDriver({ setShowManage, driverDetail }) {
     e.preventDefault();
     updateStatus();
   };
-
+console.log(plateNumber)
   return (
     <div
       className="manage-modal"
@@ -130,31 +134,38 @@ function ManageDriver({ setShowManage, driverDetail }) {
     >
       <div className="manage-modal-content">
         <div className="modal-title">
-          <p>Mangage Driver Status</p>
+          <p>Mangage Driver Status - <tb/>
+          <strong>{driverDetail.plateNumber != null ? driverDetail.plateNumber : 'UNASSIGNED'}
+          </strong>
+          </p>
         </div>
         <div>
           <form onSubmit={(e) => handleSubmit(e)}>
             <label>Licence Number</label>
             <input value={driverDetail.licenseNumber} disabled />
             <label>Driver Name</label>
-            <input value={driverDetail.driverName} disabled />
+            <input value={driverDetail.driverName } disabled />
             <label>Vehicles</label>
             {loading ? (
               "please wait while loading.."
-            ) : driverStatus != "ASSIGNED" ? (
+            ) :  (
               <select
-                value={plateNumber || ""}
+                value={driverDetail.plateNumber || ""}
                 onChange={(e) => setPlateNumber(e.target.value)}
               >
-                {unAssignedVehicles.map((vehicle, index) => (
+                <option value=''>{unAssignedVehicles.length === 0 ?
+                 'No Vehicle to Choose':plateNumber ? plateNumber:
+                 plateNumber === null ?'Empty plate number':
+                 'Choose your vehicle'}</option>
+                 <option value={null}>Empty plate number</option>
+                {
+                unAssignedVehicles.map((vehicle, index) => (
                   <option value={vehicle.plateNumber} key={index}>
                     {vehicle.plateNumber}
                   </option>
                 ))}
               </select>
-            ) : (
-              <p>Driver is ASSIGNED</p>
-            )}
+            ) }
 
             <label>Status</label>
             <select

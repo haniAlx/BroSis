@@ -1,9 +1,10 @@
 import { Pagination } from "antd";
 import React, { useEffect, useState } from "react";
+import GenerateReport from "./GenerateReport";
 
 const DriversTable = ({ target, handleManage, showDetail }) => {
   const [page, setPage] = useState(1);
-  const [postPerPage, setpostPerPage] = useState(5);
+  const [postPerPage, setpostPerPage] = useState(7);
   const lastIndexOfPage = page * postPerPage;
   const firstIndexPage = lastIndexOfPage - postPerPage;
   const currentPage = target.slice(firstIndexPage, lastIndexOfPage);
@@ -27,6 +28,7 @@ const DriversTable = ({ target, handleManage, showDetail }) => {
               <th>Experience</th>
               <th>License Grade</th>
               <th>Status</th>
+              <th>Plate Number</th>
               <th>Vehicle Owner</th>
               <th>Detail</th>
               <th>Manage</th>
@@ -55,6 +57,7 @@ const DriversTable = ({ target, handleManage, showDetail }) => {
                   >
                     {item.status}
                   </td>
+                  <td>{item.plateNumber}</td>
                   <td>{item.vehicleOwner}</td>
                   <td>
                     <button
@@ -72,6 +75,7 @@ const DriversTable = ({ target, handleManage, showDetail }) => {
                       Manage
                     </button>
                   </td>
+             
                 </tr>
               ))
             ) : (
@@ -82,6 +86,7 @@ const DriversTable = ({ target, handleManage, showDetail }) => {
           </tbody>
         </table>
       </div>
+      <div className='paginationAndReport'>
       <Pagination
         onChange={(page) => setPage(page)}
         pageSize={postPerPage}
@@ -91,6 +96,8 @@ const DriversTable = ({ target, handleManage, showDetail }) => {
         showSizeChanger
         onShowSizeChange={onShowSizeChange}
       />
+      <GenerateReport data={target}/>
+      </div>
     </div>
   );
 };
