@@ -3,34 +3,37 @@
   height: 300px;
   overflow-y: auto;
   overflow-x: auto;
+  border:2px solid yello;
 }
+
+
 .data-table td {
   padding: 5px;
   font-size: 12px;
 
 }
-.data-table th {
+.data-table th, .data-table-report th {
   padding: 10px;
   font-size: 12px;
   font-weight: 300;
-}
-.data-table tr {
-  border-top: 0.4px solid rgb(197, 197, 197);
-  border-bottom: 0.4px solid rgb(197, 197, 197);
-  border-radius: 4px 10px;
-}
-.data-table th {
   background-color: rgba(8, 80, 170);
   color: white;
   text-align: left;
 }
+.data-table tr, .data-table-report tr {
+  border-top: 0.4px solid rgb(197, 197, 197);
+  border-bottom: 0.4px solid rgb(197, 197, 197);
+  border-radius: 4px 10px;
+}
+
 .data-table {
   border-collapse: collapse;
   margin-top: 20px;
   margin: 10px auto;
   font-family: "Poppins", sans-serif;
 }
-.data-table tr:nth-child(even) {
+
+.data-table tr:nth-child(even), .data-table-report tr:nth-child(even) {
   background-color: rgb(220, 220, 220);
 }
 .table-btn {
@@ -72,7 +75,20 @@
   cursor: pointer;
   padding-bottom: 5px !important;
 }
-
+.paginationAndReport{
+  /* border: 2px solid red; */
+  display:flex;
+  justify-content: space-between;
+  margin-top: 1em;
+  
+}
+.printBtn{
+  color: white;
+  padding:8px 15px;
+  border-radius: .3em;
+  background-color: blue;
+  border: none;
+}
 @media (max-width: 992px) {
   .table-container {
     max-width: 600px;
@@ -83,16 +99,16 @@
   .top-card-holder {
     display: none;
   }
-  .data-table {
+  .data-table, .data-table-report {
     max-width: 500px;
   }
   .table-container {
     overflow-x: scroll;
   }
-  .data-table td {
+  .data-table td , .data-table-report td{
     padding: 5px;
   }
-  .data-table th {
+  .data-table th, .data-table-report th {
     padding: 5px;
   }
 }
