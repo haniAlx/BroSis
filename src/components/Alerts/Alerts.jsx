@@ -56,7 +56,7 @@ const Alerts = () => {
       cancelButtonColor: "#d33",
     }).then((signin) => {
       if (signin) {
-        localStorage.removeItem("user");
+        localStorage.clear();
         setCurrentUser(null);
         navigate("/");
       }

@@ -91,7 +91,7 @@ const CompanyOwnerRegistration = () => {
       {
         label: "Phone Number ",
         name: "phoneNumber",
-        type: "number",
+        type: "phone",
         placeholder: "Phone Number ",
       },
     
@@ -112,7 +112,7 @@ const CompanyOwnerRegistration = () => {
       {
         label: "Phone Number ",
         name: "ownerPhoneNumber",
-        type: "number",
+        type: "phone",
         placeholder: "Phone Number ",
       },
       {
@@ -624,7 +624,8 @@ const CompanyOwnerRegistration = () => {
                       </span>
                </div>
                   <div className="flex-grow">
-                      <p>Vehicle Name <FaStarOfLife style={{marginBottom:"2px"}} className='icon' size="0.5rem" color='red'></FaStarOfLife></p>
+                      <p>Vehicle Name <FaStarOfLife style={{marginBottom:"2px"}}
+                       className='icon' size="0.5rem" color='red'></FaStarOfLife></p>
                       <input name='vehicleName' type="text"
                         {...register("vehicleName", {
                             required: `${"vehicleName"} is required`,
@@ -642,9 +643,11 @@ const CompanyOwnerRegistration = () => {
                                 
                     </div>
               <div className="flex-grow">
-                    <p>Plate Number <FaStarOfLife style={{marginBottom:"2px"}} className='icon' size="0.5rem" color='red'></FaStarOfLife></p>
+                    <p>Plate Number <FaStarOfLife style={{marginBottom:"2px"}} 
+                    className='icon' size="0.5rem" color='red'></FaStarOfLife></p>
                   
-                        <input placeholder='Please Enter Plate Number' name='conditionName'
+                        <input type="text" placeholder='Please Enter Plate Number'
+                         name='plateNumber'
                             {...register("plateNumber", {
                                 required: `${"plateNumber"} is required`,
                               })}
