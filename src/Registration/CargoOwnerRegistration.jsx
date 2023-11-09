@@ -210,7 +210,7 @@ const CargoOwnerRegistration = () => {
                 setbusinessSector("");
                 setbusinessType("");
                 setLicenseFile("");
-                setTinFile("");
+                setTinFile("");                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
                 setProPic("")
               })
               .catch((e) => {
@@ -318,23 +318,22 @@ const CargoOwnerRegistration = () => {
                     <label>
                     Business Type <FaStarOfLife color="red" size={8} />
                     </label>
-                      <select
-                        name="businessType"
-                        {...register("businessType", {
-                          required: `${"Business Type"} is required`,
-                        })}
-                        className="align-left-m0"
-                      >
-                        <option value={""}>Select Business Type</option>
-                        {/* <option value={"Food"}>Food       </option> */}
-                        {
-                                    businessType.map(item =>
-                                           ( 
-                                           <option key={item.businessType}>{item.businessType}</option>
-                                        
-                                    ))
-                                }
-                            </select>
+                 <select
+                      name="businessType"
+                      {...register("businessType", {
+                        required: `${"Business Type"} is required`,
+                      })}
+                      className="align-left-m0"
+                    >
+                      <option value={""}>Select Business Type</option>
+                      {
+                                  businessType.map(item => {
+                                      return <>
+                                          <option>{item.businessType}</option>
+                                      </>
+                                  })
+                              }
+                  </select>
                             <span
                               style={{
                                 fontSize: "12px",

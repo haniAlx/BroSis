@@ -58,9 +58,9 @@ const IndividualRegistration = () => {
         placeholder: "Last Name ",
       },
       {
-        label: "Phone Number ",
+        label: "Owner Phone Number ",
         name: "ownerPhoneNumber",
-        type: "number",
+        type: "phone",
         placeholder: "Phone Number ",
       },
       {
@@ -108,7 +108,7 @@ const IndividualRegistration = () => {
         {
           label: "Phone Number ",
           name: "phoneNumber",
-          type: "text",
+          type: "phone",
           placeholder: "Phone Number ",
         },
         ]
@@ -497,7 +497,7 @@ const IndividualRegistration = () => {
               <div className="flex-grow">
                     <p>Plate Number <FaStarOfLife style={{marginBottom:"2px"}} className='icon' size="0.5rem" color='red'></FaStarOfLife></p>
                   
-                        <input placeholder='Please Enter Plate Number' name='conditionName'
+                        <input type='text' placeholder='Please Enter Plate Number' name='conditionName'
                             {...register("plateNumber", {
                                 required: `${"plateNumber"} is required`,
                               })}
