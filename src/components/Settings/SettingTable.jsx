@@ -5,7 +5,7 @@ import { FaEdit } from "react-icons/fa";
 import PopUp from './PopUp';
 import UpdatePopUp from './UpdatePopUp'
 
-const SettingTable = ({ target,setShowSetting,name }) => {
+const SettingTable = ({ target,setShowSetting,name,count,setCount }) => {
   console.log(target,name)
   const [popup, setPop] = useState(false);
   const [data,setData]=useState(target)
@@ -17,7 +17,7 @@ const SettingTable = ({ target,setShowSetting,name }) => {
   const [postPerPage, setpostPerPage] = useState(5);
   const lastIndexOfPage = page * postPerPage;
   const firstIndexPage = lastIndexOfPage - postPerPage;
-  const currentPage = target.slice(firstIndexPage, lastIndexOfPage);
+  const currentPage = name === 'LogoAvatar' ? 1 : target.slice(firstIndexPage, lastIndexOfPage);
   const totalPages = target.length;
   const onShowSizeChange = (current, pageSize) => {
     setpostPerPage(pageSize);
@@ -53,7 +53,7 @@ const SettingTable = ({ target,setShowSetting,name }) => {
       <div className={ name  === 'LogoAvatar'?'Avatar-modal':"manage-modal-content"}>
       <div className="modal-title"
       >
-           <PopUp title={name} />
+           <PopUp count={count} setCount={setCount} title={name} />
         </div>
         {/* <button className="btn" >ADD {name}</button> */}
        
@@ -95,7 +95,7 @@ const SettingTable = ({ target,setShowSetting,name }) => {
                             name === 'sectorName'?  <td>{item.sectorName}</td>:
                             name === 'businessType' ?<td> {item.businessType}</td>:
                             name === 'businessSector'?  <td>{item.businessSector}</td>:
-                            name === 'triptypes'?  <td>{item.triptypes}</td>:
+                            name === 'triptypes'?  <td>{item.tripType}</td>:
                             name === 'cargoType' ?  <td>{item.cargoType}</td>:
                                     <td>{item.driverState}</td>}
                             

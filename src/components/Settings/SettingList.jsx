@@ -18,7 +18,7 @@ function SettingCards({
       onClick={handleCardChange}
     >
       <div >
-        <h4>{title}</h4>
+        <p>{title}</p>
       </div>
       
         
