@@ -68,8 +68,7 @@ const Vehicle = ({ vehicleData }) => {
       cancelButtonColor: "#d33",
     }).then((signin) => {
       if (signin) {
-        localStorage.removeItem("user");
-        setCurrentUser(null);
+        localStorage.clear();
         navigate("/");
       }
     });
