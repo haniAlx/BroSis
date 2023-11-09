@@ -10,17 +10,25 @@
     "antd": "^5.7.3",
     "axios": "^1.4.0",
     "chart.js": "^4.3.0",
+    "file-saver": "^2.0.5",
+    "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.7.1",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
+    "react-data-table-component": "^7.5.4",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.45.2",
     "react-icons": "^4.10.1",
     "react-loading": "^2.0.3",
     "react-router-dom": "^6.14.2",
     "react-scripts": "5.0.1",
+    "react-to-print": "^2.14.15",
     "react-toastify": "^9.1.3",
+    "styled-components": "^6.1.0",
     "sweetalert": "^2.1.2",
-    "web-vitals": "^2.1.4"
+    "sweetalert2": "^11.7.32",
+    "web-vitals": "^2.1.4",
+    "xlsx": "^0.18.5"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -51,7 +59,6 @@
     "eslint-plugin-react": "^7.32.2"
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
-  
   "repository": {
     "type": "git",
     "url": "git+https://github.com/haniAlx/BroSiss.git"
@@ -61,5 +68,4 @@
   "bugs": {
     "url": "https://github.com/haniAlx/BroSiss/issues"
   }
-  
 }
