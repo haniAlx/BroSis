@@ -66,6 +66,13 @@ const SideBar = () => {
               />
               <p>Users</p>
             </li>
+            <li onClick={() => changeRoute("report")}>
+              <MdPeople
+                className={`${current.users ? "ActiveSideBar" : "sideBar"}`}
+                
+              />
+              <p>Report</p>
+            </li>
             <li onClick={() => changeRoute("market")}>
               <MdBusinessCenter
                 className={`${current.market ? "ActiveSideBar" : "sideBar"}`}

@@ -31,7 +31,7 @@ export default function SignIn() {
   async function login() {
     setShowLoading(true);
     const users = { username, password };
-    localStorage.setItem("username", username);
+    // localStorage.setItem("username", username);
     console.log(username);
     let item = { username, password };
     const options = {
@@ -62,7 +62,9 @@ export default function SignIn() {
           console.log(result.user);
           localStorage.setItem("user", JSON.stringify(result["user"]));
           localStorage.setItem("jwt", JSON.stringify(result["jwt"]));
-          navigate("/dashboard");
+          // navigate("/dashboard");
+          window.location.href = "/dashboard";
+
         });
       } else {
         swal({
