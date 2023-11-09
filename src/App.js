@@ -29,14 +29,14 @@ import Settings from "./components/Settings/Settings";
 import SettingsUpdate from "./components/Settings/SettingsUpdate";
 import Alerts from './components/Alerts/Alerts'
 import AlertsHistory from "./components/Alerts/AlertHistory";
+import Report from "./pages/Report/Report";
 function App() {
-  const { currentUser } = useUserContext();
-  // {currentUser || null ? '' : localStorage.removeItem('jwt')}
+  const { jwt } = useUserContext();
   return (
     <>
       <BrowserRouter>
         <DataLoadContext>
-          {currentUser || null ? (
+          {jwt ? (
             <>
               <div>
                 <Navigation />
@@ -46,11 +46,12 @@ function App() {
                   <div className="container_mv">
                   <SideBar />
                     <Routes>
-                    <Route path="/" element={<Homepage />}></Route>
+                      <Route exact path="/" element={<Homepage />}></Route>
                       <Route path="/dashboard" element={<Homepage />}></Route>
                       <Route path="/vehicle" element={<Vehicle />} />
                       <Route path="/driver" element={<Drivers />} />
                       <Route path="/users" element={<Users />} />
+                     < Route path="/report" element={<Report />} />
                       <Route
                         path="/companyOwnerRegister"
                         element={<CompanyOwnerRegistration />}
