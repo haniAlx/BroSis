@@ -28,7 +28,7 @@ const SystemSetting = () => {
   const [companySector, setcompanySector] = useState([]);
   const [companyType, setcompanyType] = useState([]);
   const [service, setservice] = useState([]);
-
+  const [count,setCount]=useState(0)
   const apinotification = `${mainAPI}/Api/Admin/All/NotificationMedium`;
   const apiCompanySector = `${mainAPI}/Api/Admin/All/CompanySector/`;
   const apiCompanyType = `${mainAPI}/Api/Admin/All/CompanyType/`;
@@ -445,7 +445,7 @@ const SystemSetting = () => {
     
     setTableData(role);
     setname("Role");
-  }, []);
+  }, [count]);
   const ListCardDetail = [
     {
       title: "Role",
@@ -615,27 +615,11 @@ const SystemSetting = () => {
   // };
 
   const showSettingList = () => {
-<<<<<<< HEAD
     setShow(!show);
     // const listSettingContainer = document.getElementById("show-setting");
     // listSettingContainer.style.maxHeight = "auto";
     // listSettingContainer.style.overflow = "auto";
     // console.log("setting");
-=======
-    // const listSettingContainer = document.getElementById("show-setting");
-    // const listarrow = document.getElementById("list-arrow");
-    // console.log(listSettingContainer);
-    // if (listSettingContainer.classList.contains("show-list")) {
-    //   listSettingContainer.classList.remove("show-list");
-    // } else {
-    //   listSettingContainer.classList.add("show-list");
-    // }
-    // if (listarrow.classList.contains("rotate")) {
-    //   listarrow.classList.remove("rotate");
-    // } else listarrow.classList.add("rotate");
-    setShow(!show);
-    console.log(show);
->>>>>>> b3eca52cec0cb4bdf22467d64020ca1f13d7f4c0
   };
   return (
     <div className="setting-cards">
@@ -644,6 +628,8 @@ const SystemSetting = () => {
         name={name}
         setShowSetting={setShowSetting}
           target={tableData}
+          count={count}
+          setCount={setCount}
         />
       )}
       <div
