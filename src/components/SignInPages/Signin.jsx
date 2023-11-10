@@ -62,9 +62,9 @@ export default function SignIn() {
           console.log(result.user);
           localStorage.setItem("user", JSON.stringify(result["user"]));
           localStorage.setItem("jwt", JSON.stringify(result["jwt"]));
+          localStorage.removeItem("expire");
           // navigate("/dashboard");
           window.location.href = "/dashboard";
-
         });
       } else {
         swal({
@@ -105,12 +105,12 @@ export default function SignIn() {
       <div className="SigninWrapper">
         <div className="left-side">
           {/* <div className="left-SideInner"> */}
-            <span className="signInBold">Bazra Tracker System</span>
-            <p>
-              This System controles every movement of a driver and deliver its
-              package on time.
-              <strong>Trusted by Every one</strong>{" "}
-            </p>
+          <span className="signInBold">Bazra Tracker System</span>
+          <p>
+            This System controles every movement of a driver and deliver its
+            package on time.
+            <strong>Trusted by Every one</strong>{" "}
+          </p>
           {/* </div> */}
         </div>
         <form className="SigninForm" onSubmit={validation}>
@@ -118,7 +118,7 @@ export default function SignIn() {
           <div className="Signin">
             <label>Phone number</label>
             <input
-            className="signInput"
+              className="signInput"
               type="text"
               id="nameInput"
               placeholder="Username"
@@ -133,7 +133,7 @@ export default function SignIn() {
             <label>Password</label>
             <div className="passWrapper">
               <input
-              className="signInput"
+                className="signInput"
                 id="passInput"
                 type={pass ? "text" : "password"}
                 placeholder="Password"

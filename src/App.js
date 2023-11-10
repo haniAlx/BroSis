@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navigation from "./components/navigation/Navigation";
@@ -10,7 +10,9 @@ import ConfirmPass from "./components/SignInPages/ConfirmPass";
 import ErrorPage from "./pages/ErrorPage";
 import Vehicle from "./pages/Vehicle/Vehicle";
 import Drivers from "./pages/Driver/Drivers";
-import DataLoadContext from "./components/context/DataLoadContext";
+import DataLoadContext, {
+  useLoadContext,
+} from "./components/context/DataLoadContext";
 import { useUserContext } from "./components/context/UserContext";
 import VehicleDetail from "./pages/Vehicle/VehicleDetail";
 import DriverDetail from "./pages/Driver/DriverDetail";
@@ -27,31 +29,40 @@ import CargoOwnerRegistration from "./Registration/CargoOwnerRegistration";
 import CargoDetail from "./pages/User/CargoDetail";
 import Settings from "./components/Settings/Settings";
 import SettingsUpdate from "./components/Settings/SettingsUpdate";
-import Alerts from './components/Alerts/Alerts'
+import Alerts from "./components/Alerts/Alerts";
 import AlertsHistory from "./components/Alerts/AlertHistory";
 import Report from "./pages/Report/Report";
 function App() {
-  const { jwt } = useUserContext();
+  const jwt = localStorage.getItem("jwt")
+    ? JSON.parse(localStorage.getItem("jwt"))
+    : "";
+  const [expire, setExpier] = useState();
+  useEffect(() => {
+    const expire = localStorage.getItem("expire") ? true : false;
+    setExpier(expire);
+  }, []);
+
+  // console.log(expire);
   return (
     <>
       <BrowserRouter>
         <DataLoadContext>
-          {jwt ? (
+          {!expire && jwt ? (
             <>
               <div>
                 <Navigation />
 
                 <div className="main-container">
-                  
                   <div className="container_mv">
-                  <SideBar />
+                    <SideBar />
                     <Routes>
+                      <Route exact path="/" element={<Homepage />}></Route>
                       <Route exact path="/" element={<Homepage />}></Route>
                       <Route path="/dashboard" element={<Homepage />}></Route>
                       <Route path="/vehicle" element={<Vehicle />} />
                       <Route path="/driver" element={<Drivers />} />
                       <Route path="/users" element={<Users />} />
-                     < Route path="/report" element={<Report />} />
+                      <Route path="/report" element={<Report />} />
                       <Route
                         path="/companyOwnerRegister"
                         element={<CompanyOwnerRegistration />}
@@ -103,14 +114,17 @@ function App() {
                         path="/market/marketDetail/:id"
                         element={<MarketDetail />}
                       />
+                      <Route path="/alerts" element={<Alerts />} />
+                      <Route path="/alerthistory" element={<AlertsHistory />} />
                       <Route
-                        path="/alerts"
-                        element={<Alerts />}
-                      />
-                       <Route
-                        path="/alerthistory"
-                        element={<AlertsHistory />}
-                      />
+                        path="/ForgatePass"
+                        element={<ForgatePass />}
+                      ></Route>
+                      <Route
+                        path="/ConfirmPass"
+                        element={<ConfirmPass />}
+                      ></Route>
+                      <Route path="*" element={<SignIn />} />
                       <Route path="*" element={<ErrorPage />} />
                     </Routes>
                   </div>

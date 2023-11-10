@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router";
 import swal from "sweetalert";
 
 export const showErrorMessage = (e) => {
@@ -32,4 +33,21 @@ export const showConfirmationMessage = async () => {
     buttons: ["cancel", "Procced"],
   });
   return response;
+};
+export const showSignInMessage = async (gotoSignIn) => {
+  swal({
+    title: "Server respond With 401",
+    text: `Your Session is expried`,
+    icon: "error",
+    dangerMode: true,
+    buttons: ["cancel", "SignIn"],
+    cancelButtonColor: "#d33",
+    showClass: {
+      popup: "animate__animated animate__shakeX",
+    },
+  }).then((signin) => {
+    if (signin) {
+      gotoSignIn();
+    }
+  });
 };

@@ -5,8 +5,9 @@ import { Chart } from "chart.js/auto";
 import DoughnutChart from "../components/Charts/DoughnutChart";
 import CircularBar from "../components/circularBar/circularBar";
 import { useLoadContext } from "../components/context/DataLoadContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ReactLoading from "react-loading";
+import { showSignInMessage } from "../components/SwalMessages";
 const Homepage = () => {
   const [data, setData] = useState({
     labels: ["Vehicle", "User", "Driver", "Compony"],
@@ -14,8 +15,11 @@ const Homepage = () => {
   });
   // GETTING DATA FROM LOADCONTEXT
   const { payload, loading, error, setRefresh } = useLoadContext();
-
+  const navigater = useNavigate();
   useEffect(() => {
+    if (error == "session expired") {
+      showSignInMessage(() => (window.location.href = "/"));
+    }
     const populateDate = () => {
       setData({
         labels: ["OnRoute", "Assigned", "Unassigned", "permite"],

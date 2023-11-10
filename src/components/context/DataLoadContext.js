@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import { useUserContext } from "./UserContext";
 import { mainAPI } from "../mainAPI";
+import { showSignInMessage } from "../SwalMessages";
 
 const LoadDataContext = React.createContext(null);
 // EXPORTING USELOADCONTEXT AND
@@ -21,10 +22,12 @@ const DataLoadContext = ({ children }) => {
   const apiAssigned = `${mainAPI}/Api/Admin/Drivers/ASSIGNED`;
   const apiUnAssigned = `${mainAPI}/Api/Admin/Drivers/UNASSIGNED`;
   const apiPermit = `${mainAPI}/Api/Admin/Drivers/PERMIT`;
-  const navigator = useNavigate();
+  const navigater = useNavigate();
   const { setCurrentUser, currentUser } = useUserContext();
   /**  GET JWT */
-  const jwt = JSON.parse(localStorage.getItem("jwt"));
+  const jwt = localStorage.getItem("jwt")
+    ? JSON.parse(localStorage.getItem("jwt"))
+    : "";
   /** Option for fetch */
   const options = {
     headers: {
@@ -33,14 +36,7 @@ const DataLoadContext = ({ children }) => {
       Accept: "application/json",
     },
   };
-  /** Aborting fetch if it is taking to long */
-  //   const controler = new AbortController();
-  //   const timeout = setTimeout(() => {
-  //     controler.abort();
-  //     console.log("fetch aborted");
-  //     setLoading(false);
-  //     if (!allDataLoaded) setError("Unable to Connet to Database");
-  //   }, 6000);
+
   useEffect(() => {
     const getAllDriversData = async () => {
       setError("");
@@ -63,25 +59,14 @@ const DataLoadContext = ({ children }) => {
       const res = await fetch(apiAllDrivers, options);
       console.log("response", res.status);
       if (res.status == 401) {
-        swal({
-          title: "Server respond With 401",
-          text: `Your Session is expried`,
-          icon: "error",
-          dangerMode: true,
-          buttons: ["cancel", "SignIn"],
-          cancelButtonColor: "#d33",
-          showClass: {
-            popup: "animate__animated animate__shakeX",
-          },
-        }).then((signin) => {
-          if (signin) {
-            localStorage.removeItem("user");
-            setCurrentUser(null);
-            navigator("/");
-          }
-        });
         setLoading(false);
-        setError("Unable to Load!! server respond with 401");
+        let expire = localStorage.getItem("expire");
+        //check if there is user to show Message
+        if (currentUser && !expire) {
+          showSignInMessage(() => navigater("/"));
+        }
+        localStorage.setItem("expire", true);
+        setError("session expired");
       }
       const data = await res.json();
       if (data.drivers && res.ok) {

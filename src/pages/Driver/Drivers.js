@@ -8,6 +8,7 @@ import DriversTable from "./DriversTable";
 import "./tables.css";
 import ManageDriver from "./ManageDriver";
 import { useNavigate } from "react-router-dom";
+import { showSignInMessage } from "../../components/SwalMessages";
 function Drivers({ driverData }) {
   const [allDrivers, setAllDrivers] = useState([]);
   const [onRoute, setOnRoute] = useState([]);
@@ -21,6 +22,9 @@ function Drivers({ driverData }) {
   const navigate = useNavigate();
   //** USEEFFECT FOR POPULATING DATA TO assigned,unassigned permit and alldrivers */
   useEffect(() => {
+    if (error == "session expired") {
+      showSignInMessage(() => (window.location.href = "/"));
+    }
     const getAllApiData = async () => {
       setAllDrivers(payload.allDrivers);
       setAssigned(payload.assigned);
@@ -136,20 +140,19 @@ function Drivers({ driverData }) {
   };
   return (
     <div className="main-bar">
-     <div className=" main-bar-wrapper">
-
-      {showManage && (
-        <ManageDriver
-          setShowManage={setShowManage}
-          driverDetail={driverDetail}
-        />
-      )}
-      <div >
-        {/* {detail && (
+      <div className=" main-bar-wrapper">
+        {showManage && (
+          <ManageDriver
+            setShowManage={setShowManage}
+            driverDetail={driverDetail}
+          />
+        )}
+        <div>
+          {/* {detail && (
         <DriverDetail driverDetail={driverDetail} setDetail={setDetail} />
       )} */}
-        <h2 style={{}}>Driver</h2>
-        <hr className="hr" />
+          <h2 style={{}}>Driver</h2>
+          <hr className="hr" />
           {error ? (
             <>
               <p
@@ -160,7 +163,7 @@ function Drivers({ driverData }) {
                   color: "red",
                 }}
               >
-                  {error === "Failed to fetch" ? "NO INTERNET CONNECTION" : error}
+                {error === "Failed to fetch" ? "NO INTERNET CONNECTION" : error}
               </p>
               <button
                 className="btn center w-300"
