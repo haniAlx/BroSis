@@ -274,7 +274,7 @@ const Vehicle = ({ vehicleData }) => {
   };
   const handleAssign = (item) => {
     navigate(
-      `/vehicle/changeAssign/${item.ownerID}/${item.plateNumber}/assign`
+      `/vehicle/AssignDriver/${item.ownerID}/${item.plateNumber}/assign`
     );
   };
   const showDetail = (item) => {
