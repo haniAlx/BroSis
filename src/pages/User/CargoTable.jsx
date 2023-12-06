@@ -15,6 +15,9 @@ const UserTable = ({ target }) => {
   };
   console.log(target)
   const navigate = useNavigate();
+  const PostCargo = (phone) =>{
+    navigate(`/Cargo/PostCargo/${phone}`)
+  }
   const showDetail = (user) => {
     navigate(`/cargoOwnerDetail/${user.id}`);
   };
@@ -69,6 +72,7 @@ const UserTable = ({ target }) => {
                     </button>
                   </td>
                   <td><button
+                  onClick={()=>PostCargo(item.phoneNumber)}
                       className="table-btn"
                     >
                       Post
