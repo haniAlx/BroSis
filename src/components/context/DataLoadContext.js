@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import swal from "sweetalert";
 import { useUserContext } from "./UserContext";
 import { mainAPI } from "../mainAPI";
 import { showSignInMessage } from "../SwalMessages";
@@ -57,7 +56,6 @@ const DataLoadContext = ({ children }) => {
   const getAllDrivers = async () => {
     try {
       const res = await fetch(apiAllDrivers, options);
-      console.log("response", res.status);
       if (res.status == 401) {
         setLoading(false);
         let expire = localStorage.getItem("expire");
