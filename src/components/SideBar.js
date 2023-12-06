@@ -7,34 +7,44 @@ import {
   MdPeople,
   MdOutlineAppRegistration
 } from "react-icons/md";
+
+import{ HiDocumentReport } from 'react-icons/hi'
 import { HiBellAlert } from "react-icons/hi2";
 import {AiFillSetting} from 'react-icons/ai'
-import "./sidebar.css";
+import "./sidebarr.css";
 import { useNavigate } from "react-router-dom";
-import NewMarkets from "../pages/Market/NewMarkets";
+import NewMarketsPopup from "../pages/Market/NewMarketsPopup";
 const SideBar = () => {
   const [current, setCurrent] = useState({
-    dashboard: true,
+    dashboard: false,
     vehicle: false,
     driver: false,
     users: false,
     market: false,
+    alerts:false,
+    settings:false,
+    report:false,
+    companyOwnerRegister:false,
   });
   const navigator = useNavigate();
   const changeRoute = (val) => {
     setCurrent({
       dashboard: false,
-      vehicle: false,
-      driver: false,
-      users: false,
-      market: false,
+  vehicle: false,
+  driver: false,
+  users: false,
+  market: false,
+  alerts:false,
+  settings:false,
+  report:false,
+  companyOwnerRegister:false,
       [val]: true,
     });
     navigator(`/${val}`);
   };
   return (
     <div>
-      <NewMarkets/>
+      <NewMarketsPopup/>
       <div className="sidebar-container">
         <div className="sidebar-items">
           <ul className="sidebar-list">
@@ -67,8 +77,8 @@ const SideBar = () => {
               <p>Users</p>
             </li>
             <li onClick={() => changeRoute("report")}>
-              <MdPeople
-                className={`${current.users ? "ActiveSideBar" : "sideBar"}`}
+              <HiDocumentReport
+                className={`${current.report ? "ActiveSideBar" : "sideBar"}`}
                 
               />
               <p>Report</p>
