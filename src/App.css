@@ -80,6 +80,7 @@ body::-webkit-scrollbar {
 
 .main-bar{
   margin-top: 10%;
+  padding: 10px;
 width: 100%;
 }
 .main-bar-wrapper {
@@ -101,18 +102,24 @@ width: 100%;
   display:flex;
   flex-direction: column;
   flex-wrap: wrap;
-  column-gap: 1em;
+  column-gap: .5em;
+  margin-bottom: 1em;
 }
 .chart-container{
-  padding-top: 1.5em;
-  /* display: flex; */
-  /* flex-wrap: wrap; */
-  /* border: 2px solid rgb(0, 2, 128); */
+padding-top: 1.5em;
+padding-bottom: 3em;
+/* border: 2px solid yellow; */
+display: flex;
+justify-content: space-around;
+align-items: center;
 }
 .chart-box{
   width: 30em;
   height: 15em;
   
+}
+.page{
+  margin-top:5em;
 }
 @media (min-width: 20px) {
 
@@ -133,7 +140,7 @@ width: 100%;
 @media (min-width: 250px) {
 
   .main-bar{
-    margin-top: 12%;
+    margin-top: 10%;
     width: 100%;
   }
 
@@ -195,6 +202,11 @@ width: 100%;
   }
   .reportWrapper{
     flex-direction: row;
+    padding: 0;
     row-gap: .5em;
+  }
+  .page{
+    margin:0;
+    /* border: 2px solid red; */
   }
 }

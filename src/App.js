@@ -27,11 +27,13 @@ import CompanyOwnerRegistration from "./Registration/CompanyOwnerRegistration";
 import IndividualRegistration from "./Registration/IndividualRegistration";
 import CargoOwnerRegistration from "./Registration/CargoOwnerRegistration";
 import CargoDetail from "./pages/User/CargoDetail";
-import Settings from "./components/Settings/Settings";
 import SettingsUpdate from "./components/Settings/SettingsUpdate";
 import Alerts from "./components/Alerts/Alerts";
 import AlertsHistory from "./components/Alerts/AlertHistory";
 import Report from "./pages/Report/Report";
+import AddCargoPost from "./pages/User/AddCargoPost";
+import ActiveMarkets from "./pages/Market/ActiveMarkets";
+import NewMarkets from "./pages/Market/NewMarkets";
 function App() {
   const jwt = localStorage.getItem("jwt")
     ? JSON.parse(localStorage.getItem("jwt"))
@@ -57,7 +59,6 @@ function App() {
                     <SideBar />
                     <Routes>
                       <Route exact path="/" element={<Homepage />}></Route>
-                      <Route exact path="/" element={<Homepage />}></Route>
                       <Route path="/dashboard" element={<Homepage />}></Route>
                       <Route path="/vehicle" element={<Vehicle />} />
                       <Route path="/driver" element={<Drivers />} />
@@ -79,12 +80,13 @@ function App() {
                         path="/cargoOwnerDetail/:id"
                         element={<CargoDetail />}
                       />
+                      <Route 
+                       path='Cargo/PostCargo/:ownerPhone'
+                        element={<AddCargoPost/>}
+                        />
                       <Route path="/users/:role/:id" element={<UserDetail />} />
                       <Route path="/settings" element={<SettingsUpdate />} />
-                      <Route
-                        path="/settingsUpdate"
-                        element={<SettingsUpdate />}
-                      />
+                      
                       <Route
                         path="/users/addDriver/:ownerPhone"
                         element={<AddDriver />}
@@ -106,14 +108,17 @@ function App() {
                         element={<ChangeDriver />}
                       />
                       <Route
-                        path="/vehicle/changeAssign/:ownerId/:plateNumber/:state"
+                        path="/vehicle/AssignDriver/:ownerId/:plateNumber/:state"
                         element={<ChangeDriver />}
                       />
                       <Route path="/market" element={<Market />} />
                       <Route
-                        path="/market/marketDetail/:id"
-                        element={<MarketDetail />}
+                        path="/market/marketDetailNew/:id"
+                        element={<NewMarkets />}
                       />
+                      <Route path="/market/marketDetailActive/:id"
+                      element={<ActiveMarkets/>}/>
+                      
                       <Route path="/alerts" element={<Alerts />} />
                       <Route path="/alerthistory" element={<AlertsHistory />} />
                       <Route
