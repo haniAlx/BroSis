@@ -65,7 +65,6 @@ const AlertsHistory = () => {
     try {
       setLoading(true);
       const res = await fetch(apiOffroadAlert, options);
-      console.log("response", res.status);
       if (res.status == 401) {
         showErrorMessage({ message: "Your Session is expired" });
         setLoading(false);
@@ -73,7 +72,6 @@ const AlertsHistory = () => {
       }
       const data = await res.json();
       if (data && res.ok) {
-        console.log(data);
         setOffRoadAlert(data.inactiveAlerts,data.activeAlerts);
         setTableData(data.inactiveAlerts,data.activeAlerts);
       }
@@ -98,7 +96,6 @@ const AlertsHistory = () => {
       }
       const data = await res.json();
       if (data && res.ok) {
-        console.log(data)
         setAccidentAlert(data.inactiveAlerts,data.activeAlerts);
       }
       if (res.status == 400) {
@@ -122,7 +119,6 @@ const AlertsHistory = () => {
       }
       const data = await res.json();
       if (data && res.ok) {
-        console.log(data)
         setDriverAlert(data.activeAlerts,data.inactiveAlerts);
       }
       if (res.status == 400) {
