@@ -50,8 +50,8 @@ const Navigation = () => {
         html: `
         <p><img class="profileImage" src="https://unsplash.it/400/200"> </p>
         <div class='profileDropDownList'>
-               <p style="color: #f09053; ""> ${roles}</p>
-               <p style="color: #f09053; padding-bottom: 5px;"">${username}</p>
+               <p > ${roles}</p>
+               <p >${username}</p>
                </div>
                `
               ,
@@ -85,11 +85,11 @@ console.log(view)
             <ul className="nav-list">
               
               <li>
-                <MdNotificationsNone color="black" size={35} />
+                <MdNotificationsNone  size={35} />
               </li>
               <li >
                 <div onClick={()=>toggleProfile()}>
-                  <MdOutlineAccountCircle color="black" size={35} />
+                  <MdOutlineAccountCircle size={35} />
                
                   </div>
                 

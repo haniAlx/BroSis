@@ -1,6 +1,6 @@
 .nav-container {
   position: fixed;
-  height: 10%;
+  height: 12%;
   z-index: 100;
   width: 100%;
   background-color:rgb(247, 247, 247); 
@@ -31,7 +31,7 @@
   /* position: fixed; */
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center-;
   color: black !important;
   padding: 10px;
 
