@@ -3,19 +3,19 @@ import './Signin.css'
 import swal from "sweetalert";
 import { Link } from 'react-router-dom'
 import { AiOutlineEye } from "react-icons/ai";
-
+import { mainAPI } from '../mainAPI';
 export default function ConfirmPass(){
 
     const [error, setError] = useState(false);
     const [pass, showPass] = useState(false);
     const [confirm, setConfirm]= useState(false)
+    const ConfirmUrl = `${mainAPI}/Api/User/SetPin`;
 
     let [isConfirmed, setisConfirmed] =useState(false)
     let mess
      let isPin =false
      if(isPin){
         mess = localStorage.getItem("message")
-        console.log(mess)
 
      }
      const toggleEye = (name) => {
@@ -44,23 +44,19 @@ export default function ConfirmPass(){
               username,
               pin
             }
-                console.log(item)
     const options = {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json", Authorization: `Bearer`, },
         body: JSON.stringify(item),
     };
-    const url = "http://164.90.174.113:9090/Api/User/SetPin";
     try {
-        const response = await fetch(url, options);
+        const response = await fetch(ConfirmUrl, options);
         const result = await response.json();
         localStorage.setItem("message", JSON.stringify(result["message"]));
       const  mess = localStorage.getItem("message");
-      console.log(mess)
         if (response.ok) {
-            console.log(mess)
             swal("Successful",`${mess}`, "success", { buttons: false, timer: 2000, })
-              setTimeout(()=>{setisConfirmed(!isConfirmed)}, 1000)
+              setTimeout(()=>{setisConfirmed(!isConfirmed)}, 5000)
         } else {
              swal({
                 title: "Failed To Change",
@@ -78,7 +74,6 @@ export default function ConfirmPass(){
             
         }
     } catch (error) {
-        console.log(error + "error");
         swal({
             title: "something went wrong",
             text: `net::ERR_INTERNET_DISCONNECTED`,
@@ -101,9 +96,11 @@ export default function ConfirmPass(){
                 <div className='left-side'>
                     <div className='left-SideInner'>
                     <span className="signInBold">Bazra Tracker System</span>
-                    <p>This System controles every movement of a driver and 
-                        deliver its package on time.
-                    <strong>Trusted by Every one</strong> </p>
+                    <p>
+                        A system that  controls every movement of a driver and ensures 
+                        timely delivery of its packages.
+                            <strong> Trusted by everyone.</strong>{" "}
+                        </p>
                     <Link to='/'> <p type='button'>Sign in</p> </Link>
 
                     </div>
@@ -142,7 +139,7 @@ export default function ConfirmPass(){
                             <label>Confirm Password</label>
                             <div className="passWrapper">
                                 <input className="signInput"
-                                    id="passInput"
+                                    id="ConfpassInput"
                                     type={confirm ? "text" : "password"}
                                     placeholder="Password"
                                     onChange={e => setconfirmpassword(e.target.value)} 
@@ -158,8 +155,10 @@ export default function ConfirmPass(){
                            <Link to='/'> <p type='button'>Sign in</p> </Link>
 
                         </div>
-                        <button className='signIn-btn'>Change Password</button>
-                    </form> 
+                        <div className="signin-div">
+                            <button className="signIn-btn">Confirm Password</button>
+                        </div>             
+                               </form> 
                 
                 
                 </div>

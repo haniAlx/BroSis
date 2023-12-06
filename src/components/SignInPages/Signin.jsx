@@ -1,12 +1,13 @@
 import React from "react";
 import "./Signin.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import swal from "sweetalert";
 import { useState } from "react";
 import { AiOutlineEye } from "react-icons/ai";
 import { useUserContext } from "../context/UserContext";
 import LoadingPage from "../LoadingPage";
-
+import { mainAPI } from "../mainAPI";
+import { showErrorMessage } from "../SwalMessages";
 export default function SignIn() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -14,7 +15,20 @@ export default function SignIn() {
   const [pass, showPass] = useState(false);
   const [showLoading, setShowLoading] = useState(false);
   const { setCurrentUser } = useUserContext();
-  const navigate = useNavigate();
+  const logoApi=`${mainAPI}/Api/Admin/LogoandAvatar`;
+  const signInurl = `${mainAPI}/Api/SignIn/Admin`;
+
+  const [logo,setLogo]=useState('')
+  
+
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      Authorization: `Bearer`,
+    },
+  };
   const toggleEye = () => {
     showPass(!pass);
   };
@@ -30,9 +44,6 @@ export default function SignIn() {
   };
   async function login() {
     setShowLoading(true);
-    const users = { username, password };
-    // localStorage.setItem("username", username);
-    console.log(username);
     let item = { username, password };
     const options = {
       method: "POST",
@@ -43,30 +54,26 @@ export default function SignIn() {
       },
       body: JSON.stringify(item),
     };
-    const api = "http://164.90.174.113:9090";
-    const url = `${api}/Api/SignIn/Admin`;
     try {
-      const response = await fetch(url, options);
+      const response = await fetch(signInurl, options);
       const result = await response.json();
       if (response.status === 200) {
-        localStorage.setItem("user", JSON.stringify(result["user"]));
-      }
-
-      if (response.ok) {
-        console.log("Login successful");
         swal("Successful", "Welcome To Admin DashBoard", "success", {
           buttons: false,
           timer: 2000,
         }).then(() => {
+
           setCurrentUser(result.user);
-          console.log(result.user);
           localStorage.setItem("user", JSON.stringify(result["user"]));
           localStorage.setItem("jwt", JSON.stringify(result["jwt"]));
           localStorage.removeItem("expire");
-          // navigate("/dashboard");
-          window.location.href = "/dashboard";
+          window.location.href = "/";
         });
-      } else {
+      }  
+      if (response.status === 401) {
+        setError("Unable to Load!! server respond with 401");
+      }
+      else if(response.status !== 200) {
         swal({
           title: "Failed To Login",
           text: `Wrong Password or Username! `,
@@ -82,7 +89,6 @@ export default function SignIn() {
         });
       }
     } catch (error) {
-      console.log(error + "error");
       swal({
         title: "Something Went Wrong?",
         text: `net::ERR_INTERNET_DISCONNECTED `,
@@ -94,22 +100,42 @@ export default function SignIn() {
           popup: "animate__animated animate__shakeX",
         },
       });
-      // window.location.href = "/dashboard";
     } finally {
       setShowLoading(false);
     }
   }
+
+  const getAvatar = async () => {
+    try {
+      const res = await fetch(logoApi, options);
+      if (res.status == 401) {
+        setError("Unable to Load!! server respond with 401");
+      }
+      const data = await res.json();
+      if (data && res.ok) {
+        setLogo(data.logo);
+      }
+      if (res.status == 400) {
+        setError("Invalid API server 400");
+      }
+    } catch (e) {
+      showErrorMessage(e);
+    }
+  };
+
+  
   return (
     <>
       {showLoading && <LoadingPage message={"Loging You In please Wait"} />}
       <div className="SigninWrapper">
         <div className="left-side">
           {/* <div className="left-SideInner"> */}
+          <img className="signinLogo" src={logo} alt='BazraLogo'/>
           <span className="signInBold">Bazra Tracker System</span>
           <p>
-            This System controles every movement of a driver and deliver its
-            package on time.
-            <strong>Trusted by Every one</strong>{" "}
+          A system that  controls every movement of a driver and ensures 
+          timely delivery of its packages.
+            <strong> Trusted by everyone.</strong>{" "}
           </p>
           {/* </div> */}
         </div>
@@ -152,7 +178,10 @@ export default function SignIn() {
               <p type="button">Forget Password?</p>{" "}
             </Link>
           </div>
-          <button className="signIn-btn">Sign in</button>
+          <div className="signin-div">
+            <button className="signIn-btn">Sign in</button>
+          </div>
+          
         </form>
       </div>
     </>

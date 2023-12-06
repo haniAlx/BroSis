@@ -2,6 +2,7 @@ import React,{useState} from 'react'
 import  './Signin.css'
 import swal from "sweetalert";
 import { Link } from 'react-router-dom'
+import { mainAPI } from '../mainAPI';
 export default function ForgatePass(){
 
 
@@ -18,26 +19,23 @@ export default function ForgatePass(){
         {
             phoneNumber,
         };
-        console.log(item)
         const options = {
             method: "POST",
             headers: { 'Content-Type': 'application/json', 
             "Accept": "application/json"},
             body: JSON.stringify(item),
         };
-        const url = "http://164.90.174.113:9090/Api/User/GeneratePIN";
+        const url = `${mainAPI}/Api/User/GeneratePIN`;
         try {
             const response = await fetch(url, options);
             const result = await response.json();
             localStorage.setItem("message", JSON.stringify(result["message"]));
              mess = localStorage.getItem("message");
             if (response.ok) {
-                console.log(mess)
                 setisConfirm(!isConfirm)
                 swal("Get your Pin beffore it's to late ", `${mess}`, "success", { buttons: false, timer: 5000, });
                 
             } else {
-                console.log("failed");
                 swal(`Failed To Register ${mess}`, "error");
             }
         } catch (error) {
@@ -65,9 +63,11 @@ export default function ForgatePass(){
                 <div className='left-side'>
                     <div className='left-SideInner'>
                     <span className='signInBold'>Bazra Tracker System</span>
-                    <p>This System controles every movement of a driver and 
-                        deliver its package on time.
-                    <strong>Trusted by Every one</strong> </p>
+                    <p>
+                        A system that  controls every movement of a driver and ensures 
+                        timely delivery of its packages.
+                            <strong> Trusted by everyone.</strong>{" "}
+                        </p>
                     <Link to='/'> <p type='button'>Sign in</p> </Link>
 
                     </div>
@@ -86,8 +86,10 @@ export default function ForgatePass(){
                            <Link to='/ConfirmPass'> <p type='button'>Confirm Password</p> </Link>
 
                         </div>
-                        <button className='signIn-btn'>Generate</button>
-                    </form> 
+                        <div className="signin-div">
+                            <button className="signIn-btn">Get pin</button>
+                        </div>                   
+                         </form> 
                 
                 
                 </div>
