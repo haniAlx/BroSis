@@ -1,3 +1,43 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;700;800;900&display=swap");
+.table-containers {
+  height: 350px;
+  overflow-y: auto;
+  overflow-x: auto;
+  border:2px solid yello;
+}
+
+
+.data-tables td {
+  padding: 7px;
+  font-size: 14px;
+
+}
+.data-tables th, .data-tables-reports th {
+  padding: 15px;
+  font-size: 14px;
+  font-weight: 300;
+  background-color: rgba(8, 80, 170);
+  color: white;
+  text-align: left;
+}
+.data-tables tr, .data-tables-reports tr {
+  border-top: 0.4px solid rgb(197, 197, 197);
+  border-bottom: 0.4px solid rgb(197, 197, 197);
+  border-radius: 4px 10px;
+}
+
+.data-tables {
+  border-collapse: collapse;
+  margin-top: 20px;
+  margin: 10px auto;
+  font-family: "Poppins", sans-serif;
+}
+
+.data-tables tr:nth-child(even), .data-tables-reports tr:nth-child(even) {
+  background-color: rgb(220, 220, 220);
+}
+
+
 .button{
     background-color:#606060;
     padding: 8px 16px;
@@ -24,6 +64,7 @@ button:hover {
     color: white;
     /* margin-top: 20px; */
 }
+
 
 .search{
     color: white;
