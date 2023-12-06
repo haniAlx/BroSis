@@ -11,15 +11,12 @@ const MarketDetailTable = ({ target, marketStatus, cargoId }) => {
   const totalPages = target.length;
   const onShowSizeChange = (current, pageSize) => {
     setpostPerPage(pageSize);
-    console.log(pageSize);
   };
-console.log(target)
   useEffect(() => {
     setPage(1);
   }, [target]);
   const [driverPhone, setDriverPhone] = useState("");
   const [showpay, setShowpay] = useState(false);
-  console.log("cargo id is ", cargoId);
   return (
     <div>
       {showpay && (
@@ -63,7 +60,6 @@ console.log(target)
                         style={{ height: "30px",
                       backgroundColor:item.payment == "PAID" &&'green' }}
                         onClick={() => {
-                          // console.log(item.driverPhone)
                           setShowpay(true);
                           setDriverPhone(item.driverPhone);
                         }}

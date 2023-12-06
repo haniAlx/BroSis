@@ -36,30 +36,16 @@ const Paymodal = ({ setShowpay, cargoId, driverPhone }) => {
       return;
     }
     const confirm = await showConfirmationMessage();
-    if (confirm) {
-      // payDriver();
-      console.log(driverPhone)
-    }
+   
   };
   const payDriver = async () => {
-    console.log(weybill);
-    console.log(f1form);
-    console.log(driverPhone);
-    console.log(cargoId);
     const formData = new FormData();
     formData.append("weybill", weybill);
     formData.append("f1Form", f1form);
     formData.append("amount", amount);
     formData.append("driverPhone", driverPhone);
     formData.append("cargoId", cargoId);
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${jwt}`,
-      },
-      body: JSON.stringify(formData),
-    };
+    
     setLoading(true);
     try {
       const res = await axios.post(apiPay, formData, {
@@ -68,16 +54,12 @@ const Paymodal = ({ setShowpay, cargoId, driverPhone }) => {
           Authorization: `Bearer ${jwt}`,
         },
       });
-      // console.log(res);
-      // showSuccessMessage({ message: "Payment success" });
       localStorage.setItem("message", JSON.stringify(res.data["message"]));
       const mess = localStorage.getItem("message");
       if (res.status == 200) {
-        console.log(mess, "paid successful");
         showSuccessMessage({ message: mess });
         setShowpay(false)
       } else {
-        console.log(mess,"failed");
         swal("paing Failed", mess || "Server respond 500", "error");
       }
     } catch (e) {

@@ -1,7 +1,6 @@
 import { Pagination } from "antd";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 const MarketTable = ({ target }) => {
   const [page, setPage] = useState(1);
   const [postPerPage, setpostPerPage] = useState(5);
@@ -9,16 +8,20 @@ const MarketTable = ({ target }) => {
   const firstIndexPage = lastIndexOfPage - postPerPage;
   const currentPage = target.slice(firstIndexPage, lastIndexOfPage);
   const totalPages = target.length;
+
   const onShowSizeChange = (current, pageSize) => {
     setpostPerPage(pageSize);
-    console.log(pageSize);
   };
   useEffect(() => {
     setPage(1);
   }, [target]);
   const navigate = useNavigate();
   const showDetail = (item) => {
-    navigate(`/market/marketDetail/${item.id}`);
+    if(item.status === 'NEW'){
+    navigate(`/market/marketDetailNew/${item.id}`);
+  }
+    else
+    navigate(`/market/marketDetailActive/${item.id}`);
   };
 
   return (
