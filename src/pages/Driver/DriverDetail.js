@@ -37,7 +37,6 @@ const DriverDetail = () => {
     try {
       const res = await fetch(apiDriverDetail, options);
       if (res.status == 401) {
-        //showErrorMessage();
         setLoading(false);
         setError("Unable to Load!! server respond with 401");
       }
@@ -62,7 +61,6 @@ const DriverDetail = () => {
           licenseExpireDate: data.licenseExpireDate
         }
         setDriverDetail(info);
-        console.log(data)
         setEnabled(data.enabled)
         setNew(info)
       }
@@ -70,7 +68,6 @@ const DriverDetail = () => {
         setError("Invalid API server 400");
       }
     } catch (e) {
-      console.log(e.message);
       setError(e.message);
       setLoading(false);
     } finally {
@@ -99,12 +96,9 @@ const DriverDetail = () => {
   // ********************* UPDATE DRIVER INFO FUNCTION
   const handleFormSubmit =async () => {
   
-    console.log(newData,'hiiiiiiiiiii');
     const driver = new FormData();
     driver.append("driverName", newData.driverName);
-    // driver.append("licensePic", newData.licensePic);
     driver.append("licenseNumber", '');
-    // driver.append("driverPic", newData.driverPic);
     driver.append("driverPhone", '');
     driver.append("birthDate", newData.birthDate);
     driver.append("experience", newData.experience);
@@ -127,11 +121,9 @@ const DriverDetail = () => {
       localStorage.setItem("message", JSON.stringify(response.data["message"]));
       const mess = localStorage.getItem("message");
       if (response.status == 200) {
-        console.log("updated successful");
         showSuccessMessage({ message: mess });
         setRefresh(!refresh);
       } else {
-        console.log("failed");
         swal("Update Failed", mess || "Server respond 500", "error");
       }
     } catch (error) {
@@ -213,7 +205,6 @@ const DriverDetail = () => {
      // Reloading the Page for getting status;
     }
   };
-  console.log(driverDetail)
   return (
     <div className="main-bar">
       <div

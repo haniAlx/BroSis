@@ -1,18 +1,11 @@
 import { Pagination } from "antd";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaEdit } from "react-icons/fa";
 import PopUp from './PopUp';
 import UpdatePopUp from './UpdatePopUp'
 
 const SettingTable = ({ target,setShowSetting,name,count,setCount }) => {
-  console.log(target,name)
-  const [popup, setPop] = useState(false);
-  const [data,setData]=useState(target)
-  const closePopup = () => {
-      setPop(false);
-  }
-  
+
   const [page, setPage] = useState(1);
   const [postPerPage, setpostPerPage] = useState(5);
   const lastIndexOfPage = page * postPerPage;
@@ -21,18 +14,8 @@ const SettingTable = ({ target,setShowSetting,name,count,setCount }) => {
   const totalPages = target.length;
   const onShowSizeChange = (current, pageSize) => {
     setpostPerPage(pageSize);
-    console.log(pageSize);
   };
-  const navigate = useNavigate();
-  const showDetail = (user) => {
-    navigate(`/users/${user.roles}/${user.id}`);
-  };
-  const addDriver = (item) => {
-    navigate(`/users/addDriver/${item.phoneNumber}`);
-  };
-  const addVehicle = (item) => {
-    navigate(`/users/addVehicle/${item.phoneNumber}`);
-  };
+
   useEffect(() => {
     setPage(1);
   }, [target]);
@@ -55,7 +38,6 @@ const SettingTable = ({ target,setShowSetting,name,count,setCount }) => {
       >
            <PopUp count={count} setCount={setCount} title={name} />
         </div>
-        {/* <button className="btn" >ADD {name}</button> */}
        
         <table className="data-table">
 

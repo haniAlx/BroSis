@@ -15,7 +15,6 @@ function Drivers({ driverData }) {
   const [Assigned, setAssigned] = useState([]);
   const [unassigned, setUnassigned] = useState([]);
   const [permit, setPermit] = useState([]);
-  // const [error, setError] = useState();
   const [tableData, setTableData] = useState(allDrivers);
   //*** Getting DATA FROM USELOADCONTECT FROM DATALOADCONTEXT */
   const { payload, loading, error, setRefresh } = useLoadContext();
@@ -34,7 +33,6 @@ function Drivers({ driverData }) {
       setTableData(payload.allDrivers);
     };
     if (driverData) {
-      console.log(driverData);
       setAllDrivers(driverData.allDrivers);
       setAssigned(driverData.assigned);
       setOnRoute(driverData.onRoute);

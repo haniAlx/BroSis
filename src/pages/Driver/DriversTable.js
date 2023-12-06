@@ -1,6 +1,5 @@
 import { Pagination } from "antd";
 import React, { useEffect, useState } from "react";
-import GenerateReport from "./GenerateReport";
 
 const DriversTable = ({ target, handleManage, showDetail }) => {
   const [page, setPage] = useState(1);
@@ -11,7 +10,6 @@ const DriversTable = ({ target, handleManage, showDetail }) => {
   const totalPages = target.length;
   const onShowSizeChange = (current, pageSize) => {
     setpostPerPage(pageSize);
-    console.log(pageSize);
   };
   useEffect(() => {
     setPage(1);
@@ -96,7 +94,6 @@ const DriversTable = ({ target, handleManage, showDetail }) => {
         showSizeChanger
         onShowSizeChange={onShowSizeChange}
       />
-      <GenerateReport data={target}/>
       </div>
     </div>
   );

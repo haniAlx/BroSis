@@ -12,7 +12,6 @@ const FetchData = async( url,name)=>{
       }
       const data = await res.json();
       if (data && res.ok) {
-        console.log(data);
         setRole(data.name);
       }
       if (res.status == 400) {

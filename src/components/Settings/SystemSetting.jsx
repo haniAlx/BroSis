@@ -1,6 +1,5 @@
 import React, { useState,useEffect } from "react";
 import { MdKeyboardArrowDown } from "react-icons/md";
-import { useSearchParams } from "react-router-dom";
 import { mainAPI } from "../../components/mainAPI";
 import { showErrorMessage } from "../../components/SwalMessages";
 import SettingList from './SettingList'
@@ -62,14 +61,12 @@ const SystemSetting = () => {
     try {
       const res = await fetch(apiRoles, options);
       if (res.status == 401) {
-        //showErrorMessage();
         showErrorMessage({
           message: "Unable to Load!! server respond with 401",
         });
       }
       const data = await res.json();
       if (data && res.ok) {
-        console.log(data);
         setRole(data.roles);
       }
       if (res.status == 400) {
@@ -87,14 +84,12 @@ const SystemSetting = () => {
     try {
       const res = await fetch(apiTripType, options);
       if (res.status == 401) {
-        //showErrorMessage();
         showErrorMessage({
           message: "Unable to Load!! server respond with 401",
         });
       }
       const data = await res.json();
       if (data && res.ok) {
-        console.log(data);
         setTripType(data.triptypes);
       }
       if (res.status == 400) {
@@ -111,14 +106,12 @@ const SystemSetting = () => {
     try {
       const res = await fetch(apiService, options);
       if (res.status == 401) {
-        //showErrorMessage();
         showErrorMessage({
           message: "Unable to Load!! server respond with 401",
         });
       }
       const data = await res.json();
       if (data && res.ok) {
-        console.log(data);
         setservice(data.service);
       }
       if (res.status == 400) {
@@ -135,14 +128,12 @@ const SystemSetting = () => {
     try {
       const res = await fetch(apinotification, options);
       if (res.status == 401) {
-        //showErrorMessage();
         showErrorMessage({
           message: "Unable to Load!! server respond with 401",
         });
       }
       const data = await res.json();
       if (data && res.ok) {
-        console.log(data);
         setNotification(data.notificationMedias);
       }
       if (res.status == 400) {
@@ -160,14 +151,12 @@ const SystemSetting = () => {
     try {
       const res = await fetch(apiCompanySector, options);
       if (res.status == 401) {
-        //showErrorMessage();
         showErrorMessage({
           message: "Unable to Load!! server respond with 401",
         });
       }
       const data = await res.json();
       if (data && res.ok) {
-        console.log(data);
         setcompanySector(data.companySectors);
       }
       if (res.status == 400) {
@@ -185,14 +174,12 @@ const SystemSetting = () => {
     try {
       const res = await fetch(apiCompanyType, options);
       if (res.status == 401) {
-        //showErrorMessage();
         showErrorMessage({
           message: "Unable to Load!! server respond with 401",
         });
       }
       const data = await res.json();
       if (data && res.ok) {
-        console.log(data);
         setcompanyType(data.companyTypes);
       }
       if (res.status == 400) {
@@ -209,14 +196,12 @@ const SystemSetting = () => {
     try {
       const res = await fetch(apiBusinessSector, options);
       if (res.status == 401) {
-        //showErrorMessage();
         showErrorMessage({
           message: "Unable to Load!! server respond with 401",
         });
       }
       const data = await res.json();
       if (data && res.ok) {
-        console.log(data);
         setBusinessSector(data.businessSectors);
       }
       if (res.status == 400) {
@@ -233,14 +218,12 @@ const SystemSetting = () => {
     try {
       const res = await fetch(apiBusinessType, options);
       if (res.status == 401) {
-        //showErrorMessage();
         showErrorMessage({
           message: "Unable to Load!! server respond with 401",
         });
       }
       const data = await res.json();
       if (data && res.ok) {
-        console.log(data);
         setBusinessType(data.businessSectors);
       }
       if (res.status == 400) {
@@ -257,14 +240,12 @@ const SystemSetting = () => {
     try {
       const res = await fetch(apiDriverStatus, options);
       if (res.status == 401) {
-        //showErrorMessage();
         showErrorMessage({
           message: "Unable to Load!! server respond with 401",
         });
       }
       const data = await res.json();
       if (data && res.ok) {
-        console.log(data);
         setDriverStatus(data.driverStatus);
       }
       if (res.status == 400) {
@@ -282,14 +263,12 @@ const SystemSetting = () => {
     try {
       const res = await fetch(apiDriverState, options);
       if (res.status == 401) {
-        //showErrorMessage();
         showErrorMessage({
           message: "Unable to Load!! server respond with 401",
         });
       }
       const data = await res.json();
       if (data && res.ok) {
-        console.log(data);
         setDriverState(data.driverState);
       }
       if (res.status == 400) {
@@ -313,7 +292,6 @@ const SystemSetting = () => {
       }
       const data = await res.json();
       if (data && res.ok) {
-        console.log(data);
         setAlertType(data.alertTypes);
       }
       if (res.status == 400) {
@@ -330,14 +308,12 @@ const SystemSetting = () => {
     try {
       const res = await fetch(apiCargoType, options);
       if (res.status == 401) {
-        //showErrorMessage();
         showErrorMessage({
           message: "Unable to Load!! server respond with 401",
         });
       }
       const data = await res.json();
       if (data && res.ok) {
-        console.log(data);
         setCargoType(data.cargoTypes);
       }
       if (res.status == 400) {
@@ -355,15 +331,12 @@ const SystemSetting = () => {
     try {
       const res = await fetch(apiLogoAvatar, options);
       if (res.status == 401) {
-        //showErrorMessage();
         showErrorMessage({
           message: "Unable to Load!! server respond with 401",
         });
       }
       const data = await res.json();
-      if (data && res.ok) {
-        console.log(data);
-        setLogoAvatar(data);
+      if (data && res.ok) {        setLogoAvatar(data);
       }
       if (res.status == 400) {
         setError("Invalid API server 400");
@@ -380,14 +353,12 @@ const SystemSetting = () => {
     try {
       const res = await fetch(apiVehicleCatagory, options);
       if (res.status == 401) {
-        //showErrorMessage();
         showErrorMessage({
           message: "Unable to Load!! server respond with 401",
         });
       }
       const data = await res.json();
       if (data && res.ok) {
-        console.log(data);
         setVehicleCatagory(data.vehicleCatagories);
       }
       if (res.status == 400) {
@@ -404,14 +375,12 @@ const SystemSetting = () => {
     try {
       const res = await fetch(apiVehicleCondition, options);
       if (res.status == 401) {
-        //showErrorMessage();
         showErrorMessage({
           message: "Unable to Load!! server respond with 401",
         });
       }
       const data = await res.json();
       if (data && res.ok) {
-        console.log(data);
         setVehicleCondition(data.vehicleConditions);
       }
       if (res.status == 400) {
@@ -610,16 +579,10 @@ const SystemSetting = () => {
   };
 
   const [showSetting, setShowSetting] = useState(false);
-  // const handleSetting = () => {
-  //   setShowSetting(true);
-  // };
+
 
   const showSettingList = () => {
     setShow(!show);
-    // const listSettingContainer = document.getElementById("show-setting");
-    // listSettingContainer.style.maxHeight = "auto";
-    // listSettingContainer.style.overflow = "auto";
-    // console.log("setting");
   };
   return (
     <div className="setting-cards">
@@ -640,7 +603,6 @@ const SystemSetting = () => {
         <MdKeyboardArrowDown size={20} />
       </div>
       {show && (
-        // <div className="setting-list-container" id="show-setting">
     <div>
     <ul className="setting-sublist">
             {ListCardDetail.map((item, index) => (

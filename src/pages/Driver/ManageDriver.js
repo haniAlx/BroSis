@@ -150,21 +150,23 @@ console.log(plateNumber)
               "please wait while loading.."
             ) :  (
               <select
-                value={driverDetail.plateNumber || ""}
-                onChange={(e) => setPlateNumber(e.target.value)}
+                // value={driverDetail.plateNumber || ""}
+                onChange={(e) => setPlateNumber(e.target.value === '0000' ? null : e.target.value)}
               >
-                <option value=''>{unAssignedVehicles.length === 0 ?
-                 'No Vehicle to Choose':plateNumber ? plateNumber:
-                 plateNumber === null ?'Empty plate number':
-                 'Choose your vehicle'}</option>
-                 <option value={null}>Empty plate number</option>
-                {
-                unAssignedVehicles.map((vehicle, index) => (
+                <option value=''>
+                  {'Choose your vehicle'}
+                </option>
+                <option value='0000'>
+                  UNASSIGN 
+                </option>
+                {unAssignedVehicles.map((vehicle, index) => (
                   <option value={vehicle.plateNumber} key={index}>
                     {vehicle.plateNumber}
                   </option>
                 ))}
               </select>
+
+
             ) }
 
             <label>Status</label>
@@ -172,7 +174,8 @@ console.log(plateNumber)
               value={driverStatus || ""}
               onChange={(e) => setDriverStatus(e.target.value)}
             >
-              {status.map((st, index) => (
+              { plateNumber === '0000' ?<option value='UNASSIGNED'>UNASSIGNED</option>:
+               status.map((st, index) => (
                 <option value={st.driverStatus} key={index}>
                   {st.driverStatus}
                 </option>
